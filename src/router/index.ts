@@ -44,6 +44,12 @@ const router = createRouter({
           component: () => import('@/views/user/HomePage.vue'),
           meta: { title: 'Home Page' },
         },
+        {
+          path: 'about',
+          name: 'About',
+          component: () => import('@/views/user/AboutPage.vue'),
+          meta: { title: 'About Us' },
+        },
       ],
     },
     {
@@ -73,7 +79,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
-  const publicRouteNames = ['Home', 'Signin', 'Signup', 'NotFound']
+  const publicRouteNames = ['Home', 'About', 'Signin', 'Signup', 'NotFound']
   const authStore = useAuthStore()
 
   if (publicRouteNames.includes(to.name as string)) {
