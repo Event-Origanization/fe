@@ -1,0 +1,71 @@
+{
+  "NAV": {
+    "HOME": "Trang Chủ",
+    "ABOUT": "Về Chúng Tôi",
+    "CONTACT": "Liên Hệ",
+    "PRODUCTS": "Sản Phẩm",
+    "POSTS": "Bài Viết",
+    "LANGUAGES": "Ngôn Ngữ"
+  },
+  "HOME": {
+    "HERO_TITLE": "CHI PHÍ",
+    "BADGE_LEFT": "HỢP LÝ",
+    "BADGE_RIGHT": "TỐI ƯU",
+    "STATS": {
+      "FIELDS": "Lĩnh vực",
+      "EVENTS": "Sự kiện",
+      "BRANDS": "Thương hiệu"
+    },
+    "PROJECTS": {
+      "TITLE": "Dự án nổi bật",
+      "DESC": "5P Event luôn tự hào về các dự án đã thực hiện được đầu tư chỉn chu, chuyên nghiệp nhằm đem lại trải nghiệm tuyệt vời nhất cho khách hàng.",
+      "VIEW_MORE": "Xem Thêm +"
+    },
+    "SLOGAN": {
+      "TITLE": "Vùng ơi mở ra,",
+      "DESC": "Điểm kết nối điểm chạm trải nghiệm thông qua các sự kiện đẳng cấp. Thấu hiểu và đồng hành truyền tải thông điệp trọn vẹn. Khác biệt để tạo nên sự độc bản.",
+      "VIEW_MORE": "Xem thêm"
+    },
+    "PARTNERS": {
+      "TITLE": "Khách hàng của chúng tôi"
+    },
+    "ABOUT_SNIPPET": {
+      "TITLE": "Về Chúng Tôi",
+      "SLOGAN": "5P EVENT - KIẾN TẠO CẢM XÚC, THU TRỌN THƯƠNG HIỆU",
+      "DESC": "5P EVENT mang đến những TUYỆT TÁC SỰ KIỆN NGHỆ THUẬT VÀ DỊCH VỤ SỰ KIỆN CHUYÊN NGHIỆP, TOÀN DIỆN, THÔNG MINH, TINH TẾ. Từ đó, tạo ra giá trị khác biệt mang đậm tính cách thương hiệu doanh nghiệp, tạo vị thế trước hàng triệu đối thủ & đối tượng khách hàng tiềm năng."
+    }
+  },
+  "ABOUT": {
+    "VISION_TITLE": "VISION",
+    "VISION_DESC": "5P EVENT hướng tới trở thành đơn vị tổ chức sự kiện hàng đầu và uy tín nhất Việt Nam, cung cấp các giải pháp hiệu quả và tối ưu nhất trong mọi dịch vụ chúng tôi đang cung cấp.",
+    "MISSION_TITLE": "MISSION",
+    "MISSION_DESC": "Với 5P EVENT, mỗi sự kiện là một câu chuyện hoàn toàn khác biệt, và chúng tôi sẽ giúp bạn kể câu chuyện thương hiệu của mình đến với mọi người. Chúng tôi đồng hành cùng bạn.",
+    "STAT_LABEL": "DỰ ÁN ĐÃ HOÀN THÀNH",
+    "VALUES": {
+      "S1_NAME": "S - SENSE",
+      "S1_DESC": "Chúng tôi chạm đến mọi góc nhìn & cảm xúc, để lại dấu ấn cảm xúc sâu sắc",
+      "S2_NAME": "S - SPEED",
+      "S2_DESC": "Chúng tôi xử lý mọi việc với ưu tiên: nhanh - chính xác - hiệu quả - tỉ mỉ",
+      "S3_NAME": "S - SAVE",
+      "S3_DESC": "Chúng tôi tiết kiệm ngân sách với chính sách linh hoạt và tối ưu nhất cho khách hàng",
+      "S4_NAME": "S - SPECIAL",
+      "S4_DESC": "Sự độc đáo và sáng tạo là vũ khí mạnh mẽ nhất của chúng tôi để phục vụ bạn"
+    },
+    "CORE_VALUES_TITLE": "CORE VALUES",
+    "CORE_CLIENT": "CLIENT",
+    "CORE_CLIENT_SUB": "Hài lòng - Lựa chọn - Kết nối",
+    "CORE_COMPANY": "COMPANY",
+    "CORE_COMPANY_SUB": "Phát triển - Bền vững - Xây dựng đế chế",
+    "CORE_COLLEAGUE": "COLLEAGUE",
+    "CORE_COLLEAGUE_SUB": "Cải thiện - Đối tác - Cộng sinh",
+    "MEDIA_TITLE": "EVENT - MEDIA - WEDDING",
+    "CEO_GREETING": "CHÀO ĐÓN BẠN ĐẾN THẾ GIỚI CỦA 5P!",
+    "CEO_P1": "Mọi thứ được tạo ra từ đam mê và sự cống hiến bằng tất cả tâm huyết. Sự kiện cũng vậy, mỗi sự kiện là một câu chuyện cần được kể.",
+    "CEO_P2": "Bạn đã từng làm một sự kiện từ những bước đi chập chững ban đầu đến lúc nó trưởng thành? Từng cái ghế, tờ rơi, sân khấu và cả giọt mồ hôi. Nhìn chặng đường bạn đem vào nó có thể thấy sự trưởng thành trong cách suy nghĩ từ những lỗi nhỏ nhặt đến hoàn hảo.",
+    "CEO_P3": "Bạn có yêu cách tạo ra chúng không? Riêng tôi đã tạo ra nó bằng cả trái tim. Và '5P Event' đã ra đời từ tình yêu vô giá đó để tiếp nối, viết tiếp những câu chuyện tuyệt vời đầy cảm xúc.",
+    "CEO_P4": "Bạn không hoàn hảo, nhưng là duy nhất và khác biệt, bạn không thể tạo ra những thứ chưa tạo ra nhưng bạn có thể đem đến một trải nghiệm rất riêng. Ai cũng muốn sự kiện của mình tuyệt vời và 5P Event sẽ đồng hành cùng bạn.",
+    "CEO_CLOSING": "TÔI LÀ CEO FOUNDER & CREATIVE DIRECTOR TẠI 5P EVENT, ĐỌC ĐẾN ĐÂY BẠN HIỂU.",
+    "CEO_NAME": "Lê Văn Hùng",
+    "CEO_TITLE": "CEO & Founder"
+  }
+}

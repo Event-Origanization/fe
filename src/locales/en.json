@@ -1,0 +1,71 @@
+{
+  "NAV": {
+    "HOME": "Home",
+    "ABOUT": "About Us",
+    "CONTACT": "Contact",
+    "PRODUCTS": "Products",
+    "POSTS": "Blog",
+    "LANGUAGES": "Languages"
+  },
+  "HOME": {
+    "HERO_TITLE": "COST",
+    "BADGE_LEFT": "REASONABLE",
+    "BADGE_RIGHT": "OPTIMIZED",
+    "STATS": {
+      "FIELDS": "Fields",
+      "EVENTS": "Events",
+      "BRANDS": "Brands"
+    },
+    "PROJECTS": {
+      "TITLE": "Featured Projects",
+      "DESC": "5P Event is always proud of its meticulously invested and professional projects to bring the best experience to clients.",
+      "VIEW_MORE": "View More +"
+    },
+    "SLOGAN": {
+      "TITLE": "Open the world,",
+      "DESC": "The connection point for premium experiences through world-class events. We understand and accompany you to deliver messages completely. Different to create uniqueness.",
+      "VIEW_MORE": "View more"
+    },
+    "PARTNERS": {
+      "TITLE": "Our Clients"
+    },
+    "ABOUT_SNIPPET": {
+      "TITLE": "About Us",
+      "SLOGAN": "5P EVENT - CREATE EMOTIONS, CAPTURE YOUR BRAND",
+      "DESC": "5P EVENT delivers MASTERPIECES OF ARTISTIC EVENTS AND PROFESSIONAL, COMPREHENSIVE, SMART, AND SOPHISTICATED EVENT SERVICES. Creating unique value deeply reflecting the brand identity of the enterprise, establishing a position against millions of competitors & potential customers."
+    }
+  },
+  "ABOUT": {
+    "VISION_TITLE": "VISION",
+    "VISION_DESC": "5P EVENT aims to be the leading and most reliable event organizer in Vietnam, providing the most effective and optimal solutions in every service we offer.",
+    "MISSION_TITLE": "MISSION",
+    "MISSION_DESC": "With 5P EVENT, each event is a uniquely different story, and we will help you tell your brand story to everyone. We join you.",
+    "STAT_LABEL": "PROJECT COMPLETED",
+    "VALUES": {
+      "S1_NAME": "S - SENSE",
+      "S1_DESC": "We touch every sight & perspective, leaving a deep emotional mark",
+      "S2_NAME": "S - SPEED",
+      "S2_DESC": "We process everything with priority: fast - accurate - efficient - detailed",
+      "S3_NAME": "S - SAVE",
+      "S3_DESC": "We save budget with the most flexible and optimal policy for clients",
+      "S4_NAME": "S - SPECIAL",
+      "S4_DESC": "Uniqueness and creativity are our strongest weapons to serve you"
+    },
+    "CORE_VALUES_TITLE": "CORE VALUES",
+    "CORE_CLIENT": "CLIENT",
+    "CORE_CLIENT_SUB": "Satisfied - Choose - Connects",
+    "CORE_COMPANY": "COMPANY",
+    "CORE_COMPANY_SUB": "Develops - Sustains - Build your empire",
+    "CORE_COLLEAGUE": "COLLEAGUE",
+    "CORE_COLLEAGUE_SUB": "Improve - Partner - Synergetic",
+    "MEDIA_TITLE": "EVENT - MEDIA - WEDDING",
+    "CEO_GREETING": "WELCOME TO THE WORLD OF 5P!",
+    "CEO_P1": "Everything is created from passion and dedication with all sincerity. Events are the same — each event is a story that needs to be told.",
+    "CEO_P2": "Have you ever organized an event from the very first hesitant steps to its maturity? Every chair, flyer, stage, and drop of sweat. Looking at the journey you put into it, you can see the growth in thinking from small mistakes to perfection.",
+    "CEO_P3": "Do you love the way you create them? I created mine with all my heart. And '5P Event' was born from that priceless love to continue writing wonderful, emotion-filled stories.",
+    "CEO_P4": "You're not perfect, but you are unique and different. You may not create things that have never been created before, but you can deliver a very personal experience. Everyone wants their event to be wonderful and 5P Event will accompany you on that journey.",
+    "CEO_CLOSING": "I AM THE CEO FOUNDER & CREATIVE DIRECTOR AT 5P EVENT. READING THIS FAR, YOU UNDERSTAND.",
+    "CEO_NAME": "Le Van Hung",
+    "CEO_TITLE": "CEO & Founder"
+  }
+}
