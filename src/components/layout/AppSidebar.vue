@@ -1,7 +1,7 @@
 <template>
   <aside
     :class="[
-      'fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-99999 border-r border-gray-200',
+      'fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-gray-950 border-gray-800 text-gray-100 h-screen transition-all duration-300 ease-in-out z-99999 border-r',
       {
         'lg:w-[290px]': isExpanded || isMobileOpen || isHovered,
         'lg:w-[90px]': !isExpanded && !isHovered,
@@ -17,15 +17,16 @@
       <router-link to="/">
         <div
           v-if="isExpanded || isHovered || isMobileOpen"
-          class="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent"
+          class="text-2xl font-bold flex items-center"
         >
-          AIRemake<span class="text-pink-400">Pro</span>
+          <span class="text-red-500">5P</span>
+          <span class="ml-1 text-white">Event</span>
         </div>
         <div
           v-else
-          class="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent"
+          class="text-2xl font-bold text-red-500"
         >
-          AI
+          5P
         </div>
       </router-link>
     </div>
@@ -183,58 +184,29 @@ import { useAuthStore } from '@/store/auth'
 import { USER_ROLES } from '@/constants'
 import type { MenuGroup, MenuItem } from '@/types/menu'
 
+import { useI18n } from 'vue-i18n'
+
 const route = useRoute()
 const authStore = useAuthStore()
+const { t } = useI18n()
 
 const { isExpanded, isMobileOpen, isHovered, openSubmenu } = useSidebar()
 
 const menuGroups = computed<MenuGroup[]>(() => {
   const fullMenu: MenuGroup[] = [
     {
-      title: 'Menu',
+      title: 'Admin Panel',
       items: [
-        { icon: GridIcon, name: 'Tổng quan', path: '/administrators' },
+        { icon: GridIcon, name: t('SIDEBAR.DASHBOARD'), path: '/administrators' },
+        { icon: PlugInIcon, name: t('SIDEBAR.PRODUCTS'), path: '/administrators/products' },
+        { icon: ListIcon, name: t('SIDEBAR.POSTS'), path: '/administrators/posts' },
+        { icon: GridIcon, name: t('SIDEBAR.VIDEOS'), path: '/administrators/videos' },
+        { icon: PlugInIcon, name: t('SIDEBAR.CONFIG'), path: '/administrators/configs' },
         {
-          icon: PlugInIcon,
-          name: 'Phần mềm',
-          subItems: [
-            { name: 'Phần mềm', path: '/tools', pro: false },
-            { name: 'Mua phần mềm', path: '/purchase-license', pro: false },
-          ],
-        },
-        {
-          name: 'Tài khoản',
+          name: t('SIDEBAR.USERS'),
           icon: UserCircleIcon,
-          subItems: [
-            { name: 'Ví của tôi', path: '/wallet', pro: false },
-            { name: 'Quản lý tài khoản', path: '/account', pro: false },
-            { name: 'Lịch sử giao dịch', path: '/transaction-history', pro: false },
-            { name: 'Keys đã mua', path: '/my-keys', pro: false },
-          ],
-        },
-
-        {
-          icon: PlugInIcon,
-          name: 'Quản trị',
+          path: '/administrators/users',
           requiredRole: USER_ROLES.ROLE_ADMIN,
-          subItems: [
-            { name: 'Quản lý tickets', path: '/administrators/tickets', pro: false },
-            { name: 'Quản lý tools', path: '/administrators/tools-management', pro: false },
-            { name: 'License Keys', path: '/administrators/license-keys', pro: false },
-            // { name: 'Phân quyền', path: '/administrators/permissions', pro: false },
-            { name: 'Quản lý licenses', path: '/administrators/licenses', pro: false },
-            { name: 'Quản lý users', path: '/administrators/users', pro: false },
-            { name: 'Quản lý lịch sử giao dịch', path: '/administrators/all-transaction-history', pro: false },
-          ],
-        },
-
-        {
-          name: 'Ticket hỗ trợ',
-          icon: ListIcon,
-          subItems: [
-            { name: 'Ticket Support', path: '/ticket-support', pro: false },
-            { name: 'Open Ticket', path: '/ticket-support/create', pro: false },
-          ],
         },
       ],
     },

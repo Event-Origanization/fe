@@ -1,18 +1,17 @@
 <template>
   <div class="min-h-screen xl:flex">
     <SidebarProvider>
-    <app-sidebar />
-    <Backdrop />
-    <div
-      class="flex-1 transition-all duration-300 ease-in-out"
-      :class="[isExpanded || isHovered ? 'lg:ml-[290px]' : 'lg:ml-[90px]']"
-    >
-    
-      <app-header />
-      <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-        <slot></slot>
+      <app-sidebar />
+      <Backdrop />
+      <div
+        class="relative flex-1 transition-all duration-300 ease-in-out"
+        :class="[isExpanded || isHovered ? 'lg:ml-[290px]' : 'lg:ml-[90px]']"
+      >
+        <app-header />
+        <div class="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-6 min-h-[calc(100vh-80px)]">
+          <slot></slot>
+        </div>
       </div>
-    </div>
     </SidebarProvider>
   </div>
 </template>

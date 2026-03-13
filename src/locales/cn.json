@@ -67,5 +67,23 @@
     "CEO_CLOSING": "我是5P EVENT的创始人CEO兼创意总监，读到这里，您就明白了。",
     "CEO_NAME": "黎文雄",
     "CEO_TITLE": "创始人CEO"
+  },
+  "EDITOR": {
+    "INSERT_EDIT_IMAGE": "插入/编辑图片",
+    "INSERT_EDIT_LINK": "插入/编辑链接",
+    "SOURCE": "来源",
+    "HEIGHT": "高度",
+    "WIDTH": "宽度",
+    "URL": "URL",
+    "TEXT_TO_DISPLAY": "显示文本"
+  },
+  "SIDEBAR": {
+    "DASHBOARD": "概览",
+    "PRODUCTS": "产品管理",
+    "POSTS": "文章管理",
+    "VIDEOS": "精彩视频",
+    "CONFIG": "网站设置",
+    "USERS": "用户管理",
+    "REPORTS": "统计报告"
   }
 }
