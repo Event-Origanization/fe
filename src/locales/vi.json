@@ -67,5 +67,23 @@
     "CEO_CLOSING": "TÔI LÀ CEO FOUNDER & CREATIVE DIRECTOR TẠI 5P EVENT, ĐỌC ĐẾN ĐÂY BẠN HIỂU.",
     "CEO_NAME": "Lê Văn Hùng",
     "CEO_TITLE": "CEO & Founder"
+  },
+  "EDITOR": {
+    "INSERT_EDIT_IMAGE": "Chèn/Sửa ảnh",
+    "INSERT_EDIT_LINK": "Chèn/Sửa liên kết",
+    "SOURCE": "Nguồn",
+    "HEIGHT": "Chiều cao",
+    "WIDTH": "Chiều rộng",
+    "URL": "Đường dẫn",
+    "TEXT_TO_DISPLAY": "Văn bản hiển thị"
+  },
+  "SIDEBAR": {
+    "DASHBOARD": "Tổng quan",
+    "PRODUCTS": "Quản lý sản phẩm",
+    "POSTS": "Quản lý bài viết",
+    "VIDEOS": "Kho video highlight",
+    "CONFIG": "Cấu hình website",
+    "USERS": "Quản lý người dùng",
+    "REPORTS": "Báo cáo thống kê"
   }
 }

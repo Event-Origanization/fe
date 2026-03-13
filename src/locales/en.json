@@ -67,5 +67,23 @@
     "CEO_CLOSING": "I AM THE CEO FOUNDER & CREATIVE DIRECTOR AT 5P EVENT. READING THIS FAR, YOU UNDERSTAND.",
     "CEO_NAME": "Le Van Hung",
     "CEO_TITLE": "CEO & Founder"
+  },
+  "EDITOR": {
+    "INSERT_EDIT_IMAGE": "Insert/Edit Image",
+    "INSERT_EDIT_LINK": "Insert/Edit Link",
+    "SOURCE": "Source",
+    "HEIGHT": "Height",
+    "WIDTH": "Width",
+    "URL": "URL",
+    "TEXT_TO_DISPLAY": "Text to display"
+  },
+  "SIDEBAR": {
+    "DASHBOARD": "Overview",
+    "PRODUCTS": "Products",
+    "POSTS": "Posts",
+    "VIDEOS": "Highlight Videos",
+    "CONFIG": "Website Settings",
+    "USERS": "User Management",
+    "REPORTS": "Reports"
   }
 }

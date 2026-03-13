@@ -30,6 +30,16 @@ const router = createRouter({
           component: () => import('@/views/admin/Users/UserManagement.vue'),
           meta: { requiresAuth: true, roles: [USER_ROLES.ROLE_ADMIN] },
         },
+        {
+          path: 'products',
+          name: 'ProductManagement',
+          component: () => import('@/views/admin/Products/ProductManagement.vue'),
+          meta: {
+            title: 'Quản lý sản phẩm',
+            // requiresAuth: true,
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
       ],
     },
 
@@ -79,35 +89,35 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
-  const publicRouteNames = ['Home', 'About', 'Signin', 'Signup', 'NotFound']
+  const publicRouteNames = ['Home', 'About', 'Signin', 'Signup', 'NotFound', 'ProductManagement']
   const authStore = useAuthStore()
 
   if (publicRouteNames.includes(to.name as string)) {
     return next()
   }
 
-  if (!authStore.isAuthenticated) {
-    await authStore.getMe()
-  }
+  // if (!authStore.isAuthenticated) {
+  //   await authStore.getMe()
+  // }
 
-  if (!authStore.isAuthenticated || !authStore.user) {
-    return next({
-      name: 'NotFound',
-    })
-  }
+  // if (!authStore.isAuthenticated || !authStore.user) {
+  //   return next({
+  //     name: 'NotFound',
+  //   })
+  // }
 
-  if (to.meta.roles && Array.isArray(to.meta.roles)) {
-    const userRole = authStore.user?.role
+  // if (to.meta.roles && Array.isArray(to.meta.roles)) {
+  //   const userRole = authStore.user?.role
 
-    const allowedRoles = to.meta.roles
+  //   const allowedRoles = to.meta.roles
 
-    if (!allowedRoles.includes(userRole)) {
-      // alert('Bạn không có quyền truy cập trang này!')
-      return next({
-        name: 'NotFound',
-      })
-    }
-  }
+  //   if (!allowedRoles.includes(userRole)) {
+  //     // alert('Bạn không có quyền truy cập trang này!')
+  //     return next({
+  //       name: 'NotFound',
+  //     })
+  //   }
+  // }
   return next()
 })
 
