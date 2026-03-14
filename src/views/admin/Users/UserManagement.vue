@@ -4,7 +4,7 @@
     <div class="space-y-5 sm:space-y-6">
       <!-- Header -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-700 bg-clip-text text-transparent">
+        <h1 class="text-3xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
           Quản Lý Người Dùng
         </h1>
       </div>

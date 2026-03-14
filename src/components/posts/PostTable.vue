@@ -1,4 +1,4 @@
-<!-- src/components/products/ProductTable.vue -->
+<!-- src/components/posts/PostTable.vue -->
 <template>
   <div class="space-y-4">
     <!-- Filters & Search -->
@@ -12,7 +12,7 @@
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Tìm kiếm sản phẩm..."
+          placeholder="Tìm kiếm bài viết..."
           class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         />
       </div>
@@ -23,8 +23,9 @@
           class="block w-full md:w-40 px-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         >
           <option value="all">Tất cả trạng thái</option>
-          <option value="active">Đang hoạt động</option>
-          <option value="inactive">Đã ẩn</option>
+          <option value="PUBLISHED">Đã xuất bản</option>
+          <option value="DRAFT">Bản nháp</option>
+          <option value="SCHEDULED">Lên lịch</option>
         </select>
         
         <button
@@ -45,22 +46,22 @@
         <table class="min-w-full">
           <thead>
             <tr class="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Sản phẩm</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Giá</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Bài viết</th>
               <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Trạng thái</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Điểm SEO</th>
               <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">Thao tác</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
             <tr
-              v-for="product in filteredProducts"
-              :key="product.id"
+              v-for="post in filteredPosts"
+              :key="post.id"
               class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors"
             >
               <td class="px-5 py-4">
                 <div class="flex items-center gap-4">
-                  <div class="h-12 w-12 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-hidden flex-shrink-0 border border-gray-100 dark:border-gray-700">
-                    <img v-if="product.images && product.images.length > 0" :src="product.images[0]" :alt="product.name_vi" class="h-full w-full object-cover" />
+                  <div class="h-12 w-16 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-hidden flex-shrink-0 border border-gray-100 dark:border-gray-700">
+                    <img v-if="post.media" :src="post.media" :alt="post.title_vi" class="h-full w-full object-cover" />
                     <div v-else class="h-full w-full flex items-center justify-center text-gray-400">
                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -68,31 +69,35 @@
                     </div>
                   </div>
                   <div>
-                    <p class="font-bold text-gray-900 dark:text-white">{{ product.name_vi }}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">{{ product.slug }}</p>
+                    <p class="font-bold text-gray-900 dark:text-white">{{ post.title_vi }}</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">{{ post.slug }}</p>
                   </div>
                 </div>
-              </td>
-              <td class="px-5 py-4">
-                <p class="font-semibold text-red-500 dark:text-red-400">{{ formatCurrency(product.price) }}</p>
               </td>
               <td class="px-5 py-4">
                 <span
                   :class="[
                     'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-                    product.isActive 
+                    post.status === 'PUBLISHED'
                       ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
+                      : post.status === 'SCHEDULED' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
                       : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
                   ]"
                 >
-                  <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="product.isActive ? 'bg-green-600' : 'bg-yellow-600'"></span>
-                  {{ product.isActive ? 'Hoạt động' : 'Đã ẩn' }}
+                  <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="post.status === 'PUBLISHED' ? 'bg-green-600' : post.status === 'SCHEDULED' ? 'bg-blue-600' : 'bg-yellow-600'"></span>
+                  {{ post.status === 'PUBLISHED' ? 'Đã xuất bản' : post.status === 'SCHEDULED' ? 'Lên lịch' : 'Bản nháp' }}
                 </span>
+              </td>
+              <td class="px-5 py-4">
+                <span v-if="typeof post.seoScore === 'number'" class="font-semibold" :class="post.seoScore > 80 ? 'text-green-500' : (post.seoScore > 50 ? 'text-yellow-500' : 'text-red-500')">
+                  {{ post.seoScore }}/100
+                </span>
+                <span v-else class="text-gray-400 italic">Chưa tính</span>
               </td>
               <td class="px-5 py-4 text-right">
                 <div class="flex items-center justify-end gap-2">
                   <button 
-                    @click="$emit('edit', product)"
+                    @click="$emit('edit', post)"
                     class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors" 
                     title="Chỉnh sửa"
                   >
@@ -101,7 +106,7 @@
                     </svg>
                   </button>
                   <button 
-                    @click="confirmDelete(product)"
+                    @click="confirmDelete(post)"
                     class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" 
                     title="Xóa"
                   >
@@ -112,12 +117,12 @@
                 </div>
               </td>
             </tr>
-            <tr v-if="filteredProducts.length === 0">
+            <tr v-if="filteredPosts.length === 0">
               <td colspan="4" class="px-5 py-10 text-center text-gray-500 dark:text-gray-400">
                 <svg class="h-10 w-10 mx-auto mb-3 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 00-2 2H6a2 2 0 00-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                 </svg>
-                Không tìm thấy sản phẩm nào
+                Không tìm thấy bài viết nào
               </td>
             </tr>
           </tbody>
@@ -129,56 +134,49 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
-import { useProductStore } from '@/store/product.store'
-import type { IProduct } from '@/types/product'
+import { usePostStore } from '@/store/post.store'
+import type { IPost } from '@/types/post'
 import { useToast } from '@/composables/useToast'
 
 defineEmits<{
   (e: 'add'): void
-  (e: 'edit', product: IProduct): void
+  (e: 'edit', post: IPost): void
 }>()
 
-const productStore = useProductStore()
+const postStore = usePostStore()
 const { toastSuccess, toastError } = useToast()
 
 const searchQuery = ref('')
 const filterStatus = ref('all')
 
-const filteredProducts = computed(() => productStore.products)
+const filteredPosts = computed(() => postStore.posts)
 
 onMounted(() => {
-  fetchProducts()
+  fetchPosts()
 })
 
-const fetchProducts = () => {
-  const isActive = filterStatus.value === 'all' ? undefined : filterStatus.value === 'active'
-  productStore.fetchProducts({
+const fetchPosts = () => {
+  const status = filterStatus.value === 'all' ? undefined : filterStatus.value
+  postStore.fetchPosts({
     search: searchQuery.value,
-    isActive: isActive
+    status: status
   })
 }
 
 // Watch for search and filter changes
 watch([searchQuery, filterStatus], () => {
-  fetchProducts()
+  fetchPosts()
 })
 
-const confirmDelete = async (product: IProduct) => {
-  if (confirm(`Bạn có chắc muốn xóa sản phẩm "${product.name_vi}"?`)) {
+const confirmDelete = async (post: IPost) => {
+  if (confirm(`Bạn có chắc muốn xóa bài viết "${post.title_vi}"?`)) {
     try {
-      await productStore.deleteProduct(product.id)
-      toastSuccess('Đã xóa sản phẩm thành công')
+      await postStore.deletePost(post.id)
+      toastSuccess('Đã xóa bài viết thành công')
     } catch {
-      toastError(productStore.error || 'Lỗi khi xóa sản phẩm')
+      toastError(postStore.error || 'Lỗi khi xóa bài viết')
     }
   }
-}
-
-const formatCurrency = (amount: number) => {
-  return new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND',
-  }).format(amount)
 }
 </script>
 

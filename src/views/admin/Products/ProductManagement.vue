@@ -10,7 +10,7 @@
     </div>
 
     <component-card title="Danh sách sản phẩm dịch vụ 5P Event">
-      <product-table @add="openCreateModal" />
+      <product-table @add="openCreateModal" @edit="handleEdit" />
     </component-card>
 
     <ProductModal
@@ -28,17 +28,24 @@ import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
 import ProductTable from '@/components/products/ProductTable.vue'
 import ProductModal from '@/components/products/ProductModal.vue'
+import type { IProduct } from '@/types/product'
 
 const currentPageTitle = ref('Quản Lý Sản Phẩm')
 const showModal = ref(false)
-const selectedProduct = ref<any>(null)
+const selectedProduct = ref<IProduct | null>(null)
 
 const openCreateModal = () => {
   selectedProduct.value = null
   showModal.value = true
 }
 
-const handleProductSubmit = (data: any) => {
+const handleEdit = (product: IProduct) => {
+  selectedProduct.value = { ...product }
+  showModal.value = true
+}
+
+const handleProductSubmit = (data: IProduct) => {
+  console.log('Product submitted successfully:', data)
   // In a real app, this would call an API
   // For now we just log it as requested
 }

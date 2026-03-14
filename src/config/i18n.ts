@@ -1,9 +1,9 @@
 import { createI18n } from 'vue-i18n'
 import vi from '@/locales/vi.json'
 import en from '@/locales/en.json'
-import cn from '@/locales/cn.json'
+import zh from '@/locales/zh.json'
 
-export type SupportedLocale = 'vi' | 'en' | 'cn'
+export type SupportedLocale = 'vi' | 'en' | 'zh'
 
 const LOCALE_KEY = 'app_locale'
 
@@ -16,7 +16,7 @@ export const i18n = createI18n({
   messages: {
     vi,
     en,
-    cn,
+    zh,
   },
 })
 

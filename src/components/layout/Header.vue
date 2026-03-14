@@ -19,32 +19,32 @@
           class="relative transition-colors hover:text-brand-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand-500 after:transition-all after:duration-300"
           :class="[$route.path === '/' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
         >
-          {{ $t('NAV.HOME') }}
+          {{ configStore.getConfigValue('MENU', 'MENU_HOME', $t('NAV.HOME')) }}
         </router-link>
         <router-link
           to="/about"
           class="relative transition-colors hover:text-brand-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand-500 after:transition-all after:duration-300"
           :class="[$route.path === '/about' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
         >
-          {{ $t('NAV.ABOUT') }}
+          {{ configStore.getConfigValue('MENU', 'MENU_ABOUT', $t('NAV.ABOUT')) }}
         </router-link>
         <a
           href="#"
           class="text-gray-300 hover:text-brand-500 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-brand-500 hover:after:w-full after:transition-all after:duration-300"
         >
-          {{ $t('NAV.PRODUCTS') }}
+          {{ configStore.getConfigValue('MENU', 'MENU_SERVICES', $t('NAV.PRODUCTS')) }}
         </a>
         <a
           href="#"
           class="text-gray-300 hover:text-brand-500 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-brand-500 hover:after:w-full after:transition-all after:duration-300"
         >
-          {{ $t('NAV.POSTS') }}
+          {{ configStore.getConfigValue('MENU', 'MENU_NEWS', $t('NAV.POSTS')) }}
         </a>
         <a
           href="#"
           class="text-gray-300 hover:text-brand-500 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-brand-500 hover:after:w-full after:transition-all after:duration-300"
         >
-          {{ $t('NAV.CONTACT') }}
+          {{ configStore.getConfigValue('MENU', 'MENU_CONTACT', $t('NAV.CONTACT')) }}
         </a>
       </nav>
 
@@ -169,23 +169,23 @@
            
            <nav class="flex flex-col gap-2">
              <router-link to="/" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
-               {{ $t('NAV.HOME') }}
+               {{ configStore.getConfigValue('MENU', 'MENU_HOME', $t('NAV.HOME')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
              </router-link>
              <router-link to="/about" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
-               {{ $t('NAV.ABOUT') }}
+               {{ configStore.getConfigValue('MENU', 'MENU_ABOUT', $t('NAV.ABOUT')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
              </router-link>
              <a href="#" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
-               {{ $t('NAV.PRODUCTS') }}
+               {{ configStore.getConfigValue('MENU', 'MENU_SERVICES', $t('NAV.PRODUCTS')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
              </a>
              <a href="#" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
-               {{ $t('NAV.POSTS') }}
+               {{ configStore.getConfigValue('MENU', 'MENU_NEWS', $t('NAV.POSTS')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
              </a>
              <a href="#" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
-               {{ $t('NAV.CONTACT') }}
+               {{ configStore.getConfigValue('MENU', 'MENU_CONTACT', $t('NAV.CONTACT')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
              </a>
            </nav>
@@ -214,14 +214,20 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { setLocale, type SupportedLocale } from '@/config/i18n'
+import { useConfigStore } from '@/store/config'
+
+defineOptions({
+  name: 'AppHeader',
+})
 
 const { locale } = useI18n()
+const configStore = useConfigStore()
 const isLangOpen = ref(false)
 
 const languages = [
   { code: 'vi', name: 'VN', flag: 'https://flagcdn.com/w20/vn.png' },
   { code: 'en', name: 'EN', flag: 'https://flagcdn.com/w20/gb.png' },
-  { code: 'cn', name: 'CN', flag: 'https://flagcdn.com/w20/cn.png' },
+  { code: 'zh', name: 'ZH', flag: 'https://flagcdn.com/w20/cn.png' },
 ]
 
 const currentLang = computed(() => languages.find(l => l.code === locale.value) || languages[0])
@@ -241,17 +247,19 @@ defineEmits<{
 
 // Custom directive for clicking outside
 const vClickOutside = {
-  mounted(el: any, binding: any) {
+  mounted(el: HTMLElement & { clickOutsideEvent?: (event: Event) => void }, binding: { value: () => void }) {
     el.clickOutsideEvent = (event: Event) => {
       // Check that click was outside the el and its children
-      if (!(el === event.target || el.contains(event.target))) {
+      if (!(el === event.target || el.contains(event.target as Node))) {
         binding.value()
       }
     }
     document.addEventListener('click', el.clickOutsideEvent)
   },
-  unmounted(el: any) {
-    document.removeEventListener('click', el.clickOutsideEvent)
+  unmounted(el: HTMLElement & { clickOutsideEvent?: (event: Event) => void }) {
+    if (el.clickOutsideEvent) {
+      document.removeEventListener('click', el.clickOutsideEvent)
+    }
   },
 }
 </script>

@@ -25,10 +25,13 @@
           <div
             v-if="show"
             :class="[
-              'relative bg-white dark:bg-gray-900 rounded-2xl text-left overflow-y-auto shadow-2xl transform transition-all w-full my-8 mx-auto',
+              'relative bg-white dark:bg-gray-900 rounded-2xl text-left shadow-2xl transform transition-all w-full my-8 mx-auto flex flex-col overflow-hidden',
               maxWidthClass || (isViewportWidth ? '' : 'max-w-md'),
             ]"
-            :style="isViewportWidth ? { maxWidth: props.maxWidth } : {}"
+            :style="{
+              maxHeight: '75vh',
+              ...(isViewportWidth ? { maxWidth: props.maxWidth } : {})
+            }"
           >
             <!-- Close button -->
             <button
@@ -46,7 +49,7 @@
             </button>
 
             <!-- Header -->
-            <div class="px-6 pt-6 pb-4 sm:px-8 sm:pt-8">
+            <div class="px-6 pt-6 pb-4 sm:px-8 sm:pt-8 shadow-md mb-4">
               <slot name="header">
                 <h3
                   v-if="title"
@@ -59,14 +62,14 @@
             </div>
 
             <!-- Body -->
-            <div class="px-6 pb-6 sm:px-8 sm:pb-8">
+            <div class="px-6 pb-6 sm:px-8 sm:pb-8 flex-1 overflow-y-auto min-h-0 custom-scrollbar">
               <slot></slot>
             </div>
 
             <!-- Footer -->
             <div
               v-if="$slots.footer"
-              class="bg-gray-50 dark:bg-gray-800/50 px-6 py-4 sm:px-8 sm:flex sm:flex-row-reverse gap-3"
+              class="bg-gray-50 dark:bg-gray-800/50 px-6 py-4 sm:px-8 sm:flex sm:flex-row-reverse gap-3 border-t border-gray-200 dark:border-gray-700"
             >
               <slot name="footer"></slot>
             </div>
@@ -142,5 +145,22 @@ const isViewportWidth = computed(() => {
 .zoom-leave-to {
   opacity: 0;
   transform: scale(0.95) translateY(10px);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 10px;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #374151;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #d1d5db;
 }
 </style>
