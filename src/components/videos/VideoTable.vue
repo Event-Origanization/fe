@@ -1,4 +1,4 @@
-<!-- src/components/products/ProductTable.vue -->
+<!-- src/components/videos/VideoTable.vue -->
 <template>
   <div class="space-y-4">
     <!-- Filters & Search -->
@@ -12,7 +12,7 @@
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Tìm kiếm sản phẩm..."
+          placeholder="Tìm kiếm video..."
           class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         />
       </div>
@@ -45,54 +45,59 @@
         <table class="min-w-full">
           <thead>
             <tr class="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Sản phẩm</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Giá</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Video</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Thứ tự</th>
               <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Trạng thái</th>
               <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">Thao tác</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
             <tr
-              v-for="product in filteredProducts"
-              :key="product.id"
+              v-for="video in videoStore.videos"
+              :key="video.id"
               class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors"
             >
               <td class="px-5 py-4">
                 <div class="flex items-center gap-4">
-                  <div class="h-12 w-12 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-hidden flex-shrink-0 border border-gray-100 dark:border-gray-700">
-                    <img v-if="product.images && product.images.length > 0" :src="product.images[0]" :alt="product.name_vi" class="h-full w-full object-cover" />
-                    <div v-else class="h-full w-full flex items-center justify-center text-gray-400">
-                       <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                       </svg>
+                  <div class="h-12 w-20 rounded-lg bg-gray-900 border border-gray-700 flex-shrink-0 relative overflow-hidden flex items-center justify-center group cursor-pointer" @click="$emit('edit', video)">
+                    <template v-if="video.thumbnail">
+                      <img :src="video.thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </template>
+                    <template v-else>
+                      <span class="text-xs text-white uppercase font-bold tracking-tighter opacity-50">Highlight</span>
+                    </template>
+                    <div class="absolute inset-0 flex items-center justify-center text-red-500 bg-black/20 group-hover:bg-black/40 transition-colors">
+                      <svg class="h-6 w-6 transform group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
                     </div>
                   </div>
-                  <div>
-                    <p class="font-bold text-gray-900 dark:text-white">{{ product.name_vi }}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">{{ product.slug }}</p>
+                  <div class="flex-grow min-w-0">
+                    <p class="font-bold text-gray-900 dark:text-white truncate" :title="video.title_vi">{{ video.title_vi }}</p>
+                    <a :href="video.url" target="_blank" class="text-sm text-blue-500 hover:underline truncate block" :title="video.url">{{ video.url }}</a>
                   </div>
                 </div>
               </td>
               <td class="px-5 py-4">
-                <p class="font-semibold text-red-500 dark:text-red-400">{{ formatCurrency(product.price) }}</p>
+                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">#{{ video.orderIndex }}</span>
               </td>
               <td class="px-5 py-4">
                 <span
                   :class="[
                     'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-                    product.isActive 
+                    video.isActive 
                       ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
                       : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
                   ]"
                 >
-                  <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="product.isActive ? 'bg-green-600' : 'bg-yellow-600'"></span>
-                  {{ product.isActive ? 'Hoạt động' : 'Đã ẩn' }}
+                  <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="video.isActive ? 'bg-green-600' : 'bg-yellow-600'"></span>
+                  {{ video.isActive ? 'Hoạt động' : 'Đã ẩn' }}
                 </span>
               </td>
               <td class="px-5 py-4 text-right">
                 <div class="flex items-center justify-end gap-2">
                   <button 
-                    @click="$emit('edit', product)"
+                    @click="$emit('edit', video)"
                     class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors" 
                     title="Chỉnh sửa"
                   >
@@ -101,7 +106,7 @@
                     </svg>
                   </button>
                   <button 
-                    @click="confirmDelete(product)"
+                    @click="confirmDelete(video)"
                     class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" 
                     title="Xóa"
                   >
@@ -112,12 +117,12 @@
                 </div>
               </td>
             </tr>
-            <tr v-if="filteredProducts.length === 0">
+            <tr v-if="videoStore.videos.length === 0">
               <td colspan="4" class="px-5 py-10 text-center text-gray-500 dark:text-gray-400">
                 <svg class="h-10 w-10 mx-auto mb-3 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 00-2 2H6a2 2 0 00-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                 </svg>
-                Không tìm thấy sản phẩm nào
+                Không tìm thấy video nào
               </td>
             </tr>
           </tbody>
@@ -128,31 +133,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
-import { useProductStore } from '@/store/product.store'
-import type { IProduct } from '@/types/product'
+import { ref, onMounted, watch } from 'vue'
+import { useVideoStore } from '@/store/highlight-video.store'
+import type { IHighlightVideo } from '@/types/highlight-video'
 import { useToast } from '@/composables/useToast'
 
 defineEmits<{
   (e: 'add'): void
-  (e: 'edit', product: IProduct): void
+  (e: 'edit', video: IHighlightVideo): void
 }>()
 
-const productStore = useProductStore()
+const videoStore = useVideoStore()
 const { toastSuccess, toastError } = useToast()
 
 const searchQuery = ref('')
 const filterStatus = ref('all')
 
-const filteredProducts = computed(() => productStore.products)
-
 onMounted(() => {
-  fetchProducts()
+  fetchVideos()
 })
 
-const fetchProducts = () => {
+const fetchVideos = () => {
   const isActive = filterStatus.value === 'all' ? undefined : filterStatus.value === 'active'
-  productStore.fetchProducts({
+  videoStore.fetchVideos({
     search: searchQuery.value,
     isActive: isActive
   })
@@ -160,25 +163,18 @@ const fetchProducts = () => {
 
 // Watch for search and filter changes
 watch([searchQuery, filterStatus], () => {
-  fetchProducts()
+  fetchVideos()
 })
 
-const confirmDelete = async (product: IProduct) => {
-  if (confirm(`Bạn có chắc muốn xóa sản phẩm "${product.name_vi}"?`)) {
+const confirmDelete = async (video: IHighlightVideo) => {
+  if (confirm(`Bạn có chắc muốn xóa video "${video.title_vi}"?`)) {
     try {
-      await productStore.deleteProduct(product.id)
-      toastSuccess('Đã xóa sản phẩm thành công')
+      await videoStore.deleteVideo(video.id)
+      toastSuccess('Đã xóa video thành công')
     } catch {
-      toastError(productStore.error || 'Lỗi khi xóa sản phẩm')
+      toastError(videoStore.error || 'Lỗi khi xóa video')
     }
   }
-}
-
-const formatCurrency = (amount: number) => {
-  return new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND',
-  }).format(amount)
 }
 </script>
 

@@ -1,23 +1,23 @@
-<!-- src/components/products/ProductModal.vue -->
+<!-- src/components/posts/PostModal.vue -->
 <template>
   <BaseModal
     :show="show"
-    :title="isEdit ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới'"
+    :title="isEdit ? 'Chỉnh sửa bài viết' : 'Thêm bài viết mới'"
     maxWidth="70%"
     @close="$emit('close')"
   >
     <div class="space-y-6">
-      <!-- Name & Slug -->
+      <!-- Title & Slug -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Tên sản phẩm *
+            Tiêu đề bài viết *
           </label>
           <input
-            v-model="form.name_vi"
+            v-model="form.title_vi"
             type="text"
-            @input="handleNameInput"
-            placeholder="Nhập tên sản phẩm..."
+            @input="handleTitleInput"
+            placeholder="Nhập tiêu đề bài viết..."
             class="block w-full px-4 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all"
           />
         </div>
@@ -29,49 +29,40 @@
             v-model="form.slug"
             type="text"
             class="block w-full px-4 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all"
-            placeholder="ví-du-slug-san-pham"
+            placeholder="vi-du-slug-bai-viet"
           />
         </div>
       </div>
 
-      <!-- Price & Status -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Status Option -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Giá bán (VND) *
+            Trạng thái *
           </label>
-          <div class="relative">
-            <input
-              v-model.number="form.price"
-              type="number"
-              class="block w-full pl-4 pr-12 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all"
-            />
-            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">VND</span>
-          </div>
-        </div>
-        <div class="flex items-end pb-2">
-          <label class="flex items-center cursor-pointer">
-            <input type="checkbox" v-model="form.isActive" class="sr-only peer" />
-            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
-            <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-              Kích hoạt sản phẩm
-            </span>
-          </label>
+          <select
+            v-model="form.status"
+            class="block w-full px-4 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
+          >
+            <option value="DRAFT">Bản nháp</option>
+            <option value="PUBLISHED">Xuất bản</option>
+            <option value="SCHEDULED">Lên lịch</option>
+          </select>
         </div>
       </div>
 
-      <!-- Main Image Upload -->
+      <!-- Main Media Upload -->
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Ảnh chính sản phẩm
+          Ảnh đại diện (Media)
         </label>
         <div class="flex items-center space-x-6">
           <div 
             @click="triggerFileUpload"
-            class="w-40 h-40 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-2xl overflow-hidden flex flex-col items-center justify-center cursor-pointer hover:border-red-500 dark:hover:border-red-500 transition-all relative group bg-gray-50 dark:bg-gray-800/50 shadow-inner"
+            class="w-80 h-40 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-2xl overflow-hidden flex flex-col items-center justify-center cursor-pointer hover:border-red-500 dark:hover:border-red-500 transition-all relative group bg-gray-50 dark:bg-gray-800/50 shadow-inner"
           >
-            <template v-if="form.images && form.images.length > 0">
-              <img :src="form.images[0]" class="w-full h-full object-cover" />
+            <template v-if="form.media">
+              <img :src="form.media" class="w-full h-full object-cover" />
               <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <i class="pi pi-camera text-white text-2xl"></i>
               </div>
@@ -84,7 +75,7 @@
             </template>
           </div>
           
-          <div v-if="form.images && form.images.length > 0" class="flex flex-col gap-3">
+          <div v-if="form.media" class="flex flex-col gap-3">
             <button 
               type="button"
               @click="removeMainImage"
@@ -119,7 +110,7 @@
       <div class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Nội dung chi tiết *
+            Nội dung bài viết *
           </label>
           <div class="border rounded-xl dark:border-gray-700">
             <Editor v-model="form.content_vi" minHeight="450px" />
@@ -134,11 +125,14 @@
     <template #footer>
       <button
         @click="handleSubmit"
-        :disabled="productStore.loading"
+        :disabled="postStore.loading"
         class="w-full inline-flex justify-center items-center rounded-lg px-6 py-2 bg-red-500 text-white font-semibold hover:bg-red-600 transition-all shadow-md active:scale-95 sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <i v-if="productStore.loading" class="pi pi-spin pi-spinner mr-2"></i>
-        {{ isEdit ? 'Cập nhật' : 'Tạo mới' }}
+        <i v-if="postStore.loading" class="pi pi-spin pi-spinner mr-2"></i>
+        <template v-if="isEdit && form.status === 'PUBLISHED'">Cập nhật</template>
+        <template v-else-if="!isEdit && form.status === 'PUBLISHED'">Khởi tạo & Xuất bản</template>
+        <template v-else-if="isEdit">Lưu cập nhật</template>
+        <template v-else>Lưu bản nháp</template>
       </button>
       <button
         @click="$emit('close')"
@@ -157,40 +151,38 @@ import Editor from '../common/Editor.vue'
 import { slugify } from '@/utils/string'
 import { fileToDataURL, checkFileSize } from '@/utils/file'
 import { hasFieldChanged } from '@/utils/diff'
-import { useProductStore } from '@/store/product.store'
-import type { IProduct, ProductCreationAttributes } from '@/types/product'
+import { usePostStore } from '@/store/post.store'
+import type { IPost, PostCreationAttributes } from '@/types/post'
 import { useToast } from '@/composables/useToast'
 
 const props = defineProps({
   show: Boolean,
-  product: {
-    type: Object as () => IProduct | null,
+  post: {
+    type: Object as () => IPost | null,
     default: null
   }
 })
 
 const emit = defineEmits<{
   (e: 'close'): void
-  (e: 'submit', data: IProduct): void
+  (e: 'submit', data: IPost): void
 }>()
 
 const isEdit = ref(false)
-const productStore = useProductStore()
+const postStore = usePostStore()
 const { toastSuccess, toastError, toastWarn } = useToast()
 
-const initialForm: ProductCreationAttributes = {
-  name_vi: '',
+const initialForm: PostCreationAttributes = {
+  title_vi: '',
   slug: '',
   content_vi: '',
-  price: 0,
-  isActive: true,
-  images: [],
-  variants: []
+  status: 'DRAFT',
+  media: '',
 }
 
 const form = reactive({ ...initialForm })
 
-watch(() => props.product, (newVal) => {
+watch(() => props.post, (newVal) => {
   if (newVal) {
     isEdit.value = true
     Object.assign(form, newVal)
@@ -216,7 +208,7 @@ const handleFileUpload = async (event: Event) => {
     }
     try {
       const base64 = await fileToDataURL(file)
-      form.images = [base64]
+      form.media = base64
     } catch (error) {
       console.error('Lỗi khi đọc file:', error)
       toastError('Có lỗi xảy ra khi tải ảnh lên')
@@ -225,44 +217,44 @@ const handleFileUpload = async (event: Event) => {
 }
 
 const removeMainImage = () => {
-  form.images = []
+  form.media = ''
   if (fileInput.value) {
     fileInput.value.value = ''
   }
 }
 
-const handleNameInput = () => {
+const handleTitleInput = () => {
   if (!isEdit.value) {
-    form.slug = slugify(form.name_vi)
+    form.slug = slugify(form.title_vi)
   }
 }
 
 const handleSubmit = async () => {
   try {
     let result
-    if (isEdit.value && props.product?.id) {
-      const payload: Partial<ProductCreationAttributes> = { ...form }
+    if (isEdit.value && props.post?.id) {
+      const payload: Partial<PostCreationAttributes> = { ...form }
       
       // Kiểm tra xem có thay đổi nội dung không để yêu cầu dịch lại
-      payload.translateName = hasFieldChanged(props.product, form, 'name_vi')
-      payload.translateContent = hasFieldChanged(props.product, form, 'content_vi')
+      payload.translateTitle = hasFieldChanged(props.post, form, 'title_vi')
+      payload.translateContent = hasFieldChanged(props.post, form, 'content_vi')
       
-      result = await productStore.updateProduct(props.product.id, payload)
+      result = await postStore.updatePost(props.post.id, payload)
     } else {
-      result = await productStore.createProduct({ 
+      result = await postStore.createPost({ 
         ...form, 
-        translateName: true, 
+        translateTitle: true, 
         translateContent: true 
       })
     }
 
-    toastSuccess(isEdit.value ? 'Cập nhật sản phẩm thành công' : 'Thêm sản phẩm thành công')
+    toastSuccess(isEdit.value ? 'Cập nhật bài viết thành công' : 'Thêm bài viết thành công')
 
     emit('submit', result.data)
     emit('close')
   } catch (error) {
-    console.error('Error submitting product:', error)
-    toastError(productStore.error || 'Có lỗi xảy ra khi lưu sản phẩm')
+    console.error('Error submitting post:', error)
+    toastError(postStore.error || 'Có lỗi xảy ra khi lưu bài viết')
   }
 }
 </script>

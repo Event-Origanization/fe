@@ -40,6 +40,46 @@ const router = createRouter({
             roles: [USER_ROLES.ROLE_ADMIN],
           },
         },
+        {
+          path: 'posts',
+          name: 'PostManagement',
+          component: () => import('@/views/admin/Posts/PostManagement.vue'),
+          meta: {
+            title: 'Quản lý bài viết',
+            // requiresAuth: true,
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
+        {
+          path: 'seo',
+          name: 'SeoManagement',
+          component: () => import('@/views/admin/Seo/SeoManagement.vue'),
+          meta: {
+            title: 'Quản lý SEO',
+            requiresAuth: true,
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
+        {
+          path: 'videos',
+          name: 'VideoManagement',
+          component: () => import('@/views/admin/Videos/VideoManagement.vue'),
+          meta: {
+            title: 'Quản lý Video',
+            // requiresAuth: true,
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
+        {
+          path: 'configs',
+          name: 'ConfigManagement',
+          component: () => import('@/views/admin/Config/ConfigManagement.vue'),
+          meta: {
+            title: 'Cấu hình Website',
+            requiresAuth: true,
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
       ],
     },
 
@@ -89,36 +129,40 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
-  const publicRouteNames = ['Home', 'About', 'Signin', 'Signup', 'NotFound', 'ProductManagement']
+  const publicRouteNames = ['Home', 'About', 'Signin', 'Signup', 'NotFound', 'ProductManagement', 'PostManagement', 'VideoManagement']
   const authStore = useAuthStore()
 
   if (publicRouteNames.includes(to.name as string)) {
     return next()
   }
 
-  // if (!authStore.isAuthenticated) {
-  //   await authStore.getMe()
-  // }
+  if (!authStore.isAuthenticated) {
+    await authStore.getMe()
+  }
 
-  // if (!authStore.isAuthenticated || !authStore.user) {
-  //   return next({
-  //     name: 'NotFound',
-  //   })
-  // }
+  if (!authStore.isAuthenticated || !authStore.user) {
+    return next({
+      name: 'NotFound',
+    })
+  }
 
-  // if (to.meta.roles && Array.isArray(to.meta.roles)) {
-  //   const userRole = authStore.user?.role
+  if (to.meta.roles && Array.isArray(to.meta.roles)) {
+    const userRole = authStore.user?.role
 
-  //   const allowedRoles = to.meta.roles
+    const allowedRoles = to.meta.roles
 
-  //   if (!allowedRoles.includes(userRole)) {
-  //     // alert('Bạn không có quyền truy cập trang này!')
-  //     return next({
-  //       name: 'NotFound',
-  //     })
-  //   }
-  // }
+    if (!allowedRoles.includes(userRole)) {
+      // alert('Bạn không có quyền truy cập trang này!')
+      return next({
+        name: 'NotFound',
+      })
+    }
+  }
   return next()
+})
+
+router.afterEach(() => {
+  // We handle SEO and Tittle in App.vue now
 })
 
 export default router

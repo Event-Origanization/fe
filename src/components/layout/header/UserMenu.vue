@@ -1,17 +1,18 @@
 <template>
-  <!-- <loading-home :is-loading="authStore.loading" /> -->
+  <loading-home :is-loading="authStore.loading" />
 
   <div class="relative" ref="dropdownRef">
     <button
+      v-if="authStore.isAuthenticated"
       class="flex items-center text-gray-700 dark:text-gray-400"
       :class="isHome ? 'text-white' : ''"
       @click.prevent="toggleDropdown"
     >
-      <!-- <span class="mr-3 overflow-hidden rounded-full h-11 w-11 border border-gray-200">
+      <span class="mr-3 overflow-hidden rounded-full h-11 w-11 border border-gray-200">
         <img v-if="user?.image" :src="user?.image" alt="User" />
         <span
           v-else
-          class="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold"
+          class="w-full h-full bg-gradient-to-br from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold"
         >
           {{ user?.email[0].toUpperCase() }}
         </span>
@@ -19,12 +20,12 @@
 
       <span class="block mr-1 font-medium text-theme-sm" :class="isHome ? 'text-white' : ''">{{
         user?.username
-      }}</span> -->
+      }}</span>
 
       <ChevronDownIcon :class="{ 'rotate-180': dropdownOpen }" />
     </button>
 
-    <!-- <router-link v-else to="/signin" class="btn btn-primary text-sm"> Sign In </router-link> -->
+    <router-link v-else to="/signin" class="btn btn-primary text-sm"> Sign In </router-link>
 
     <!-- Dropdown Start -->
     <div
@@ -32,12 +33,12 @@
       class="absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-dark"
     >
       <div>
-        <!-- <span class="block font-medium text-gray-700 text-theme-sm dark:text-gray-400">
+        <span class="block font-medium text-gray-700 text-theme-sm dark:text-gray-400">
           {{ user?.username }}
         </span>
         <span class="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
           {{ user?.email }}
-        </span> -->
+        </span>
       </div>
 
       <ul class="flex flex-col gap-1 pt-4 pb-3 border-b border-gray-200 dark:border-gray-800">
@@ -81,9 +82,9 @@ const route = useRoute()
 const dropdownOpen = ref(false)
 const dropdownRef = ref<HTMLElement | null>(null)
 
-// const authStore = useAuthStore()
+const authStore = useAuthStore()
 
-// const user = computed(() => authStore.user)
+const user = computed(() => authStore.user)
 
 const isHome = computed(() => route.path === '/')
 
@@ -98,7 +99,7 @@ const closeDropdown = () => {
 }
 
 const signOut = async () => {
-  // await authStore.logout() // Gọi logout từ store
+  await authStore.logout() // Gọi logout từ store
   closeDropdown()
 }
 
@@ -109,9 +110,9 @@ const handleClickOutside = (event: MouseEvent) => {
 }
 
 onMounted(() => {
-  // if (authStore.isAuthenticated === false) {
-  //   authStore.getMe()
-  // }
+  if (authStore.isAuthenticated === false) {
+    authStore.getMe()
+  }
   document.addEventListener('click', handleClickOutside)
 })
 

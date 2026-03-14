@@ -6,15 +6,11 @@
       '--editor-height': autoResize ? 'auto' : minHeight,
     }"
   >
-    <textarea
-      :id="editorId"
-      :placeholder="placeholder"
-      :disabled="disabled"
-    ></textarea>
+    <textarea :id="editorId" :placeholder="placeholder" :disabled="disabled"></textarea>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import tinymce from 'tinymce/tinymce'
 import { useI18n } from 'vue-i18n'
@@ -41,6 +37,10 @@ import 'tinymce/plugins/autoresize'
 
 import 'tinymce/plugins/emoticons/js/emojis'
 
+defineOptions({
+  name: 'TheEditor',
+})
+
 const props = defineProps({
   minHeight: { type: String, default: '200px' },
   placeholder: { type: String, default: '' },
@@ -59,14 +59,16 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'blur', 'paste'])
 
 const { t } = useI18n()
-const editorId = ref(`editor-${Math.random().toString(36).substr(2, 9)}`)
-let editor = null
+const editorId = ref(`editor-${Math.random().toString(36).substring(2, 11)}`)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let editor: any = null // TinyMCE editor instance
 let isInternalUpdate = false
+let tooltipHideTimeout: ReturnType<typeof setTimeout> | null = null
 
 // Computed properties for CSS binding
 const autoResize = computed(() => props.autoResize)
 
-const convertToPixels = (value) => {
+const convertToPixels = (value: string | number): number => {
   if (!value) return 200
 
   if (typeof value === 'number') return value
@@ -115,7 +117,8 @@ const editorConfig = computed(() => {
     ].join(' | ')
   }
 
-  const config = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const config: any = {
     license_key: 'gpl',
     selector: `#${editorId.value}`,
     min_height: convertToPixels(props.minHeight),
@@ -138,7 +141,7 @@ const editorConfig = computed(() => {
     quickbars_selection_toolbar: 'bold italic | formatselect',
     quickbars_insert_toolbar: false,
 
-    auto_focus: false,
+    auto_focus: true,
     branding: false,
     promotion: false,
     statusbar: false,
@@ -201,14 +204,21 @@ const editorConfig = computed(() => {
 
   // Enable file picker for images
   config.file_picker_types = 'image'
-  config.file_picker_callback = (callback, value, meta) => {
+
+  config.file_picker_callback = (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    callback: (url: string, meta: Record<string, unknown>) => void,
+    _value: unknown,
+    _meta: Record<string, unknown>,
+  ) => {
     // Create a hidden input element
     const input = document.createElement('input')
     input.setAttribute('type', 'file')
     input.setAttribute('accept', 'image/*')
 
-    input.onchange = function () {
-      const file = this.files[0]
+    input.onchange = (e: Event) => {
+      const target = e.target as HTMLInputElement
+      const file = target.files?.[0]
 
       if (!file) return
 
@@ -220,12 +230,14 @@ const editorConfig = computed(() => {
 
       // Read the file as base64
       const reader = new FileReader()
-      reader.onload = function (e) {
+      reader.onload = (e: ProgressEvent<FileReader>) => {
         // Call the callback with the base64 data
-        callback(e.target.result, {
-          alt: file.name,
-          title: file.name,
-        })
+        if (e.target?.result) {
+          callback(e.target.result as string, {
+            alt: file.name,
+            title: file.name,
+          })
+        }
       }
       reader.readAsDataURL(file)
     }
@@ -234,12 +246,12 @@ const editorConfig = computed(() => {
     input.click()
   }
 
-    config.convert_urls = false
-    config.relative_urls = false
-    config.remove_script_host = false
+  config.convert_urls = false
+  config.relative_urls = false
+  config.remove_script_host = false
 
-    config.link_default_target = '_blank'
-    config.link_assume_external_targets = true
+  config.link_default_target = '_blank'
+  config.link_assume_external_targets = true
 
   // Hide unwanted fields in link dialog
   config.link_title = false
@@ -252,49 +264,51 @@ const editorConfig = computed(() => {
   config.table_cell_advtab = false
   config.table_row_advtab = false
 
-  const updateLabels = (dialog, selector, matchText, newText) => {
-    dialog.querySelectorAll(selector).forEach((label) => {
-      if (label.textContent.includes(matchText)) {
+  const updateLabels = (dialog: Element, selector: string, matchText: string, newText: string) => {
+    dialog.querySelectorAll(selector).forEach((label: Element) => {
+      if (label.textContent?.includes(matchText)) {
         label.textContent = newText
       }
     })
   }
 
-  const hideLockIcon = (icon) => {
+  const hideLockIcon = (icon: Element | null) => {
     if (icon) {
-      icon.style.display = 'none'
-      if (
-        icon.parentElement &&
-        icon.parentElement.classList.contains('tox-button')
-      ) {
-        icon.parentElement.style.display = 'none'
+      const el = icon as HTMLElement
+      el.style.display = 'none'
+      if (el.parentElement && el.parentElement.classList.contains('tox-button')) {
+        el.parentElement.style.display = 'none'
       }
     }
   }
 
-  config.setup = (ed) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config.setup = (ed: Record<string, any>) => {
     editor = ed
 
     ed.on('init', () => {
       const iframe = ed.getContainer().querySelector('iframe')
       if (iframe) {
-        let mousePos = { x: 0, y: 0 }
+        const mousePos = { x: 0, y: 0 }
 
         // Track mouse position
-        iframe.contentDocument.addEventListener('mousemove', (e) =>
-          handleMouseMove(e, mousePos),
-        )
+        if (iframe.contentDocument) {
+          iframe.contentDocument.addEventListener('mousemove', (e: MouseEvent) =>
+            handleMouseMove(e, mousePos),
+          )
 
-        iframe.contentDocument.addEventListener('mouseover', (e) =>
-          handleMouseOver(e, iframe, mousePos),
-        )
+          iframe.contentDocument.addEventListener('mouseover', (e: MouseEvent) =>
+            handleMouseOver(e, iframe, mousePos),
+          )
 
-        iframe.contentDocument.addEventListener('mouseout', handleMouseOut)
+          iframe.contentDocument.addEventListener('mouseout', (e: MouseEvent) => handleMouseOut(e))
+        }
       }
     })
 
     // Override dialog titles and labels for multilingual support
-    ed.on('OpenWindow', (e) => {
+
+    ed.on('OpenWindow', (_e: unknown) => {
       setTimeout(() => {
         const dialog = document.querySelector('.tox-dialog')
         if (!dialog) return
@@ -316,12 +330,7 @@ const editorConfig = computed(() => {
         updateLabels(dialog, '.tox-label', 'Height', t('lang.EDITOR.HEIGHT'))
         updateLabels(dialog, '.tox-label', 'Width', t('lang.EDITOR.WIDTH'))
         updateLabels(dialog, '.tox-label', 'URL', t('lang.EDITOR.URL'))
-        updateLabels(
-          dialog,
-          '.tox-label',
-          'Text to display',
-          t('lang.EDITOR.TEXT_TO_DISPLAY'),
-        )
+        updateLabels(dialog, '.tox-label', 'Text to display', t('lang.EDITOR.TEXT_TO_DISPLAY'))
 
         // Hide lock icon (constrain proportions)
         dialog
@@ -340,11 +349,13 @@ const editorConfig = computed(() => {
       }, 0)
     })
 
-    ed.on('blur', (e) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ed.on('blur', (e: any) => {
       emit('blur', e)
     })
 
-    ed.on('paste', (e) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ed.on('paste', (e: any) => {
       emit('paste', e)
     })
   }
@@ -386,6 +397,9 @@ watch(
 
 onBeforeUnmount(() => {
   hideLinkTooltip() // Clean up tooltip
+  if (tooltipHideTimeout) {
+    clearTimeout(tooltipHideTimeout)
+  }
   if (editor) {
     tinymce.remove(editor)
     editor = null
@@ -393,56 +407,72 @@ onBeforeUnmount(() => {
 })
 
 // Tooltip functions for link hover
-let tooltipElement = null
+let tooltipElement: HTMLElement | null = null
 
-function handleMouseMove(e, mousePos) {
+function handleMouseMove(e: MouseEvent, mousePos: { x: number; y: number }) {
   mousePos.x = e.clientX
   mousePos.y = e.clientY
 }
 
-function handleMouseOver(e, iframe, mousePos) {
-  const link = e.target.closest('a[href], a[data-mce-href]')
+function handleMouseOver(
+  e: MouseEvent,
+  iframe: HTMLIFrameElement,
+  mousePos: { x: number; y: number },
+) {
+  const target = e.target as HTMLElement
+  const link = target.closest('a[href], a[data-mce-href]') as HTMLAnchorElement | null
   if (link && (link.href || link.dataset.mceHref)) {
-    clearTimeout(globalThis.tooltipHideTimeout)
+    if (tooltipHideTimeout) clearTimeout(tooltipHideTimeout)
     showLinkTooltip(link, e, iframe, mousePos.x, mousePos.y)
   }
 }
 
-function handleMouseOut(e) {
-  const link = e.target.closest('a[href]')
+function handleMouseOut(e: MouseEvent) {
+  const target = e.target as HTMLElement
+  const link = target.closest('a[href]')
   if (link) {
-    globalThis.tooltipHideTimeout = setTimeout(() => {
+    tooltipHideTimeout = setTimeout(() => {
       hideLinkTooltip()
     }, 200)
   }
 }
 
-const matchByTextContent = (links, text) =>
+const matchByTextContent = (links: NodeListOf<Element> | Element[], text: string) =>
   Array.from(links).find((linkEl) => linkEl.textContent === text)
 
-const matchByDataMceSelected = (links, dataMceSelected) =>
+const matchByDataMceSelected = (links: NodeListOf<Element> | Element[], dataMceSelected: string) =>
   Array.from(links).find(
-    (linkEl) => linkEl.dataset.mceSelected === dataMceSelected,
+    (linkEl) => (linkEl as HTMLElement).dataset.mceSelected === dataMceSelected,
   )
 
-const matchByHrefAttributes = (links, hrefAttr, dataMceHref) =>
+const matchByHrefAttributes = (
+  links: NodeListOf<Element> | Element[],
+  hrefAttr: string | null,
+  dataMceHref: string | null | undefined,
+) =>
   Array.from(links).find((linkEl) => {
-    const linkHref = linkEl.getAttribute('href')
-    const linkDataMceHref = linkEl.dataset.mceHref
+    const el = linkEl as HTMLElement
+    const linkHref = el.getAttribute('href')
+    const linkDataMceHref = el.dataset.mceHref
     return (
       linkHref === hrefAttr ||
       linkDataMceHref === dataMceHref ||
-      linkHref === dataMceHref ||
-      linkDataMceHref === hrefAttr
+      linkHref === (dataMceHref as string) ||
+      linkDataMceHref === hrefAttr ||
+      (linkDataMceHref && linkDataMceHref === hrefAttr)
     )
   })
 
-const matchBySimilarText = (links, text) =>
-  Array.from(links).find((linkEl) =>
-    linkEl.textContent.includes(text.substring(0, 20)),
-  )
+const matchBySimilarText = (links: NodeListOf<Element> | Element[], text: string) =>
+  Array.from(links).find((linkEl) => linkEl.textContent?.includes(text.substring(0, 20)))
 
-const showLinkTooltip = (link, event, iframe, mouseX, mouseY) => {
+const showLinkTooltip = (
+  link: HTMLAnchorElement,
+  _event: MouseEvent,
+  iframe: HTMLIFrameElement,
+  mouseX: number,
+  mouseY: number,
+) => {
   hideLinkTooltip() // Remove existing tooltip
 
   if (!iframe) return
@@ -520,21 +550,14 @@ const showLinkTooltip = (link, event, iframe, mouseX, mouseY) => {
         const iframe = editor.getContainer().querySelector('iframe')
         if (iframe && iframe.contentDocument) {
           const iframeDoc = iframe.contentDocument
-          const allLinks = iframeDoc.querySelectorAll(
-            'a[href], a[data-mce-href]',
-          )
+          const allLinks = iframeDoc.querySelectorAll('a[href], a[data-mce-href]')
 
-          let targetLink =
-            matchByTextContent(allLinks, currentLink.textContent) ||
-            matchByDataMceSelected(allLinks, currentLink.dataMceSelected) ||
-            matchByHrefAttributes(
-              allLinks,
-              currentLink.hrefAttr,
-              currentLink.dataMceHref,
-            ) ||
+          const targetLink =
+            matchByTextContent(allLinks, currentLink.textContent || '') ||
+            matchByDataMceSelected(allLinks, currentLink.dataMceSelected || '') ||
+            matchByHrefAttributes(allLinks, currentLink.hrefAttr, currentLink.dataMceHref) ||
             (allLinks.length > 0 &&
-              (matchBySimilarText(allLinks, currentLink.textContent) ||
-                allLinks[0]))
+              (matchBySimilarText(allLinks, currentLink.textContent || '') || allLinks[0]))
 
           if (targetLink) {
             const range = iframeDoc.createRange()
@@ -577,11 +600,12 @@ const showLinkTooltip = (link, event, iframe, mouseX, mouseY) => {
       navigator.clipboard.writeText(linkUrl).then(() => {
         // Show success feedback
         const originalText = copyBtn.innerHTML
-        copyBtn.innerHTML = '<i class="fas fa-check"></i>'
-        copyBtn.style.background = '#28a745'
+        const copyBtnHtml = copyBtn as HTMLElement
+        copyBtnHtml.innerHTML = '<i class="fas fa-check"></i>'
+        copyBtnHtml.style.background = '#28a745'
         setTimeout(() => {
-          copyBtn.innerHTML = originalText
-          copyBtn.style.background = '#007cba'
+          copyBtnHtml.innerHTML = originalText
+          copyBtnHtml.style.background = '#007cba'
         }, 1000)
       })
     })
@@ -599,9 +623,9 @@ const showLinkTooltip = (link, event, iframe, mouseX, mouseY) => {
   // Add mouse events to tooltip to prevent it from disappearing
   tooltipElement.addEventListener('mouseenter', () => {
     // Cancel any pending hide timeout
-    if (globalThis.tooltipHideTimeout) {
-      clearTimeout(globalThis.tooltipHideTimeout)
-      globalThis.tooltipHideTimeout = null
+    if (tooltipHideTimeout) {
+      clearTimeout(tooltipHideTimeout)
+      tooltipHideTimeout = null
     }
   })
 
@@ -613,9 +637,9 @@ const showLinkTooltip = (link, event, iframe, mouseX, mouseY) => {
 
 const hideLinkTooltip = () => {
   // Clear any pending hide timeout
-  if (globalThis.tooltipHideTimeout) {
-    clearTimeout(globalThis.tooltipHideTimeout)
-    globalThis.tooltipHideTimeout = null
+  if (tooltipHideTimeout) {
+    clearTimeout(tooltipHideTimeout)
+    tooltipHideTimeout = null
   }
 
   if (tooltipElement) {

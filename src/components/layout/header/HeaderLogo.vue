@@ -1,9 +1,9 @@
 <template>
   <router-link to="/" class="lg:hidden">
     <div
-      class="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent"
+      class="text-2xl font-bold bg-gradient-to-r from-red-500 to-purple-500 bg-clip-text text-transparent"
     >
-      AIRemake<span class="text-pink-400">Pro</span>
+      5P<span class="text-red-500">Event</span>
     </div>
   </router-link>
 </template>
