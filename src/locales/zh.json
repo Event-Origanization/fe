@@ -83,8 +83,15 @@
     "POSTS": "文章管理",
     "VIDEOS": "精彩视频",
     "CONFIG": "网站设置",
+    "HOME_VIDEOS": "首页视频",
+    "NEWSLETTER": "邮件订阅",
     "SEO": "SEO Meta 管理",
     "USERS": "用户管理",
     "REPORTS": "统计报告"
+  },
+  "FOOTER": {
+    "SUBSCRIBE": "订阅最新动态",
+    "EMAIL_PLACEHOLDER": "您的邮箱...",
+    "CONNECT_WITH_US": "跟我们联络"
   }
 }

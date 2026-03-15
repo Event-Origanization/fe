@@ -201,6 +201,8 @@ const menuGroups = computed<MenuGroup[]>(() => {
         { icon: PlugInIcon, name: t('SIDEBAR.PRODUCTS'), path: '/administrators/products' },
         { icon: ListIcon, name: t('SIDEBAR.POSTS'), path: '/administrators/posts' },
         { icon: GridIcon, name: t('SIDEBAR.VIDEOS'), path: '/administrators/videos' },
+        { icon: GridIcon, name: t('SIDEBAR.HOME_VIDEOS'), path: '/administrators/home-videos' },
+        { icon: ListIcon, name: t('SIDEBAR.NEWSLETTER'), path: '/administrators/newsletter' },
         { icon: PlugInIcon, name: t('SIDEBAR.CONFIG'), path: '/administrators/configs' },
         { icon: ListIcon, name: t('SIDEBAR.SEO'), path: '/administrators/seo' },
         {

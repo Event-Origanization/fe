@@ -112,6 +112,7 @@ const filteredConfigs = computed(() => {
 const getConfigLabel = (key: string) => {
   const labels: Record<string, string> = {
     'WEBSITE_NAME': 'Tên website',
+    'WEBSITE_FULLNAME': 'Tên đầy đủ công ty',
     'WEBSITE_SLOGAN': 'Slogan',
     'WEBSITE_LOGO': 'Đường dẫn Logo',
     'WEBSITE_FAVICON': 'Đường dẫn Favicon',

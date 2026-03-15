@@ -62,4 +62,19 @@ export const API_ROUTES = {
     UPDATE: '/highlight-videos/:id',
     DELETE: '/highlight-videos/:id',
   },
+  HOME_VIDEOS: {
+    BASE: '/home-videos',
+    GET_ALL: '/home-videos',
+    GET_BY_ID: '/home-videos/:id',
+    CREATE: '/home-videos',
+    UPDATE: '/home-videos/:id',
+    DELETE: '/home-videos/:id',
+  },
+  NEWSLETTER: {
+    BASE: '/newsletter',
+    SUBSCRIBE: '/newsletter/subscribe',
+    GET_ALL: '/newsletter',
+    UPDATE: '/newsletter/:id',
+    DELETE: '/newsletter/:id',
+  },
 }

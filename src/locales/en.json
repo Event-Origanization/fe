@@ -83,8 +83,15 @@
     "POSTS": "Posts",
     "VIDEOS": "Highlight Videos",
     "CONFIG": "Website Settings",
+    "HOME_VIDEOS": "Home Videos",
+    "NEWSLETTER": "Newsletter Subscriptions",
     "SEO": "SEO Meta Management",
     "USERS": "User Management",
     "REPORTS": "Reports"
+  },
+  "FOOTER": {
+    "SUBSCRIBE": "Subscribe to newsletter",
+    "EMAIL_PLACEHOLDER": "Your email...",
+    "CONNECT_WITH_US": "Connect with us"
   }
 }
