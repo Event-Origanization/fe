@@ -83,8 +83,15 @@
     "POSTS": "Quản lý bài viết",
     "VIDEOS": "Kho video highlight",
     "CONFIG": "Cấu hình website",
+    "HOME_VIDEOS": "Video trang chủ",
+    "NEWSLETTER": "Đăng ký nhận tin",
     "SEO": "Quản lý SEO Meta",
     "USERS": "Quản lý người dùng",
     "REPORTS": "Báo cáo thống kê"
+  },
+  "FOOTER": {
+    "SUBSCRIBE": "Đăng ký nhận tin",
+    "EMAIL_PLACEHOLDER": "Email của bạn...",
+    "CONNECT_WITH_US": "Kết nối với chúng tôi"
   }
 }

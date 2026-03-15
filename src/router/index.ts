@@ -71,12 +71,32 @@ const router = createRouter({
           },
         },
         {
+          path: 'home-videos',
+          name: 'HomeVideoManagement',
+          component: () => import('@/views/admin/HomeVideo/HomeVideoManagement.vue'),
+          meta: {
+            title: 'Quản lý Video trang chủ',
+            // requiresAuth: true,
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
+        {
           path: 'configs',
           name: 'ConfigManagement',
           component: () => import('@/views/admin/Config/ConfigManagement.vue'),
           meta: {
             title: 'Cấu hình Website',
             requiresAuth: true,
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
+        {
+          path: 'newsletter',
+          name: 'NewsletterManagement',
+          component: () => import('@/views/admin/Newsletter/NewsletterManagement.vue'),
+          meta: {
+            title: 'Quản lý nhận tin',
+            // requiresAuth: true,
             roles: [USER_ROLES.ROLE_ADMIN],
           },
         },
@@ -129,7 +149,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
-  const publicRouteNames = ['Home', 'About', 'Signin', 'Signup', 'NotFound', 'ProductManagement', 'PostManagement', 'VideoManagement']
+  const publicRouteNames = ['Home', 'About', 'Signin', 'Signup', 'NotFound', 'ProductManagement', 'PostManagement', 'VideoManagement', 'HomeVideoManagement', 'NewsletterManagement']
   const authStore = useAuthStore()
 
   if (publicRouteNames.includes(to.name as string)) {

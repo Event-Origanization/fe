@@ -27,17 +27,21 @@
               ></path>
             </svg>
             <span class="text-white font-medium uppercase text-sm tracking-widest"
-              >Đăng ký nhận tin</span
+              >{{ $t('FOOTER.SUBSCRIBE') }}</span
             >
           </div>
           <div class="w-px h-6 bg-gray-700 mx-4"></div>
           <input
+            v-model="email"
             type="email"
-            placeholder="Email của bạn..."
+            :placeholder="$t('FOOTER.EMAIL_PLACEHOLDER')"
             class="bg-transparent flex-1 text-white text-sm focus:outline-none placeholder-gray-600 py-2"
+            @keyup.enter="handleSubscribe"
           />
           <button
-            class="bg-[#111] border border-gray-700 hover:bg-gray-800 text-white p-2 rounded-full transition-colors flex items-center justify-center"
+            @click="handleSubscribe"
+            :disabled="loading"
+            class="bg-[#111] border border-gray-700 hover:bg-gray-800 text-white p-2 rounded-full transition-colors flex items-center justify-center disabled:opacity-50"
           >
             <svg
               class="w-5 h-5 text-gray-400"
@@ -75,7 +79,13 @@
         >
           <p>
             <strong class="text-white uppercase">
-              {{ configStore.getConfigValue('GENERAL', 'WEBSITE_FULL_NAME', 'CÔNG TY TNHH TRUYỀN THÔNG VÀ TỔ CHỨC SỰ KIỆN 5P EVENT') }}
+              {{
+                configStore.getConfigValue(
+                  'GENERAL',
+                  'WEBSITE_FULLNAME',
+                  'CÔNG TY TNHH TRUYỀN THÔNG VÀ TỔ CHỨC SỰ KIỆN 5P EVENT',
+                )
+              }}
             </strong>
           </p>
           <p class="flex items-start gap-2 justify-center md:justify-start">
@@ -99,7 +109,13 @@
               ></path>
             </svg>
             <span>
-              {{ configStore.getConfigValue('CONTACT', 'CONTACT_ADDRESS', 'Landmark 81, Vinhomes Central Park, 720A Điện Biên Phủ, Phường 22, Quận Bình Thạnh, TP.HCM') }}
+              {{
+                configStore.getConfigValue(
+                  'CONTACT',
+                  'CONTACT_ADDRESS',
+                  'Landmark 81, Vinhomes Central Park, 720A Điện Biên Phủ, Phường 22, Quận Bình Thạnh, TP.HCM',
+                )
+              }}
             </span>
           </p>
           <p class="flex items-center gap-2 justify-center md:justify-start">
@@ -116,7 +132,10 @@
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               ></path>
             </svg>
-            <span>Hotline: {{ configStore.getConfigValue('CONTACT', 'CONTACT_HOTLINE', '090 123 4567') }}</span>
+            <span
+              >Hotline:
+              {{ configStore.getConfigValue('CONTACT', 'CONTACT_HOTLINE', '090 123 4567') }}</span
+            >
           </p>
           <p class="flex items-center gap-2 justify-center md:justify-start">
             <svg
@@ -132,14 +151,17 @@
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               ></path>
             </svg>
-            <span>Email: {{ configStore.getConfigValue('CONTACT', 'CONTACT_EMAIL', 'admin@5pevent.vn') }}</span>
+            <span
+              >Email:
+              {{ configStore.getConfigValue('CONTACT', 'CONTACT_EMAIL', 'admin@5pevent.vn') }}</span
+            >
           </p>
         </div>
 
         <!-- Socials and Links -->
         <div class="md:col-span-1 space-y-4 text-center md:text-right text-white">
           <h4 class="text-white font-medium font-outfit uppercase tracking-widest text-xs mb-6">
-            Kết nối với chúng tôi
+            {{ $t('FOOTER.CONNECT_WITH_US') }}
           </h4>
           <div class="flex items-center justify-center md:justify-end gap-3 cursor-pointer">
             <!-- Facebook -->
@@ -176,7 +198,10 @@
             </a>
           </div>
           <div class="pt-8 text-gray-600 text-[11px] uppercase tracking-wider">
-            © 2026 5P EVENT TRADING CO.,LTD
+            © 2026
+            {{
+              configStore.getConfigValue('GENERAL', 'WEBSITE_FULLNAME', '5P EVENT TRADING CO.,LTD')
+            }}
           </div>
         </div>
       </div>
@@ -191,4 +216,38 @@ defineOptions({
 })
 
 const configStore = useConfigStore()
+
+import { ref } from 'vue'
+import { useNewsletterStore } from '@/store/newsletter'
+import { useToast } from '@/composables/useToast'
+
+const newsletterStore = useNewsletterStore()
+const { toastSuccess, toastError, toastWarn } = useToast()
+
+const email = ref('')
+const loading = ref(false)
+
+const handleSubscribe = async () => {
+  if (!email.value) {
+    toastWarn('Vui lòng nhập email')
+    return
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email.value)) {
+    toastWarn('Email không hợp lệ')
+    return
+  }
+
+  loading.value = true
+  try {
+    await newsletterStore.subscribe(email.value)
+    toastSuccess('Đăng ký nhận tin thành công!')
+    email.value = ''
+  } catch (error) {
+    toastError(newsletterStore.error || 'Có lỗi xảy ra khi đăng ký')
+  } finally {
+    loading.value = false
+  }
+}
 </script>
