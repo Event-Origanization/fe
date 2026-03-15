@@ -10,7 +10,7 @@
             class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400"
             to="/"
           >
-            Home
+            {{ $t('NAV.HOME') }}
             <svg
               class="stroke-current"
               width="17"
@@ -38,8 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 interface BreadcrumbProps {
   pageTitle: string
 }

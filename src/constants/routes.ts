@@ -77,4 +77,8 @@ export const API_ROUTES = {
     UPDATE: '/newsletter/:id',
     DELETE: '/newsletter/:id',
   },
+  DASHBOARD: {
+    OVERVIEW: '/dashboard/overview',
+    YEARLY_CHARTS: '/dashboard/charts/yearly',
+  },
 }

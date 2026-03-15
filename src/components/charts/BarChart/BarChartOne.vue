@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-full overflow-x-auto custom-scrollbar">
     <div id="chartOne" class="-ml-5 min-w-[650px] xl:min-w-full pl-2">
-      <VueApexCharts type="bar" height="180" :options="chartOptions" :series="series" />
+      <VueApexCharts type="bar" height="180" :options="chartOptions" :series="props.series" />
     </div>
   </div>
 </template>
@@ -10,15 +10,28 @@
 import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 
-const series = ref([
-  {
-    name: 'Sales',
-    data: [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112],
+const props = defineProps({
+  series: {
+    type: Array as () => any[],
+    default: () => [
+      {
+        name: 'Sản phẩm',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+      {
+        name: 'Bài viết',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+    ],
   },
-])
+  colors: {
+    type: Array as () => string[],
+    default: () => ['#465fff', '#00e396'],
+  },
+})
 
 const chartOptions = ref({
-  colors: ['#465fff'],
+  colors: props.colors,
   chart: {
     fontFamily: 'Outfit, sans-serif',
     type: 'bar',
@@ -87,6 +100,7 @@ const chartOptions = ref({
     opacity: 1,
   },
   tooltip: {
+    theme: 'light',
     x: {
       show: false,
     },

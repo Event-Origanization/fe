@@ -12,7 +12,7 @@
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Tìm kiếm video..."
+          :placeholder="$t('COMMON.SEARCH')"
           class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         />
       </div>
@@ -22,9 +22,9 @@
           v-model="filterStatus"
           class="block w-full md:w-40 px-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         >
-          <option value="all">Tất cả trạng thái</option>
-          <option value="active">Đang hoạt động</option>
-          <option value="inactive">Đã ẩn</option>
+          <option value="all">{{ $t('COMMON.ALL') }}</option>
+          <option value="active">{{ $t('COMMON.ACTIVE') }}</option>
+          <option value="inactive">{{ $t('COMMON.INACTIVE') }}</option>
         </select>
         
         <button
@@ -34,7 +34,7 @@
           <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
-          Thêm mới
+          {{ $t('COMMON.CREATE') }}
         </button>
       </div>
     </div>
@@ -45,10 +45,10 @@
         <table class="min-w-full">
           <thead>
             <tr class="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Video</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Thứ tự</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Trạng thái</th>
-              <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">Thao tác</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('VIDEOS_ADMIN.TABLE.VIDEO') }}</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('VIDEOS_ADMIN.TABLE.ORDER') }}</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.STATUS') }}</th>
+              <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.ACTIONS') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
@@ -91,7 +91,7 @@
                   ]"
                 >
                   <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="video.isActive ? 'bg-green-600' : 'bg-yellow-600'"></span>
-                  {{ video.isActive ? 'Hoạt động' : 'Đã ẩn' }}
+                  {{ video.isActive ? $t('COMMON.ACTIVE') : $t('COMMON.INACTIVE') }}
                 </span>
               </td>
               <td class="px-5 py-4 text-right">
@@ -99,7 +99,7 @@
                   <button 
                     @click="$emit('edit', video)"
                     class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors" 
-                    title="Chỉnh sửa"
+                    :title="$t('COMMON.EDIT')"
                   >
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -108,7 +108,7 @@
                   <button 
                     @click="confirmDelete(video)"
                     class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" 
-                    title="Xóa"
+                    :title="$t('COMMON.DELETE')"
                   >
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -122,7 +122,7 @@
                 <svg class="h-10 w-10 mx-auto mb-3 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 00-2 2H6a2 2 0 00-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                 </svg>
-                Không tìm thấy video nào
+                {{ $t('COMMON.EMPTY_DATA') }}
               </td>
             </tr>
           </tbody>
@@ -134,6 +134,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useVideoStore } from '@/store/highlight-video.store'
 import type { IHighlightVideo } from '@/types/highlight-video'
 import { useToast } from '@/composables/useToast'
@@ -143,6 +144,7 @@ defineEmits<{
   (e: 'edit', video: IHighlightVideo): void
 }>()
 
+const { t } = useI18n()
 const videoStore = useVideoStore()
 const { toastSuccess, toastError } = useToast()
 
@@ -167,12 +169,12 @@ watch([searchQuery, filterStatus], () => {
 })
 
 const confirmDelete = async (video: IHighlightVideo) => {
-  if (confirm(`Bạn có chắc muốn xóa video "${video.title_vi}"?`)) {
+  if (confirm(`${t('COMMON.CONFIRM')}?`)) {
     try {
       await videoStore.deleteVideo(video.id)
-      toastSuccess('Đã xóa video thành công')
+      toastSuccess(t('COMMON.SUCCESS'))
     } catch {
-      toastError(videoStore.error || 'Lỗi khi xóa video')
+      toastError(videoStore.error || t('COMMON.ERROR'))
     }
   }
 }

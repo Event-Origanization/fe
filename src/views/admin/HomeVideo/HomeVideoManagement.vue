@@ -8,7 +8,7 @@
       </h1>
     </div>
 
-    <component-card title="Quản lý Video Trang Chủ">
+    <component-card :title="$t('HOME_VIDEO_ADMIN.TITLE')">
       <home-video-table @add="openCreateModal" @edit="handleEdit" />
     </component-card>
 
@@ -22,14 +22,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
 import HomeVideoTable from '@/components/home-video/HomeVideoTable.vue'
 import HomeVideoModal from '@/components/home-video/HomeVideoModal.vue'
 import type { IHomeVideo } from '@/types/home-video'
 
-const currentPageTitle = ref('Quản Lý Video Trang Chủ')
+const { t } = useI18n()
+const currentPageTitle = computed(() => t('HOME_VIDEO_ADMIN.TITLE'))
 const showModal = ref(false)
 const selectedVideo = ref<IHomeVideo | null>(null)
 

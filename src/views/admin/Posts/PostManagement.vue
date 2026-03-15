@@ -9,7 +9,7 @@
       </h1>
     </div>
 
-    <component-card title="Danh sách bài viết 5P Event">
+    <component-card :title="$t('POSTS_ADMIN.SUBTITLE')">
       <post-table @add="openCreateModal" @edit="handleEdit" />
     </component-card>
 
@@ -23,14 +23,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
 import PostTable from '@/components/posts/PostTable.vue'
 import PostModal from '@/components/posts/PostModal.vue'
 import type { IPost } from '@/types/post'
 
-const currentPageTitle = ref('Quản Lý Bài Viết')
+const { t } = useI18n()
+const currentPageTitle = computed(() => t('POSTS_ADMIN.TITLE'))
 const showModal = ref(false)
 const selectedPost = ref<IPost | null>(null)
 

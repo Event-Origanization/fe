@@ -68,6 +68,15 @@
     "CEO_NAME": "Le Van Hung",
     "CEO_TITLE": "CEO & Founder"
   },
+  "AUTH": {
+    "CHANGE_PASSWORD": "Change Password",
+    "CURRENT_PASSWORD": "Current Password",
+    "NEW_PASSWORD": "New Password",
+    "CONFIRM_PASSWORD": "Confirm New Password",
+    "PASSWORD_MISMATCH": "Passwords do not match",
+    "PASSWORD_CHANGE_SUCCESS": "Password changed successfully",
+    "REQUIRED_FIELDS": "Please fill in all fields"
+  },
   "EDITOR": {
     "INSERT_EDIT_IMAGE": "Insert/Edit Image",
     "INSERT_EDIT_LINK": "Insert/Edit Link",
@@ -93,5 +102,228 @@
     "SUBSCRIBE": "Subscribe to newsletter",
     "EMAIL_PLACEHOLDER": "Your email...",
     "CONNECT_WITH_US": "Connect with us"
+  },
+  "COMMON": {
+    "CANCEL": "Cancel",
+    "CREATE": "Create",
+    "UPDATE": "Update",
+    "SAVE": "Save Changes",
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "SEARCH": "Search...",
+    "STATUS": "Status",
+    "ACTIONS": "Actions",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "ALL": "All",
+    "SUCCESS": "Success",
+    "ERROR": "Error",
+    "CONFIRM": "Confirm",
+    "CLOSE": "Close",
+    "EMPTY_DATA": "No data found",
+    "AUTO_TRANSLATE_HINT": "System will automatically translate to English and Chinese.",
+    "UPLOAD": "Upload",
+    "ACTIVE_DISPLAY": "Active display",
+    "FORMAT_HINT": "Format: JPG, PNG, WEBP",
+    "SIZE_HINT": "Max size: 2MB",
+    "LANGUAGES": {
+      "VI": "Vietnamese",
+      "EN": "English",
+      "ZH": "Chinese"
+    },
+    "DATE_LOCALE": "en-US"
+  },
+  "PRODUCT_ADMIN": {
+    "TITLE": "Product Management",
+    "SUBTITLE": "List of 5P Event products and services",
+    "ADD_NEW": "Add new product",
+    "EDIT": "Edit product",
+    "FIELDS": {
+      "NAME": "Product Name",
+      "SLUG": "Slug",
+      "PRICE": "Price",
+      "IMAGE": "Product Image",
+      "CONTENT": "Detailed Content"
+    },
+    "PLACEHOLDERS": {
+      "NAME": "Enter product name..."
+    },
+    "TABLE": {
+      "IMAGE": "Image",
+      "NAME": "Product Name",
+      "PRICE": "Price",
+      "STATUS": "Status",
+      "ACTIONS": "Actions"
+    }
+  },
+  "SEO_ADMIN": {
+    "TITLE": "SEO Meta Management",
+    "SUBTITLE": "SEO Configuration for 5P Event pages",
+    "EDIT_TITLE": "Edit SEO: {page}",
+    "TABLE": {
+      "PAGE": "Page",
+      "PATH": "Path",
+      "TITLE": "Title (VI)",
+      "DESC": "Description (VI)",
+      "ACTIONS": "Actions"
+    },
+    "FIELDS": {
+      "META_TITLE": "Meta Title",
+      "META_DESC": "Meta Description"
+    }
+  },
+  "NEWSLETTER_ADMIN": {
+    "TITLE": "Newsletter Subscription Management",
+    "TABLE": {
+      "EMAIL": "Email",
+      "DATE": "Subscribe Date",
+      "STATUS": "Status",
+      "ACTIONS": "Actions"
+    },
+    "EMPTY": "No subscribers found"
+  },
+  "HOME_VIDEO_ADMIN": {
+    "TITLE": "Home Video Management",
+    "ADD_NEW": "Add new home video",
+    "EDIT": "Edit home video",
+    "FIELDS": {
+      "TITLE": "Video Title",
+      "THUMBNAIL": "Preview Image (Thumbnail)",
+      "URL": "Video Link (Youtube/Vimeo/Direct...)"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Enter video title..."
+    },
+    "TABLE": {
+      "VIDEO": "Video",
+      "STATUS": "Status",
+      "ACTIONS": "Actions"
+    }
+  },
+  "POSTS_ADMIN": {
+    "TITLE": "Post Management",
+    "SUBTITLE": "List of 5P Event articles",
+    "ADD_NEW": "Add new article",
+    "EDIT": "Edit article",
+    "FIELDS": {
+      "TITLE": "Article Title",
+      "SLUG": "Slug",
+      "STATUS": "Status",
+      "IMAGE": "Featured Image (Media)",
+      "CONTENT": "Article Content"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Enter article title...",
+      "SLUG": "example-post-slug"
+    },
+    "STATUS": {
+      "PUBLISHED": "Published",
+      "DRAFT": "Draft",
+      "SCHEDULED": "Scheduled",
+      "PUBLISH": "Publish",
+      "INIT_PUBLISH": "Initialize & Publish"
+    },
+    "TABLE": {
+      "POST": "Article",
+      "STATUS": "Status",
+      "SEO_SCORE": "SEO Score",
+      "NOT_CALCULATED": "N/A"
+    }
+  },
+  "VIDEOS_ADMIN": {
+    "TITLE": "Highlight Video Management",
+    "SUBTITLE": "Manage highlight videos library",
+    "ADD_NEW": "Add new highlight video",
+    "EDIT": "Edit highlight video",
+    "FIELDS": {
+      "TITLE": "Video Title",
+      "THUMBNAIL": "Preview Image (Thumbnail)",
+      "URL": "Video Link (Youtube/Vimeo...)",
+      "ORDER": "Display Order"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Enter video title..."
+    },
+    "TABLE": {
+      "VIDEO": "Video",
+      "ORDER": "Order",
+      "STATUS": "Status"
+    }
+  },
+  "CONFIG_ADMIN": {
+    "TITLE": "Website Configuration",
+    "SUBTITLE": "Manage general information and system settings",
+    "TAB_CONTENT_TITLE": "Configuration Content",
+    "TAB_CONTENT_DESC": "Manage information in group",
+    "SAVE_ALL": "Save All",
+    "SAVING": "Saving...",
+    "TABS": {
+      "GENERAL": "General Settings",
+      "CONTACT": "Contact Info",
+      "SOCIAL": "Social Media",
+      "MENU": "Menu Config"
+    },
+    "LABELS": {
+      "WEBSITE_NAME": "Website Name",
+      "WEBSITE_FULLNAME": "Company Full Name",
+      "WEBSITE_SLOGAN": "Slogan",
+      "WEBSITE_LOGO": "Logo URL",
+      "WEBSITE_FAVICON": "Favicon URL",
+      "CONTACT_HOTLINE": "Hotline",
+      "CONTACT_EMAIL": "Contact Email",
+      "CONTACT_ADDRESS": "Address",
+      "CONTACT_MAP_IFRAME": "Map Iframe",
+      "SOCIAL_FACEBOOK": "Facebook link",
+      "SOCIAL_ZALO": "Zalo link",
+      "SOCIAL_YOUTUBE": "Youtube link",
+      "MENU_HOME": "Home Menu",
+      "MENU_ABOUT": "About Menu",
+      "MENU_SERVICES": "Services Menu",
+      "MENU_PROJECTS": "Projects Menu",
+      "MENU_NEWS": "News Menu",
+      "MENU_CONTACT": "Contact Menu"
+    }
+  },
+  "DASHBOARD": {
+    "OVERVIEW": {
+      "PRODUCTS": "Products",
+      "POSTS": "Articles",
+      "VIDEOS": "Highlight Videos",
+      "SUBSCRIBERS": "Subscribers"
+    },
+    "CHARTS": {
+      "PRODUCTS_POSTS_TITLE": "Products & Articles (Yearly)",
+      "SUBSCRIBERS_TITLE": "Subscribers (Yearly)",
+      "POST_STATUS_TITLE": "Article Status",
+      "PRODUCT_STATUS_TITLE": "Product Activity",
+      "POST_STATUS": {
+        "PUBLISHED": "Published",
+        "DRAFT": "Draft",
+        "SCHEDULED": "Scheduled"
+      },
+      "PRODUCT_STATUS": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive"
+      }
+    },
+    "RECENT": {
+      "PRODUCTS_TITLE": "Recently Added Products (Top 5)",
+      "SUBSCRIBERS_TITLE": "Recent Subscriptions (Top 5)",
+      "TABLE": {
+        "PRODUCT_NAME": "Product Name",
+        "PRICE": "Price",
+        "STATUS": "Status",
+        "EMAIL": "Email",
+        "DATE": "Join Date"
+      },
+      "STATUS": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Off",
+        "SUBSCRIBED": "Active",
+        "UNSUBSCRIBED": "Unsubscribed"
+      },
+      "NO_DATA": "No data available",
+      "LOADING": "Loading data..."
+    }
   }
 }

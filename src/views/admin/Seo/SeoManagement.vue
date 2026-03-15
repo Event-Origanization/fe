@@ -9,7 +9,7 @@
       </h1>
     </div>
 
-    <component-card title="Cấu hình SEO Meta cho các trang của 5P Event">
+    <component-card :title="$t('SEO_ADMIN.SUBTITLE')">
       <seo-table :metas="seoStore.seoMetas" @edit="openEditModal" />
     </component-card>
 
@@ -24,7 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
 import SeoTable from '@/components/seo/SeoTable.vue'
@@ -33,7 +34,8 @@ import { useSeoStore } from '@/store/seo'
 import type { ISeoMeta, SeoMetaUpdatePayload } from '@/types/seo'
 import { useToast } from '@/composables/useToast'
 
-const currentPageTitle = ref('Quản Lý SEO Meta')
+const { t } = useI18n()
+const currentPageTitle = computed(() => t('SEO_ADMIN.TITLE'))
 const seoStore = useSeoStore()
 const { toastSuccess, toastError } = useToast()
 
@@ -56,10 +58,10 @@ const handleSeoSubmit = async (data: SeoMetaUpdatePayload) => {
 
   try {
     await seoStore.updateSeoMeta(selectedMeta.value.pageKey, data)
-    toastSuccess('Cập nhật SEO Meta thành công')
+    toastSuccess(t('COMMON.SUCCESS'))
     showModal.value = false
   } catch {
-    toastError(seoStore.error || 'Không thể cập nhật SEO Meta')
+    toastError(seoStore.error || t('COMMON.ERROR'))
   }
 }
 </script>

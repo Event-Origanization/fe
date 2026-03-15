@@ -2,7 +2,7 @@
 <template>
   <BaseModal
     :show="show"
-    :title="isEdit ? 'Chỉnh sửa bài viết' : 'Thêm bài viết mới'"
+    :title="isEdit ? $t('POSTS_ADMIN.EDIT') : $t('POSTS_ADMIN.ADD_NEW')"
     maxWidth="70%"
     @close="$emit('close')"
   >
@@ -11,25 +11,25 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Tiêu đề bài viết *
+            {{ $t('POSTS_ADMIN.FIELDS.TITLE') }} *
           </label>
           <input
             v-model="form.title_vi"
             type="text"
             @input="handleTitleInput"
-            placeholder="Nhập tiêu đề bài viết..."
+            :placeholder="$t('POSTS_ADMIN.PLACEHOLDERS.TITLE')"
             class="block w-full px-4 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all"
           />
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Đường dẫn (Slug) *
+            {{ $t('POSTS_ADMIN.FIELDS.SLUG') }} *
           </label>
           <input
             v-model="form.slug"
             type="text"
             class="block w-full px-4 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all"
-            placeholder="vi-du-slug-bai-viet"
+            :placeholder="$t('POSTS_ADMIN.PLACEHOLDERS.SLUG')"
           />
         </div>
       </div>
@@ -38,15 +38,15 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Trạng thái *
+            {{ $t('POSTS_ADMIN.FIELDS.STATUS') }} *
           </label>
           <select
             v-model="form.status"
             class="block w-full px-4 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
           >
-            <option value="DRAFT">Bản nháp</option>
-            <option value="PUBLISHED">Xuất bản</option>
-            <option value="SCHEDULED">Lên lịch</option>
+            <option value="DRAFT">{{ $t('POSTS_ADMIN.STATUS.DRAFT') }}</option>
+            <option value="PUBLISHED">{{ $t('POSTS_ADMIN.STATUS.PUBLISH') }}</option>
+            <option value="SCHEDULED">{{ $t('POSTS_ADMIN.STATUS.SCHEDULED') }}</option>
           </select>
         </div>
       </div>
@@ -54,7 +54,7 @@
       <!-- Main Media Upload -->
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Ảnh đại diện (Media)
+          {{ $t('POSTS_ADMIN.FIELDS.IMAGE') }}
         </label>
         <div class="flex items-center space-x-6">
           <div 
@@ -70,7 +70,7 @@
             <template v-else>
               <div class="flex flex-col items-center text-gray-400 group-hover:text-red-500 transition-colors">
                 <i class="pi pi-image text-4xl mb-2"></i>
-                <span class="text-xs font-semibold uppercase tracking-wider">Tải ảnh lên</span>
+                <span class="text-xs font-semibold uppercase tracking-wider">{{ $t('COMMON.UPLOAD') }}</span>
               </div>
             </template>
           </div>
@@ -82,16 +82,16 @@
               class="px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors flex items-center gap-2 border border-transparent hover:border-red-200 dark:hover:border-red-800/50"
             >
               <i class="pi pi-trash"></i>
-              Xóa ảnh hiện tại
+              {{ $t('COMMON.DELETE') }}
             </button>
             <div class="space-y-1">
               <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
                 <i class="pi pi-info-circle text-[10px]"></i>
-                Định dạng: JPG, PNG, WEBP
+                {{ $t('COMMON.FORMAT_HINT') }}
               </p>
               <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
                 <i class="pi pi-info-circle text-[10px]"></i>
-                Dung lượng tối đa: 2MB
+                {{ $t('COMMON.SIZE_HINT') }}
               </p>
             </div>
           </div>
@@ -110,13 +110,13 @@
       <div class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Nội dung bài viết *
+            {{ $t('POSTS_ADMIN.FIELDS.CONTENT') }} *
           </label>
           <div class="border rounded-xl dark:border-gray-700">
             <Editor v-model="form.content_vi" minHeight="450px" />
           </div>
           <p class="mt-2 text-xs text-gray-500 italic">
-            * Backend sẽ tự động dịch nội dung này sang Tiếng Anh và Tiếng Trung.
+            * {{ $t('COMMON.AUTO_TRANSLATE_HINT') }}
           </p>
         </div>
       </div>
@@ -129,16 +129,16 @@
         class="w-full inline-flex justify-center items-center rounded-lg px-6 py-2 bg-red-500 text-white font-semibold hover:bg-red-600 transition-all shadow-md active:scale-95 sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <i v-if="postStore.loading" class="pi pi-spin pi-spinner mr-2"></i>
-        <template v-if="isEdit && form.status === 'PUBLISHED'">Cập nhật</template>
-        <template v-else-if="!isEdit && form.status === 'PUBLISHED'">Khởi tạo & Xuất bản</template>
-        <template v-else-if="isEdit">Lưu cập nhật</template>
-        <template v-else>Lưu bản nháp</template>
+        <template v-if="isEdit && form.status === 'PUBLISHED'">{{ $t('COMMON.UPDATE') }}</template>
+        <template v-else-if="!isEdit && form.status === 'PUBLISHED'">{{ $t('POSTS_ADMIN.STATUS.INIT_PUBLISH') }}</template>
+        <template v-else-if="isEdit">{{ $t('COMMON.SAVE') }}</template>
+        <template v-else>{{ $t('POSTS_ADMIN.STATUS.DRAFT') }}</template>
       </button>
       <button
         @click="$emit('close')"
         class="w-full inline-flex justify-center items-center rounded-lg px-6 py-2 border border-gray-300 bg-white text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all sm:w-auto mt-2 sm:mt-0"
       >
-        Hủy
+        {{ $t('COMMON.CANCEL') }}
       </button>
     </template>
   </BaseModal>
@@ -146,6 +146,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import BaseModal from '../common/BaseModal.vue'
 import Editor from '../common/Editor.vue'
 import { slugify } from '@/utils/string'
@@ -168,6 +169,7 @@ const emit = defineEmits<{
   (e: 'submit', data: IPost): void
 }>()
 
+const { t } = useI18n()
 const isEdit = ref(false)
 const postStore = usePostStore()
 const { toastSuccess, toastError, toastWarn } = useToast()
@@ -203,7 +205,7 @@ const handleFileUpload = async (event: Event) => {
   const file = target.files?.[0]
   if (file) {
     if (!checkFileSize(file, 2)) {
-      toastWarn('Dung lượng ảnh không được vượt quá 2MB')
+      toastWarn(t('COMMON.SIZE_HINT'))
       return
     }
     try {
@@ -211,7 +213,7 @@ const handleFileUpload = async (event: Event) => {
       form.media = base64
     } catch (error) {
       console.error('Lỗi khi đọc file:', error)
-      toastError('Có lỗi xảy ra khi tải ảnh lên')
+      toastError(t('COMMON.ERROR'))
     }
   }
 }
@@ -248,13 +250,13 @@ const handleSubmit = async () => {
       })
     }
 
-    toastSuccess(isEdit.value ? 'Cập nhật bài viết thành công' : 'Thêm bài viết thành công')
+    toastSuccess(isEdit.value ? t('COMMON.SUCCESS') : t('COMMON.SUCCESS'))
 
     emit('submit', result.data)
     emit('close')
   } catch (error) {
     console.error('Error submitting post:', error)
-    toastError(postStore.error || 'Có lỗi xảy ra khi lưu bài viết')
+    toastError(postStore.error || t('COMMON.ERROR'))
   }
 }
 </script>
