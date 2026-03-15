@@ -205,12 +205,6 @@ const menuGroups = computed<MenuGroup[]>(() => {
         { icon: ListIcon, name: t('SIDEBAR.NEWSLETTER'), path: '/administrators/newsletter' },
         { icon: PlugInIcon, name: t('SIDEBAR.CONFIG'), path: '/administrators/configs' },
         { icon: ListIcon, name: t('SIDEBAR.SEO'), path: '/administrators/seo' },
-        {
-          name: t('SIDEBAR.USERS'),
-          icon: UserCircleIcon,
-          path: '/administrators/users',
-          requiredRole: USER_ROLES.ROLE_ADMIN,
-        },
       ],
     },
   ]

@@ -2,7 +2,7 @@
 <template>
   <BaseModal
     :show="show"
-    :title="isEdit ? 'Chỉnh sửa video trang chủ' : 'Thêm video trang chủ mới'"
+    :title="isEdit ? $t('HOME_VIDEO_ADMIN.EDIT') : $t('HOME_VIDEO_ADMIN.ADD_NEW')"
     maxWidth="600px"
     @close="$emit('close')"
   >
@@ -10,21 +10,21 @@
       <!-- Title -->
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-          Tiêu đề video *
+          {{ $t('HOME_VIDEO_ADMIN.FIELDS.TITLE') }} *
         </label>
         <input
           v-model="form.title_vi"
           type="text"
-          placeholder="Nhập tiêu đề video..."
+          :placeholder="$t('HOME_VIDEO_ADMIN.PLACEHOLDERS.TITLE')"
           class="block w-full px-4 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all"
         />
-        <p class="mt-1 text-xs text-gray-400 italic">Hệ thống sẽ tự động dịch sang tiếng Anh và tiếng Trung.</p>
+        <p class="mt-1 text-xs text-gray-400 italic">{{ $t('COMMON.AUTO_TRANSLATE_HINT') }}</p>
       </div>
 
       <!-- Thumbnail Upload -->
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Ảnh xem trước (Thumbnail)
+          {{ $t('HOME_VIDEO_ADMIN.FIELDS.THUMBNAIL') }}
         </label>
         <div class="flex items-center space-x-6">
           <div 
@@ -40,7 +40,7 @@
             <template v-else>
               <div class="flex flex-col items-center text-gray-400 group-hover:text-red-500 transition-colors">
                 <i class="pi pi-image text-2xl mb-1"></i>
-                <span class="text-[10px] font-semibold uppercase tracking-wider">Tải ảnh lên</span>
+                <span class="text-[10px] font-semibold uppercase tracking-wider">{{ $t('COMMON.UPLOAD') }}</span>
               </div>
             </template>
           </div>
@@ -52,7 +52,7 @@
               class="px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors flex items-center gap-2 border border-transparent hover:border-red-200 dark:hover:border-red-800/50"
             >
               <i class="pi pi-trash"></i>
-              Xóa ảnh
+              {{ $t('COMMON.DELETE') }}
             </button>
           </div>
         </div>
@@ -68,7 +68,7 @@
       <!-- URL -->
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-          Link Video (Youtube/Vimeo/Direct...) *
+          {{ $t('HOME_VIDEO_ADMIN.FIELDS.URL') }} *
         </label>
         <div class="relative">
           <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
@@ -89,7 +89,7 @@
           <input type="checkbox" v-model="form.isActive" class="sr-only peer" />
           <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
           <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-            Kích hoạt hiển thị
+            {{ $t('COMMON.ACTIVE_DISPLAY') || 'Kích hoạt hiển thị' }}
           </span>
         </label>
       </div>
@@ -102,13 +102,13 @@
         class="w-full inline-flex justify-center items-center rounded-lg px-6 py-2 bg-red-500 text-white font-semibold hover:bg-red-600 transition-all shadow-md active:scale-95 sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <i v-if="homeVideoStore.loading" class="pi pi-spin pi-spinner mr-2"></i>
-        {{ isEdit ? 'Cập nhật' : 'Thêm mới' }}
+        {{ isEdit ? $t('COMMON.UPDATE') : $t('COMMON.CREATE') }}
       </button>
       <button
         @click="$emit('close')"
         class="w-full inline-flex justify-center items-center rounded-lg px-6 py-2 border border-gray-300 bg-white text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all sm:w-auto mt-2 sm:mt-0"
       >
-        Hủy
+        {{ $t('COMMON.CANCEL') }}
       </button>
     </template>
   </BaseModal>

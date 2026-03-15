@@ -68,6 +68,15 @@
     "CEO_NAME": "黎文雄",
     "CEO_TITLE": "创始人CEO"
   },
+  "AUTH": {
+    "CHANGE_PASSWORD": "修改密码",
+    "CURRENT_PASSWORD": "当前密码",
+    "NEW_PASSWORD": "新密码",
+    "CONFIRM_PASSWORD": "确认新密码",
+    "PASSWORD_MISMATCH": "密码不匹配",
+    "PASSWORD_CHANGE_SUCCESS": "密码修改成功",
+    "REQUIRED_FIELDS": "请填写所有字段"
+  },
   "EDITOR": {
     "INSERT_EDIT_IMAGE": "插入/编辑图片",
     "INSERT_EDIT_LINK": "插入/编辑链接",
@@ -93,5 +102,228 @@
     "SUBSCRIBE": "订阅最新动态",
     "EMAIL_PLACEHOLDER": "您的邮箱...",
     "CONNECT_WITH_US": "跟我们联络"
+  },
+  "COMMON": {
+    "CANCEL": "取消",
+    "CREATE": "创建",
+    "UPDATE": "更新",
+    "SAVE": "保存更改",
+    "DELETE": "删除",
+    "EDIT": "编辑",
+    "SEARCH": "搜索...",
+    "STATUS": "状态",
+    "ACTIONS": "操作",
+    "ACTIVE": "活跃",
+    "INACTIVE": "停用",
+    "ALL": "全部",
+    "SUCCESS": "成功",
+    "ERROR": "错误",
+    "CONFIRM": "确认",
+    "CLOSE": "关闭",
+    "EMPTY_DATA": "暂无数据",
+    "AUTO_TRANSLATE_HINT": "系统将自动翻译成英文和中文。",
+    "UPLOAD": "上传",
+    "ACTIVE_DISPLAY": "启用显示",
+    "FORMAT_HINT": "格式: JPG, PNG, WEBP",
+    "SIZE_HINT": "最大大小: 2MB",
+    "LANGUAGES": {
+      "VI": "越南语",
+      "EN": "英语",
+      "ZH": "中文"
+    },
+    "DATE_LOCALE": "zh-CN"
+  },
+  "PRODUCT_ADMIN": {
+    "TITLE": "产品管理",
+    "SUBTITLE": "5P Event 产品和服务列表",
+    "ADD_NEW": "添加新产品",
+    "EDIT": "编辑产品",
+    "FIELDS": {
+      "NAME": "产品名称",
+      "SLUG": "别名 (Slug)",
+      "PRICE": "价格",
+      "IMAGE": "产品图片",
+      "CONTENT": "详细内容"
+    },
+    "PLACEHOLDERS": {
+      "NAME": "输入产品名称..."
+    },
+    "TABLE": {
+      "IMAGE": "图片",
+      "NAME": "产品名称",
+      "PRICE": "价格",
+      "STATUS": "状态",
+      "ACTIONS": "操作"
+    }
+  },
+  "SEO_ADMIN": {
+    "TITLE": "SEO Meta 管理",
+    "SUBTITLE": "5P Event 页面 SEO Meta 配置",
+    "EDIT_TITLE": "编辑 SEO: {page}",
+    "TABLE": {
+      "PAGE": "页面",
+      "PATH": "路径",
+      "TITLE": "标题 (VI)",
+      "DESC": "描述 (VI)",
+      "ACTIONS": "操作"
+    },
+    "FIELDS": {
+      "META_TITLE": "Meta 标题",
+      "META_DESC": "Meta 描述"
+    }
+  },
+  "NEWSLETTER_ADMIN": {
+    "TITLE": "邮件订阅管理",
+    "TABLE": {
+      "EMAIL": "邮件",
+      "DATE": "订阅日期",
+      "STATUS": "状态",
+      "ACTIONS": "操作"
+    },
+    "EMPTY": "未找到订阅者"
+  },
+  "HOME_VIDEO_ADMIN": {
+    "TITLE": "首页视频管理",
+    "ADD_NEW": "添加新首页视频",
+    "EDIT": "编辑首页视频",
+    "FIELDS": {
+      "TITLE": "视频标题",
+      "THUMBNAIL": "预览图 (Thumbnail)",
+      "URL": "视频链接 (Youtube/Vimeo/Direct...)"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "输入视频标题..."
+    },
+    "TABLE": {
+      "VIDEO": "视频",
+      "STATUS": "状态",
+      "ACTIONS": "操作"
+    }
+  },
+  "POSTS_ADMIN": {
+    "TITLE": "文章管理",
+    "SUBTITLE": "5P Event 文章列表",
+    "ADD_NEW": "添加新文章",
+    "EDIT": "编辑文章",
+    "FIELDS": {
+      "TITLE": "文章标题",
+      "SLUG": "别名 (Slug)",
+      "STATUS": "状态",
+      "IMAGE": "封面图 (Media)",
+      "CONTENT": "文章内容"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "输入文章标题...",
+      "SLUG": "example-post-slug"
+    },
+    "STATUS": {
+      "PUBLISHED": "已发布",
+      "DRAFT": "草稿",
+      "SCHEDULED": "已排期",
+      "PUBLISH": "发布",
+      "INIT_PUBLISH": "初始化并发布"
+    },
+    "TABLE": {
+      "POST": "文章",
+      "STATUS": "状态",
+      "SEO_SCORE": "SEO 分数",
+      "NOT_CALCULATED": "暂无"
+    }
+  },
+  "VIDEOS_ADMIN": {
+    "TITLE": "精彩视频管理",
+    "SUBTITLE": "管理精彩视频库",
+    "ADD_NEW": "添加新精彩视频",
+    "EDIT": "编辑精彩视频",
+    "FIELDS": {
+      "TITLE": "视频标题",
+      "THUMBNAIL": "预览图 (Thumbnail)",
+      "URL": "视频链接 (Youtube/Vimeo...)",
+      "ORDER": "显示顺序"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "输入视频标题..."
+    },
+    "TABLE": {
+      "VIDEO": "视频",
+      "ORDER": "顺序",
+      "STATUS": "状态"
+    }
+  },
+  "CONFIG_ADMIN": {
+    "TITLE": "网站配置",
+    "SUBTITLE": "管理常规信息和系统设置",
+    "TAB_CONTENT_TITLE": "配置内容",
+    "TAB_CONTENT_DESC": "管理分组下的信息",
+    "SAVE_ALL": "保存全部",
+    "SAVING": "正在保存...",
+    "TABS": {
+      "GENERAL": "常规设置",
+      "CONTACT": "联系信息",
+      "SOCIAL": "社交媒体",
+      "MENU": "菜单配置"
+    },
+    "LABELS": {
+      "WEBSITE_NAME": "网站名称",
+      "WEBSITE_FULLNAME": "公司全称",
+      "WEBSITE_SLOGAN": "口号",
+      "WEBSITE_LOGO": "Logo URL",
+      "WEBSITE_FAVICON": "Favicon URL",
+      "CONTACT_HOTLINE": "热线电话",
+      "CONTACT_EMAIL": "联系邮箱",
+      "CONTACT_ADDRESS": "地址",
+      "CONTACT_MAP_IFRAME": "地图 Iframe",
+      "SOCIAL_FACEBOOK": "Facebook 链接",
+      "SOCIAL_ZALO": "Zalo 链接",
+      "SOCIAL_YOUTUBE": "Youtube 链接",
+      "MENU_HOME": "首页菜单",
+      "MENU_ABOUT": "关于菜单",
+      "MENU_SERVICES": "服务菜单",
+      "MENU_PROJECTS": "项目菜单",
+      "MENU_NEWS": "新闻菜单",
+      "MENU_CONTACT": "联系菜单"
+    }
+  },
+  "DASHBOARD": {
+    "OVERVIEW": {
+      "PRODUCTS": "产品",
+      "POSTS": "文章",
+      "VIDEOS": "精彩视频",
+      "SUBSCRIBERS": "订阅用户"
+    },
+    "CHARTS": {
+      "PRODUCTS_POSTS_TITLE": "产品与文章 (年度)",
+      "SUBSCRIBERS_TITLE": "订阅用户 (年度)",
+      "POST_STATUS_TITLE": "文章状态",
+      "PRODUCT_STATUS_TITLE": "产品活动",
+      "POST_STATUS": {
+        "PUBLISHED": "已发布",
+        "DRAFT": "草稿",
+        "SCHEDULED": "已排期"
+      },
+      "PRODUCT_STATUS": {
+        "ACTIVE": "活跃",
+        "INACTIVE": "停用"
+      }
+    },
+    "RECENT": {
+      "PRODUCTS_TITLE": "最近添加的产品 (前5名)",
+      "SUBSCRIBERS_TITLE": "最近订阅 (前5名)",
+      "TABLE": {
+        "PRODUCT_NAME": "产品名称",
+        "PRICE": "价格",
+        "STATUS": "状态",
+        "EMAIL": "电子邮件",
+        "DATE": "加入日期"
+      },
+      "STATUS": {
+        "ACTIVE": "活跃",
+        "INACTIVE": "关闭",
+        "SUBSCRIBED": "活跃",
+        "UNSUBSCRIBED": "已取消订阅"
+      },
+      "NO_DATA": "暂无数据",
+      "LOADING": "正在加载数据..."
+    }
   }
 }

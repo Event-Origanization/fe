@@ -12,7 +12,7 @@
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Tìm kiếm bài viết..."
+          :placeholder="$t('COMMON.SEARCH')"
           class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         />
       </div>
@@ -22,10 +22,10 @@
           v-model="filterStatus"
           class="block w-full md:w-40 px-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         >
-          <option value="all">Tất cả trạng thái</option>
-          <option value="PUBLISHED">Đã xuất bản</option>
-          <option value="DRAFT">Bản nháp</option>
-          <option value="SCHEDULED">Lên lịch</option>
+          <option value="all">{{ $t('COMMON.ALL') }}</option>
+          <option value="PUBLISHED">{{ $t('POSTS_ADMIN.STATUS.PUBLISHED') }}</option>
+          <option value="DRAFT">{{ $t('POSTS_ADMIN.STATUS.DRAFT') }}</option>
+          <option value="SCHEDULED">{{ $t('POSTS_ADMIN.STATUS.SCHEDULED') }}</option>
         </select>
         
         <button
@@ -35,7 +35,7 @@
           <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
-          Thêm mới
+          {{ $t('COMMON.CREATE') }}
         </button>
       </div>
     </div>
@@ -46,10 +46,10 @@
         <table class="min-w-full">
           <thead>
             <tr class="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Bài viết</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Trạng thái</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Điểm SEO</th>
-              <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">Thao tác</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('POSTS_ADMIN.TABLE.POST') }}</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.STATUS') }}</th>
+              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('POSTS_ADMIN.TABLE.SEO_SCORE') }}</th>
+              <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.ACTIONS') }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
@@ -85,21 +85,21 @@
                   ]"
                 >
                   <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="post.status === 'PUBLISHED' ? 'bg-green-600' : post.status === 'SCHEDULED' ? 'bg-blue-600' : 'bg-yellow-600'"></span>
-                  {{ post.status === 'PUBLISHED' ? 'Đã xuất bản' : post.status === 'SCHEDULED' ? 'Lên lịch' : 'Bản nháp' }}
+                  {{ post.status === 'PUBLISHED' ? $t('POSTS_ADMIN.STATUS.PUBLISHED') : post.status === 'SCHEDULED' ? $t('POSTS_ADMIN.STATUS.SCHEDULED') : $t('POSTS_ADMIN.STATUS.DRAFT') }}
                 </span>
               </td>
               <td class="px-5 py-4">
                 <span v-if="typeof post.seoScore === 'number'" class="font-semibold" :class="post.seoScore > 80 ? 'text-green-500' : (post.seoScore > 50 ? 'text-yellow-500' : 'text-red-500')">
                   {{ post.seoScore }}/100
                 </span>
-                <span v-else class="text-gray-400 italic">Chưa tính</span>
+                <span v-else class="text-gray-400 italic">{{ $t('POSTS_ADMIN.TABLE.NOT_CALCULATED') }}</span>
               </td>
               <td class="px-5 py-4 text-right">
                 <div class="flex items-center justify-end gap-2">
                   <button 
                     @click="$emit('edit', post)"
                     class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors" 
-                    title="Chỉnh sửa"
+                    :title="$t('COMMON.EDIT')"
                   >
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -108,7 +108,7 @@
                   <button 
                     @click="confirmDelete(post)"
                     class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" 
-                    title="Xóa"
+                    :title="$t('COMMON.DELETE')"
                   >
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -122,7 +122,7 @@
                 <svg class="h-10 w-10 mx-auto mb-3 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 00-2 2H6a2 2 0 00-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                 </svg>
-                Không tìm thấy bài viết nào
+                {{ $t('COMMON.EMPTY_DATA') }}
               </td>
             </tr>
           </tbody>
@@ -134,6 +134,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { usePostStore } from '@/store/post.store'
 import type { IPost } from '@/types/post'
 import { useToast } from '@/composables/useToast'
@@ -143,6 +144,7 @@ defineEmits<{
   (e: 'edit', post: IPost): void
 }>()
 
+const { t } = useI18n()
 const postStore = usePostStore()
 const { toastSuccess, toastError } = useToast()
 
@@ -169,12 +171,12 @@ watch([searchQuery, filterStatus], () => {
 })
 
 const confirmDelete = async (post: IPost) => {
-  if (confirm(`Bạn có chắc muốn xóa bài viết "${post.title_vi}"?`)) {
+  if (confirm(`${t('COMMON.CONFIRM')}?`)) {
     try {
       await postStore.deletePost(post.id)
-      toastSuccess('Đã xóa bài viết thành công')
+      toastSuccess(t('COMMON.SUCCESS'))
     } catch {
-      toastError(postStore.error || 'Lỗi khi xóa bài viết')
+      toastError(postStore.error || t('COMMON.ERROR'))
     }
   }
 }

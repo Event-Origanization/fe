@@ -1,10 +1,10 @@
 <template>
   <div class="space-y-6">
-    <page-breadcrumb pageTitle="Cấu hình Website" />
+    <page-breadcrumb :pageTitle="$t('CONFIG_ADMIN.TITLE')" />
 
     <div class="flex justify-between items-center">
       <h1 class="text-3xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
-        Quản lý Cấu hình Website
+        {{ $t('CONFIG_ADMIN.TITLE') }}
       </h1>
       <button 
         @click="saveAll"
@@ -12,7 +12,7 @@
         class="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl transition-all shadow-lg flex items-center gap-2 disabled:opacity-50 active:scale-95"
       >
         <i class="pi pi-save"></i>
-        <span>{{ saving ? 'Đang lưu...' : 'Lưu tất cả' }}</span>
+        <span>{{ saving ? $t('CONFIG_ADMIN.SAVING') : $t('CONFIG_ADMIN.SAVE_ALL') }}</span>
       </button>
     </div>
 
@@ -34,8 +34,8 @@
 
     <!-- Tab Content -->
     <component-card 
-      title="Nội dung cấu hình" 
-      :desc="`Quản lý các thông tin thuộc nhóm ${activeTab}`"
+      :title="$t('CONFIG_ADMIN.TAB_CONTENT_TITLE')" 
+      :desc="`${$t('CONFIG_ADMIN.TAB_CONTENT_DESC')} ${tabs.find(t => t.id === activeTab)?.name}`"
     >
       <div v-if="loading" class="flex justify-center py-12">
         <i class="pi pi-spin pi-spinner text-3xl text-blue-500"></i>
@@ -43,7 +43,7 @@
 
       <div v-else class="space-y-8 max-w-5xl">
         <div v-for="config in filteredConfigs" :key="config.key" class="space-y-4 pb-8 border-b border-gray-100 last:border-0 last:pb-0">
-          <label class="block text-sm font-bold text-gray-700">{{ getConfigLabel(config.key) }}</label>
+          <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">{{ getConfigLabel(config.key) }}</label>
           
           <div v-if="editData[config.key]" class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- VI -->
@@ -82,6 +82,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue';
 import ComponentCard from '@/components/common/ComponentCard.vue';
 import { useConfigStore } from '@/store/config';
@@ -89,6 +90,7 @@ import { ConfigService } from '@/services/config.service';
 import { ResponseError } from '@/utils/error';
 import { useToast } from '@/composables/useToast';
 
+const { t } = useI18n();
 const { toastSuccess, toastError } = useToast();
 
 const configStore = useConfigStore();
@@ -96,12 +98,12 @@ const activeTab = ref('GENERAL');
 const saving = ref(false);
 const loading = ref(false);
 
-const tabs = [
-  { id: 'GENERAL', name: 'Cài đặt chung' },
-  { id: 'CONTACT', name: 'Thông tin liên hệ' },
-  { id: 'SOCIAL', name: 'Mạng xã hội' },
-  { id: 'MENU', name: 'Cấu hình Menu' }
-];
+const tabs = computed(() => [
+  { id: 'GENERAL', name: t('CONFIG_ADMIN.TABS.GENERAL') },
+  { id: 'CONTACT', name: t('CONFIG_ADMIN.TABS.CONTACT') },
+  { id: 'SOCIAL', name: t('CONFIG_ADMIN.TABS.SOCIAL') },
+  { id: 'MENU', name: t('CONFIG_ADMIN.TABS.MENU') }
+]);
 
 const editData = ref<Record<string, { value_vi: string, value_en: string, value_zh: string }>>({});
 
@@ -110,27 +112,7 @@ const filteredConfigs = computed(() => {
 });
 
 const getConfigLabel = (key: string) => {
-  const labels: Record<string, string> = {
-    'WEBSITE_NAME': 'Tên website',
-    'WEBSITE_FULLNAME': 'Tên đầy đủ công ty',
-    'WEBSITE_SLOGAN': 'Slogan',
-    'WEBSITE_LOGO': 'Đường dẫn Logo',
-    'WEBSITE_FAVICON': 'Đường dẫn Favicon',
-    'CONTACT_HOTLINE': 'Hotline',
-    'CONTACT_EMAIL': 'Email liên hệ',
-    'CONTACT_ADDRESS': 'Địa chỉ',
-    'CONTACT_MAP_IFRAME': 'Iframe Bản đồ',
-    'SOCIAL_FACEBOOK': 'Link Facebook',
-    'SOCIAL_ZALO': 'Link Zalo',
-    'SOCIAL_YOUTUBE': 'Link Youtube',
-    'MENU_HOME': 'Menu Trang chủ',
-    'MENU_ABOUT': 'Menu Giới thiệu',
-    'MENU_SERVICES': 'Menu Dịch vụ',
-    'MENU_PROJECTS': 'Menu Dự án',
-    'MENU_NEWS': 'Menu Tin tức',
-    'MENU_CONTACT': 'Menu Liên hệ'
-  };
-  return labels[key] || key;
+  return t(`CONFIG_ADMIN.LABELS.${key}`) || key;
 };
 
 const initEditData = () => {
@@ -166,12 +148,12 @@ const saveAll = async () => {
     if (!(response instanceof ResponseError)) {
       // Refresh data
       await configStore.fetchAllConfigs();
-      toastSuccess('Cập nhật cấu hình thành công');
+      toastSuccess(t('COMMON.SUCCESS'));
     } else {
-      toastError(response.message || 'Có lỗi xảy ra khi lưu cấu hình');
+      toastError(response.message || t('COMMON.ERROR'));
     }
   } catch {
-    toastError('Có lỗi xảy ra khi lưu cấu hình');
+    toastError(t('COMMON.ERROR'));
   } finally {
     saving.value = false;
   }

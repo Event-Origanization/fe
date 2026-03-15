@@ -25,12 +25,6 @@ const router = createRouter({
           },
         },
         {
-          path: 'users',
-          name: 'UserManagement',
-          component: () => import('@/views/admin/Users/UserManagement.vue'),
-          meta: { requiresAuth: true, roles: [USER_ROLES.ROLE_ADMIN] },
-        },
-        {
           path: 'products',
           name: 'ProductManagement',
           component: () => import('@/views/admin/Products/ProductManagement.vue'),

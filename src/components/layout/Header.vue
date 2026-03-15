@@ -71,65 +71,8 @@
           </svg>
         </div>
 
-        <!-- Language Selector Dropdown -->
-        <div class="relative">
-          <button
-            @click.stop="isLangOpen = !isLangOpen"
-            class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm font-semibold"
-          >
-            <svg class="w-4 h-4 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-            <img
-              :src="currentLang?.flag"
-              :alt="currentLang?.name"
-              class="w-4 h-2.5 object-cover rounded-sm ml-1"
-            />
-            <span class="text-gray-300 group-hover:text-white transition-colors text-xs uppercase tracking-tighter">{{ currentLang?.code }}</span>
-            <svg 
-              class="w-3.5 h-3.5 text-gray-500 transition-transform duration-300" 
-              :class="{'rotate-180': isLangOpen}"
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-
-          <!-- Dropdown Menu -->
-          <Transition
-            enter-active-class="transition duration-200 ease-out"
-            enter-from-class="transform scale-95 opacity-0 -translate-y-2"
-            enter-to-class="transform scale-100 opacity-100 translate-y-0"
-            leave-active-class="transition duration-150 ease-in"
-            leave-from-class="transform scale-100 opacity-100 translate-y-0"
-            leave-to-class="transform scale-95 opacity-0 -translate-y-2"
-          >
-            <div
-              v-if="isLangOpen"
-              v-click-outside="() => isLangOpen = false"
-              class="absolute right-0 mt-2 w-32 bg-[#0d0d1a] border border-white/10 rounded-xl overflow-hidden shadow-2xl backdrop-blur-xl z-[60]"
-            >
-              <div class="py-1">
-                <button
-                  v-for="lang in languages"
-                  :key="lang.code"
-                  @click="changeLang(lang.code)"
-                  class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/5"
-                  :class="[locale === lang.code ? 'text-brand-500 bg-brand-500/5' : 'text-gray-300 hover:text-white']"
-                >
-                  <img
-                    :src="lang.flag"
-                    :alt="lang.name"
-                    class="w-5 h-3.5 object-cover rounded-sm"
-                  />
-                  {{ lang.name }}
-                </button>
-              </div>
-            </div>
-          </Transition>
-        </div>
+        <!-- Language Selector -->
+        <LanguageSelector dark />
       </div>
 
       <!-- Mobile Toggle -->
@@ -194,7 +137,7 @@
            <div class="mt-auto pb-8">
              <p class="text-xs font-black uppercase tracking-widest text-gray-500 mb-4">{{ $t('NAV.LANGUAGES') || 'Languages' }}</p>
              <div class="grid grid-cols-1 gap-3">
-                <button v-for="lang in languages" :key="lang.code" @click="changeLang(lang.code); $emit('toggle-menu')"
+                <button v-for="lang in LANGUAGES" :key="lang.code" @click="changeLang(lang.code); $emit('toggle-menu')"
                   class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all border"
                   :class="[locale === lang.code ? 'bg-brand-500/10 border-brand-500/30 text-brand-500' : 'bg-white/5 border-transparent text-gray-400 hover:bg-white/10']"
                 >
@@ -211,10 +154,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { setLocale, type SupportedLocale } from '@/config/i18n'
 import { useConfigStore } from '@/store/config'
+import { LANGUAGES } from '@/constants/languages'
+import LanguageSelector from '../common/LanguageSelector.vue'
 
 defineOptions({
   name: 'AppHeader',
@@ -222,19 +166,9 @@ defineOptions({
 
 const { locale } = useI18n()
 const configStore = useConfigStore()
-const isLangOpen = ref(false)
-
-const languages = [
-  { code: 'vi', name: 'VN', flag: 'https://flagcdn.com/w20/vn.png' },
-  { code: 'en', name: 'EN', flag: 'https://flagcdn.com/w20/gb.png' },
-  { code: 'zh', name: 'ZH', flag: 'https://flagcdn.com/w20/cn.png' },
-]
-
-const currentLang = computed(() => languages.find(l => l.code === locale.value) || languages[0])
 
 const changeLang = (code: string) => {
   setLocale(code as SupportedLocale)
-  isLangOpen.value = false
 }
 
 defineProps<{
@@ -244,24 +178,6 @@ defineProps<{
 defineEmits<{
   (e: 'toggle-menu'): void
 }>()
-
-// Custom directive for clicking outside
-const vClickOutside = {
-  mounted(el: HTMLElement & { clickOutsideEvent?: (event: Event) => void }, binding: { value: () => void }) {
-    el.clickOutsideEvent = (event: Event) => {
-      // Check that click was outside the el and its children
-      if (!(el === event.target || el.contains(event.target as Node))) {
-        binding.value()
-      }
-    }
-    document.addEventListener('click', el.clickOutsideEvent)
-  },
-  unmounted(el: HTMLElement & { clickOutsideEvent?: (event: Event) => void }) {
-    if (el.clickOutsideEvent) {
-      document.removeEventListener('click', el.clickOutsideEvent)
-    }
-  },
-}
 </script>
 
 <style scoped>

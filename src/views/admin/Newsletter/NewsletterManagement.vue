@@ -9,7 +9,7 @@
       </h1>
     </div>
 
-    <component-card title="Danh sách người đăng ký">
+    <component-card :title="$t('NEWSLETTER_ADMIN.TITLE')">
       <div class="space-y-4">
         <!-- Filters & Search -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
@@ -22,7 +22,7 @@
             <input
               v-model="searchQuery"
               type="text"
-              placeholder="Tìm kiếm email..."
+              :placeholder="$t('COMMON.SEARCH')"
               class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
               @keyup.enter="fetchSubscribers"
             />
@@ -33,9 +33,9 @@
               v-model="filterStatus"
               class="block w-full md:w-40 px-3 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
             >
-              <option value="all">Tất cả trạng thái</option>
-              <option value="active">Đang hoạt động</option>
-              <option value="inactive">Đã ẩn</option>
+              <option value="all">{{ $t('COMMON.ALL') }}</option>
+              <option value="active">{{ $t('COMMON.ACTIVE') }}</option>
+              <option value="inactive">{{ $t('COMMON.INACTIVE') }}</option>
             </select>
           </div>
         </div>
@@ -46,10 +46,10 @@
             <table class="min-w-full">
               <thead>
                 <tr class="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-                  <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Email</th>
-                  <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Ngày đăng ký</th>
-                  <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">Trạng thái</th>
-                  <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">Thao tác</th>
+                  <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('NEWSLETTER_ADMIN.TABLE.EMAIL') }}</th>
+                  <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('NEWSLETTER_ADMIN.TABLE.DATE') }}</th>
+                  <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.STATUS') }}</th>
+                  <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.ACTIONS') }}</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
@@ -75,14 +75,14 @@
                       ]"
                     >
                       <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="sub.isActive ? 'bg-green-600' : 'bg-red-600'"></span>
-                      {{ sub.isActive ? 'Hoạt động' : 'Tạm dừng' }}
+                      {{ sub.isActive ? $t('COMMON.ACTIVE') : $t('COMMON.INACTIVE') }}
                     </button>
                   </td>
                   <td class="px-5 py-4 text-right">
                     <button 
                       @click="confirmDelete(sub)"
                       class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" 
-                      title="Xóa"
+                      :title="$t('COMMON.DELETE')"
                     >
                       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -92,7 +92,7 @@
                 </tr>
                 <tr v-if="newsletterStore.subscribers.length === 0">
                   <td colspan="4" class="px-5 py-10 text-center text-gray-500">
-                    Chưa có người đăng ký nào
+                    {{ $t('NEWSLETTER_ADMIN.EMPTY') }}
                   </td>
                 </tr>
               </tbody>
@@ -107,14 +107,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
 import { useNewsletterStore } from '@/store/newsletter'
 import { useToast } from '@/composables/useToast'
 import type { INewsletterSubscriber } from '@/types/newsletter-subscriber'
 
-const currentPageTitle = ref('Quản Lý Đăng Ký Nhận Tin')
+const { t } = useI18n()
+const currentPageTitle = computed(() => t('NEWSLETTER_ADMIN.TITLE'))
 const newsletterStore = useNewsletterStore()
 const { toastSuccess, toastError } = useToast()
 
@@ -140,19 +142,19 @@ watch([filterStatus], () => {
 const toggleStatus = async (sub: INewsletterSubscriber) => {
   try {
     await newsletterStore.updateSubscriber(sub.id, { isActive: !sub.isActive })
-    toastSuccess('Cập nhật trạng thái thành công')
+    toastSuccess(t('COMMON.SUCCESS'))
   } catch {
-    toastError(newsletterStore.error || 'Lỗi khi cập nhật')
+    toastError(newsletterStore.error || t('COMMON.ERROR'))
   }
 }
 
 const confirmDelete = async (sub: INewsletterSubscriber) => {
-  if (confirm(`Bạn có chắc muốn xóa email "${sub.email}"?`)) {
+  if (confirm(`${t('COMMON.CONFIRM')}?`)) {
     try {
       await newsletterStore.deleteSubscriber(sub.id)
-      toastSuccess('Đã xóa thành công')
+      toastSuccess(t('COMMON.SUCCESS'))
     } catch {
-      toastError(newsletterStore.error || 'Lỗi khi xóa')
+      toastError(newsletterStore.error || t('COMMON.ERROR'))
     }
   }
 }

@@ -9,7 +9,7 @@
       </h1>
     </div>
 
-    <component-card title="Quản lý Highlight Videos">
+    <component-card :title="$t('VIDEOS_ADMIN.SUBTITLE')">
       <video-table @add="openCreateModal" @edit="handleEdit" />
     </component-card>
 
@@ -23,14 +23,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
 import VideoTable from '@/components/videos/VideoTable.vue'
 import VideoModal from '@/components/videos/VideoModal.vue'
 import type { IHighlightVideo } from '@/types/highlight-video'
 
-const currentPageTitle = ref('Quản Lý Video Nổi Bật')
+const { t } = useI18n()
+const currentPageTitle = computed(() => t('VIDEOS_ADMIN.TITLE'))
 const showModal = ref(false)
 const selectedVideo = ref<IHighlightVideo | null>(null)
 

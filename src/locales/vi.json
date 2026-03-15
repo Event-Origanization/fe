@@ -68,6 +68,15 @@
     "CEO_NAME": "Lê Văn Hùng",
     "CEO_TITLE": "CEO & Founder"
   },
+  "AUTH": {
+    "CHANGE_PASSWORD": "Đổi mật khẩu",
+    "CURRENT_PASSWORD": "Mật khẩu hiện tại",
+    "NEW_PASSWORD": "Mật khẩu mới",
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu mới",
+    "PASSWORD_MISMATCH": "Mật khẩu xác nhận không khớp",
+    "PASSWORD_CHANGE_SUCCESS": "Đổi mật khẩu thành công",
+    "REQUIRED_FIELDS": "Vui lòng nhập đầy đủ thông tin"
+  },
   "EDITOR": {
     "INSERT_EDIT_IMAGE": "Chèn/Sửa ảnh",
     "INSERT_EDIT_LINK": "Chèn/Sửa liên kết",
@@ -93,5 +102,228 @@
     "SUBSCRIBE": "Đăng ký nhận tin",
     "EMAIL_PLACEHOLDER": "Email của bạn...",
     "CONNECT_WITH_US": "Kết nối với chúng tôi"
+  },
+  "COMMON": {
+    "CANCEL": "Hủy",
+    "CREATE": "Tạo mới",
+    "UPDATE": "Cập nhật",
+    "SAVE": "Lưu thay đổi",
+    "DELETE": "Xóa",
+    "EDIT": "Chỉnh sửa",
+    "SEARCH": "Tìm kiếm...",
+    "STATUS": "Trạng thái",
+    "ACTIONS": "Thao tác",
+    "ACTIVE": "Hoạt động",
+    "INACTIVE": "Tạm dừng",
+    "ALL": "Tất cả",
+    "SUCCESS": "Thành công",
+    "ERROR": "Lỗi",
+    "CONFIRM": "Xác nhận",
+    "CLOSE": "Đóng",
+    "EMPTY_DATA": "Không có dữ liệu",
+    "AUTO_TRANSLATE_HINT": "Hệ thống sẽ tự động dịch sang tiếng Anh và tiếng Trung.",
+    "UPLOAD": "Tải lên",
+    "ACTIVE_DISPLAY": "Kích hoạt hiển thị",
+    "FORMAT_HINT": "Định dạng: JPG, PNG, WEBP",
+    "SIZE_HINT": "Dung lượng tối đa: 2MB",
+    "LANGUAGES": {
+      "VI": "Tiếng Việt",
+      "EN": "Tiếng Anh",
+      "ZH": "Tiếng Trung"
+    },
+    "DATE_LOCALE": "vi-VN"
+  },
+  "PRODUCT_ADMIN": {
+    "TITLE": "Quản Lý Sản Phẩm",
+    "SUBTITLE": "Danh sách sản phẩm dịch vụ 5P Event",
+    "ADD_NEW": "Thêm sản phẩm mới",
+    "EDIT": "Chỉnh sửa sản phẩm",
+    "FIELDS": {
+      "NAME": "Tên sản phẩm",
+      "SLUG": "Đường dẫn (Slug)",
+      "PRICE": "Giá bán",
+      "IMAGE": "Ảnh sản phẩm",
+      "CONTENT": "Nội dung chi tiết"
+    },
+    "PLACEHOLDERS": {
+      "NAME": "Nhập tên sản phẩm..."
+    },
+    "TABLE": {
+      "IMAGE": "Hình ảnh",
+      "NAME": "Tên sản phẩm",
+      "PRICE": "Giá bán",
+      "STATUS": "Trạng thái",
+      "ACTIONS": "Thao tác"
+    }
+  },
+  "SEO_ADMIN": {
+    "TITLE": "Quản Lý SEO Meta",
+    "SUBTITLE": "Cấu hình SEO Meta cho các trang của 5P Event",
+    "EDIT_TITLE": "Chỉnh sửa SEO: {page}",
+    "TABLE": {
+      "PAGE": "Trang",
+      "PATH": "Đường dẫn",
+      "TITLE": "Tiêu đề (VI)",
+      "DESC": "Mô tả (VI)",
+      "ACTIONS": "Thao tác"
+    },
+    "FIELDS": {
+      "META_TITLE": "Meta Title",
+      "META_DESC": "Meta Description"
+    }
+  },
+  "NEWSLETTER_ADMIN": {
+    "TITLE": "Quản Lý Đăng Ký Nhận Tin",
+    "TABLE": {
+      "EMAIL": "Email",
+      "DATE": "Ngày đăng ký",
+      "STATUS": "Trạng thái",
+      "ACTIONS": "Thao tác"
+    },
+    "EMPTY": "Chưa có người đăng ký nào"
+  },
+  "HOME_VIDEO_ADMIN": {
+    "TITLE": "Quản Lý Video Trang Chủ",
+    "ADD_NEW": "Thêm video trang chủ mới",
+    "EDIT": "Chỉnh sửa video trang chủ",
+    "FIELDS": {
+      "TITLE": "Tiêu đề video",
+      "THUMBNAIL": "Ảnh xem trước (Thumbnail)",
+      "URL": "Link Video (Youtube/Vimeo/Direct...)"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Nhập tiêu đề video..."
+    },
+    "TABLE": {
+      "VIDEO": "Video",
+      "STATUS": "Trạng thái",
+      "ACTIONS": "Thao tác"
+    }
+  },
+  "POSTS_ADMIN": {
+    "TITLE": "Quản Lý Bài Viết",
+    "SUBTITLE": "Danh sách bài viết của 5P Event",
+    "ADD_NEW": "Thêm bài viết mới",
+    "EDIT": "Chỉnh sửa bài viết",
+    "FIELDS": {
+      "TITLE": "Tiêu đề bài viết",
+      "SLUG": "Đường dẫn (Slug)",
+      "STATUS": "Trạng thái",
+      "IMAGE": "Ảnh đại diện (Media)",
+      "CONTENT": "Nội dung bài viết"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Nhập tiêu đề bài viết...",
+      "SLUG": "vi-du-slug-bai-viet"
+    },
+    "STATUS": {
+      "PUBLISHED": "Đã xuất bản",
+      "DRAFT": "Bản nháp",
+      "SCHEDULED": "Lên lịch",
+      "PUBLISH": "Xuất bản",
+      "INIT_PUBLISH": "Khởi tạo & Xuất bản"
+    },
+    "TABLE": {
+      "POST": "Bài viết",
+      "STATUS": "Trạng thái",
+      "SEO_SCORE": "Điểm SEO",
+      "NOT_CALCULATED": "Chưa tính"
+    }
+  },
+  "VIDEOS_ADMIN": {
+    "TITLE": "Quản Lý Video Nổi Bật",
+    "SUBTITLE": "Quản lý kho highlight videos",
+    "ADD_NEW": "Thêm video nổi bật mới",
+    "EDIT": "Chỉnh sửa video nổi bật",
+    "FIELDS": {
+      "TITLE": "Tiêu đề video",
+      "THUMBNAIL": "Ảnh xem trước (Thumbnail)",
+      "URL": "Link Video (Youtube/Vimeo...)",
+      "ORDER": "Thứ tự hiển thị"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Nhập tiêu đề video..."
+    },
+    "TABLE": {
+      "VIDEO": "Video",
+      "ORDER": "Thứ tự",
+      "STATUS": "Trạng thái"
+    }
+  },
+  "CONFIG_ADMIN": {
+    "TITLE": "Cấu Hình Website",
+    "SUBTITLE": "Quản lý thông tin chung và cấu hình hệ thống",
+    "TAB_CONTENT_TITLE": "Nội dung cấu hình",
+    "TAB_CONTENT_DESC": "Quản lý các thông tin thuộc nhóm",
+    "SAVE_ALL": "Lưu tất cả",
+    "SAVING": "Đang lưu...",
+    "TABS": {
+      "GENERAL": "Cài đặt chung",
+      "CONTACT": "Thông tin liên hệ",
+      "SOCIAL": "Mạng xã hội",
+      "MENU": "Cấu hình Menu"
+    },
+    "LABELS": {
+      "WEBSITE_NAME": "Tên website",
+      "WEBSITE_FULLNAME": "Tên đầy đủ công ty",
+      "WEBSITE_SLOGAN": "Slogan",
+      "WEBSITE_LOGO": "Đường dẫn Logo",
+      "WEBSITE_FAVICON": "Đường dẫn Favicon",
+      "CONTACT_HOTLINE": "Hotline",
+      "CONTACT_EMAIL": "Email liên hệ",
+      "CONTACT_ADDRESS": "Địa chỉ",
+      "CONTACT_MAP_IFRAME": "Iframe Bản đồ",
+      "SOCIAL_FACEBOOK": "Link Facebook",
+      "SOCIAL_ZALO": "Link Zalo",
+      "SOCIAL_YOUTUBE": "Link Youtube",
+      "MENU_HOME": "Menu Trang chủ",
+      "MENU_ABOUT": "Menu Giới thiệu",
+      "MENU_SERVICES": "Menu Dịch vụ",
+      "MENU_PROJECTS": "Menu Dự án",
+      "MENU_NEWS": "Menu Tin tức",
+      "MENU_CONTACT": "Menu Liên hệ"
+    }
+  },
+  "DASHBOARD": {
+    "OVERVIEW": {
+      "PRODUCTS": "Sản phẩm",
+      "POSTS": "Bài viết",
+      "VIDEOS": "Video Highlight",
+      "SUBSCRIBERS": "Người đăng ký"
+    },
+    "CHARTS": {
+      "PRODUCTS_POSTS_TITLE": "Sản phẩm & Bài viết (Năm nay)",
+      "SUBSCRIBERS_TITLE": "Người đăng ký (Năm nay)",
+      "POST_STATUS_TITLE": "Trạng thái Bài viết",
+      "PRODUCT_STATUS_TITLE": "Hoạt động Sản phẩm",
+      "POST_STATUS": {
+        "PUBLISHED": "Đã xuất bản",
+        "DRAFT": "Bản nháp",
+        "SCHEDULED": "Đã lên lịch"
+      },
+      "PRODUCT_STATUS": {
+        "ACTIVE": "Đang kích hoạt",
+        "INACTIVE": "Vô hiệu hóa"
+      }
+    },
+    "RECENT": {
+      "PRODUCTS_TITLE": "Sản phẩm mới thêm (Top 5)",
+      "SUBSCRIBERS_TITLE": "Lượt đăng ký Email (Top 5)",
+      "TABLE": {
+        "PRODUCT_NAME": "Tên Sản Phẩm",
+        "PRICE": "Giá",
+        "STATUS": "Trạng Thái",
+        "EMAIL": "Email",
+        "DATE": "Ngày Đăng Ký"
+      },
+      "STATUS": {
+        "ACTIVE": "Hoạt động",
+        "INACTIVE": "Tắt",
+        "SUBSCRIBED": "Active",
+        "UNSUBSCRIBED": "Unsubscribed"
+      },
+      "NO_DATA": "Chưa có dữ liệu",
+      "LOADING": "Đang tải dữ liệu..."
+    }
   }
 }

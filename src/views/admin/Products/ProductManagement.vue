@@ -9,7 +9,7 @@
       </h1>
     </div>
 
-    <component-card title="Danh sách sản phẩm dịch vụ 5P Event">
+    <component-card :title="$t('PRODUCT_ADMIN.SUBTITLE')">
       <product-table @add="openCreateModal" @edit="handleEdit" />
     </component-card>
 
@@ -23,14 +23,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
 import ProductTable from '@/components/products/ProductTable.vue'
 import ProductModal from '@/components/products/ProductModal.vue'
 import type { IProduct } from '@/types/product'
 
-const currentPageTitle = ref('Quản Lý Sản Phẩm')
+const { t } = useI18n()
+const currentPageTitle = computed(() => t('PRODUCT_ADMIN.TITLE'))
 const showModal = ref(false)
 const selectedProduct = ref<IProduct | null>(null)
 
