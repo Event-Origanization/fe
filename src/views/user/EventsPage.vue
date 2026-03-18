@@ -62,37 +62,12 @@
           </div>
 
           <!-- Right: Scrollable News List -->
-          <div class="lg:col-span-5 bg-white/[0.02] border border-white/5 rounded-lg p-5" data-aos="fade-left" data-aos-delay="200">
-            <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
-               <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                 TIN TỨC 
-                 <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors">
-                   <i class="pi pi-angle-right text-xs"></i>
-                 </div>
-               </h3>
-               <div class="cursor-pointer text-gray-500 hover:text-white transition-colors">
-                   <i class="pi pi-ellipsis-h"></i>
-               </div>
-            </div>
-            
-            <div class="h-[600px] overflow-y-auto custom-scrollbar pr-2 flex flex-col gap-4">
-              <!-- Item 1 -->
-              <div v-for="i in 6" :key="i" class="flex gap-4 group cursor-pointer border-b border-white/5 pb-4 last:border-0 hover:bg-white/[0.02] p-2 rounded transition-colors">
-                <div class="w-32 aspect-video rounded overflow-hidden shrink-0 relative">
-                  <img :src="`https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&q=80&w=400&ixlib=rb-4.0.3`" alt="News Thumbnail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                  <div class="absolute top-1 left-1 bg-red-600 w-5 h-5 flex items-center justify-center rounded-sm shadow-sm text-[10px] font-bold">5P</div>
-                </div>
-                <div class="flex-1">
-                  <h4 class="font-bold text-sm text-gray-200 group-hover:text-red-500 transition-colors line-clamp-2 leading-snug mb-2">
-                    03 "ĐIỂM CHẠM" GIỮ CHÂN KHÁCH HÀNG TRONG SỰ KIỆN RA MẮT SẢN PHẨM MỚI
-                  </h4>
-                  <p class="text-xs text-gray-500 line-clamp-2">
-                    3 yếu tố quan trọng làm nên thành công của sự kiện ra mắt...
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ScrollableNewsList 
+            class="lg:col-span-5" 
+            data-aos="fade-left" 
+            data-aos-delay="200" 
+            :items="newsItems" 
+          />
         </div>
       </section>
 
@@ -172,8 +147,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import AOS from 'aos'
+import ScrollableNewsList from '@/components/ScrollableNewsList.vue'
 
 const activeTab = ref<'images' | 'videos'>('images')
+
+const newsItems = Array.from({ length: 10 }).map((_, i) => ({
+  title: '03 "ĐIỂM CHẠM" GIỮ CHÂN KHÁCH HÀNG TRONG SỰ KIỆN RA MẮT SẢN PHẨM MỚI',
+  desc: '3 yếu tố quan trọng làm nên thành công của sự kiện ra mắt...',
+  image: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&q=80&w=400&ixlib=rb-4.0.3'
+}))
 
 onMounted(() => {
   AOS.refresh()
