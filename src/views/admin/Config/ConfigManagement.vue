@@ -102,7 +102,8 @@ const tabs = computed(() => [
   { id: 'GENERAL', name: t('CONFIG_ADMIN.TABS.GENERAL') },
   { id: 'CONTACT', name: t('CONFIG_ADMIN.TABS.CONTACT') },
   { id: 'SOCIAL', name: t('CONFIG_ADMIN.TABS.SOCIAL') },
-  { id: 'MENU', name: t('CONFIG_ADMIN.TABS.MENU') }
+  { id: 'MENU', name: t('CONFIG_ADMIN.TABS.MENU') },
+  { id: 'STATISTICS', name: t('CONFIG_ADMIN.TABS.STATISTICS') }
 ]);
 
 const editData = ref<Record<string, { value_vi: string, value_en: string, value_zh: string }>>({});

@@ -15,37 +15,47 @@
       <!-- Menu Navigation -->
       <nav class="hidden lg:flex items-center gap-8 font-medium text-[15px]">
         <router-link
-          to="/"
+          :to="{ name: 'Home' }"
           class="relative transition-colors hover:text-brand-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand-500 after:transition-all after:duration-300"
-          :class="[$route.path === '/' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
+          :class="[$route.name === 'Home' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
         >
           {{ configStore.getConfigValue('MENU', 'MENU_HOME', $t('NAV.HOME')) }}
         </router-link>
         <router-link
-          to="/about"
+          :to="{ name: 'About' }"
           class="relative transition-colors hover:text-brand-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand-500 after:transition-all after:duration-300"
-          :class="[$route.path === '/about' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
+          :class="[$route.name === 'About' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
         >
           {{ configStore.getConfigValue('MENU', 'MENU_ABOUT', $t('NAV.ABOUT')) }}
         </router-link>
-        <a
-          href="#"
-          class="text-gray-300 hover:text-brand-500 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-brand-500 hover:after:w-full after:transition-all after:duration-300"
+        <router-link
+          :to="{ name: 'Events' }"
+          class="relative transition-colors hover:text-brand-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand-500 after:transition-all after:duration-300"
+          :class="[$route.name === 'Events' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
         >
-          {{ configStore.getConfigValue('MENU', 'MENU_SERVICES', $t('NAV.PRODUCTS')) }}
-        </a>
-        <a
-          href="#"
-          class="text-gray-300 hover:text-brand-500 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-brand-500 hover:after:w-full after:transition-all after:duration-300"
+          {{ configStore.getConfigValue('MENU', 'MENU_EVENTS', $t('NAV.EVENTS')) }}
+        </router-link>
+        <router-link
+          :to="{ name: 'Sound_Light' }"
+          class="relative transition-colors hover:text-brand-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand-500 after:transition-all after:duration-300"
+          :class="[$route.name === 'Sound_Light' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
         >
-          {{ configStore.getConfigValue('MENU', 'MENU_NEWS', $t('NAV.POSTS')) }}
-        </a>
-        <a
-          href="#"
-          class="text-gray-300 hover:text-brand-500 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-brand-500 hover:after:w-full after:transition-all after:duration-300"
+          {{ configStore.getConfigValue('MENU', 'MENU_SOUND_LIGHT', $t('NAV.SOUND_LIGHT')) }}
+        </router-link>
+        <router-link
+          :to="{ name: 'Rental' }"
+          class="relative transition-colors hover:text-brand-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand-500 after:transition-all after:duration-300"
+          :class="[$route.name === 'Rental' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
+        >
+          {{ configStore.getConfigValue('MENU', 'MENU_RENTAL', $t('NAV.RENTAL')) }}
+        </router-link>
+        <router-link
+          :to="{ name: 'Contact' }"
+          class="relative transition-colors hover:text-brand-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand-500 after:transition-all after:duration-300"
+          :class="[$route.name === 'Contact' ? 'text-brand-500 after:w-full shadow-brand-500 drop-shadow-sm' : 'text-gray-300 after:w-0 hover:after:w-full']"
         >
           {{ configStore.getConfigValue('MENU', 'MENU_CONTACT', $t('NAV.CONTACT')) }}
-        </a>
+        </router-link>
       </nav>
 
       <!-- Search & Languages -->
@@ -111,26 +121,30 @@
            </div>
            
            <nav class="flex flex-col gap-2">
-             <router-link to="/" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
+             <router-link :to="{ name: 'Home' }" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
                {{ configStore.getConfigValue('MENU', 'MENU_HOME', $t('NAV.HOME')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
              </router-link>
-             <router-link to="/about" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
+             <router-link :to="{ name: 'About' }" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
                {{ configStore.getConfigValue('MENU', 'MENU_ABOUT', $t('NAV.ABOUT')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
              </router-link>
-             <a href="#" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
-               {{ configStore.getConfigValue('MENU', 'MENU_SERVICES', $t('NAV.PRODUCTS')) }}
+             <router-link :to="{ name: 'Events' }" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
+               {{ configStore.getConfigValue('MENU', 'MENU_EVENTS', $t('NAV.EVENTS')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
-             </a>
-             <a href="#" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
-               {{ configStore.getConfigValue('MENU', 'MENU_NEWS', $t('NAV.POSTS')) }}
+             </router-link>
+             <router-link :to="{ name: 'Sound_Light' }" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
+               {{ configStore.getConfigValue('MENU', 'MENU_SOUND_LIGHT', $t('NAV.SOUND_LIGHT')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
-             </a>
-             <a href="#" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
+             </router-link>
+             <router-link :to="{ name: 'Rental' }" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
+               {{ configStore.getConfigValue('MENU', 'MENU_RENTAL', $t('NAV.RENTAL')) }}
+               <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
+             </router-link>
+             <router-link :to="{ name: 'Contact' }" @click="$emit('toggle-menu')" class="text-lg font-bold py-3 border-b border-white/5 text-gray-300 hover:text-brand-500 transition-colors flex items-center justify-between group">
                {{ configStore.getConfigValue('MENU', 'MENU_CONTACT', $t('NAV.CONTACT')) }}
                <i class="pi pi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
-             </a>
+             </router-link>
            </nav>
            
            <!-- Mobile Languages -->

@@ -1,6 +1,6 @@
 <!-- src/components/home-video/HomeVideoBanner.vue -->
 <template>
-  <div v-if="activeVideo" class="w-full max-w-6xl mx-auto relative group" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
+  <div v-if="activeVideo" class="w-full mx-auto relative group" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
     <!-- Cyberpunk glowing frame -->
     <div
       class="absolute -inset-[3px] bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 rounded-sm blur-[2px] opacity-75 group-hover:opacity-100 group-hover:blur-[6px] transition-all duration-1000 [clip-path:polygon(5%_0%,95%_0%,100%_5%,100%_95%,95%_100%,5%_100%,0%_95%,0%_5%)]"
@@ -21,7 +21,6 @@
         <video
           v-else
           class="absolute inset-0 w-full h-full object-cover"
-          controls
           autoplay
           muted
           loop
@@ -138,6 +137,6 @@ const embedUrl = computed(() => {
   } else if (activeVideo.value.url.includes('youtu.be/')) {
     videoId = activeVideo.value.url.split('youtu.be/')[1].split('?')[0]
   }
-  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&playlist=${videoId}`
 })
 </script>

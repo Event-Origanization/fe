@@ -2,9 +2,10 @@
   "NAV": {
     "HOME": "首页",
     "ABOUT": "关于我们",
+    "EVENTS": "活动策划",
+    "SOUND_LIGHT": "音响灯光",
+    "RENTAL": "设备租赁",
     "CONTACT": "联系我们",
-    "PRODUCTS": "产品",
-    "POSTS": "博客",
     "LANGUAGES": "语言"
   },
   "HOME": {
@@ -96,7 +97,8 @@
     "NEWSLETTER": "邮件订阅",
     "SEO": "SEO Meta 管理",
     "USERS": "用户管理",
-    "REPORTS": "统计报告"
+    "REPORTS": "统计报告",
+    "PARTNERS": "合作伙伴管理"
   },
   "FOOTER": {
     "SUBSCRIBE": "订阅最新动态",
@@ -261,7 +263,8 @@
       "GENERAL": "常规设置",
       "CONTACT": "联系信息",
       "SOCIAL": "社交媒体",
-      "MENU": "菜单配置"
+      "MENU": "菜单配置",
+      "STATISTICS": "数据统计"
     },
     "LABELS": {
       "WEBSITE_NAME": "网站名称",
@@ -278,10 +281,33 @@
       "SOCIAL_YOUTUBE": "Youtube 链接",
       "MENU_HOME": "首页菜单",
       "MENU_ABOUT": "关于菜单",
-      "MENU_SERVICES": "服务菜单",
-      "MENU_PROJECTS": "项目菜单",
-      "MENU_NEWS": "新闻菜单",
-      "MENU_CONTACT": "联系菜单"
+      "MENU_EVENTS": "活动策划菜单",
+      "MENU_SOUND_LIGHT": "音响灯光菜单",
+      "MENU_RENTAL": "设备租赁菜单",
+      "MENU_CONTACT": "联系菜单",
+      "STATS_FIELDS": "领域数量",
+      "STATS_EVENTS": "活动数量",
+      "STATS_BRANDS": "品牌数量"
+    }
+  },
+  "PARTNERS_ADMIN": {
+    "TITLE": "合作伙伴管理",
+    "SUBTITLE": "客户品牌及合作伙伴名单",
+    "ADD_NEW": "添加新合作伙伴",
+    "EDIT": "编辑合作伙伴",
+    "FIELDS": {
+      "NAME": "合作伙伴名称",
+      "LOGO": "合作伙伴 Logo (图片/Iframe)",
+      "ORDER": "显示顺序"
+    },
+    "PLACEHOLDERS": {
+      "NAME": "输入合作伙伴名称..."
+    },
+    "TABLE": {
+      "LOGO": "Logo",
+      "NAME": "合作伙伴名称",
+      "ORDER": "顺序",
+      "STATUS": "状态"
     }
   },
   "DASHBOARD": {

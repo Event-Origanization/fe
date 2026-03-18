@@ -2,9 +2,10 @@
   "NAV": {
     "HOME": "Home",
     "ABOUT": "About Us",
+    "EVENTS": "Event Organization",
+    "SOUND_LIGHT": "Sound & Lighting",
+    "RENTAL": "Equipment Rental",
     "CONTACT": "Contact",
-    "PRODUCTS": "Products",
-    "POSTS": "Blog",
     "LANGUAGES": "Languages"
   },
   "HOME": {
@@ -96,7 +97,8 @@
     "NEWSLETTER": "Newsletter Subscriptions",
     "SEO": "SEO Meta Management",
     "USERS": "User Management",
-    "REPORTS": "Reports"
+    "REPORTS": "Reports",
+    "PARTNERS": "Partner Management"
   },
   "FOOTER": {
     "SUBSCRIBE": "Subscribe to newsletter",
@@ -261,7 +263,8 @@
       "GENERAL": "General Settings",
       "CONTACT": "Contact Info",
       "SOCIAL": "Social Media",
-      "MENU": "Menu Config"
+      "MENU": "Menu Config",
+      "STATISTICS": "Statistics"
     },
     "LABELS": {
       "WEBSITE_NAME": "Website Name",
@@ -278,10 +281,33 @@
       "SOCIAL_YOUTUBE": "Youtube link",
       "MENU_HOME": "Home Menu",
       "MENU_ABOUT": "About Menu",
-      "MENU_SERVICES": "Services Menu",
-      "MENU_PROJECTS": "Projects Menu",
-      "MENU_NEWS": "News Menu",
-      "MENU_CONTACT": "Contact Menu"
+      "MENU_EVENTS": "Event Organization Menu",
+      "MENU_SOUND_LIGHT": "Sound & Light Menu",
+      "MENU_RENTAL": "Rental Menu",
+      "MENU_CONTACT": "Contact Menu",
+      "STATS_FIELDS": "Number of Fields",
+      "STATS_EVENTS": "Number of Events",
+      "STATS_BRANDS": "Number of Brands"
+    }
+  },
+  "PARTNERS_ADMIN": {
+    "TITLE": "Partner Management",
+    "SUBTITLE": "List of client brands and accompanying partners",
+    "ADD_NEW": "Add new partner",
+    "EDIT": "Edit partner",
+    "FIELDS": {
+      "NAME": "Partner Name",
+      "LOGO": "Partner Logo (Image/Iframe)",
+      "ORDER": "Display Order"
+    },
+    "PLACEHOLDERS": {
+      "NAME": "Enter partner name..."
+    },
+    "TABLE": {
+      "LOGO": "Logo",
+      "NAME": "Partner Name",
+      "ORDER": "Order",
+      "STATUS": "Status"
     }
   },
   "DASHBOARD": {

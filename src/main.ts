@@ -19,6 +19,7 @@ app.use(primeVuePreset).use(PrimeVue).use(pinia).use(router).use(i18n).mount('#a
 
 AOS.init({
   duration: 800,
-  once: false,
+  once: false, // Ensure animations trigger every time you scroll
   offset: 100,
+  mirror: true, // This enables repeating the animation when scrolling past them
 })

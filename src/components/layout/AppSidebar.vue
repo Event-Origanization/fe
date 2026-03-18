@@ -205,6 +205,7 @@ const menuGroups = computed<MenuGroup[]>(() => {
         { icon: ListIcon, name: t('SIDEBAR.NEWSLETTER'), path: '/administrators/newsletter' },
         { icon: PlugInIcon, name: t('SIDEBAR.CONFIG'), path: '/administrators/configs' },
         { icon: ListIcon, name: t('SIDEBAR.SEO'), path: '/administrators/seo' },
+        { icon: ListIcon, name: t('SIDEBAR.PARTNERS'), path: '/administrators/partners' },
       ],
     },
   ]
