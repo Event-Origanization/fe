@@ -4,6 +4,19 @@ import Admin from '@/components/layout/Admin.vue'
 import UserLayout from '@/components/layout/UserLayout.vue'
 import { useAuthStore } from '@/store/auth'
 import { USER_ROLES } from '@/constants'
+import { SeoService } from '@/services/seo.service'
+import { ResponseError } from '@/utils/error'
+
+// Fetch all SEO metas once to get paths
+const seoData = await SeoService.getAllSeoMeta()
+const seoMetas = !(seoData instanceof ResponseError) ? seoData.data : []
+
+const getSeoPath = (pageKey: string, defaultPath: string) => {
+  const normalizedKey = pageKey.toUpperCase()
+  const meta = seoMetas.find(m => m.pageKey.toUpperCase() === normalizedKey)
+  // Ensure we don't return an empty string if it's not the home page
+  return meta?.path || defaultPath
+}
 
 const router = createRouter({
   history: createWebHistory(),
@@ -94,6 +107,16 @@ const router = createRouter({
             roles: [USER_ROLES.ROLE_ADMIN],
           },
         },
+        {
+          path: 'partners',
+          name: 'PartnerManagement',
+          component: () => import('@/views/admin/Partners/PartnerManagement.vue'),
+          meta: {
+            title: 'Quản lý đối tác',
+            requiresAuth: true,
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
       ],
     },
 
@@ -103,16 +126,40 @@ const router = createRouter({
       component: UserLayout,
       children: [
         {
-          path: '',
+          path: getSeoPath('HOME', ''),
           name: 'Home',
           component: () => import('@/views/user/HomePage.vue'),
           meta: { title: 'Home Page' },
         },
         {
-          path: 'about',
+          path: getSeoPath('ABOUT', 'about').replace(/^\//, ''),
           name: 'About',
           component: () => import('@/views/user/AboutPage.vue'),
           meta: { title: 'About Us' },
+        },
+        {
+          path: getSeoPath('EVENTS', 'events').replace(/^\//, ''),
+          name: 'Events',
+          component: () => import('@/views/user/EventsPage.vue'),
+          meta: { title: 'Event Organization' },
+        },
+        {
+          path: getSeoPath('SOUND_LIGHT', 'sound-lighting').replace(/^\//, ''),
+          name: 'Sound_Light',
+          component: () => import('@/views/user/SoundLightPage.vue'),
+          meta: { title: 'Sound & Lighting' },
+        },
+        {
+          path: getSeoPath('RENTAL', 'rental').replace(/^\//, ''),
+          name: 'Rental',
+          component: () => import('@/views/user/RentalPage.vue'),
+          meta: { title: 'Equipment Rental' },
+        },
+        {
+          path: getSeoPath('CONTACT', 'contact').replace(/^\//, ''),
+          name: 'Contact',
+          component: () => import('@/views/user/ContactPage.vue'),
+          meta: { title: 'Contact Us' },
         },
       ],
     },
@@ -143,7 +190,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
-  const publicRouteNames = ['Home', 'About', 'Signin', 'Signup', 'NotFound', 'ProductManagement', 'PostManagement', 'VideoManagement', 'HomeVideoManagement', 'NewsletterManagement']
+  const publicRouteNames = ['Home', 'About', 'Events', 'Sound_Light', 'Rental', 'Contact', 'Signin', 'Signup', 'NotFound', 'ProductManagement', 'PostManagement', 'VideoManagement', 'HomeVideoManagement', 'NewsletterManagement', 'PartnerManagement']
   const authStore = useAuthStore()
 
   if (publicRouteNames.includes(to.name as string)) {

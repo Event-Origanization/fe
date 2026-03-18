@@ -81,4 +81,14 @@ export const API_ROUTES = {
     OVERVIEW: '/dashboard/overview',
     YEARLY_CHARTS: '/dashboard/charts/yearly',
   },
+  PARTNERS: {
+    BASE: '/partners',
+    GET_ALL: '/partners',
+    GET_ACTIVE: '/partners/active',
+    GET_BY_ID: '/partners/:id',
+    CREATE: '/partners',
+    UPDATE: '/partners/:id',
+    DELETE: '/partners/:id',
+  },
 }
+

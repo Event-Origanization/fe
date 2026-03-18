@@ -2,36 +2,7 @@
   <div class="w-full">
     <main class="relative z-10">
       <!-- HERO & VIDEO SECTION -->
-      <section class="pt-16 pb-12 container mx-auto px-4 flex flex-col items-center">
-        <!-- Title CHI PHÍ -->
-        <h1
-          class="text-5xl md:text-7xl font-black italic tracking-wider mb-8 text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 via-yellow-500 to-yellow-600 filter drop-shadow-[0_4px_10px_rgba(234,179,8,0.5)]"
-          data-aos="zoom-in"
-          data-aos-duration="1000"
-        >
-          {{ $t('HOME.HERO_TITLE') }}
-        </h1>
-
-        <!-- Sub Badges -->
-        <div class="flex justify-between w-full max-w-6xl relative z-20 -mb-5 px-4 md:px-0">
-          <div
-            class="bg-gradient-to-r from-fuchsia-600 to-pink-500 text-white font-black italic text-xl md:text-2xl px-12 py-3 [clip-path:polygon(0_0,100%_0,85%_100%,0%_100%)] drop-shadow-[0_0_15px_rgba(219,39,119,0.8)] shadow-pink-500 animate-pulse"
-            data-aos="fade-right"
-            data-aos-duration="800"
-            data-aos-delay="200"
-          >
-            {{ $t('HOME.BADGE_LEFT') }}
-          </div>
-          <div
-            class="bg-gradient-to-l from-fuchsia-600 to-pink-500 text-white font-black italic text-xl md:text-2xl px-12 py-3 [clip-path:polygon(15%_0,100%_0,100%_100%,0%_100%)] drop-shadow-[0_0_15px_rgba(219,39,119,0.8)] shadow-pink-500 animate-pulse animation-delay-200"
-            data-aos="fade-left"
-            data-aos-duration="800"
-            data-aos-delay="200"
-          >
-            {{ $t('HOME.BADGE_RIGHT') }}
-          </div>
-        </div>
-
+      <section class="pt-4 pb-12 w-full mx-auto px-4 flex flex-col items-center">
         <!-- Main Video Frame -->
         <HomeVideoBanner />
 
@@ -48,7 +19,7 @@
               <h3
                 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
               >
-                3
+                <span v-html="formatStat(configStore.getConfigValue('STATISTICS', 'STATS_FIELDS', '3'))"></span>
               </h3>
               <p class="text-gray-400 uppercase text-sm tracking-widest font-semibold">{{ $t('HOME.STATS.FIELDS') }}</p>
             </div>
@@ -57,7 +28,7 @@
               <h3
                 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
               >
-                1500<span class="text-brand-500">+</span>
+                <span v-html="formatStat(configStore.getConfigValue('STATISTICS', 'STATS_EVENTS', '1500+'))"></span>
               </h3>
               <p class="text-gray-400 uppercase text-sm tracking-widest font-semibold">{{ $t('HOME.STATS.EVENTS') }}</p>
             </div>
@@ -66,7 +37,7 @@
               <h3
                 class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
               >
-                500<span class="text-brand-500">+</span>
+                <span v-html="formatStat(configStore.getConfigValue('STATISTICS', 'STATS_BRANDS', '500+'))"></span>
               </h3>
               <p class="text-gray-400 uppercase text-sm tracking-widest font-semibold">
                 {{ $t('HOME.STATS.BRANDS') }}
@@ -312,21 +283,32 @@
               class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-x-8 gap-y-12 items-center justify-items-center opacity-70"
               data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"
             >
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl italic font-serif">Sunjin</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl tracking-widest text-[#0066ff]">NOVALAND</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl uppercase font-mono">ZKTEco</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl uppercase font-sans">VDDLAND</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl uppercase tracking-tighter text-red-500">VIFON</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl font-serif">REAL CLOTHES</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl italic text-blue-400">Vietjet.com</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl font-mono">PHU DONG</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-2xl tracking-tighter">dathop</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl uppercase tracking-widest text-[#ed1b24]">KYO WON</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl uppercase">Fox Group</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl italic">CJ ViNa</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-2xl font-serif">GihOt</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl font-mono border border-white p-1">samtec</span></div>
-              <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl italic text-green-400">LUXURY</span></div>
+              <template v-if="partnerStore.activePartners.length > 0">
+                <div 
+                  v-for="partner in partnerStore.activePartners" 
+                  :key="partner.id"
+                  class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer group"
+                >
+                  <img 
+                    v-if="partner.logo" 
+                    :src="partner.logo" 
+                    :alt="partner.name"
+                    class="max-h-12 w-auto object-contain brightness-0 invert opacity-60 group-hover:opacity-100 transition-all"
+                  />
+                  <span v-else class="font-bold text-xl uppercase tracking-widest text-gray-300">
+                    {{ partner.name }}
+                  </span>
+                </div>
+              </template>
+              <template v-else>
+                <!-- Fallback to static if no partners found in DB yet -->
+                <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl italic font-serif">Sunjin</span></div>
+                <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl tracking-widest text-[#0066ff]">NOVALAND</span></div>
+                <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl uppercase font-mono">ZKTEco</span></div>
+                <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl uppercase font-sans">VDDLAND</span></div>
+                <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl uppercase tracking-tighter text-red-500">VIFON</span></div>
+                <div class="w-full flex justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer"><span class="font-bold text-xl font-serif">REAL CLOTHES</span></div>
+              </template>
             </div>
           </div>
 
@@ -356,8 +338,22 @@
 import { onMounted } from 'vue'
 import AOS from 'aos'
 import HomeVideoBanner from '@/components/home-video/HomeVideoBanner.vue'
+import { useConfigStore } from '@/store/config'
+import { usePartnerStore } from '@/store/partner.store'
 
-onMounted(() => {
+const configStore = useConfigStore()
+const partnerStore = usePartnerStore()
+
+const formatStat = (val: string) => {
+  if (!val) return ''
+  return val.replace('+', '<span class="text-brand-500">+</span>')
+}
+
+onMounted(async () => {
+  await Promise.all([
+    configStore.fetchAllConfigs(),
+    partnerStore.fetchActivePartners()
+  ])
   AOS.refresh()
 })
 </script>

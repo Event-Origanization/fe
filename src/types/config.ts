@@ -1,4 +1,4 @@
-export type ConfigGroup = 'GENERAL' | 'CONTACT' | 'SOCIAL' | 'MENU';
+export type ConfigGroup = 'GENERAL' | 'CONTACT' | 'SOCIAL' | 'MENU' | 'STATISTICS';
 
 export interface IWebsiteConfig {
   id: number;

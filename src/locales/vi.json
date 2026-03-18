@@ -1,10 +1,11 @@
 {
   "NAV": {
-    "HOME": "Trang Chủ",
-    "ABOUT": "Về Chúng Tôi",
-    "CONTACT": "Liên Hệ",
-    "PRODUCTS": "Sản Phẩm",
-    "POSTS": "Bài Viết",
+    "HOME": "Trang chủ",
+    "ABOUT": "Giới thiệu",
+    "EVENTS": "Tổ chức sự kiện",
+    "SOUND_LIGHT": "Âm thanh ánh sáng",
+    "RENTAL": "Cho thuê thiết bị sự kiện",
+    "CONTACT": "Liên hệ",
     "LANGUAGES": "Ngôn Ngữ"
   },
   "HOME": {
@@ -96,7 +97,8 @@
     "NEWSLETTER": "Đăng ký nhận tin",
     "SEO": "Quản lý SEO Meta",
     "USERS": "Quản lý người dùng",
-    "REPORTS": "Báo cáo thống kê"
+    "REPORTS": "Báo cáo thống kê",
+    "PARTNERS": "Quản lý đối tác"
   },
   "FOOTER": {
     "SUBSCRIBE": "Đăng ký nhận tin",
@@ -261,7 +263,8 @@
       "GENERAL": "Cài đặt chung",
       "CONTACT": "Thông tin liên hệ",
       "SOCIAL": "Mạng xã hội",
-      "MENU": "Cấu hình Menu"
+      "MENU": "Cấu hình Menu",
+      "STATISTICS": "Số liệu thống kê"
     },
     "LABELS": {
       "WEBSITE_NAME": "Tên website",
@@ -278,10 +281,33 @@
       "SOCIAL_YOUTUBE": "Link Youtube",
       "MENU_HOME": "Menu Trang chủ",
       "MENU_ABOUT": "Menu Giới thiệu",
-      "MENU_SERVICES": "Menu Dịch vụ",
-      "MENU_PROJECTS": "Menu Dự án",
-      "MENU_NEWS": "Menu Tin tức",
-      "MENU_CONTACT": "Menu Liên hệ"
+      "MENU_EVENTS": "Menu Tổ chức sự kiện",
+      "MENU_SOUND_LIGHT": "Menu Âm thanh ánh sáng",
+      "MENU_RENTAL": "Menu Cho thuê thiết bị sự kiện",
+      "MENU_CONTACT": "Menu Liên hệ",
+      "STATS_FIELDS": "Số lượng lĩnh vực",
+      "STATS_EVENTS": "Số lượng sự kiện",
+      "STATS_BRANDS": "Số lượng thương hiệu"
+    }
+  },
+  "PARTNERS_ADMIN": {
+    "TITLE": "Quản Lý Đối Tác",
+    "SUBTITLE": "Danh sách các thương hiệu khách hàng, đối tác đồng hành",
+    "ADD_NEW": "Thêm đối tác mới",
+    "EDIT": "Chỉnh sửa đối tác",
+    "FIELDS": {
+      "NAME": "Tên đối tác",
+      "LOGO": "Logo đối tác (Ảnh/Iframe)",
+      "ORDER": "Thứ tự hiển thị"
+    },
+    "PLACEHOLDERS": {
+      "NAME": "Nhập tên đối tác..."
+    },
+    "TABLE": {
+      "LOGO": "Logo",
+      "NAME": "Tên đối tác",
+      "ORDER": "Thứ tự",
+      "STATUS": "Trạng thái"
     }
   },
   "DASHBOARD": {

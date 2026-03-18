@@ -9,6 +9,22 @@
     <!-- Form -->
     <form @submit.prevent="handleSubmit" class="space-y-6">
       <div class="grid grid-cols-1 gap-6">
+        <!-- Page Path -->
+        <div class="space-y-4 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800">
+           <h4 class="font-bold text-blue-700 flex items-center gap-2">
+            <i class="pi pi-link"></i>
+            {{ $t('SEO_ADMIN.TABLE.PATH') }}
+          </h4>
+          <div class="space-y-3">
+            <input
+              v-model="formData.path"
+              type="text"
+              placeholder="/your-path"
+              class="w-full px-4 py-2 rounded-lg border border-blue-200 dark:border-blue-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+            />
+          </div>
+        </div>
+
         <!-- VI -->
         <div class="space-y-4 p-4 rounded-xl bg-gray-50 dark:bg-gray-800/40 border border-gray-100 dark:border-gray-700">
           <h4 class="font-bold text-red-600 flex items-center gap-2">
@@ -121,6 +137,7 @@ const emit = defineEmits<{
 }>()
 
 const formData = ref<SeoMetaUpdatePayload>({
+  path: '',
   title_vi: '',
   title_en: '',
   title_zh: '',
@@ -132,6 +149,7 @@ const formData = ref<SeoMetaUpdatePayload>({
 watch(() => props.meta, (newVal) => {
   if (newVal) {
     formData.value = {
+      path: newVal.path || '',
       title_vi: newVal.title_vi || '',
       title_en: newVal.title_en || '',
       title_zh: newVal.title_zh || '',

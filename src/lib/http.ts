@@ -11,7 +11,6 @@ import axios, {
 
 import { ENV } from '@/lib'
 import { ResponseError } from '@/utils/error'
-import router from '@/router'
 import { API_ROUTES } from '@/constants'
 
 interface ApiResponseRaw<T = unknown> {
@@ -113,7 +112,8 @@ class AxiosConfig {
       } catch (refreshError) {
         this.isRefreshing = false
         this.processQueue(refreshError)
-        router.push('/signin')
+        const { default: routerInstance } = await import('@/router')
+        routerInstance.push('/signin')
 
         if (refreshError instanceof AxiosError && refreshError.response?.data) {
           const data = refreshError.response.data as ApiResponseRaw
@@ -201,7 +201,8 @@ const parseApiResponse = async <K>(
     if (error instanceof ResponseError) return error
 
     if (error instanceof AxiosError && error.response?.status === HttpStatusCode.InternalServerError) {
-      router.push('/error')
+      const { default: routerInstance } = await import('@/router')
+      routerInstance.push('/error')
     }
 
     return new ResponseError('Internal server error', HttpStatusCode.InternalServerError)
