@@ -227,6 +227,7 @@ import { useUserStore } from '@/store/user.store'
 import { useI18n } from 'vue-i18n'
 import LoadingHome from '@/components/common/LoadingHome.vue'
 import { useToast } from '@/composables/useToast'
+import { ADMIN_ROUTES } from '@/constants/routes'
 
 const route = useRoute()
 
@@ -242,7 +243,13 @@ const user = computed(() => authStore.user)
 
 const isHome = computed(() => route.path === '/')
 
-const menuItems = [{ href: '/administrators', icon: SendIcon, text: 'Quản trị' }]
+const menuItems = computed(() => {
+  const items = []
+  if (authStore.isAdmin) {
+    items.push({ href: ADMIN_ROUTES.BASE, icon: SendIcon, text: 'Quản trị' })
+  }
+  return items
+})
 
 const passwordModalOpen = ref(false)
 const passwordForm = ref({

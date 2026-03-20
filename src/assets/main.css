@@ -764,3 +764,31 @@ span.flatpickr-weekday,
 .edit-button {
   @apply flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto;
 }
+
+/* --- STATS COUNT-UP STYLES --- */
+[v-count-up] {
+  display: inline-block;
+  font-family: var(--font-outfit);
+  letter-spacing: -0.02em;
+}
+
+/* Subtle glow pulse when visible/animating */
+@keyframes stats-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+  }
+}
+
+.animate-stats-glow {
+  animation: stats-glow 2s ease-in-out infinite;
+}
+
+/* Hover effect for stats - more premium feel */
+.stats-item-group:hover h3 {
+  transform: scale(1.05);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+

@@ -27,7 +27,7 @@ export interface NewsItem {
   image?: string
 }
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   items: NewsItem[]
 }>(), {
   items: () => []

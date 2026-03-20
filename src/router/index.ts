@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/auth'
 import { USER_ROLES } from '@/constants'
 import { SeoService } from '@/services/seo.service'
 import { ResponseError } from '@/utils/error'
+import { ADMIN_ROUTES, ADMIN_PATHS } from '@/constants/routes'
 
 // Fetch all SEO metas once to get paths
 const seoData = await SeoService.getAllSeoMeta()
@@ -18,17 +19,32 @@ const getSeoPath = (pageKey: string, defaultPath: string) => {
   return meta?.path || defaultPath
 }
 
+// ====================== ROUTE NAME CONSTANTS ======================
+const ROUTE_NAMES = {
+  HOME: 'Home',
+  ABOUT: 'About',
+  EVENTS: 'Events',
+  SOUND_LIGHT: 'Sound_Light',
+  RENTAL: 'Rental',
+  CONTACT: 'Contact',
+  SIGNIN: 'Signin',
+  SIGNUP: 'Signup',
+  NOT_FOUND: 'NotFound',
+} as const
+
+const PUBLIC_ROUTE_NAMES: string[] = Object.values(ROUTE_NAMES)
+
 const router = createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
   routes: [
     // ====================== ADMIN ROUTES ======================
     {
-      path: '/administrators',
+      path: ADMIN_ROUTES.BASE,
       component: Admin,
       children: [
         {
-          path: '',
+          path: ADMIN_PATHS.DASHBOARD,
           name: 'HomePage',
           component: () => import('@/views/admin/HomePage.vue'),
           meta: {
@@ -38,7 +54,7 @@ const router = createRouter({
           },
         },
         {
-          path: 'products',
+          path: ADMIN_PATHS.PRODUCTS,
           name: 'ProductManagement',
           component: () => import('@/views/admin/Products/ProductManagement.vue'),
           meta: {
@@ -48,7 +64,7 @@ const router = createRouter({
           },
         },
         {
-          path: 'posts',
+          path: ADMIN_PATHS.POSTS,
           name: 'PostManagement',
           component: () => import('@/views/admin/Posts/PostManagement.vue'),
           meta: {
@@ -58,7 +74,7 @@ const router = createRouter({
           },
         },
         {
-          path: 'seo',
+          path: ADMIN_PATHS.SEO,
           name: 'SeoManagement',
           component: () => import('@/views/admin/Seo/SeoManagement.vue'),
           meta: {
@@ -68,7 +84,7 @@ const router = createRouter({
           },
         },
         {
-          path: 'videos',
+          path: ADMIN_PATHS.VIDEOS,
           name: 'VideoManagement',
           component: () => import('@/views/admin/Videos/VideoManagement.vue'),
           meta: {
@@ -78,7 +94,7 @@ const router = createRouter({
           },
         },
         {
-          path: 'home-videos',
+          path: ADMIN_PATHS.HOME_VIDEOS,
           name: 'HomeVideoManagement',
           component: () => import('@/views/admin/HomeVideo/HomeVideoManagement.vue'),
           meta: {
@@ -88,7 +104,7 @@ const router = createRouter({
           },
         },
         {
-          path: 'configs',
+          path: ADMIN_PATHS.CONFIGS,
           name: 'ConfigManagement',
           component: () => import('@/views/admin/Config/ConfigManagement.vue'),
           meta: {
@@ -98,7 +114,7 @@ const router = createRouter({
           },
         },
         {
-          path: 'newsletter',
+          path: ADMIN_PATHS.NEWSLETTER,
           name: 'NewsletterManagement',
           component: () => import('@/views/admin/Newsletter/NewsletterManagement.vue'),
           meta: {
@@ -108,11 +124,21 @@ const router = createRouter({
           },
         },
         {
-          path: 'partners',
+          path: ADMIN_PATHS.PARTNERS,
           name: 'PartnerManagement',
           component: () => import('@/views/admin/Partners/PartnerManagement.vue'),
           meta: {
             title: 'Quản lý đối tác',
+            requiresAuth: true,
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
+        {
+          path: ADMIN_PATHS.CONTACT_MESSAGES,
+          name: 'ContactMessageManagement',
+          component: () => import('@/views/admin/ContactMessage/ContactMessageManagement.vue'),
+          meta: {
+            title: 'Tin nhắn liên hệ',
             requiresAuth: true,
             roles: [USER_ROLES.ROLE_ADMIN],
           },
@@ -127,37 +153,37 @@ const router = createRouter({
       children: [
         {
           path: getSeoPath('HOME', ''),
-          name: 'Home',
+          name: ROUTE_NAMES.HOME,
           component: () => import('@/views/user/HomePage.vue'),
           meta: { title: 'Home Page' },
         },
         {
           path: getSeoPath('ABOUT', 'about').replace(/^\//, ''),
-          name: 'About',
+          name: ROUTE_NAMES.ABOUT,
           component: () => import('@/views/user/AboutPage.vue'),
           meta: { title: 'About Us' },
         },
         {
           path: getSeoPath('EVENTS', 'events').replace(/^\//, ''),
-          name: 'Events',
+          name: ROUTE_NAMES.EVENTS,
           component: () => import('@/views/user/EventsPage.vue'),
           meta: { title: 'Event Organization' },
         },
         {
           path: getSeoPath('SOUND_LIGHT', 'sound-lighting').replace(/^\//, ''),
-          name: 'Sound_Light',
+          name: ROUTE_NAMES.SOUND_LIGHT,
           component: () => import('@/views/user/SoundLightPage.vue'),
           meta: { title: 'Sound & Lighting' },
         },
         {
           path: getSeoPath('RENTAL', 'rental').replace(/^\//, ''),
-          name: 'Rental',
+          name: ROUTE_NAMES.RENTAL,
           component: () => import('@/views/user/RentalPage.vue'),
           meta: { title: 'Equipment Rental' },
         },
         {
           path: getSeoPath('CONTACT', 'contact').replace(/^\//, ''),
-          name: 'Contact',
+          name: ROUTE_NAMES.CONTACT,
           component: () => import('@/views/user/ContactPage.vue'),
           meta: { title: 'Contact Us' },
         },
@@ -165,20 +191,20 @@ const router = createRouter({
     },
     {
       path: '/signin',
-      name: 'Signin',
+      name: ROUTE_NAMES.SIGNIN,
       component: () => import('@/views/Auth/Signin.vue'),
       meta: { title: 'Sign In' },
     },
     {
       path: '/signup',
-      name: 'Signup',
+      name: ROUTE_NAMES.SIGNUP,
       component: () => import('@/views/Auth/Signup.vue'),
       meta: { title: 'Sign Up' },
     },
     // ====================== 404 ======================
     {
       path: '/404',
-      name: 'NotFound',
+      name: ROUTE_NAMES.NOT_FOUND,
       component: () => import('@/views/Errors/FourZeroFour.vue'),
       meta: { title: '404 - Not Found' },
     },
@@ -190,35 +216,35 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
-  const publicRouteNames = ['Home', 'About', 'Events', 'Sound_Light', 'Rental', 'Contact', 'Signin', 'Signup', 'NotFound', 'ProductManagement', 'PostManagement', 'VideoManagement', 'HomeVideoManagement', 'NewsletterManagement', 'PartnerManagement']
   const authStore = useAuthStore()
 
-  if (publicRouteNames.includes(to.name as string)) {
+  // Check if this is an admin route by path prefix
+  const isAdminRoute = to.path.startsWith(ADMIN_ROUTES.BASE)
+
+  if (!isAdminRoute || PUBLIC_ROUTE_NAMES.includes(to.name as string)) {
+    // All non-admin routes are public — allow through
     return next()
   }
 
+  // Admin route: ensure user is authenticated
   if (!authStore.isAuthenticated) {
     await authStore.getMe()
   }
 
   if (!authStore.isAuthenticated || !authStore.user) {
-    return next({
-      name: 'NotFound',
-    })
+    return next({ path: '/signin', query: { redirect: to.fullPath } })
   }
 
+  // Check role-based access
   if (to.meta.roles && Array.isArray(to.meta.roles)) {
     const userRole = authStore.user?.role
-
     const allowedRoles = to.meta.roles
 
     if (!allowedRoles.includes(userRole)) {
-      // alert('Bạn không có quyền truy cập trang này!')
-      return next({
-        name: 'NotFound',
-      })
+      return next({ name: 'NotFound' })
     }
   }
+
   return next()
 })
 

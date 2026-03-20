@@ -206,11 +206,13 @@ const editorConfig = computed(() => {
   config.file_picker_types = 'image'
 
   config.file_picker_callback = (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     callback: (url: string, meta: Record<string, unknown>) => void,
     _value: unknown,
     _meta: Record<string, unknown>,
   ) => {
+    void _value
+    void _meta
     // Create a hidden input element
     const input = document.createElement('input')
     input.setAttribute('type', 'file')
@@ -309,6 +311,7 @@ const editorConfig = computed(() => {
     // Override dialog titles and labels for multilingual support
 
     ed.on('OpenWindow', (_e: unknown) => {
+      void _e
       setTimeout(() => {
         const dialog = document.querySelector('.tox-dialog')
         if (!dialog) return

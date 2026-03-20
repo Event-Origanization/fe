@@ -98,7 +98,11 @@
     "SEO": "SEO Meta 管理",
     "USERS": "用户管理",
     "REPORTS": "统计报告",
-    "PARTNERS": "合作伙伴管理"
+    "PARTNERS": "合作伙伴管理",
+    "CONTACT_MESSAGES": "联系信息",
+    "CONTENT_MANAGEMENT": "内容管理",
+    "CUSTOMER_ENGAGEMENT": "客户与联系",
+    "SYSTEM_SETTINGS": "系统设置"
   },
   "FOOTER": {
     "SUBSCRIBE": "订阅最新动态",
@@ -133,7 +137,8 @@
       "EN": "英语",
       "ZH": "中文"
     },
-    "DATE_LOCALE": "zh-CN"
+    "DATE_LOCALE": "zh-CN",
+    "LOADING": "加载中..."
   },
   "PRODUCT_ADMIN": {
     "TITLE": "产品管理",
@@ -183,6 +188,20 @@
       "ACTIONS": "操作"
     },
     "EMPTY": "未找到订阅者"
+  },
+  "CONTACT_MESSAGE_ADMIN": {
+    "TITLE": "联系信息管理",
+    "TABLE": {
+      "SENDER": "发送者",
+      "CONTACT": "联系方式",
+      "MESSAGE": "内容",
+      "DATE": "发送日期"
+    },
+    "STATUS": {
+      "READ": "已读",
+      "UNREAD": "未读"
+    },
+    "EMPTY": "没有找到联系信息"
   },
   "HOME_VIDEO_ADMIN": {
     "TITLE": "首页视频管理",
@@ -288,6 +307,12 @@
       "STATS_FIELDS": "领域数量",
       "STATS_EVENTS": "活动数量",
       "STATS_BRANDS": "品牌数量"
+    },
+    "HINT": {
+      "MAP_TITLE": "如何获取谷歌地图 Iframe：",
+      "MAP_STEP1": "访问谷歌地图并找到您的地址。",
+      "MAP_STEP2": "点击 分享 -> 嵌入地图。",
+      "MAP_STEP3": "复制 src=\"...\" 属性内的 URL 并粘贴到此处。"
     }
   },
   "PARTNERS_ADMIN": {

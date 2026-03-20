@@ -103,16 +103,6 @@
                 class="contact-input" />
             </div>
             <div class="flex flex-col gap-2">
-              <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Dịch vụ quan tâm</label>
-              <select v-model="form.service" class="contact-input">
-                <option value="" disabled>-- Chọn dịch vụ --</option>
-                <option value="event">Tổ chức sự kiện</option>
-                <option value="sound">Âm thanh ánh sáng</option>
-                <option value="rental">Cho thuê thiết bị</option>
-                <option value="other">Khác</option>
-              </select>
-            </div>
-            <div class="flex flex-col gap-2">
               <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Nội dung <span class="text-red-500">*</span></label>
               <textarea v-model="form.message" rows="5" placeholder="Vui lòng nhập yêu cầu của bạn..."
                 class="contact-input resize-none" required></textarea>
@@ -150,7 +140,7 @@
           <!-- Map overlay effect on top edge -->
           <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent z-10 opacity-60"></div>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.178855780718!2d106.68459131533487!3d10.72714419234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f6bce7e1a23%3A0x8b3c65d00e2b8048!2s122%2F46%20Th%E1%BA%A1nh%20Xu%C3%A2n%2022%2C%20Ph%C6%B0%E1%BB%9Dng%20Th%E1%BA%A1nh%20Xu%C3%A2n%2022%2C%20Qu%E1%BA%ADn%2012%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh!5e0!3m2!1svi!2svn!4v1700000000000!5m2!1svi!2svn"
+            :src="parsedMapSrc"
             width="100%"
             height="450"
             style="border:0; filter: invert(90%) hue-rotate(180deg) brightness(0.9) contrast(0.9) saturate(0.9);"
@@ -161,18 +151,26 @@
           ></iframe>
           <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent z-10 opacity-60"></div>
         </div>
-        <p class="text-center text-gray-500 text-xs mt-3">122/46 Thạnh Xuân 22, Phường Thạnh Xuân 22, Quận 12, TP.HCM</p>
+        <p class="text-center text-gray-500 text-xs mt-3 uppercase tracking-widest font-medium">{{ contactAddress }}</p>
       </div>
     </section>
 
   </div>
 </template>
-
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, computed } from 'vue'
 import AOS from 'aos'
+import { useConfigStore } from '@/store/config'
+import { useContactMessageStore } from '@/store/contactMessage.store'
+import { useToast } from '@/composables/useToast'
+import { validateEmail, validatePhone, validateStringField } from '@/utils/validation'
 
-onMounted(() => {
+const configStore = useConfigStore()
+const contactMessageStore = useContactMessageStore()
+const { toastSuccess, toastError } = useToast()
+
+onMounted(async () => {
+  await configStore.fetchAllConfigs()
   AOS.refresh()
 })
 
@@ -183,38 +181,97 @@ const form = reactive({
   name: '',
   email: '',
   phone: '',
-  service: '',
   message: ''
 })
 
 const handleSubmit = async () => {
+  // Validate fields
+  const nameRes = validateStringField(form.name, 'Họ và tên')
+  if (!nameRes.isValid) {
+    toastError(nameRes.error || 'Tên là bắt buộc')
+    return
+  }
+
+  const emailRes = validateEmail(form.email)
+  if (!emailRes.isValid) {
+    toastError(emailRes.error || 'Email không hợp lệ')
+    return
+  }
+
+  if (form.phone) {
+    const phoneRes = validatePhone(form.phone)
+    if (!phoneRes.isValid) {
+      toastError(phoneRes.error || 'Số điện thoại không hợp lệ')
+      return
+    }
+  }
+
+  const msgRes = validateStringField(form.message, 'Nội dung')
+  if (!msgRes.isValid) {
+    toastError(msgRes.error || 'Nội dung là bắt buộc')
+    return
+  }
+
   isSending.value = true
   submitSuccess.value = false
-  await new Promise(resolve => setTimeout(resolve, 1200))
-  isSending.value = false
-  submitSuccess.value = true
-  Object.assign(form, { name: '', email: '', phone: '', service: '', message: '' })
-  setTimeout(() => { submitSuccess.value = false }, 5000)
+
+  try {
+    await contactMessageStore.createContactMessage({
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      message: form.message
+    })
+    
+    submitSuccess.value = true
+    Object.assign(form, { name: '', email: '', phone: '', message: '' })
+    toastSuccess('Tin nhắn của bạn đã được gửi thành công!')
+    
+    setTimeout(() => { submitSuccess.value = false }, 5000)
+  } catch {
+    toastError(contactMessageStore.error || 'Có lỗi xảy ra khi gửi tin nhắn, vui lòng thử lại sau.')
+  } finally {
+    isSending.value = false
+  }
 }
 
-const contactCards = [
-  { icon: 'pi-map-marker', title: 'ĐỊA CHỈ', value: '122/46 Thạnh Xuân 22, P. Thạnh Xuân 22, Q.12, TP.HCM', link: 'https://maps.google.com/?q=122/46+Thạnh+Xuân+22+Quận+12+HCM', linkLabel: 'Bản đồ', external: true },
-  { icon: 'pi-phone', title: 'LIÊN HỆ CHÚNG TÔI', value: '0369 150 431', link: 'tel:0369150431', linkLabel: 'Gọi ngay', external: false },
-  { icon: 'pi-envelope', title: 'GỬI MAIL', value: 'info.marketingevent5p@gmail.com', link: 'mailto:info.marketingevent5p@gmail.com', linkLabel: 'Gửi email', external: false }
-]
+// Config-based dynamic values
+const contactAddress = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_ADDRESS', '122/46 Thạnh Xuân 22, P. Thạnh Xuân 22, Q.12, TP.HCM'))
+const contactMapIframe = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_MAP_IFRAME', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.178855780718!2d106.68459131533487!3d10.72714419234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f6bce7e1a23%3A0x8b3c65d00e2b8048!2s122%2F46%20Th%E1%BA%A1nh%20Xu%C3%A2n%2022%2C%20Ph%C6%B0%E1%BB%9Dng%20Th%E1%BA%A1nh%20Xu%C3%A2n%2022%2C%20Qu%E1%BA%ADn%2012%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh!5e0!3m2!1svi!2svn!4v1700000000000!5m2!1svi!2svn'))
 
-const infoItems = [
-  { icon: 'pi-map-marker', label: 'Địa chỉ', value: '122/46 Thạnh Xuân 22, Phường Thạnh Xuân 22, Quận 12, TP.HCM' },
-  { icon: 'pi-phone', label: 'Điện thoại', value: '0369 150 431' },
-  { icon: 'pi-envelope', label: 'Email', value: 'info.marketingevent5p@gmail.com' },
+const parsedMapSrc = computed(() => {
+  const value = contactMapIframe.value;
+  if (!value) return '';
+  // Nếu copy nguyên thẻ iframe từ google map
+  if (value.trim().toLowerCase().startsWith('<iframe')) {
+    const match = value.match(/src="([^"]+)"/);
+    if (match && match[1]) {
+      return match[1];
+    }
+  }
+  return value; // Trường hợp admin chỉ lưu mỗi link
+});
+const contactHotline = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_HOTLINE', '0369 150 431'))
+const contactEmail = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_EMAIL', 'info.marketingevent5p@gmail.com'))
+
+const contactCards = computed(() => [
+  { icon: 'pi-map-marker', title: 'ĐỊA CHỈ', value: contactAddress.value, link: `https://maps.google.com/?q=${encodeURIComponent(contactAddress.value)}`, linkLabel: 'Bản đồ', external: true },
+  { icon: 'pi-phone', title: 'LIÊN HỆ CHÚNG TÔI', value: contactHotline.value, link: `tel:${contactHotline.value.replace(/\s+/g, '')}`, linkLabel: 'Gọi ngay', external: false },
+  { icon: 'pi-envelope', title: 'GỬI MAIL', value: contactEmail.value, link: `mailto:${contactEmail.value}`, linkLabel: 'Gửi email', external: false }
+])
+
+const infoItems = computed(() => [
+  { icon: 'pi-map-marker', label: 'Địa chỉ', value: contactAddress.value },
+  { icon: 'pi-phone', label: 'Điện thoại', value: contactHotline.value },
+  { icon: 'pi-envelope', label: 'Email', value: contactEmail.value },
   { icon: 'pi-clock', label: 'Giờ làm việc', value: 'Thứ 2 – Thứ 7: 8:00 – 18:00' }
-]
+])
 
-const socials = [
-  { icon: 'pi-facebook', link: '#' },
-  { icon: 'pi-youtube', link: '#' },
-  { icon: 'pi-instagram', link: '#' }
-]
+const socials = computed(() => [
+  { icon: 'pi-facebook', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_FACEBOOK', '#') },
+  { icon: 'pi-youtube', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#') },
+  { icon: 'pi-comments', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_ZALO', '#') }
+])
 </script>
 
 <style scoped>

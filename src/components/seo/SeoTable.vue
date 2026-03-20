@@ -19,68 +19,63 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] shadow-sm">
-      <div class="max-w-full overflow-x-auto custom-scrollbar">
-        <table class="min-w-full">
-          <thead>
-            <tr class="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('SEO_ADMIN.TABLE.PAGE') }}</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('SEO_ADMIN.TABLE.PATH') }}</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('SEO_ADMIN.TABLE.TITLE') }}</th>
-              <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.ACTIONS') }}</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            <tr
-              v-for="meta in filteredMetas"
-              :key="meta.id"
-              class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors"
-            >
-              <td class="px-5 py-4">
-                <p class="font-bold text-gray-900 dark:text-white">{{ meta.pageKey }}</p>
-              </td>
-              <td class="px-5 py-4">
-                <span class="text-sm font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{{ meta.path }}</span>
-              </td>
-              <td class="px-5 py-4">
-                <p class="text-sm text-gray-700 dark:text-gray-300 line-clamp-1">{{ meta.title_vi }}</p>
-              </td>
-              <td class="px-5 py-4 text-right">
-                <div class="flex items-center justify-end gap-2">
-                  <button 
-                    @click="$emit('edit', meta)"
-                    class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors" 
-                    :title="$t('COMMON.EDIT')"
-                  >
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr v-if="filteredMetas.length === 0">
-              <td colspan="4" class="px-5 py-10 text-center text-gray-500 dark:text-gray-400">
-                <svg class="h-10 w-10 mx-auto mb-3 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                {{ $t('COMMON.EMPTY_DATA') }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <BaseTable
+      :columns="columns"
+      :items="filteredMetas"
+      :loading="loading"
+    >
+      <!-- Custom Cell: Page -->
+      <template #cell(pageKey)="{ value }">
+        <p class="font-bold text-gray-900 dark:text-white">{{ value }}</p>
+      </template>
+
+      <!-- Custom Cell: Path -->
+      <template #cell(path)="{ value }">
+        <span class="text-sm font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{{ value }}</span>
+      </template>
+
+      <!-- Custom Cell: Title -->
+      <template #cell(title_vi)="{ value }">
+        <p class="text-sm text-gray-700 dark:text-gray-300 line-clamp-1">{{ value }}</p>
+      </template>
+
+      <!-- Custom Cell: Actions -->
+      <template #cell(actions)="{ item: meta }">
+        <div class="flex items-center justify-end gap-2">
+          <button 
+            @click="$emit('edit', meta)"
+            class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors" 
+            :title="$t('COMMON.EDIT')"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+          </button>
+        </div>
+      </template>
+    </BaseTable>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { ISeoMeta } from '@/types/seo'
+import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   metas: ISeoMeta[]
+  loading?: boolean
 }>()
+
+const columns: ITableColumn[] = [
+  { key: 'pageKey', label: t('SEO_ADMIN.TABLE.PAGE') },
+  { key: 'path', label: t('SEO_ADMIN.TABLE.PATH') },
+  { key: 'title_vi', label: t('SEO_ADMIN.TABLE.TITLE') },
+  { key: 'actions', label: t('COMMON.ACTIONS'), align: 'right' }
+]
 
 defineEmits<{
   (e: 'edit', meta: ISeoMeta): void

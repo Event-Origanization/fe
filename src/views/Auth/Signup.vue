@@ -306,6 +306,7 @@ import bgSignin from '@/assets/images/bg-signin.jpg'
 import { useAuthStore } from '@/store/auth'
 import type { RegisterRequest } from '@/types/user'
 import { useToast } from '@/composables/useToast'
+import { validateEmail as utilValidateEmail, validatePassword as utilValidatePassword, validateStringField } from '@/utils/validation'
 const authStore = useAuthStore()
 
 const { toastSuccess } = useToast()
@@ -326,46 +327,29 @@ const generalError = ref('')
 
 // Validation methods
 const validateUsername = () => {
-  if (!username.value) {
-    usernameError.value = 'Tên là bắt buộc'
+  const result = validateStringField(username.value, 'Tên')
+  if (!result.isValid) {
+    usernameError.value = result.error || ''
     return false
-  } else if (username.value.length < 3) {
+  }
+  if (username.value.length < 3) {
     usernameError.value = 'Tên phải có ít nhất 3 ký tự'
     return false
-  } else {
-    usernameError.value = ''
-    return true
   }
+  usernameError.value = ''
+  return true
 }
 
 const validateEmail = () => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!email.value.trim()) {
-    emailError.value = 'Email là bắt buộc'
-    return false
-  } else if (!emailRegex.test(email.value)) {
-    emailError.value = 'Email không hợp lệ'
-    return false
-  } else {
-    emailError.value = ''
-    return true
-  }
+  const result = utilValidateEmail(email.value)
+  emailError.value = result.error || ''
+  return result.isValid
 }
 
 const validatePassword = () => {
-  if (!password.value.trim()) {
-    passwordError.value = 'Mật khẩu là bắt buộc'
-    return false
-  } else if (password.value.length < 6) {
-    passwordError.value = 'Mật khẩu phải có ít nhất 6 ký tự'
-    return false
-  } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password.value)) {
-    passwordError.value = 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường và 1 số'
-    return false
-  } else {
-    passwordError.value = ''
-    return true
-  }
+  const result = utilValidatePassword(password.value)
+  passwordError.value = result.error || ''
+  return result.isValid
 }
 
 const validateTerms = () => {

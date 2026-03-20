@@ -90,5 +90,42 @@ export const API_ROUTES = {
     UPDATE: '/partners/:id',
     DELETE: '/partners/:id',
   },
+  CONTACT_MESSAGES: {
+    BASE: '/contact-messages',
+    GET_ALL: '/contact-messages',
+    GET_BY_ID: '/contact-messages/:id',
+    CREATE: '/contact-messages',
+    MARK_AS_READ: '/contact-messages/:id/read',
+    DELETE: '/contact-messages/:id',
+  },
+}
+
+const ADMIN_BASE = '/wpadmin'
+
+export const ADMIN_PATHS = {
+  DASHBOARD: '',
+  PRODUCTS: 'products',
+  POSTS: 'posts',
+  VIDEOS: 'videos',
+  HOME_VIDEOS: 'home-videos',
+  NEWSLETTER: 'newsletter',
+  CONFIGS: 'configs',
+  SEO: 'seo',
+  PARTNERS: 'partners',
+  CONTACT_MESSAGES: 'contact-messages',
+}
+
+export const ADMIN_ROUTES = {
+  BASE: ADMIN_BASE,
+  DASHBOARD: ADMIN_BASE,
+  PRODUCTS: `${ADMIN_BASE}/${ADMIN_PATHS.PRODUCTS}`,
+  POSTS: `${ADMIN_BASE}/${ADMIN_PATHS.POSTS}`,
+  VIDEOS: `${ADMIN_BASE}/${ADMIN_PATHS.VIDEOS}`,
+  HOME_VIDEOS: `${ADMIN_BASE}/${ADMIN_PATHS.HOME_VIDEOS}`,
+  NEWSLETTER: `${ADMIN_BASE}/${ADMIN_PATHS.NEWSLETTER}`,
+  CONFIGS: `${ADMIN_BASE}/${ADMIN_PATHS.CONFIGS}`,
+  SEO: `${ADMIN_BASE}/${ADMIN_PATHS.SEO}`,
+  PARTNERS: `${ADMIN_BASE}/${ADMIN_PATHS.PARTNERS}`,
+  CONTACT_MESSAGES: `${ADMIN_BASE}/${ADMIN_PATHS.CONTACT_MESSAGES}`,
 }
 

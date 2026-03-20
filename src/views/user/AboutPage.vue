@@ -43,9 +43,9 @@
       <h2 class="absolute text-[8vw] md:text-[10vw] font-black text-white/5 uppercase tracking-tighter whitespace-nowrap leading-none select-none">
         THINK DIFFERENT
       </h2>
-      <div class="relative z-10 text-center font-black uppercase">
+      <div class="relative z-10 text-center font-black uppercase stats-item-group">
         <p class="text-lg md:text-xl tracking-widest mb-1 text-gray-300">MORE</p>
-        <p class="text-5xl md:text-7xl text-red-600 drop-shadow-[0_0_20px_rgba(220,38,38,0.8)] tracking-tighter">1000</p>
+        <p class="text-5xl md:text-7xl text-red-600 drop-shadow-[0_0_20px_rgba(220,38,38,0.8)] tracking-tighter animate-stats-glow" v-count-up="'1000'">1000</p>
         <p class="text-xl md:text-2xl mt-2 tracking-[0.2em] text-gray-200">{{ $t('ABOUT.STAT_LABEL') }}</p>
         <div class="w-24 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mt-4"></div>
       </div>

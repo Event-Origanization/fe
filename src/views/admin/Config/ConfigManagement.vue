@@ -44,6 +44,17 @@
       <div v-else class="space-y-8 max-w-5xl">
         <div v-for="config in filteredConfigs" :key="config.key" class="space-y-4 pb-8 border-b border-gray-100 last:border-0 last:pb-0">
           <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">{{ getConfigLabel(config.key) }}</label>
+          <div v-if="config.key === 'CONTACT_MAP_IFRAME'" class="text-xs text-blue-600 bg-blue-50 p-3 rounded-lg flex items-start gap-2 border border-blue-100 italic transition-all shadow-sm">
+            <i class="pi pi-info-circle mt-0.5"></i>
+            <div>
+              <p class="font-bold mb-1 opacity-90">{{ $t('CONFIG_ADMIN.HINT.MAP_TITLE') }}</p>
+              <ul class="list-disc list-inside space-y-1 opacity-80">
+                <li>{{ $t('CONFIG_ADMIN.HINT.MAP_STEP1') }}</li>
+                <li>{{ $t('CONFIG_ADMIN.HINT.MAP_STEP2') }}</li>
+                <li>{{ $t('CONFIG_ADMIN.HINT.MAP_STEP3') }}</li>
+              </ul>
+            </div>
+          </div>
           
           <div v-if="editData[config.key]" class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- VI -->
@@ -138,10 +149,20 @@ onMounted(async () => {
 const saveAll = async () => {
   saving.value = true;
   try {
+    const sanitizeMapUrl = (key: string, value: string) => {
+      if (key === 'CONTACT_MAP_IFRAME' && value.includes('<iframe')) {
+        const match = value.match(/src="([^"]+)"/);
+        return match ? match[1] : value;
+      }
+      return value;
+    };
+
     const payload = {
       configs: Object.keys(editData.value).map(key => ({
         key,
-        ...editData.value[key]
+        value_vi: sanitizeMapUrl(key, editData.value[key].value_vi),
+        value_en: sanitizeMapUrl(key, editData.value[key].value_en),
+        value_zh: sanitizeMapUrl(key, editData.value[key].value_zh)
       }))
     };
     
