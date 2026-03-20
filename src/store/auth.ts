@@ -5,6 +5,7 @@ import { ResponseError } from '@/utils/error'
 import { HttpStatusCode } from 'axios'
 import router from '@/router'
 import { USER_ROLES } from '@/constants'
+import { ADMIN_ROUTES } from '@/constants/routes'
 
 interface AuthState {
   user: User | null
@@ -73,7 +74,7 @@ export const useAuthStore = defineStore<
 
         const isAdmin =
           user.role === USER_ROLES.ROLE_ADMIN
-        router.push(isAdmin ? '/administrators' : '/')
+        router.push(isAdmin ? ADMIN_ROUTES.BASE : '/')
         return undefined
       } catch (err) {
         if (err instanceof ResponseError && err.status === HttpStatusCode.InternalServerError)

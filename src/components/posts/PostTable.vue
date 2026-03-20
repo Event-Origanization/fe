@@ -41,103 +41,87 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] shadow-sm">
-      <div class="max-w-full overflow-x-auto custom-scrollbar">
-        <table class="min-w-full">
-          <thead>
-            <tr class="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('POSTS_ADMIN.TABLE.POST') }}</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.STATUS') }}</th>
-              <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('POSTS_ADMIN.TABLE.SEO_SCORE') }}</th>
-              <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.ACTIONS') }}</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            <tr
-              v-for="post in filteredPosts"
-              :key="post.id"
-              class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors"
-            >
-              <td class="px-5 py-4">
-                <div class="flex items-center gap-4">
-                  <div class="h-12 w-16 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-hidden flex-shrink-0 border border-gray-100 dark:border-gray-700">
-                    <img v-if="post.media" :src="post.media" :alt="post.title_vi" class="h-full w-full object-cover" />
-                    <div v-else class="h-full w-full flex items-center justify-center text-gray-400">
-                       <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                       </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <p class="font-bold text-gray-900 dark:text-white">{{ post.title_vi }}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">{{ post.slug }}</p>
-                  </div>
-                </div>
-              </td>
-              <td class="px-5 py-4">
-                <span
-                  :class="[
-                    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-                    post.status === 'PUBLISHED'
-                      ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
-                      : post.status === 'SCHEDULED' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
-                      : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                  ]"
-                >
-                  <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="post.status === 'PUBLISHED' ? 'bg-green-600' : post.status === 'SCHEDULED' ? 'bg-blue-600' : 'bg-yellow-600'"></span>
-                  {{ post.status === 'PUBLISHED' ? $t('POSTS_ADMIN.STATUS.PUBLISHED') : post.status === 'SCHEDULED' ? $t('POSTS_ADMIN.STATUS.SCHEDULED') : $t('POSTS_ADMIN.STATUS.DRAFT') }}
-                </span>
-              </td>
-              <td class="px-5 py-4">
-                <span v-if="typeof post.seoScore === 'number'" class="font-semibold" :class="post.seoScore > 80 ? 'text-green-500' : (post.seoScore > 50 ? 'text-yellow-500' : 'text-red-500')">
-                  {{ post.seoScore }}/100
-                </span>
-                <span v-else class="text-gray-400 italic">{{ $t('POSTS_ADMIN.TABLE.NOT_CALCULATED') }}</span>
-              </td>
-              <td class="px-5 py-4 text-right">
-                <div class="flex items-center justify-end gap-2">
-                  <button 
-                    @click="$emit('edit', post)"
-                    class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors" 
-                    :title="$t('COMMON.EDIT')"
-                  >
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                  </button>
-                  <button 
-                    @click="confirmDelete(post)"
-                    class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" 
-                    :title="$t('COMMON.DELETE')"
-                  >
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr v-if="filteredPosts.length === 0">
-              <td colspan="4" class="px-5 py-10 text-center text-gray-500 dark:text-gray-400">
-                <svg class="h-10 w-10 mx-auto mb-3 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 00-2 2H6a2 2 0 00-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                </svg>
-                {{ $t('COMMON.EMPTY_DATA') }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <BaseTable
+      :columns="columns"
+      :items="postStore.posts"
+      :loading="postStore.loading"
+    >
+      <!-- Custom Cell: Post -->
+      <template #cell(title_vi)="{ item: post }">
+        <div class="flex items-center gap-4">
+          <div class="h-12 w-16 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-hidden flex-shrink-0 border border-gray-100 dark:border-gray-700">
+            <img v-if="post.media" :src="post.media" :alt="post.title_vi" class="h-full w-full object-cover" />
+            <div v-else class="h-full w-full flex items-center justify-center text-gray-400">
+               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+               </svg>
+            </div>
+          </div>
+          <div>
+            <p class="font-bold text-gray-900 dark:text-white">{{ post.title_vi }}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">{{ post.slug }}</p>
+          </div>
+        </div>
+      </template>
+
+      <!-- Custom Cell: Status -->
+      <template #cell(status)="{ value: status }">
+        <span
+          :class="[
+            'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
+            status === 'PUBLISHED'
+              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
+              : status === 'SCHEDULED' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
+              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+          ]"
+        >
+          <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="status === 'PUBLISHED' ? 'bg-green-600' : status === 'SCHEDULED' ? 'bg-blue-600' : 'bg-yellow-600'"></span>
+          {{ status === 'PUBLISHED' ? $t('POSTS_ADMIN.STATUS.PUBLISHED') : status === 'SCHEDULED' ? $t('POSTS_ADMIN.STATUS.SCHEDULED') : $t('POSTS_ADMIN.STATUS.DRAFT') }}
+        </span>
+      </template>
+
+      <!-- Custom Cell: SEO Score -->
+      <template #cell(seoScore)="{ value: seoScore }">
+        <span v-if="typeof seoScore === 'number'" class="font-semibold" :class="seoScore > 80 ? 'text-green-500' : (seoScore > 50 ? 'text-yellow-500' : 'text-red-500')">
+          {{ seoScore }}/100
+        </span>
+        <span v-else class="text-gray-400 italic">{{ $t('POSTS_ADMIN.TABLE.NOT_CALCULATED') }}</span>
+      </template>
+
+      <!-- Custom Cell: Actions -->
+      <template #cell(actions)="{ item: post }">
+        <div class="flex items-center justify-end gap-2">
+          <button 
+            @click="$emit('edit', post)"
+            class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors" 
+            :title="$t('COMMON.EDIT')"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+          </button>
+          <button 
+            @click="confirmDelete(post)"
+            class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" 
+            :title="$t('COMMON.DELETE')"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        </div>
+      </template>
+    </BaseTable>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { usePostStore } from '@/store/post.store'
 import type { IPost } from '@/types/post'
 import { useToast } from '@/composables/useToast'
+import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
 
 defineEmits<{
   (e: 'add'): void
@@ -148,10 +132,15 @@ const { t } = useI18n()
 const postStore = usePostStore()
 const { toastSuccess, toastError } = useToast()
 
+const columns: ITableColumn[] = [
+  { key: 'title_vi', label: t('POSTS_ADMIN.TABLE.POST') },
+  { key: 'status', label: t('COMMON.STATUS') },
+  { key: 'seoScore', label: t('POSTS_ADMIN.TABLE.SEO_SCORE') },
+  { key: 'actions', label: t('COMMON.ACTIONS'), align: 'right' }
+]
+
 const searchQuery = ref('')
 const filterStatus = ref('all')
-
-const filteredPosts = computed(() => postStore.posts)
 
 onMounted(() => {
   fetchPosts()

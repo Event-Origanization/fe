@@ -98,7 +98,11 @@
     "SEO": "Quản lý SEO Meta",
     "USERS": "Quản lý người dùng",
     "REPORTS": "Báo cáo thống kê",
-    "PARTNERS": "Quản lý đối tác"
+    "PARTNERS": "Quản lý đối tác",
+    "CONTACT_MESSAGES": "Tin nhắn liên hệ",
+    "CONTENT_MANAGEMENT": "Quản lý nội dung",
+    "CUSTOMER_ENGAGEMENT": "Khách hàng & Liên hệ",
+    "SYSTEM_SETTINGS": "Cấu hình hệ thống"
   },
   "FOOTER": {
     "SUBSCRIBE": "Đăng ký nhận tin",
@@ -133,7 +137,8 @@
       "EN": "Tiếng Anh",
       "ZH": "Tiếng Trung"
     },
-    "DATE_LOCALE": "vi-VN"
+    "DATE_LOCALE": "vi-VN",
+    "LOADING": "Đang tải..."
   },
   "PRODUCT_ADMIN": {
     "TITLE": "Quản Lý Sản Phẩm",
@@ -183,6 +188,20 @@
       "ACTIONS": "Thao tác"
     },
     "EMPTY": "Chưa có người đăng ký nào"
+  },
+  "CONTACT_MESSAGE_ADMIN": {
+    "TITLE": "Quản Lý Tin Nhắn Liên Hệ",
+    "TABLE": {
+      "SENDER": "Người gửi",
+      "CONTACT": "Thông tin liên hệ",
+      "MESSAGE": "Nội dung",
+      "DATE": "Ngày gửi"
+    },
+    "STATUS": {
+      "READ": "Đã xem",
+      "UNREAD": "Chưa xem"
+    },
+    "EMPTY": "Không có tin nhắn nào"
   },
   "HOME_VIDEO_ADMIN": {
     "TITLE": "Quản Lý Video Trang Chủ",
@@ -288,6 +307,12 @@
       "STATS_FIELDS": "Số lượng lĩnh vực",
       "STATS_EVENTS": "Số lượng sự kiện",
       "STATS_BRANDS": "Số lượng thương hiệu"
+    },
+    "HINT": {
+      "MAP_TITLE": "Hướng dẫn lấy Bản đồ Google Maps:",
+      "MAP_STEP1": "Mở Google Maps và tìm địa chỉ của bạn.",
+      "MAP_STEP2": "Nhấp 'Chia sẻ' -> Chọn tab 'Nhúng bản đồ' (KHÔNG dùng tab 'Gửi liên kết').",
+      "MAP_STEP3": "Nhấp 'SAO CHÉP HTML' rồi DÁN TRỰC TIẾP vào đây. Hệ thống sẽ tự động lọc lấy link bản đồ cho bạn."
     }
   },
   "PARTNERS_ADMIN": {

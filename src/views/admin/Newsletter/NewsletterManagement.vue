@@ -41,66 +41,51 @@
         </div>
 
         <!-- Table -->
-        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] shadow-sm">
-          <div class="max-w-full overflow-x-auto">
-            <table class="min-w-full">
-              <thead>
-                <tr class="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-                  <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('NEWSLETTER_ADMIN.TABLE.EMAIL') }}</th>
-                  <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('NEWSLETTER_ADMIN.TABLE.DATE') }}</th>
-                  <th class="px-5 py-4 text-left font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.STATUS') }}</th>
-                  <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.ACTIONS') }}</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-                <tr
-                  v-for="sub in newsletterStore.subscribers"
-                  :key="sub.id"
-                  class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors"
-                >
-                  <td class="px-5 py-4">
-                    <span class="font-medium text-gray-900 dark:text-white">{{ sub.email }}</span>
-                  </td>
-                  <td class="px-5 py-4">
-                    <span class="text-sm text-gray-500">{{ formatDate(sub.createdAt) }}</span>
-                  </td>
-                  <td class="px-5 py-4">
-                    <button 
-                      @click="toggleStatus(sub)"
-                      :class="[
-                        'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors',
-                        sub.isActive 
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
-                          : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
-                      ]"
-                    >
-                      <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="sub.isActive ? 'bg-green-600' : 'bg-red-600'"></span>
-                      {{ sub.isActive ? $t('COMMON.ACTIVE') : $t('COMMON.INACTIVE') }}
-                    </button>
-                  </td>
-                  <td class="px-5 py-4 text-right">
-                    <button 
-                      @click="confirmDelete(sub)"
-                      class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" 
-                      :title="$t('COMMON.DELETE')"
-                    >
-                      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-                <tr v-if="newsletterStore.subscribers.length === 0">
-                  <td colspan="4" class="px-5 py-10 text-center text-gray-500">
-                    {{ $t('NEWSLETTER_ADMIN.EMPTY') }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          
-          <!-- Pagination can be added here if needed -->
-        </div>
+        <BaseTable
+          :columns="columns"
+          :items="newsletterStore.subscribers"
+          :loading="newsletterStore.loading"
+          :empty-text="$t('NEWSLETTER_ADMIN.EMPTY')"
+        >
+          <!-- Custom Cell: Email -->
+          <template #cell(email)="{ value }">
+            <span class="font-medium text-gray-900 dark:text-white">{{ value }}</span>
+          </template>
+
+          <!-- Custom Cell: Date -->
+          <template #cell(createdAt)="{ value }">
+            <span class="text-sm text-gray-500">{{ formatDate(value) }}</span>
+          </template>
+
+          <!-- Custom Cell: Status -->
+          <template #cell(isActive)="{ item: sub }">
+            <button 
+              @click="toggleStatus(sub)"
+              :class="[
+                'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors',
+                sub.isActive 
+                  ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
+                  : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+              ]"
+            >
+              <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="sub.isActive ? 'bg-green-600' : 'bg-red-600'"></span>
+              {{ sub.isActive ? $t('COMMON.ACTIVE') : $t('COMMON.INACTIVE') }}
+            </button>
+          </template>
+
+          <!-- Custom Cell: Actions -->
+          <template #cell(actions)="{ item: sub }">
+            <button 
+              @click="confirmDelete(sub)"
+              class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" 
+              :title="$t('COMMON.DELETE')"
+            >
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </template>
+        </BaseTable>
       </div>
     </component-card>
   </div>
@@ -114,11 +99,19 @@ import ComponentCard from '@/components/common/ComponentCard.vue'
 import { useNewsletterStore } from '@/store/newsletter'
 import { useToast } from '@/composables/useToast'
 import type { INewsletterSubscriber } from '@/types/newsletter-subscriber'
+import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
 
 const { t } = useI18n()
 const currentPageTitle = computed(() => t('NEWSLETTER_ADMIN.TITLE'))
 const newsletterStore = useNewsletterStore()
 const { toastSuccess, toastError } = useToast()
+
+const columns: ITableColumn[] = [
+  { key: 'email', label: t('NEWSLETTER_ADMIN.TABLE.EMAIL') },
+  { key: 'createdAt', label: t('NEWSLETTER_ADMIN.TABLE.DATE') },
+  { key: 'isActive', label: t('COMMON.STATUS') },
+  { key: 'actions', label: t('COMMON.ACTIONS'), align: 'right' }
+]
 
 const searchQuery = ref('')
 const filterStatus = ref('all')

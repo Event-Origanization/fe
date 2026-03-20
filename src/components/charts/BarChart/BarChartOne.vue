@@ -10,9 +10,14 @@
 import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 
+interface IChartSeries {
+  name: string
+  data: number[]
+}
+
 const props = defineProps({
   series: {
-    type: Array as () => any[],
+    type: Array as () => IChartSeries[],
     default: () => [
       {
         name: 'Sản phẩm',
@@ -105,8 +110,7 @@ const chartOptions = ref({
       show: false,
     },
     y: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      formatter: function (val: any) {
+      formatter: function (val: number) {
         return val.toString()
       },
     },

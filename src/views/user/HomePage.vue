@@ -15,29 +15,35 @@
           <div
             class="flex flex-col md:flex-row justify-between items-center text-center gap-10 md:gap-0"
           >
-            <div class="flex-1 space-y-2 relative group cursor-default">
+            <div class="flex-1 space-y-2 relative group cursor-default stats-item-group">
               <h3
-                class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] animate-stats-glow"
               >
-                <span v-html="formatStat(configStore.getConfigValue('STATISTICS', 'STATS_FIELDS', '3'))"></span>
+                <span v-count-up="configStore.getConfigValue('STATISTICS', 'STATS_FIELDS', '3')">
+                  {{ configStore.getConfigValue('STATISTICS', 'STATS_FIELDS', '3') }}
+                </span>
               </h3>
               <p class="text-gray-400 uppercase text-sm tracking-widest font-semibold">{{ $t('HOME.STATS.FIELDS') }}</p>
             </div>
             <div class="hidden md:block w-px h-16 bg-white/10"></div>
-            <div class="flex-1 space-y-2 relative group cursor-default">
+            <div class="flex-1 space-y-2 relative group cursor-default stats-item-group">
               <h3
-                class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] animate-stats-glow"
               >
-                <span v-html="formatStat(configStore.getConfigValue('STATISTICS', 'STATS_EVENTS', '1500+'))"></span>
+                <span v-count-up="configStore.getConfigValue('STATISTICS', 'STATS_EVENTS', '1500+')">
+                  {{ configStore.getConfigValue('STATISTICS', 'STATS_EVENTS', '1500+') }}
+                </span>
               </h3>
               <p class="text-gray-400 uppercase text-sm tracking-widest font-semibold">{{ $t('HOME.STATS.EVENTS') }}</p>
             </div>
             <div class="hidden md:block w-px h-16 bg-white/10"></div>
-            <div class="flex-1 space-y-2 relative group cursor-default">
+            <div class="flex-1 space-y-2 relative group cursor-default stats-item-group">
               <h3
-                class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                class="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] animate-stats-glow"
               >
-                <span v-html="formatStat(configStore.getConfigValue('STATISTICS', 'STATS_BRANDS', '500+'))"></span>
+                <span v-count-up="configStore.getConfigValue('STATISTICS', 'STATS_BRANDS', '500+')">
+                  {{ configStore.getConfigValue('STATISTICS', 'STATS_BRANDS', '500+') }}
+                </span>
               </h3>
               <p class="text-gray-400 uppercase text-sm tracking-widest font-semibold">
                 {{ $t('HOME.STATS.BRANDS') }}
@@ -343,11 +349,6 @@ import { usePartnerStore } from '@/store/partner.store'
 
 const configStore = useConfigStore()
 const partnerStore = usePartnerStore()
-
-const formatStat = (val: string) => {
-  if (!val) return ''
-  return val.replace('+', '<span class="text-brand-500">+</span>')
-}
 
 onMounted(async () => {
   await Promise.all([

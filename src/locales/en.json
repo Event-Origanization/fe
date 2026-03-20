@@ -98,7 +98,11 @@
     "SEO": "SEO Meta Management",
     "USERS": "User Management",
     "REPORTS": "Reports",
-    "PARTNERS": "Partner Management"
+    "PARTNERS": "Partner Management",
+    "CONTACT_MESSAGES": "Contact Messages",
+    "CONTENT_MANAGEMENT": "Content Management",
+    "CUSTOMER_ENGAGEMENT": "Customer Engagement",
+    "SYSTEM_SETTINGS": "System Settings"
   },
   "FOOTER": {
     "SUBSCRIBE": "Subscribe to newsletter",
@@ -133,7 +137,8 @@
       "EN": "English",
       "ZH": "Chinese"
     },
-    "DATE_LOCALE": "en-US"
+    "DATE_LOCALE": "en-US",
+    "LOADING": "Loading..."
   },
   "PRODUCT_ADMIN": {
     "TITLE": "Product Management",
@@ -183,6 +188,20 @@
       "ACTIONS": "Actions"
     },
     "EMPTY": "No subscribers found"
+  },
+  "CONTACT_MESSAGE_ADMIN": {
+    "TITLE": "Contact Message Management",
+    "TABLE": {
+      "SENDER": "Sender",
+      "CONTACT": "Contact Info",
+      "MESSAGE": "Message",
+      "DATE": "Sent Date"
+    },
+    "STATUS": {
+      "READ": "Read",
+      "UNREAD": "Unread"
+    },
+    "EMPTY": "No contact messages found"
   },
   "HOME_VIDEO_ADMIN": {
     "TITLE": "Home Video Management",
@@ -288,6 +307,12 @@
       "STATS_FIELDS": "Number of Fields",
       "STATS_EVENTS": "Number of Events",
       "STATS_BRANDS": "Number of Brands"
+    },
+    "HINT": {
+      "MAP_TITLE": "How to get Google Maps Iframe:",
+      "MAP_STEP1": "Go to Google Maps and find your address.",
+      "MAP_STEP2": "Click Share -> Embed a map.",
+      "MAP_STEP3": "Copy the URL inside the src=\"...\" attribute and paste it here."
     }
   },
   "PARTNERS_ADMIN": {

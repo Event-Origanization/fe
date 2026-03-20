@@ -84,7 +84,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LANGUAGES } from '@/constants/languages'
 
-const props = defineProps({
+defineProps({
   dark: {
     type: Boolean,
     default: false

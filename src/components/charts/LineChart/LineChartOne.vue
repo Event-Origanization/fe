@@ -11,9 +11,14 @@ import { ref } from 'vue'
 
 import VueApexCharts from 'vue3-apexcharts'
 
+interface IChartSeries {
+  name: string
+  data: number[]
+}
+
 const props = defineProps({
   series: {
-    type: Array as () => any[],
+    type: Array as () => IChartSeries[],
     default: () => [
       {
         name: 'Người đăng ký',

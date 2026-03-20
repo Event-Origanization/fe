@@ -180,11 +180,11 @@ import {
   PlugInIcon,
 } from '../../icons'
 import { useSidebar } from '@/composables/useSidebar'
+import { useI18n } from 'vue-i18n'
+import { ADMIN_ROUTES } from '@/constants/routes'
+import type { MenuGroup, MenuItem } from '@/types/menu'
 import { useAuthStore } from '@/store/auth'
 import { USER_ROLES } from '@/constants'
-import type { MenuGroup, MenuItem } from '@/types/menu'
-
-import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const authStore = useAuthStore()
@@ -197,15 +197,38 @@ const menuGroups = computed<MenuGroup[]>(() => {
     {
       title: 'Admin Panel',
       items: [
-        { icon: GridIcon, name: t('SIDEBAR.DASHBOARD'), path: '/administrators' },
-        { icon: PlugInIcon, name: t('SIDEBAR.PRODUCTS'), path: '/administrators/products' },
-        { icon: ListIcon, name: t('SIDEBAR.POSTS'), path: '/administrators/posts' },
-        { icon: GridIcon, name: t('SIDEBAR.VIDEOS'), path: '/administrators/videos' },
-        { icon: GridIcon, name: t('SIDEBAR.HOME_VIDEOS'), path: '/administrators/home-videos' },
-        { icon: ListIcon, name: t('SIDEBAR.NEWSLETTER'), path: '/administrators/newsletter' },
-        { icon: PlugInIcon, name: t('SIDEBAR.CONFIG'), path: '/administrators/configs' },
-        { icon: ListIcon, name: t('SIDEBAR.SEO'), path: '/administrators/seo' },
-        { icon: ListIcon, name: t('SIDEBAR.PARTNERS'), path: '/administrators/partners' },
+        { icon: GridIcon, name: t('SIDEBAR.DASHBOARD'), path: ADMIN_ROUTES.DASHBOARD },
+        {
+          icon: ListIcon,
+          name: t('SIDEBAR.CONTENT_MANAGEMENT'),
+          subItems: [
+            { name: t('SIDEBAR.PRODUCTS'), path: ADMIN_ROUTES.PRODUCTS, pro: false },
+            { name: t('SIDEBAR.POSTS'), path: ADMIN_ROUTES.POSTS, pro: false },
+            { name: t('SIDEBAR.PARTNERS'), path: ADMIN_ROUTES.PARTNERS, pro: false },
+            { name: t('SIDEBAR.VIDEOS'), path: ADMIN_ROUTES.VIDEOS, pro: false },
+            { name: t('SIDEBAR.HOME_VIDEOS'), path: ADMIN_ROUTES.HOME_VIDEOS, pro: false },
+          ],
+        },
+        {
+          icon: UserCircleIcon,
+          name: t('SIDEBAR.CUSTOMER_ENGAGEMENT'),
+          subItems: [
+            { name: t('SIDEBAR.NEWSLETTER'), path: ADMIN_ROUTES.NEWSLETTER, pro: false },
+            {
+              name: t('SIDEBAR.CONTACT_MESSAGES'),
+              path: ADMIN_ROUTES.CONTACT_MESSAGES,
+              pro: false,
+            },
+          ],
+        },
+        {
+          icon: PlugInIcon,
+          name: t('SIDEBAR.SYSTEM_SETTINGS'),
+          subItems: [
+            { name: t('SIDEBAR.CONFIG'), path: ADMIN_ROUTES.CONFIGS, pro: false },
+            { name: t('SIDEBAR.SEO'), path: ADMIN_ROUTES.SEO, pro: false },
+          ],
+        },
       ],
     },
   ]

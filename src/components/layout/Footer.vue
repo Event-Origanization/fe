@@ -244,7 +244,7 @@ const handleSubscribe = async () => {
     await newsletterStore.subscribe(email.value)
     toastSuccess('Đăng ký nhận tin thành công!')
     email.value = ''
-  } catch (error) {
+  } catch {
     toastError(newsletterStore.error || 'Có lỗi xảy ra khi đăng ký')
   } finally {
     loading.value = false

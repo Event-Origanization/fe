@@ -12,8 +12,12 @@ import i18n from '@/config/i18n'
 // Import PrimeVue
 import PrimeVue from 'primevue/config'
 
+import { vCountUp } from '@/directives/vCountUp'
+
 const pinia = createPinia()
 const app = createApp(App)
+
+app.directive('count-up', vCountUp)
 
 app.use(primeVuePreset).use(PrimeVue).use(pinia).use(router).use(i18n).mount('#app')
 

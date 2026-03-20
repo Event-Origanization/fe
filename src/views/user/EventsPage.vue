@@ -151,7 +151,7 @@ import ScrollableNewsList from '@/components/ScrollableNewsList.vue'
 
 const activeTab = ref<'images' | 'videos'>('images')
 
-const newsItems = Array.from({ length: 10 }).map((_, i) => ({
+const newsItems = Array.from({ length: 10 }).map(() => ({
   title: '03 "ĐIỂM CHẠM" GIỮ CHÂN KHÁCH HÀNG TRONG SỰ KIỆN RA MẮT SẢN PHẨM MỚI',
   desc: '3 yếu tố quan trọng làm nên thành công của sự kiện ra mắt...',
   image: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&q=80&w=400&ixlib=rb-4.0.3'

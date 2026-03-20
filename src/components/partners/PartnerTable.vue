@@ -40,86 +40,70 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] shadow-sm">
-      <div class="max-w-full overflow-x-auto custom-scrollbar">
-        <table class="min-w-full text-center">
-          <thead>
-            <tr class="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-              <th class="px-5 py-4 font-semibold text-gray-600 dark:text-gray-300 text-center">{{ $t('PARTNERS_ADMIN.TABLE.LOGO') }}</th>
-              <th class="px-5 py-4 font-semibold text-gray-600 dark:text-gray-300 text-left">{{ $t('PARTNERS_ADMIN.TABLE.NAME') }}</th>
-              <th class="px-5 py-4 font-semibold text-gray-600 dark:text-gray-300">{{ $t('PARTNERS_ADMIN.TABLE.ORDER') }}</th>
-              <th class="px-5 py-4 font-semibold text-gray-600 dark:text-gray-300">{{ $t('PARTNERS_ADMIN.TABLE.STATUS') }}</th>
-              <th class="px-5 py-4 text-right font-semibold text-gray-600 dark:text-gray-300">{{ $t('COMMON.ACTIONS') }}</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            <tr
-              v-for="partner in partnerStore.partners"
-              :key="partner.id"
-              class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors"
-            >
-              <td class="px-5 py-4">
-                <div class="flex justify-center">
-                  <div class="h-12 w-28 rounded-lg border border-gray-200 dark:border-gray-700 flex-shrink-0 overflow-hidden flex items-center justify-center p-2 logo-checkerboard shadow-sm group-hover:shadow-md transition-shadow">
-                    <img v-if="partner.logo" :src="partner.logo" class="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-300" />
-                    <span v-else class="text-[10px] text-gray-400 uppercase font-bold tracking-tighter opacity-50">Partner Logo</span>
-                  </div>
-                </div>
-              </td>
-              <td class="px-5 py-4 text-left font-medium text-gray-900 dark:text-white">
-                {{ partner.name }}
-              </td>
-              <td class="px-5 py-4">
-                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">#{{ partner.orderIndex }}</span>
-              </td>
-              <td class="px-5 py-4">
-                <span
-                  :class="[
-                    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-                    partner.isActive 
-                      ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
-                      : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                  ]"
-                >
-                  <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="partner.isActive ? 'bg-green-600' : 'bg-yellow-600'"></span>
-                  {{ partner.isActive ? $t('COMMON.ACTIVE') : $t('COMMON.INACTIVE') }}
-                </span>
-              </td>
-              <td class="px-5 py-4 text-right">
-                <div class="flex items-center justify-end gap-2">
-                  <button 
-                    @click="$emit('edit', partner)"
-                    class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors shadow-sm" 
-                    :title="$t('COMMON.EDIT')"
-                  >
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                  </button>
-                  <button 
-                    @click="confirmDelete(partner)"
-                    class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors shadow-sm" 
-                    :title="$t('COMMON.DELETE')"
-                  >
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr v-if="partnerStore.partners.length === 0">
-              <td colspan="5" class="px-5 py-10 text-center text-gray-500 dark:text-gray-400">
-                <svg class="h-10 w-10 mx-auto mb-3 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 00-2 2H6a2 2 0 00-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                </svg>
-                {{ $t('COMMON.EMPTY_DATA') }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <BaseTable
+      :columns="columns"
+      :items="partnerStore.partners"
+      :loading="partnerStore.loading"
+    >
+      <!-- Custom Cell: Logo -->
+      <template #cell(logo)="{ item: partner }">
+        <div class="flex justify-center">
+          <div class="h-12 w-28 rounded-lg border border-gray-200 dark:border-gray-700 flex-shrink-0 overflow-hidden flex items-center justify-center p-2 logo-checkerboard shadow-sm group-hover:shadow-md transition-shadow">
+            <img v-if="partner.logo" :src="partner.logo" class="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-300" />
+            <span v-else class="text-[10px] text-gray-400 uppercase font-bold tracking-tighter opacity-50">Partner Logo</span>
+          </div>
+        </div>
+      </template>
+
+      <!-- Custom Cell: Name -->
+      <template #cell(name)="{ value }">
+        <span class="font-medium text-gray-900 dark:text-white">{{ value }}</span>
+      </template>
+
+      <!-- Custom Cell: Order Index -->
+      <template #cell(orderIndex)="{ value }">
+        <span class="text-sm font-medium text-gray-600 dark:text-gray-400">#{{ value }}</span>
+      </template>
+
+      <!-- Custom Cell: Status -->
+      <template #cell(isActive)="{ value: isActive }">
+        <span
+          :class="[
+            'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
+            isActive 
+              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
+              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+          ]"
+        >
+          <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="isActive ? 'bg-green-600' : 'bg-yellow-600'"></span>
+          {{ isActive ? $t('COMMON.ACTIVE') : $t('COMMON.INACTIVE') }}
+        </span>
+      </template>
+
+      <!-- Custom Cell: Actions -->
+      <template #cell(actions)="{ item: partner }">
+        <div class="flex items-center justify-end gap-2">
+          <button 
+            @click="$emit('edit', partner)"
+            class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors shadow-sm" 
+            :title="$t('COMMON.EDIT')"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+          </button>
+          <button 
+            @click="confirmDelete(partner)"
+            class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors shadow-sm" 
+            :title="$t('COMMON.DELETE')"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        </div>
+      </template>
+    </BaseTable>
   </div>
 </template>
 
@@ -129,6 +113,7 @@ import { useI18n } from 'vue-i18n'
 import { usePartnerStore } from '@/store/partner.store'
 import type { IPartner } from '@/types/partner'
 import { useToast } from '@/composables/useToast'
+import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
 
 defineEmits<{
   (e: 'add'): void
@@ -138,6 +123,14 @@ defineEmits<{
 const { t } = useI18n()
 const partnerStore = usePartnerStore()
 const { toastSuccess, toastError } = useToast()
+
+const columns: ITableColumn[] = [
+  { key: 'logo', label: t('PARTNERS_ADMIN.TABLE.LOGO'), align: 'center' },
+  { key: 'name', label: t('PARTNERS_ADMIN.TABLE.NAME') },
+  { key: 'orderIndex', label: t('PARTNERS_ADMIN.TABLE.ORDER'), align: 'center' },
+  { key: 'isActive', label: t('PARTNERS_ADMIN.TABLE.STATUS'), align: 'center' },
+  { key: 'actions', label: t('COMMON.ACTIONS'), align: 'right' }
+]
 
 const searchQuery = ref('')
 const filterStatus = ref('all')

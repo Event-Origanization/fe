@@ -79,7 +79,7 @@
             <tbody>
               <tr v-for="product in overview.recentProducts" :key="product.id" class="border-b border-gray-100 dark:border-gray-700/50 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
                 <td class="py-3 px-4 text-theme-sm text-gray-800 dark:text-gray-200 truncate max-w-[200px]">{{ product.name_vi }}</td>
-                <td class="py-3 px-4 text-theme-sm text-gray-800 dark:text-gray-200">{{ product.price.toLocaleString('vi-VN') }} ₫</td>
+                <td class="py-3 px-4 text-theme-sm text-gray-800 dark:text-gray-200">{{ formatCurrency(product.price) }}</td>
                 <td class="py-3 px-4">
                   <span 
                     class="px-2.5 py-1 text-xs font-medium rounded-full" 
@@ -140,6 +140,7 @@ import { useDashboardStore } from '@/store/dashboard.store'
 import BarChartOne from '@/components/charts/BarChart/BarChartOne.vue'
 import LineChartOne from '@/components/charts/LineChart/LineChartOne.vue'
 import DonutChart from '@/components/charts/DonutChart.vue'
+import { formatCurrency } from '@/utils/common'
 
 defineOptions({
   name: 'HomePage',
