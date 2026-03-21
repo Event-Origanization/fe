@@ -20,13 +20,15 @@ const getSeoPath = (pageKey: string, defaultPath: string) => {
 }
 
 // ====================== ROUTE NAME CONSTANTS ======================
-const ROUTE_NAMES = {
+export const ROUTE_NAMES = {
   HOME: 'Home',
   ABOUT: 'About',
   EVENTS: 'Events',
   SOUND_LIGHT: 'Sound_Light',
   RENTAL: 'Rental',
   CONTACT: 'Contact',
+  POST_DETAIL: 'PostDetail',
+  PRODUCT_DETAIL: 'ProductDetail',
   SIGNIN: 'Signin',
   SIGNUP: 'Signup',
   NOT_FOUND: 'NotFound',
@@ -186,6 +188,18 @@ const router = createRouter({
           name: ROUTE_NAMES.CONTACT,
           component: () => import('@/views/user/ContactPage.vue'),
           meta: { title: 'Contact Us' },
+        },
+        {
+          path: getSeoPath('POST_DETAIL', 'post/:slug').replace(/^\//, ''),
+          name: ROUTE_NAMES.POST_DETAIL,
+          component: () => import('@/views/user/PostDetailPage.vue'),
+          meta: { title: 'Post Details' },
+        },
+        {
+          path: getSeoPath('PRODUCT_DETAIL', 'product/:slug').replace(/^\//, ''),
+          name: ROUTE_NAMES.PRODUCT_DETAIL,
+          component: () => import('@/views/user/ProductDetailPage.vue'),
+          meta: { title: 'Product Details' },
         },
       ],
     },

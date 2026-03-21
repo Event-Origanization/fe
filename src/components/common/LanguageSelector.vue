@@ -83,6 +83,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LANGUAGES } from '@/constants/languages'
+import { setLocale as setAppLocale, type SupportedLocale } from '@/config/i18n'
 
 defineProps({
   dark: {
@@ -100,8 +101,7 @@ const currentLang = computed(() =>
 )
 
 const changeLang = (code: string) => {
-  locale.value = code
-  localStorage.setItem('user-locale', code)
+  setAppLocale(code as SupportedLocale)
   isOpen.value = false
 }
 

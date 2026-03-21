@@ -9,7 +9,7 @@
     "LANGUAGES": "语言"
   },
   "HOME": {
-    "HERO_TITLE": "费用",
+    "HERO_TITLE": "成本",
     "BADGE_LEFT": "合理",
     "BADGE_RIGHT": "优化",
     "STATS": {
@@ -19,12 +19,26 @@
     },
     "PROJECTS": {
       "TITLE": "精选项目",
-      "DESC": "5P Event始终为我们精心投资、专业执行的项目感到自豪，为客户带来最佳体验。",
-      "VIEW_MORE": "查看更多 +"
+      "DESC": "5P Event 始终为精心投入和专业的项目感到自豪，旨在为客户带来最佳体验。",
+      "VIEW_MORE": "查看更多 +",
+      "ITEMS": {
+        "P1_CAT": "周年纪念 - 感恩",
+        "P1_TITLE": "VIFON 60周年纪念晚会",
+        "P2_CAT": "音乐 - 娱乐",
+        "P2_TITLE": "YEU FESTIVAL 2026",
+        "P3_CAT": "年终派对",
+        "P3_TITLE": "SUNJIN 大家庭年终派对",
+        "P4_CAT": "研讨会",
+        "P4_TITLE": "Tech Show - 新品发布会",
+        "P5_CAT": "团队建设",
+        "P5_TITLE": "V-Group 领导力团建",
+        "P6_CAT": "开业盛典",
+        "P6_TITLE": "电器超市开业庆典"
+      }
     },
     "SLOGAN": {
-      "TITLE": "开启新世界，",
-      "DESC": "通过高端活动连接体验触点。理解并陪伴您完整传达信息。与众不同，创造独一无二。",
+      "TITLE": "芝麻开门，",
+      "DESC": "通过高端活动连接体验的触点。理解并陪伴，完整传达信息。与众不同，创造独特性。",
       "VIEW_MORE": "查看更多"
     },
     "PARTNERS": {
@@ -32,51 +46,51 @@
     },
     "ABOUT_SNIPPET": {
       "TITLE": "关于我们",
-      "SLOGAN": "5P EVENT - 创造情感，彰显品牌",
-      "DESC": "5P EVENT提供卓越的艺术活动杰作和专业、全面、智能、精致的活动服务。创造深度反映企业品牌个性的独特价值，在数百万竞争者和潜在客户面前建立地位。"
+      "SLOGAN": "5P EVENT - 创造情感，捕捉品牌",
+      "DESC": "5P EVENT 提供艺术活动杰作和专业、全面、智能、精致的活动服务。以此创造融入企业品牌个性的独特价值，在数百万竞争对手和潜在客户面前建立地位。"
     }
   },
   "ABOUT": {
     "VISION_TITLE": "愿景",
-    "VISION_DESC": "5P EVENT 致力于成为越南领先且最具信誉的活动组织者，在我们提供的每项服务中提供最有效、最优化的解决方案。",
+    "VISION_DESC": "5P EVENT 旨在成为越南领先且最负盛名的活动策划单位，在我们提供的所有服务中提供最有效、最优的解决方案。",
     "MISSION_TITLE": "使命",
-    "MISSION_DESC": "在5P EVENT，每个活动都是一个独特的故事，我们将帮助您向所有人讲述您的品牌故事。我们与您同行。",
+    "MISSION_DESC": "对于 5P EVENT，每个活动都是一个完全不同的故事，我们将帮助您向所有人讲述您的品牌故事。我们与您同行。",
     "STAT_LABEL": "已完成项目",
     "VALUES": {
-      "S1_NAME": "S - 感知",
-      "S1_DESC": "我们触及每一个视角与感受，留下深刻的情感印记",
-      "S2_NAME": "S - 速度",
-      "S2_DESC": "我们以优先原则处理一切：快速 - 准确 - 高效 - 细致",
-      "S3_NAME": "S - 节省",
-      "S3_DESC": "我们为客户提供最灵活、最优化的预算节省方案",
-      "S4_NAME": "S - 特色",
-      "S4_DESC": "独特性和创造力是我们服务您的最强武器"
+      "S1_NAME": "S - 感知 (SENSE)",
+      "S1_DESC": "我们触及每个角度和情感，留下深刻的情感印记",
+      "S2_NAME": "S - 速度 (SPEED)",
+      "S2_DESC": "我们优先处理一切：快速 - 准确 - 有效 - 细致",
+      "S3_NAME": "S - 节约 (SAVE)",
+      "S3_DESC": "我们以最灵活、最优的政策为客户节省预算",
+      "S4_NAME": "S - 特别 (SPECIAL)",
+      "S4_DESC": "独特性和创造力是我们服务您的最强大武器"
     },
-    "CORE_VALUES_TITLE": "核心价值观",
-    "CORE_CLIENT": "客户",
+    "CORE_VALUES_TITLE": "核心价值",
+    "CORE_CLIENT": "客户 (CLIENT)",
     "CORE_CLIENT_SUB": "满意 - 选择 - 连接",
-    "CORE_COMPANY": "公司",
-    "CORE_COMPANY_SUB": "发展 - 可持续 - 建立帝国",
-    "CORE_COLLEAGUE": "同事",
-    "CORE_COLLEAGUE_SUB": "提升 - 合作 - 协同",
+    "CORE_COMPANY": "公司 (COMPANY)",
+    "CORE_COMPANY_SUB": "发展 - 持续 - 建立帝国",
+    "CORE_COLLEAGUE": "同事 (COLLEAGUE)",
+    "CORE_COLLEAGUE_SUB": "提升 - 伙伴 - 共生",
     "MEDIA_TITLE": "活动 - 媒体 - 婚礼",
-    "CEO_GREETING": "欢迎来到5P的世界！",
-    "CEO_P1": "一切都源于热情和全心全意的奉献。活动也是如此，每个活动都是一个需要被讲述的故事。",
-    "CEO_P2": "您是否曾经从最初的蹒跚步伐到活动成熟地组织过一场活动？每把椅子、每张传单、每个舞台和每滴汗水。回顾您投入其中的历程，您可以看到从小错误到完美的思维成长。",
-    "CEO_P3": "您喜欢创造它们的方式吗？我用全部的心创造了它。而'5P Event'就是从那份无价的爱中诞生的，继续书写精彩感人的故事。",
-    "CEO_P4": "您不完美，但您独一无二、与众不同。您也许无法创造前所未有的事物，但您可以带来非常个性化的体验。每个人都希望自己的活动精彩绝伦，5P Event将陪伴您走这条路。",
-    "CEO_CLOSING": "我是5P EVENT的创始人CEO兼创意总监，读到这里，您就明白了。",
-    "CEO_NAME": "黎文雄",
-    "CEO_TITLE": "创始人CEO"
+    "CEO_GREETING": "欢迎来到 5P 的世界！",
+    "CEO_P1": "一切都是由激情和全身心的投入创造的。活动也是如此，每个活动都是一个需要讲述的故事。",
+    "CEO_P2": "你是否曾参与过一个从最初的蹒跚步步到成熟的活动？每一张椅子、每一份传单、舞台甚至汗水。回顾你在其中付出的路径，可以看到从微小错误到完美的思维成熟。",
+    "CEO_P3": "你喜欢创造它们的方式吗？我个人是用心创造的。'5P Event' 诞生于那份无价的爱，旨在继续书写精彩的情感故事。",
+    "CEO_P4": "你并不完美，但你是独一无二、与众不同的。你不能创造尚未被创造的东西，但你可以带来非常私人的体验。每个人都希望他们的活动精彩绝伦，5P Event 将与您同行。",
+    "CEO_CLOSING": "我是 5P EVENT 的首席执行官、创始人兼创意总监，读到这里你应该明白了。",
+    "CEO_NAME": "Lê Văn Hùng",
+    "CEO_TITLE": "首席执行官 & 创始人"
   },
   "AUTH": {
     "CHANGE_PASSWORD": "修改密码",
     "CURRENT_PASSWORD": "当前密码",
     "NEW_PASSWORD": "新密码",
     "CONFIRM_PASSWORD": "确认新密码",
-    "PASSWORD_MISMATCH": "密码不匹配",
+    "PASSWORD_MISMATCH": "确认密码不匹配",
     "PASSWORD_CHANGE_SUCCESS": "密码修改成功",
-    "REQUIRED_FIELDS": "请填写所有字段"
+    "REQUIRED_FIELDS": "请填写所有信息"
   },
   "EDITOR": {
     "INSERT_EDIT_IMAGE": "插入/编辑图片",
@@ -84,30 +98,30 @@
     "SOURCE": "来源",
     "HEIGHT": "高度",
     "WIDTH": "宽度",
-    "URL": "URL",
+    "URL": "链接",
     "TEXT_TO_DISPLAY": "显示文本"
   },
   "SIDEBAR": {
-    "DASHBOARD": "概览",
+    "DASHBOARD": "仪表板",
     "PRODUCTS": "产品管理",
     "POSTS": "文章管理",
-    "VIDEOS": "精彩视频",
-    "CONFIG": "网站设置",
+    "VIDEOS": "精彩视频库",
+    "CONFIG": "网站配置",
     "HOME_VIDEOS": "首页视频",
-    "NEWSLETTER": "邮件订阅",
-    "SEO": "SEO Meta 管理",
+    "NEWSLETTER": "订阅用户",
+    "SEO": "SEO 元数据管理",
     "USERS": "用户管理",
     "REPORTS": "统计报告",
     "PARTNERS": "合作伙伴管理",
-    "CONTACT_MESSAGES": "联系信息",
+    "CONTACT_MESSAGES": "联系消息",
     "CONTENT_MANAGEMENT": "内容管理",
     "CUSTOMER_ENGAGEMENT": "客户与联系",
     "SYSTEM_SETTINGS": "系统设置"
   },
   "FOOTER": {
-    "SUBSCRIBE": "订阅最新动态",
+    "SUBSCRIBE": "订阅我们的新闻邮件",
     "EMAIL_PLACEHOLDER": "您的邮箱...",
-    "CONNECT_WITH_US": "跟我们联络"
+    "CONNECT_WITH_US": "关注我们"
   },
   "COMMON": {
     "CANCEL": "取消",
@@ -116,10 +130,12 @@
     "SAVE": "保存更改",
     "DELETE": "删除",
     "EDIT": "编辑",
+    "BACK": "返回",
+    "GO_HOME": "返回首页",
     "SEARCH": "搜索...",
     "STATUS": "状态",
     "ACTIONS": "操作",
-    "ACTIVE": "活跃",
+    "ACTIVE": "启用",
     "INACTIVE": "停用",
     "ALL": "全部",
     "SUCCESS": "成功",
@@ -129,16 +145,95 @@
     "EMPTY_DATA": "暂无数据",
     "AUTO_TRANSLATE_HINT": "系统将自动翻译成英文和中文。",
     "UPLOAD": "上传",
-    "ACTIVE_DISPLAY": "启用显示",
-    "FORMAT_HINT": "格式: JPG, PNG, WEBP",
-    "SIZE_HINT": "最大大小: 2MB",
+    "ACTIVE_DISPLAY": "激活显示",
+    "FORMAT_HINT": "格式：JPG, PNG, WEBP",
+    "SIZE_HINT": "最大容量：2MB",
     "LANGUAGES": {
       "VI": "越南语",
       "EN": "英语",
       "ZH": "中文"
     },
     "DATE_LOCALE": "zh-CN",
-    "LOADING": "加载中..."
+    "LOADING": "加载中...",
+    "CONTACT_NOW": "立即联系",
+    "HOT": "热门",
+    "404": "404",
+    "NEWS": "新闻",
+    "BREADCRUMB_HOME": "首页",
+    "NOT_FOUND": "未找到",
+    "NOT_FOUND_DESC": "您找的内容不存在或已被删除。"
+  },
+  "CONTACT": {
+    "BREADCRUMB": "联系我们",
+    "TITLE_CONNECT": "建立联系",
+    "TITLE_WITH_US": "与我们同行",
+    "DESC": "我们随时准备倾听并在每个活动项目中为您伴随。请留下您的信息，我们将尽快回复。",
+    "FOLLOW_US": "关注我们：",
+    "FORM": {
+      "FULLNAME": "姓名",
+      "EMAIL": "邮箱",
+      "PHONE": "电话号码",
+      "MESSAGE": "内容",
+      "MESSAGE_PLACEHOLDER": "请输入您的要求...",
+      "SEND": "发送消息",
+      "SENDING": "发送中...",
+      "SUCCESS_MSG": "谢谢！我们将尽快回复您。",
+      "TOAST_SUCCESS": "您的消息已成功发送！",
+      "TOAST_ERROR": "发送消息时出错，请稍后重试。",
+      "VAL_NAME": "姓名为必填项",
+      "VAL_EMAIL": "邮箱格式不正确",
+      "VAL_PHONE": "电话号码不正确",
+      "VAL_MESSAGE": "内容为必填项"
+    },
+    "CARDS": {
+      "ADDRESS_TITLE": "地址",
+      "MAP_LABEL": "地图",
+      "CONTACT_TITLE": "联系我们",
+      "CALL_NOW": "立即致电",
+      "EMAIL_TITLE": "发送邮件",
+      "SEND_EMAIL": "发送邮箱",
+      "PHONE_LABEL": "电话",
+      "WORKING_HOURS": "工作时间",
+      "WORKING_TIME": "周一 – 周六: 8:00 – 18:00"
+    }
+  },
+  "POST": {
+    "LABEL": "文章",
+    "NOT_FOUND": "未找到该文章",
+    "RECENT": "最近动态",
+    "LIBRARY": "图书馆",
+    "TAB_IMAGES": "图片",
+    "TAB_VIDEOS": "视频",
+    "FEATURED_EVENT": "精彩活动"
+  },
+  "PRODUCT": {
+    "RELATED": "相关产品",
+    "NOT_FOUND": "未找到该产品",
+    "COMING_SOON": "功能更新中..."
+  },
+  "RENTAL": {
+    "STEPS": {
+      "STEP1_TITLE": "接收需求",
+      "STEP1_DESC": "倾听需求，建议适合活动性质的设备类别。",
+      "STEP2_TITLE": "报价与签约",
+      "STEP2_DESC": "制定详细清单，确认透明具有竞争力的报价并签订合同。",
+      "STEP3_TITLE": "设备搭建",
+      "STEP3_DESC": "按约定的时间表将设备运送并安装到位，进行准确测试。",
+      "STEP4_TITLE": "现场支持",
+      "STEP4_DESC": "技术人员全程跟进活动，立即处理突发情况，确保 100% 成功。"
+    }
+  },
+  "SOUND_LIGHT": {
+    "BENEFITS": {
+      "BENEFIT1_TITLE": "先进设备",
+      "BENEFIT1_DESC": "拥有最新款进口音响灯光系统。",
+      "BENEFIT2_TITLE": "专业技术员",
+      "BENEFIT2_DESC": "经验丰富的技术团队，灵活处理各种情况。",
+      "BENEFIT3_TITLE": "优化成本",
+      "BENEFIT3_DESC": "在提供顶级服务质量的同时，提供最合理的成本。",
+      "BENEFIT4_TITLE": "成功保证",
+      "BENEFIT4_DESC": "我们确保活动技术环节的顺畅与完美。"
+    }
   },
   "PRODUCT_ADMIN": {
     "TITLE": "产品管理",
@@ -147,25 +242,30 @@
     "EDIT": "编辑产品",
     "FIELDS": {
       "NAME": "产品名称",
-      "SLUG": "别名 (Slug)",
+      "SLUG": "Slug",
       "PRICE": "价格",
+      "TYPE": "产品类型",
       "IMAGE": "产品图片",
       "CONTENT": "详细内容"
     },
     "PLACEHOLDERS": {
       "NAME": "输入产品名称..."
     },
+    "FILTERS": {
+      "ALL_TYPES": "所有类型"
+    },
     "TABLE": {
       "IMAGE": "图片",
       "NAME": "产品名称",
+      "TYPE": "类型",
       "PRICE": "价格",
       "STATUS": "状态",
       "ACTIONS": "操作"
     }
   },
   "SEO_ADMIN": {
-    "TITLE": "SEO Meta 管理",
-    "SUBTITLE": "5P Event 页面 SEO Meta 配置",
+    "TITLE": "SEO 元数据管理",
+    "SUBTITLE": "为 5P Event 页面配置 SEO Meta",
     "EDIT_TITLE": "编辑 SEO: {page}",
     "TABLE": {
       "PAGE": "页面",
@@ -175,25 +275,25 @@
       "ACTIONS": "操作"
     },
     "FIELDS": {
-      "META_TITLE": "Meta 标题",
-      "META_DESC": "Meta 描述"
+      "META_TITLE": "元标题",
+      "META_DESC": "元描述"
     }
   },
   "NEWSLETTER_ADMIN": {
-    "TITLE": "邮件订阅管理",
+    "TITLE": "订阅用户管理",
     "TABLE": {
-      "EMAIL": "邮件",
+      "EMAIL": "邮箱",
       "DATE": "订阅日期",
       "STATUS": "状态",
       "ACTIONS": "操作"
     },
-    "EMPTY": "未找到订阅者"
+    "EMPTY": "暂无订阅用户"
   },
   "CONTACT_MESSAGE_ADMIN": {
-    "TITLE": "联系信息管理",
+    "TITLE": "联系消息管理",
     "TABLE": {
       "SENDER": "发送者",
-      "CONTACT": "联系方式",
+      "CONTACT": "联系信息",
       "MESSAGE": "内容",
       "DATE": "发送日期"
     },
@@ -201,7 +301,7 @@
       "READ": "已读",
       "UNREAD": "未读"
     },
-    "EMPTY": "没有找到联系信息"
+    "EMPTY": "未找到消息"
   },
   "HOME_VIDEO_ADMIN": {
     "TITLE": "首页视频管理",
@@ -209,8 +309,8 @@
     "EDIT": "编辑首页视频",
     "FIELDS": {
       "TITLE": "视频标题",
-      "THUMBNAIL": "预览图 (Thumbnail)",
-      "URL": "视频链接 (Youtube/Vimeo/Direct...)"
+      "THUMBNAIL": "缩略图",
+      "URL": "视频链接"
     },
     "PLACEHOLDERS": {
       "TITLE": "输入视频标题..."
@@ -228,10 +328,22 @@
     "EDIT": "编辑文章",
     "FIELDS": {
       "TITLE": "文章标题",
-      "SLUG": "别名 (Slug)",
+      "SLUG": "Slug",
       "STATUS": "状态",
-      "IMAGE": "封面图 (Media)",
+      "IMAGE": "封面图片 (Media)",
+      "PUBLISH_AT": "发布时间",
       "CONTENT": "文章内容"
+    },
+    "ACTIONS": {
+      "SCORE_SEO": "SEO 评分 (AI)"
+    },
+    "LABEL": {
+      "SEO_FEEDBACK": "AI 优化建议",
+      "SEO_ANALYSIS": "整体分析",
+      "SEO_SUGGESTIONS": "具体建议"
+    },
+    "ERRORS": {
+      "REQUIRED_FOR_SEO": "标题和内容对于 SEO 评分是必填的"
     },
     "PLACEHOLDERS": {
       "TITLE": "输入文章标题...",
@@ -240,15 +352,17 @@
     "STATUS": {
       "PUBLISHED": "已发布",
       "DRAFT": "草稿",
-      "SCHEDULED": "已排期",
+      "SCHEDULED": "已定时",
       "PUBLISH": "发布",
-      "INIT_PUBLISH": "初始化并发布"
+      "INIT_PUBLISH": "初始化并发布",
+      "AI_ANALYZING": "正在分析 SEO...",
+      "AI_SUCCESS": "SEO 评分计算成功"
     },
     "TABLE": {
       "POST": "文章",
       "STATUS": "状态",
-      "SEO_SCORE": "SEO 分数",
-      "NOT_CALCULATED": "暂无"
+      "SEO_SCORE": "SEO 评分",
+      "NOT_CALCULATED": "未计算"
     }
   },
   "VIDEOS_ADMIN": {
@@ -258,8 +372,8 @@
     "EDIT": "编辑精彩视频",
     "FIELDS": {
       "TITLE": "视频标题",
-      "THUMBNAIL": "预览图 (Thumbnail)",
-      "URL": "视频链接 (Youtube/Vimeo...)",
+      "THUMBNAIL": "缩略图",
+      "URL": "视频链接",
       "ORDER": "显示顺序"
     },
     "PLACEHOLDERS": {
@@ -273,24 +387,24 @@
   },
   "CONFIG_ADMIN": {
     "TITLE": "网站配置",
-    "SUBTITLE": "管理常规信息和系统设置",
+    "SUBTITLE": "管理通用信息与系统配置",
     "TAB_CONTENT_TITLE": "配置内容",
-    "TAB_CONTENT_DESC": "管理分组下的信息",
+    "TAB_CONTENT_DESC": "管理组内的信息",
     "SAVE_ALL": "保存全部",
-    "SAVING": "正在保存...",
+    "SAVING": "保存中...",
     "TABS": {
       "GENERAL": "常规设置",
       "CONTACT": "联系信息",
       "SOCIAL": "社交媒体",
       "MENU": "菜单配置",
-      "STATISTICS": "数据统计"
+      "STATISTICS": "统计数据"
     },
     "LABELS": {
       "WEBSITE_NAME": "网站名称",
       "WEBSITE_FULLNAME": "公司全称",
       "WEBSITE_SLOGAN": "口号",
-      "WEBSITE_LOGO": "Logo URL",
-      "WEBSITE_FAVICON": "Favicon URL",
+      "WEBSITE_LOGO": "Logo 链接",
+      "WEBSITE_FAVICON": "Favicon 链接",
       "CONTACT_HOTLINE": "热线电话",
       "CONTACT_EMAIL": "联系邮箱",
       "CONTACT_ADDRESS": "地址",
@@ -299,38 +413,38 @@
       "SOCIAL_ZALO": "Zalo 链接",
       "SOCIAL_YOUTUBE": "Youtube 链接",
       "MENU_HOME": "首页菜单",
-      "MENU_ABOUT": "关于菜单",
+      "MENU_ABOUT": "关于我们菜单",
       "MENU_EVENTS": "活动策划菜单",
       "MENU_SOUND_LIGHT": "音响灯光菜单",
       "MENU_RENTAL": "设备租赁菜单",
-      "MENU_CONTACT": "联系菜单",
+      "MENU_CONTACT": "联系我们菜单",
       "STATS_FIELDS": "领域数量",
       "STATS_EVENTS": "活动数量",
       "STATS_BRANDS": "品牌数量"
     },
     "HINT": {
-      "MAP_TITLE": "如何获取谷歌地图 Iframe：",
-      "MAP_STEP1": "访问谷歌地图并找到您的地址。",
-      "MAP_STEP2": "点击 分享 -> 嵌入地图。",
-      "MAP_STEP3": "复制 src=\"...\" 属性内的 URL 并粘贴到此处。"
+      "MAP_TITLE": "Google 地图获取说明：",
+      "MAP_STEP1": "打开 Google 地图并查找您的地址。",
+      "MAP_STEP2": "点击 '分享' -> 选择 '嵌入地图' 标签（不要使用 '发送链接'）。",
+      "MAP_STEP3": "点击 '复制 HTML' 并直接粘贴在这里。系统将自动过滤提取地图链接。"
     }
   },
   "PARTNERS_ADMIN": {
     "TITLE": "合作伙伴管理",
-    "SUBTITLE": "客户品牌及合作伙伴名单",
-    "ADD_NEW": "添加新合作伙伴",
-    "EDIT": "编辑合作伙伴",
+    "SUBTITLE": "客户品牌与合作伙伴列表",
+    "ADD_NEW": "添加新伙伴",
+    "EDIT": "编辑伙伴",
     "FIELDS": {
-      "NAME": "合作伙伴名称",
-      "LOGO": "合作伙伴 Logo (图片/Iframe)",
+      "NAME": "伙伴名称",
+      "LOGO": "伙伴 Logo (图片/Iframe)",
       "ORDER": "显示顺序"
     },
     "PLACEHOLDERS": {
-      "NAME": "输入合作伙伴名称..."
+      "NAME": "输入伙伴名称..."
     },
     "TABLE": {
       "LOGO": "Logo",
-      "NAME": "合作伙伴名称",
+      "NAME": "伙伴名称",
       "ORDER": "顺序",
       "STATUS": "状态"
     }
@@ -343,38 +457,38 @@
       "SUBSCRIBERS": "订阅用户"
     },
     "CHARTS": {
-      "PRODUCTS_POSTS_TITLE": "产品与文章 (年度)",
-      "SUBSCRIBERS_TITLE": "订阅用户 (年度)",
+      "PRODUCTS_POSTS_TITLE": "产品与文章 (今年)",
+      "SUBSCRIBERS_TITLE": "订阅用户 (今年)",
       "POST_STATUS_TITLE": "文章状态",
-      "PRODUCT_STATUS_TITLE": "产品活动",
+      "PRODUCT_STATUS_TITLE": "产品活动情况",
       "POST_STATUS": {
         "PUBLISHED": "已发布",
         "DRAFT": "草稿",
-        "SCHEDULED": "已排期"
+        "SCHEDULED": "已定时"
       },
       "PRODUCT_STATUS": {
-        "ACTIVE": "活跃",
-        "INACTIVE": "停用"
+        "ACTIVE": "已启用",
+        "INACTIVE": "已禁用"
       }
     },
     "RECENT": {
-      "PRODUCTS_TITLE": "最近添加的产品 (前5名)",
-      "SUBSCRIBERS_TITLE": "最近订阅 (前5名)",
+      "PRODUCTS_TITLE": "最近添加的产品 (前5)",
+      "SUBSCRIBERS_TITLE": "最近订阅邮箱 (前5)",
       "TABLE": {
         "PRODUCT_NAME": "产品名称",
         "PRICE": "价格",
         "STATUS": "状态",
-        "EMAIL": "电子邮件",
-        "DATE": "加入日期"
+        "EMAIL": "邮箱",
+        "DATE": "订阅日期"
       },
       "STATUS": {
-        "ACTIVE": "活跃",
+        "ACTIVE": "启用",
         "INACTIVE": "关闭",
-        "SUBSCRIBED": "活跃",
-        "UNSUBSCRIBED": "已取消订阅"
+        "SUBSCRIBED": "激活",
+        "UNSUBSCRIBED": "已退订"
       },
       "NO_DATA": "暂无数据",
-      "LOADING": "正在加载数据..."
+      "LOADING": "数据加载中..."
     }
   }
 }

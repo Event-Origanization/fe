@@ -1,3 +1,5 @@
+import { PAGE_KEYS } from "@/constants";
+
 export interface IProduct {
   id: number;
   name_vi: string;
@@ -11,6 +13,7 @@ export interface IProduct {
   images: string[];
   variants: Record<string, unknown>[];
   isActive: boolean;
+  productType: typeof PAGE_KEYS.SOUND_LIGHT | typeof PAGE_KEYS.RENTAL;
   createdAt: string;
   updatedAt: string;
 }
@@ -27,6 +30,7 @@ export interface ProductCreationAttributes {
   images?: string[];
   variants?: Record<string, unknown>[];
   isActive?: boolean;
+  productType: typeof PAGE_KEYS.SOUND_LIGHT | typeof PAGE_KEYS.RENTAL;
   translateName?: boolean;
   translateContent?: boolean;
 }
@@ -38,6 +42,7 @@ export interface ProductQuery {
   minPrice?: number;
   maxPrice?: number;
   isActive?: boolean;
+  productType?: typeof PAGE_KEYS.SOUND_LIGHT | typeof PAGE_KEYS.RENTAL;
   sortBy?: string;
   sortOrder?: 'ASC' | 'DESC';
 }

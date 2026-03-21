@@ -10,12 +10,12 @@
       
       <div class="relative z-10 w-full max-w-7xl mx-auto px-4">
         <h1 class="text-4xl md:text-6xl font-black uppercase text-white mb-4 tracking-widest drop-shadow-[0_0_15px_rgba(220,38,38,0.8)]" data-aos="fade-down">
-          TỔ CHỨC SỰ KIỆN
+          {{ $t('NAV.EVENTS') }}
         </h1>
         <div class="flex items-center justify-center gap-2 text-sm md:text-base font-medium text-gray-300 uppercase tracking-widest" data-aos="fade-up" data-aos-delay="100">
-          <router-link to="/" class="hover:text-red-500 transition-colors">TRANG CHỦ</router-link>
+          <router-link to="/" class="hover:text-red-500 transition-colors">{{ $t('COMMON.BREADCRUMB_HOME') }}</router-link>
           <span class="text-gray-600">-</span>
-          <span class="text-red-500 font-bold drop-shadow-[0_0_5px_rgba(220,38,38,0.6)]">TỔ CHỨC SỰ KIỆN</span>
+          <span class="text-red-500 font-bold drop-shadow-[0_0_5px_rgba(220,38,38,0.6)]">{{ $t('NAV.EVENTS') }}</span>
         </div>
       </div>
       
@@ -30,10 +30,10 @@
       <section class="mb-24">
         <div class="flex justify-between items-end mb-8 border-b border-white/10 pb-4">
           <h2 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500 uppercase tracking-widest" data-aos="fade-right">
-            TIN GẦN ĐÂY
+            {{ $t('POST.RECENT') }}
           </h2>
           <div class="flex items-center gap-2 cursor-pointer group" data-aos="fade-left">
-            <span class="text-sm font-bold uppercase text-gray-400 group-hover:text-white transition-colors">Tin tức</span>
+            <span class="text-sm font-bold uppercase text-gray-400 group-hover:text-white transition-colors">{{ $t('COMMON.NEWS') }}</span>
             <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-red-600 transition-all text-gray-400 group-hover:text-white">
               <i class="pi pi-angle-right text-xs"></i>
             </div>
@@ -44,19 +44,29 @@
           <!-- Left: Big Images -->
           <div class="lg:col-span-7 flex flex-col gap-4" data-aos="fade-up">
             <!-- Top large image -->
-            <div class="w-full aspect-video rounded overflow-hidden relative group cursor-pointer border border-white/5 hover:border-red-500/30 transition-all">
-              <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1200" alt="News 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div v-if="postStore.recentNews[0]" @click="goToPost(postStore.recentNews[0].slug)" class="w-full aspect-video rounded overflow-hidden relative group cursor-pointer border border-white/5 hover:border-red-500/30 transition-all">
+              <img :src="postStore.recentNews[0].media" :alt="getTitle(postStore.recentNews[0])" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div class="absolute inset-10 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/20 to-transparent">
+                  <h3 class="text-white font-black text-xl lg:text-3xl uppercase leading-tight group-hover:text-red-500 transition-colors line-clamp-2">
+                    {{ getTitle(postStore.recentNews[0]) }}
+                  </h3>
+              </div>
             </div>
             <!-- Bottom 2 halves -->
             <div class="grid grid-cols-2 gap-4">
-              <div class="w-full aspect-[4/3] rounded overflow-hidden relative group cursor-pointer border border-white/5 hover:border-red-500/30 transition-all">
-                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800" alt="News 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 origin-center" />
-                <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">HOT</div>
+              <div v-if="postStore.recentNews[1]" @click="goToPost(postStore.recentNews[1].slug)" class="w-full aspect-[4/3] rounded overflow-hidden relative group cursor-pointer border border-white/5 hover:border-red-500/30 transition-all">
+                <img :src="postStore.recentNews[1].media" :alt="getTitle(postStore.recentNews[1])" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 origin-center" />
+                <div class="absolute top-2 left-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded">{{ $t('COMMON.HOT') }}</div>
+                 <div class="absolute inset-0 bg-black/40 p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                    <h4 class="text-white font-bold text-xs uppercase line-clamp-2">{{ getTitle(postStore.recentNews[1]) }}</h4>
+                 </div>
               </div>
-              <div class="w-full aspect-[4/3] rounded overflow-hidden relative group cursor-pointer border border-white/5 hover:border-red-500/30 transition-all">
-                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800" alt="News 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 origin-center" />
-                <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">HOT</div>
+              <div v-if="postStore.recentNews[2]" @click="goToPost(postStore.recentNews[2].slug)" class="w-full aspect-[4/3] rounded overflow-hidden relative group cursor-pointer border border-white/5 hover:border-red-500/30 transition-all">
+                <img :src="postStore.recentNews[2].media" :alt="getTitle(postStore.recentNews[2])" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 origin-center" />
+                <div class="absolute top-2 left-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded">{{ $t('COMMON.HOT') }}</div>
+                <div class="absolute inset-0 bg-black/40 p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                    <h4 class="text-white font-bold text-xs uppercase line-clamp-2">{{ getTitle(postStore.recentNews[2]) }}</h4>
+                 </div>
               </div>
             </div>
           </div>
@@ -65,8 +75,7 @@
           <ScrollableNewsList 
             class="lg:col-span-5" 
             data-aos="fade-left" 
-            data-aos-delay="200" 
-            :items="newsItems" 
+            data-aos-delay="200"
           />
         </div>
       </section>
@@ -75,7 +84,7 @@
       <section class="mb-16">
         <div class="text-center mb-10" data-aos="fade-up">
           <h2 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-400 via-white to-gray-400 uppercase tracking-widest mb-6">
-            KHO THƯ VIỆN
+            {{ $t('POST.LIBRARY') }}
           </h2>
           
           <div class="flex justify-center gap-2">
@@ -84,28 +93,28 @@
               class="px-6 py-2 border rounded font-bold text-xs uppercase tracking-widest transition-all duration-300"
               :class="activeTab === 'images' ? 'border-red-600 bg-red-600 text-white shadow-[0_0_10px_rgba(220,38,38,0.5)]' : 'border-white/20 text-gray-400 hover:border-white/50 hover:text-white'"
             >
-              HÌNH ẢNH
+              {{ $t('POST.TAB_IMAGES') }}
             </button>
             <button 
               @click="activeTab = 'videos'" 
               class="px-6 py-2 border rounded font-bold text-xs uppercase tracking-widest transition-all duration-300"
               :class="activeTab === 'videos' ? 'border-red-600 bg-red-600 text-white shadow-[0_0_10px_rgba(220,38,38,0.5)]' : 'border-white/20 text-gray-400 hover:border-white/50 hover:text-white'"
             >
-              VIDEO
+              {{ $t('POST.TAB_VIDEOS') }}
             </button>
           </div>
         </div>
 
         <!-- Grid Images -->
         <div v-if="activeTab === 'images'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-in">
-          <div v-for="i in 6" :key="'img'+i" class="group relative rounded-lg overflow-hidden aspect-[4/3] bg-white/5 border border-white/5 hover:border-red-500/30 cursor-pointer">
-            <img :src="`https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&ixlib=rb-4.0.3`" alt="Gallery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <div v-for="post in postStore.posts" :key="post.id" @click="goToPost(post.slug)" class="group relative rounded-lg overflow-hidden aspect-[4/3] bg-white/5 border border-white/5 hover:border-red-500/30 cursor-pointer">
+            <img :src="post.media || `https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800`" :alt="getTitle(post)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
-              <span class="text-red-500 text-xs font-bold tracking-widest mb-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">SỰ KIỆN NỔI BẬT</span>
-              <h3 class="text-white font-bold leading-tight transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
-                YEAR END PARTY 2024 VNPAY VỚI CHỦ ĐỀ "TẾT TÂN THỜI"
+              <span class="text-red-500 text-xs font-bold tracking-widest mb-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 uppercase">{{ $t('POST.FEATURED_EVENT') }}</span>
+              <h3 class="text-white font-bold leading-tight transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 line-clamp-2 uppercase">
+                {{ getTitle(post) }}
               </h3>
-              <div class="text-gray-400 text-xs mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">17/05/2026</div>
+              <div class="text-gray-400 text-xs mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">{{ formatDate(post.createdAt, locale) }}</div>
             </div>
             <!-- Top left mark -->
             <div class="absolute top-0 left-0 w-10 h-10 bg-red-600 [clip-path:polygon(0_0,100%_0,0_100%)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -128,14 +137,23 @@
         </div>
 
         <!-- Pagination -->
-        <div class="flex justify-center mt-12 gap-2" data-aos="fade-up">
-          <button class="w-8 h-8 flex items-center justify-center rounded border border-red-600 bg-red-600 text-white text-sm font-medium">1</button>
-          <button class="w-8 h-8 flex items-center justify-center rounded border border-white/20 text-gray-400 hover:border-white/50 hover:text-white transition-colors text-sm">2</button>
-          <button class="w-8 h-8 flex items-center justify-center rounded border border-white/20 text-gray-400 hover:border-white/50 hover:text-white transition-colors text-sm">3</button>
-          <button class="w-8 h-8 flex items-center justify-center rounded border border-white/20 text-gray-400 hover:border-white/50 hover:text-white transition-colors text-sm">
+        <div v-if="activeTab === 'images' && postStore.totalPages > 1" class="flex justify-center mt-12 gap-2" data-aos="fade-up">
+          <button 
+            v-for="p in postStore.totalPages" 
+            :key="p"
+            @click="changePage(p)"
+            class="w-8 h-8 flex items-center justify-center rounded border transition-colors text-sm font-medium"
+            :class="postStore.currentPage === p ? 'border-red-600 bg-red-600 text-white' : 'border-white/20 text-gray-400 hover:border-white/50 hover:text-white'"
+          >
+            {{ p }}
+          </button>
+          <button 
+             v-if="postStore.currentPage < postStore.totalPages"
+             @click="changePage(postStore.currentPage + 1)"
+             class="w-8 h-8 flex items-center justify-center rounded border border-white/20 text-gray-400 hover:border-white/50 hover:text-white transition-colors text-sm"
+          >
             <i class="pi pi-angle-right text-xs"></i>
           </button>
-          <button class="px-3 py-1 h-8 flex items-center justify-center rounded border border-white/20 text-gray-400 hover:border-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-wider">Trang cuối</button>
         </div>
 
       </section>
@@ -148,17 +166,38 @@
 import { ref, onMounted } from 'vue'
 import AOS from 'aos'
 import ScrollableNewsList from '@/components/ScrollableNewsList.vue'
+import { usePostStore } from '@/store/post.store'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import { formatDate } from '@/utils/common'
+import type { IPost } from '@/types/post'
+import { ROUTE_NAMES } from '@/router'
 
+const postStore = usePostStore()
+const { locale } = useI18n()
+const router = useRouter()
 const activeTab = ref<'images' | 'videos'>('images')
 
-const newsItems = Array.from({ length: 10 }).map(() => ({
-  title: '03 "ĐIỂM CHẠM" GIỮ CHÂN KHÁCH HÀNG TRONG SỰ KIỆN RA MẮT SẢN PHẨM MỚI',
-  desc: '3 yếu tố quan trọng làm nên thành công của sự kiện ra mắt...',
-  image: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&q=80&w=400&ixlib=rb-4.0.3'
-}))
+const goToPost = (slug: string) => {
+  if (slug) {
+    router.push({ name: ROUTE_NAMES.POST_DETAIL, params: { slug } })
+  }
+}
 
-onMounted(() => {
+const getTitle = (post: IPost) => {
+  if (!post) return ''
+  const key = `title_${locale.value}` as keyof IPost
+  return (post[key] as string) || post.title_vi || ''
+}
+
+const changePage = (p: number) => {
+  postStore.fetchPosts({ page: p, limit: 6 })
+}
+
+onMounted(async () => {
   AOS.refresh()
+  postStore.fetchRecentNews(50)
+  postStore.fetchPosts({ limit: 6, page: 1 })
 })
 </script>
 

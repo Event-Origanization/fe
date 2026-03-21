@@ -87,10 +87,10 @@
               <h4
                 class="text-brand-500 text-xs font-bold tracking-widest uppercase mb-1 drop-shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"
               >
-                Kỷ niệm - Tri ân
+                {{ $t('HOME.PROJECTS.ITEMS.P1_CAT') }}
               </h4>
               <h3 class="text-lg font-bold text-white uppercase drop-shadow-lg">
-                Gala Kỷ Niệm 60 Năm VIFON
+                {{ $t('HOME.PROJECTS.ITEMS.P1_TITLE') }}
               </h3>
             </div>
           </div>
@@ -115,10 +115,10 @@
               <h4
                 class="text-blue-400 text-xs font-bold tracking-widest uppercase mb-1 drop-shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"
               >
-                Âm Nhạc - Giải trí
+                {{ $t('HOME.PROJECTS.ITEMS.P2_CAT') }}
               </h4>
               <h3 class="text-lg font-bold text-white uppercase drop-shadow-lg">
-                YEU FESTIVAL 2026
+                {{ $t('HOME.PROJECTS.ITEMS.P2_TITLE') }}
               </h3>
             </div>
           </div>
@@ -143,10 +143,10 @@
               <h4
                 class="text-pink-400 text-xs font-bold tracking-widest uppercase mb-1 drop-shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"
               >
-                Tiệc cuối năm
+                {{ $t('HOME.PROJECTS.ITEMS.P3_CAT') }}
               </h4>
               <h3 class="text-lg font-bold text-white uppercase drop-shadow-lg">
-                YEAR END PARTY - ĐẠI GIA ĐÌNH SUNJIN
+                {{ $t('HOME.PROJECTS.ITEMS.P3_TITLE') }}
               </h3>
             </div>
           </div>
@@ -171,10 +171,10 @@
               <h4
                 class="text-purple-400 text-xs font-bold tracking-widest uppercase mb-1 drop-shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"
               >
-                Hội thảo
+                {{ $t('HOME.PROJECTS.ITEMS.P4_CAT') }}
               </h4>
               <h3 class="text-lg font-bold text-white uppercase drop-shadow-lg">
-                Tech Show - Giới thiệu sản phẩm mới
+                {{ $t('HOME.PROJECTS.ITEMS.P4_TITLE') }}
               </h3>
             </div>
           </div>
@@ -199,10 +199,10 @@
               <h4
                 class="text-orange-400 text-xs font-bold tracking-widest uppercase mb-1 drop-shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"
               >
-                Teambuilding
+                {{ $t('HOME.PROJECTS.ITEMS.P5_CAT') }}
               </h4>
               <h3 class="text-lg font-bold text-white uppercase drop-shadow-lg">
-                Teambuilding Lãnh Đạo V-Group
+                {{ $t('HOME.PROJECTS.ITEMS.P5_TITLE') }}
               </h3>
             </div>
           </div>
@@ -227,10 +227,10 @@
               <h4
                 class="text-teal-400 text-xs font-bold tracking-widest uppercase mb-1 drop-shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"
               >
-                Khai trương
+                {{ $t('HOME.PROJECTS.ITEMS.P6_CAT') }}
               </h4>
               <h3 class="text-lg font-bold text-white uppercase drop-shadow-lg">
-                Lễ Khai Trương Siêu Thị Điện Máy
+                {{ $t('HOME.PROJECTS.ITEMS.P6_TITLE') }}
               </h3>
             </div>
           </div>
