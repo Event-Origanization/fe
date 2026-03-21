@@ -11,7 +11,8 @@ export interface IPost {
   status: string;
   publishAt?: string | null;
   seoScore?: number | null;
-  seoFeedback?: string | null;
+  seoAnalysis?: string | null;
+  seoSuggestions?: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -28,7 +29,8 @@ export interface PostCreationAttributes {
   status?: string;
   publishAt?: string | null;
   seoScore?: number | null;
-  seoFeedback?: string | null;
+  seoAnalysis?: string | null;
+  seoSuggestions?: string | null;
   translateTitle?: boolean;
   translateContent?: boolean;
 }
@@ -47,4 +49,10 @@ export interface PostListResponse {
   totalPages: number;
   currentPage: number;
   posts: IPost[];
+}
+
+export interface SeoScoreResult {
+  score: number;
+  analysis: string;
+  suggestions: string;
 }

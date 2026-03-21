@@ -20,7 +20,21 @@
     "PROJECTS": {
       "TITLE": "Dự án nổi bật",
       "DESC": "5P Event luôn tự hào về các dự án đã thực hiện được đầu tư chỉn chu, chuyên nghiệp nhằm đem lại trải nghiệm tuyệt vời nhất cho khách hàng.",
-      "VIEW_MORE": "Xem Thêm +"
+      "VIEW_MORE": "Xem Thêm +",
+      "ITEMS": {
+        "P1_CAT": "Kỷ niệm - Tri ân",
+        "P1_TITLE": "Gala Kỷ Niệm 60 Năm VIFON",
+        "P2_CAT": "Âm Nhạc - Giải trí",
+        "P2_TITLE": "YEU FESTIVAL 2026",
+        "P3_CAT": "Tiệc cuối năm",
+        "P3_TITLE": "YEAR END PARTY - ĐẠI GIA ĐÌNH SUNJIN",
+        "P4_CAT": "Hội thảo",
+        "P4_TITLE": "Tech Show - Giới thiệu sản phẩm mới",
+        "P5_CAT": "Teambuilding",
+        "P5_TITLE": "Teambuilding Lãnh Đạo V-Group",
+        "P6_CAT": "Khai trương",
+        "P6_TITLE": "Lễ Khai Trương Siêu Thị Điện Máy"
+      }
     },
     "SLOGAN": {
       "TITLE": "Vùng ơi mở ra,",
@@ -116,6 +130,8 @@
     "SAVE": "Lưu thay đổi",
     "DELETE": "Xóa",
     "EDIT": "Chỉnh sửa",
+    "BACK": "Quay lại",
+    "GO_HOME": "Về trang chủ",
     "SEARCH": "Tìm kiếm...",
     "STATUS": "Trạng thái",
     "ACTIONS": "Thao tác",
@@ -138,7 +154,86 @@
       "ZH": "Tiếng Trung"
     },
     "DATE_LOCALE": "vi-VN",
-    "LOADING": "Đang tải..."
+    "LOADING": "Đang tải...",
+    "CONTACT_NOW": "Liên hệ ngay",
+    "HOT": "HOT",
+    "404": "404",
+    "NEWS": "Tin tức",
+    "BREADCRUMB_HOME": "TRANG CHỦ",
+    "NOT_FOUND": "Không tìm thấy",
+    "NOT_FOUND_DESC": "Nội dung bạn tìm kiếm không tồn tại hoặc đã bị xóa."
+  },
+  "CONTACT": {
+    "BREADCRUMB": "LIÊN HỆ",
+    "TITLE_CONNECT": "HÃY KẾT NỐI",
+    "TITLE_WITH_US": "CÙNG CHÚNG TÔI",
+    "DESC": "Chúng tôi luôn sẵn sàng lắng nghe và đồng hành cùng bạn trong từng dự án sự kiện. Hãy để lại thông tin và chúng tôi sẽ phản hồi trong thời gian sớm nhất.",
+    "FOLLOW_US": "THEO DÕI:",
+    "FORM": {
+      "FULLNAME": "Họ và tên",
+      "EMAIL": "Email",
+      "PHONE": "Số điện thoại",
+      "MESSAGE": "Nội dung",
+      "MESSAGE_PLACEHOLDER": "Vui lòng nhập yêu cầu của bạn...",
+      "SEND": "GỬI TIN NHẮN",
+      "SENDING": "ĐANG GỬI...",
+      "SUCCESS_MSG": "Cảm ơn bạn! Chúng tôi sẽ liên hệ lại sớm nhất có thể.",
+      "TOAST_SUCCESS": "Tin nhắn của bạn đã được gửi thành công!",
+      "TOAST_ERROR": "Có lỗi xảy ra khi gửi tin nhắn, vui lòng thử lại sau.",
+      "VAL_NAME": "Tên là bắt buộc",
+      "VAL_EMAIL": "Email không hợp lệ",
+      "VAL_PHONE": "Số điện thoại không hợp lệ",
+      "VAL_MESSAGE": "Nội dung là bắt buộc"
+    },
+    "CARDS": {
+      "ADDRESS_TITLE": "ĐỊA CHỈ",
+      "MAP_LABEL": "Bản đồ",
+      "CONTACT_TITLE": "LIÊN HỆ CHÚNG TÔI",
+      "CALL_NOW": "Gọi ngay",
+      "EMAIL_TITLE": "GỬI MAIL",
+      "SEND_EMAIL": "Gửi email",
+      "PHONE_LABEL": "Điện thoại",
+      "WORKING_HOURS": "Giờ làm việc",
+      "WORKING_TIME": "Thứ 2 – Thứ 7: 8:00 – 18:00"
+    }
+  },
+  "POST": {
+    "LABEL": "Bài viết",
+    "NOT_FOUND": "Không tìm thấy bài viết này",
+    "RECENT": "TIN GẦN ĐÂY",
+    "LIBRARY": "KHO THƯ VIỆN",
+    "TAB_IMAGES": "HÌNH ẢNH",
+    "TAB_VIDEOS": "VIDEO",
+    "FEATURED_EVENT": "SỰ KIỆN NỔI BẬT"
+  },
+  "PRODUCT": {
+    "RELATED": "SẢN PHẨM LIÊN QUAN",
+    "NOT_FOUND": "Không tìm thấy sản phẩm này",
+    "COMING_SOON": "Tính năng đang được cập nhật..."
+  },
+  "RENTAL": {
+    "STEPS": {
+      "STEP1_TITLE": "TIẾP NHẬN YÊU CẦU",
+      "STEP1_DESC": "Lắng nghe nhu cầu, tư vấn hạng mục thiết bị phù hợp với tính chất sự kiện.",
+      "STEP2_TITLE": "BÁO GIÁ & KÝ KẾT",
+      "STEP2_DESC": "Lên checklist chi tiết, chốt báo giá cạnh tranh minh bạch và ký hợp đồng.",
+      "STEP3_TITLE": "SETUP THIẾT BỊ",
+      "STEP3_DESC": "Vận chuyển và setup thiết bị tận nơi đúng timeline cam kết, test chuẩn xác.",
+      "STEP4_TITLE": "HỖ TRỢ TRỰC TIẾP",
+      "STEP4_DESC": "Kỹ thuật viên trực suốt sự kiện, xử lý sự cố lập tức đảm bảo thành công 100%."
+    }
+  },
+  "SOUND_LIGHT": {
+    "BENEFITS": {
+      "BENEFIT1_TITLE": "THIẾT BỊ HIỆN ĐẠI",
+      "BENEFIT1_DESC": "Sở hữu hệ thống âm thanh ánh sáng đời mới nhất, nhập khẩu 100%.",
+      "BENEFIT2_TITLE": "KỸ THUẬT VIÊN PRO",
+      "BENEFIT2_DESC": "Đội ngũ kỹ thuật viên dày dặn kinh nghiệm, xử lý tình huống linh hoạt.",
+      "BENEFIT3_TITLE": "CHI PHÍ TỐI ƯU",
+      "BENEFIT3_DESC": "Mang đến mức chi phí hợp lý nhất đi kèm với chất lượng dịch vụ đỉnh cao.",
+      "BENEFIT4_TITLE": "CAM KẾT THÀNH CÔNG",
+      "BENEFIT4_DESC": "Chúng tôi đảm bảo sự trơn tru, hoàn hảo cho khâu kỹ thuật của sự kiện."
+    }
   },
   "PRODUCT_ADMIN": {
     "TITLE": "Quản Lý Sản Phẩm",
@@ -149,15 +244,20 @@
       "NAME": "Tên sản phẩm",
       "SLUG": "Đường dẫn (Slug)",
       "PRICE": "Giá bán",
+      "TYPE": "Loại sản phẩm",
       "IMAGE": "Ảnh sản phẩm",
       "CONTENT": "Nội dung chi tiết"
     },
     "PLACEHOLDERS": {
       "NAME": "Nhập tên sản phẩm..."
     },
+    "FILTERS": {
+      "ALL_TYPES": "Tất cả loại"
+    },
     "TABLE": {
       "IMAGE": "Hình ảnh",
       "NAME": "Tên sản phẩm",
+      "TYPE": "Loại",
       "PRICE": "Giá bán",
       "STATUS": "Trạng thái",
       "ACTIONS": "Thao tác"
@@ -231,7 +331,19 @@
       "SLUG": "Đường dẫn (Slug)",
       "STATUS": "Trạng thái",
       "IMAGE": "Ảnh đại diện (Media)",
+      "PUBLISH_AT": "Thời gian đăng bài",
       "CONTENT": "Nội dung bài viết"
+    },
+    "ACTIONS": {
+      "SCORE_SEO": "Chấm điểm SEO (AI)"
+    },
+    "LABEL": {
+      "SEO_FEEDBACK": "Gợi ý tối ưu từ AI",
+      "SEO_ANALYSIS": "Phân tích tổng quan",
+      "SEO_SUGGESTIONS": "Gợi ý hành động"
+    },
+    "ERRORS": {
+      "REQUIRED_FOR_SEO": "Tiêu đề và nội dung là bắt buộc để chấm điểm SEO"
     },
     "PLACEHOLDERS": {
       "TITLE": "Nhập tiêu đề bài viết...",
@@ -242,7 +354,9 @@
       "DRAFT": "Bản nháp",
       "SCHEDULED": "Lên lịch",
       "PUBLISH": "Xuất bản",
-      "INIT_PUBLISH": "Khởi tạo & Xuất bản"
+      "INIT_PUBLISH": "Khởi tạo & Xuất bản",
+      "AI_ANALYZING": "Đang phân tích SEO...",
+      "AI_SUCCESS": "Đã chấm điểm SEO thành công"
     },
     "TABLE": {
       "POST": "Bài viết",

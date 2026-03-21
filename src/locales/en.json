@@ -1,8 +1,8 @@
 {
   "NAV": {
     "HOME": "Home",
-    "ABOUT": "About Us",
-    "EVENTS": "Event Organization",
+    "ABOUT": "About",
+    "EVENTS": "Events",
     "SOUND_LIGHT": "Sound & Lighting",
     "RENTAL": "Equipment Rental",
     "CONTACT": "Contact",
@@ -19,12 +19,26 @@
     },
     "PROJECTS": {
       "TITLE": "Featured Projects",
-      "DESC": "5P Event is always proud of its meticulously invested and professional projects to bring the best experience to clients.",
-      "VIEW_MORE": "View More +"
+      "DESC": "5P Event is always proud of the projects that have been well-invested and professional to bring the best experience to customers.",
+      "VIEW_MORE": "View More +",
+      "ITEMS": {
+        "P1_CAT": "Anniversary - Appreciation",
+        "P1_TITLE": "VIFON 60th Anniversary Gala",
+        "P2_CAT": "Music - Entertainment",
+        "P2_TITLE": "YEU FESTIVAL 2026",
+        "P3_CAT": "Year End Party",
+        "P3_TITLE": "YEAR END PARTY - SUNJIN GREAT FAMILY",
+        "P4_CAT": "Seminar",
+        "P4_TITLE": "Tech Show - New Product Introduction",
+        "P5_CAT": "Teambuilding",
+        "P5_TITLE": "V-Group Leadership Teambuilding",
+        "P6_CAT": "Grand Opening",
+        "P6_TITLE": "Electronics Supermarket Grand Opening"
+      }
     },
     "SLOGAN": {
-      "TITLE": "Open the world,",
-      "DESC": "The connection point for premium experiences through world-class events. We understand and accompany you to deliver messages completely. Different to create uniqueness.",
+      "TITLE": "Open Sesame,",
+      "DESC": "The point of connecting the touch points of experience through high-class events. Understanding and accompanying to convey the message completely. Different to create uniqueness.",
       "VIEW_MORE": "View more"
     },
     "PARTNERS": {
@@ -32,40 +46,40 @@
     },
     "ABOUT_SNIPPET": {
       "TITLE": "About Us",
-      "SLOGAN": "5P EVENT - CREATE EMOTIONS, CAPTURE YOUR BRAND",
-      "DESC": "5P EVENT delivers MASTERPIECES OF ARTISTIC EVENTS AND PROFESSIONAL, COMPREHENSIVE, SMART, AND SOPHISTICATED EVENT SERVICES. Creating unique value deeply reflecting the brand identity of the enterprise, establishing a position against millions of competitors & potential customers."
+      "SLOGAN": "5P EVENT - CREATING EMOTIONS, CAPTURING BRAND",
+      "DESC": "5P EVENT brings ARTISTIC EVENT MASTERPIECES AND PROFESSIONAL, COMPREHENSIVE, SMART, SOPHISTICATED EVENT SERVICES. From there, creating distinct values imbued with the corporate brand personality, creating a position before millions of competitors & potential customers."
     }
   },
   "ABOUT": {
     "VISION_TITLE": "VISION",
-    "VISION_DESC": "5P EVENT aims to be the leading and most reliable event organizer in Vietnam, providing the most effective and optimal solutions in every service we offer.",
+    "VISION_DESC": "5P EVENT aims to become the leading and most prestigious event organization unit in Vietnam, providing the most effective and optimal solutions in all services we are providing.",
     "MISSION_TITLE": "MISSION",
-    "MISSION_DESC": "With 5P EVENT, each event is a uniquely different story, and we will help you tell your brand story to everyone. We join you.",
-    "STAT_LABEL": "PROJECT COMPLETED",
+    "MISSION_DESC": "With 5P EVENT, each event is a completely different story, and we will help you tell your brand story to everyone. We accompany you.",
+    "STAT_LABEL": "COMPLETED PROJECTS",
     "VALUES": {
       "S1_NAME": "S - SENSE",
-      "S1_DESC": "We touch every sight & perspective, leaving a deep emotional mark",
+      "S1_DESC": "We touch every angle & emotion, leaving a deep emotional mark",
       "S2_NAME": "S - SPEED",
-      "S2_DESC": "We process everything with priority: fast - accurate - efficient - detailed",
+      "S2_DESC": "We handle everything with priority: fast - accurate - effective - meticulous",
       "S3_NAME": "S - SAVE",
-      "S3_DESC": "We save budget with the most flexible and optimal policy for clients",
+      "S3_DESC": "We save budget with the most flexible and optimal policy for customers",
       "S4_NAME": "S - SPECIAL",
-      "S4_DESC": "Uniqueness and creativity are our strongest weapons to serve you"
+      "S4_DESC": "Uniqueness and creativity are our most powerful weapons to serve you"
     },
     "CORE_VALUES_TITLE": "CORE VALUES",
     "CORE_CLIENT": "CLIENT",
-    "CORE_CLIENT_SUB": "Satisfied - Choose - Connects",
+    "CORE_CLIENT_SUB": "Satisfaction - Selection - Connection",
     "CORE_COMPANY": "COMPANY",
-    "CORE_COMPANY_SUB": "Develops - Sustains - Build your empire",
+    "CORE_COMPANY_SUB": "Development - Sustainable - Building an empire",
     "CORE_COLLEAGUE": "COLLEAGUE",
-    "CORE_COLLEAGUE_SUB": "Improve - Partner - Synergetic",
+    "CORE_COLLEAGUE_SUB": "Improvement - Partner - Symbiosis",
     "MEDIA_TITLE": "EVENT - MEDIA - WEDDING",
     "CEO_GREETING": "WELCOME TO THE WORLD OF 5P!",
-    "CEO_P1": "Everything is created from passion and dedication with all sincerity. Events are the same — each event is a story that needs to be told.",
-    "CEO_P2": "Have you ever organized an event from the very first hesitant steps to its maturity? Every chair, flyer, stage, and drop of sweat. Looking at the journey you put into it, you can see the growth in thinking from small mistakes to perfection.",
-    "CEO_P3": "Do you love the way you create them? I created mine with all my heart. And '5P Event' was born from that priceless love to continue writing wonderful, emotion-filled stories.",
-    "CEO_P4": "You're not perfect, but you are unique and different. You may not create things that have never been created before, but you can deliver a very personal experience. Everyone wants their event to be wonderful and 5P Event will accompany you on that journey.",
-    "CEO_CLOSING": "I AM THE CEO FOUNDER & CREATIVE DIRECTOR AT 5P EVENT. READING THIS FAR, YOU UNDERSTAND.",
+    "CEO_P1": "Everything is created from passion and dedication with all heart. Events are the same, each event is a story that needs to be told.",
+    "CEO_P2": "Have you ever done an event from the first faltering steps to when it matures? Every chair, flyer, stage and even drops of sweat. Looking at the path you bring into it can see the maturity in thinking from small errors to perfection.",
+    "CEO_P3": "Do you love the way they are created? Personally, I created it with all my heart. And '5P Event' was born from that priceless love to continue, write further wonderful emotional stories.",
+    "CEO_P4": "You are not perfect, but you are unique and different, you cannot create things that have not been created but you can bring a very private experience. Everyone wants their event to be wonderful and 5P Event will accompany you.",
+    "CEO_CLOSING": "I AM CEO FOUNDER & CREATIVE DIRECTOR AT 5P EVENT, READING THIS YOU UNDERSTAND.",
     "CEO_NAME": "Le Van Hung",
     "CEO_TITLE": "CEO & Founder"
   },
@@ -74,9 +88,9 @@
     "CURRENT_PASSWORD": "Current Password",
     "NEW_PASSWORD": "New Password",
     "CONFIRM_PASSWORD": "Confirm New Password",
-    "PASSWORD_MISMATCH": "Passwords do not match",
+    "PASSWORD_MISMATCH": "Confirm password does not match",
     "PASSWORD_CHANGE_SUCCESS": "Password changed successfully",
-    "REQUIRED_FIELDS": "Please fill in all fields"
+    "REQUIRED_FIELDS": "Please fill in all information"
   },
   "EDITOR": {
     "INSERT_EDIT_IMAGE": "Insert/Edit Image",
@@ -88,24 +102,24 @@
     "TEXT_TO_DISPLAY": "Text to display"
   },
   "SIDEBAR": {
-    "DASHBOARD": "Overview",
-    "PRODUCTS": "Products",
-    "POSTS": "Posts",
+    "DASHBOARD": "Dashboard",
+    "PRODUCTS": "Products Management",
+    "POSTS": "Posts Management",
     "VIDEOS": "Highlight Videos",
-    "CONFIG": "Website Settings",
+    "CONFIG": "Website Config",
     "HOME_VIDEOS": "Home Videos",
-    "NEWSLETTER": "Newsletter Subscriptions",
+    "NEWSLETTER": "Newsletter Subscribers",
     "SEO": "SEO Meta Management",
-    "USERS": "User Management",
+    "USERS": "Users Management",
     "REPORTS": "Reports",
-    "PARTNERS": "Partner Management",
+    "PARTNERS": "Partners Management",
     "CONTACT_MESSAGES": "Contact Messages",
     "CONTENT_MANAGEMENT": "Content Management",
-    "CUSTOMER_ENGAGEMENT": "Customer Engagement",
+    "CUSTOMER_ENGAGEMENT": "Customer & Contact",
     "SYSTEM_SETTINGS": "System Settings"
   },
   "FOOTER": {
-    "SUBSCRIBE": "Subscribe to newsletter",
+    "SUBSCRIBE": "Subscribe to our newsletter",
     "EMAIL_PLACEHOLDER": "Your email...",
     "CONNECT_WITH_US": "Connect with us"
   },
@@ -116,6 +130,8 @@
     "SAVE": "Save Changes",
     "DELETE": "Delete",
     "EDIT": "Edit",
+    "BACK": "Back",
+    "GO_HOME": "Go Home",
     "SEARCH": "Search...",
     "STATUS": "Status",
     "ACTIONS": "Actions",
@@ -126,10 +142,10 @@
     "ERROR": "Error",
     "CONFIRM": "Confirm",
     "CLOSE": "Close",
-    "EMPTY_DATA": "No data found",
-    "AUTO_TRANSLATE_HINT": "System will automatically translate to English and Chinese.",
+    "EMPTY_DATA": "No data available",
+    "AUTO_TRANSLATE_HINT": "The system will automatically translate into English and Chinese.",
     "UPLOAD": "Upload",
-    "ACTIVE_DISPLAY": "Active display",
+    "ACTIVE_DISPLAY": "Active Display",
     "FORMAT_HINT": "Format: JPG, PNG, WEBP",
     "SIZE_HINT": "Max size: 2MB",
     "LANGUAGES": {
@@ -138,26 +154,110 @@
       "ZH": "Chinese"
     },
     "DATE_LOCALE": "en-US",
-    "LOADING": "Loading..."
+    "LOADING": "Loading...",
+    "CONTACT_NOW": "Contact Now",
+    "HOT": "HOT",
+    "404": "404",
+    "NEWS": "News",
+    "BREADCRUMB_HOME": "HOME",
+    "NOT_FOUND": "Not Found",
+    "NOT_FOUND_DESC": "The content you are looking for does not exist or has been deleted."
+  },
+  "CONTACT": {
+    "BREADCRUMB": "CONTACT",
+    "TITLE_CONNECT": "LET'S CONNECT",
+    "TITLE_WITH_US": "WITH US",
+    "DESC": "We are always ready to listen and accompany you in every event project. Please leave your information and we will respond as soon as possible.",
+    "FOLLOW_US": "FOLLOW US:",
+    "FORM": {
+      "FULLNAME": "Full Name",
+      "EMAIL": "Email",
+      "PHONE": "Phone Number",
+      "MESSAGE": "Message",
+      "MESSAGE_PLACEHOLDER": "Please enter your request...",
+      "SEND": "SEND MESSAGE",
+      "SENDING": "SENDING...",
+      "SUCCESS_MSG": "Thank you! We'll get back to you as soon as possible.",
+      "TOAST_SUCCESS": "Your message has been sent successfully!",
+      "TOAST_ERROR": "An error occurred while sending message, please try again later.",
+      "VAL_NAME": "Name is required",
+      "VAL_EMAIL": "Invalid email",
+      "VAL_PHONE": "Invalid phone number",
+      "VAL_MESSAGE": "Message is required"
+    },
+    "CARDS": {
+      "ADDRESS_TITLE": "ADDRESS",
+      "MAP_LABEL": "Map",
+      "CONTACT_TITLE": "CONTACT US",
+      "CALL_NOW": "Call Now",
+      "EMAIL_TITLE": "SEND EMAIL",
+      "SEND_EMAIL": "Send Email",
+      "PHONE_LABEL": "Phone",
+      "WORKING_HOURS": "Working Hours",
+      "WORKING_TIME": "Mon – Sat: 8:00 – 18:00"
+    }
+  },
+  "POST": {
+    "LABEL": "Post",
+    "NOT_FOUND": "Post not found",
+    "RECENT": "RECENT NEWS",
+    "LIBRARY": "LIBRARY",
+    "TAB_IMAGES": "IMAGES",
+    "TAB_VIDEOS": "VIDEOS",
+    "FEATURED_EVENT": "FEATURED EVENTS"
+  },
+  "PRODUCT": {
+    "RELATED": "RELATED PRODUCTS",
+    "NOT_FOUND": "Product not found",
+    "COMING_SOON": "Coming soon..."
+  },
+  "RENTAL": {
+    "STEPS": {
+      "STEP1_TITLE": "REQUIREMENT RECEIPT",
+      "STEP1_DESC": "Listen to needs, advise equipment categories suitable for event characteristics.",
+      "STEP2_TITLE": "QUOTATION & CONTRACT",
+      "STEP2_DESC": "Prepare detailed checklist, finalize transparent competitive quote and sign contract.",
+      "STEP3_TITLE": "EQUIPMENT SETUP",
+      "STEP3_DESC": "Transport and set up equipment on-site according to committed timeline, accurate testing.",
+      "STEP4_TITLE": "DIRECT SUPPORT",
+      "STEP4_DESC": "Technicians stay throughout the event, address issues immediately to ensure 100% success."
+    }
+  },
+  "SOUND_LIGHT": {
+    "BENEFITS": {
+      "BENEFIT1_TITLE": "MODERN EQUIPMENT",
+      "BENEFIT1_DESC": "Own the latest sound and lighting system, 100% imported.",
+      "BENEFIT2_TITLE": "PRO TECHNICIANS",
+      "BENEFIT2_DESC": "Team of experienced technicians, flexible situation handling.",
+      "BENEFIT3_TITLE": "OPTIMAL COST",
+      "BENEFIT3_DESC": "Bring the most reasonable cost accompanied by top service quality.",
+      "BENEFIT4_TITLE": "COMMITMENT TO SUCCESS",
+      "BENEFIT4_DESC": "We ensure the smoothness, perfection for the technical part of the event."
+    }
   },
   "PRODUCT_ADMIN": {
     "TITLE": "Product Management",
     "SUBTITLE": "List of 5P Event products and services",
-    "ADD_NEW": "Add new product",
-    "EDIT": "Edit product",
+    "ADD_NEW": "Add New Product",
+    "EDIT": "Edit Product",
     "FIELDS": {
       "NAME": "Product Name",
       "SLUG": "Slug",
       "PRICE": "Price",
+      "TYPE": "Product Type",
       "IMAGE": "Product Image",
       "CONTENT": "Detailed Content"
     },
     "PLACEHOLDERS": {
       "NAME": "Enter product name..."
     },
+    "FILTERS": {
+      "ALL_TYPES": "All Types"
+    },
     "TABLE": {
       "IMAGE": "Image",
       "NAME": "Product Name",
+      "TYPE": "Type",
       "PRICE": "Price",
       "STATUS": "Status",
       "ACTIONS": "Actions"
@@ -165,7 +265,7 @@
   },
   "SEO_ADMIN": {
     "TITLE": "SEO Meta Management",
-    "SUBTITLE": "SEO Configuration for 5P Event pages",
+    "SUBTITLE": "Configure SEO Meta for 5P Event pages",
     "EDIT_TITLE": "Edit SEO: {page}",
     "TABLE": {
       "PAGE": "Page",
@@ -180,17 +280,17 @@
     }
   },
   "NEWSLETTER_ADMIN": {
-    "TITLE": "Newsletter Subscription Management",
+    "TITLE": "Newsletter Subscribers Management",
     "TABLE": {
       "EMAIL": "Email",
-      "DATE": "Subscribe Date",
+      "DATE": "Subscription Date",
       "STATUS": "Status",
       "ACTIONS": "Actions"
     },
-    "EMPTY": "No subscribers found"
+    "EMPTY": "No subscribers yet"
   },
   "CONTACT_MESSAGE_ADMIN": {
-    "TITLE": "Contact Message Management",
+    "TITLE": "Contact Messages Management",
     "TABLE": {
       "SENDER": "Sender",
       "CONTACT": "Contact Info",
@@ -201,16 +301,16 @@
       "READ": "Read",
       "UNREAD": "Unread"
     },
-    "EMPTY": "No contact messages found"
+    "EMPTY": "No messages found"
   },
   "HOME_VIDEO_ADMIN": {
     "TITLE": "Home Video Management",
-    "ADD_NEW": "Add new home video",
-    "EDIT": "Edit home video",
+    "ADD_NEW": "Add New Home Video",
+    "EDIT": "Edit Home Video",
     "FIELDS": {
       "TITLE": "Video Title",
-      "THUMBNAIL": "Preview Image (Thumbnail)",
-      "URL": "Video Link (Youtube/Vimeo/Direct...)"
+      "THUMBNAIL": "Thumbnail",
+      "URL": "Video URL"
     },
     "PLACEHOLDERS": {
       "TITLE": "Enter video title..."
@@ -222,19 +322,31 @@
     }
   },
   "POSTS_ADMIN": {
-    "TITLE": "Post Management",
-    "SUBTITLE": "List of 5P Event articles",
-    "ADD_NEW": "Add new article",
-    "EDIT": "Edit article",
+    "TITLE": "Posts Management",
+    "SUBTITLE": "List of 5P Event posts",
+    "ADD_NEW": "Add New Post",
+    "EDIT": "Edit Post",
     "FIELDS": {
-      "TITLE": "Article Title",
+      "TITLE": "Post Title",
       "SLUG": "Slug",
       "STATUS": "Status",
       "IMAGE": "Featured Image (Media)",
-      "CONTENT": "Article Content"
+      "PUBLISH_AT": "Publish At",
+      "CONTENT": "Post Content"
+    },
+    "ACTIONS": {
+      "SCORE_SEO": "Score SEO (AI)"
+    },
+    "LABEL": {
+      "SEO_FEEDBACK": "AI Optimization Suggestions",
+      "SEO_ANALYSIS": "Overall Analysis",
+      "SEO_SUGGESTIONS": "Actionable Suggestions"
+    },
+    "ERRORS": {
+      "REQUIRED_FOR_SEO": "Title and content are required for SEO scoring"
     },
     "PLACEHOLDERS": {
-      "TITLE": "Enter article title...",
+      "TITLE": "Enter post title...",
       "SLUG": "example-post-slug"
     },
     "STATUS": {
@@ -242,24 +354,26 @@
       "DRAFT": "Draft",
       "SCHEDULED": "Scheduled",
       "PUBLISH": "Publish",
-      "INIT_PUBLISH": "Initialize & Publish"
+      "INIT_PUBLISH": "Init & Publish",
+      "AI_ANALYZING": "Analyzing SEO...",
+      "AI_SUCCESS": "SEO Score calculated successfully"
     },
     "TABLE": {
-      "POST": "Article",
+      "POST": "Post",
       "STATUS": "Status",
       "SEO_SCORE": "SEO Score",
-      "NOT_CALCULATED": "N/A"
+      "NOT_CALCULATED": "Not calculated"
     }
   },
   "VIDEOS_ADMIN": {
-    "TITLE": "Highlight Video Management",
-    "SUBTITLE": "Manage highlight videos library",
-    "ADD_NEW": "Add new highlight video",
-    "EDIT": "Edit highlight video",
+    "TITLE": "Highlight Videos Management",
+    "SUBTITLE": "Manage highlight videos repository",
+    "ADD_NEW": "Add New Highlight Video",
+    "EDIT": "Edit Highlight Video",
     "FIELDS": {
       "TITLE": "Video Title",
-      "THUMBNAIL": "Preview Image (Thumbnail)",
-      "URL": "Video Link (Youtube/Vimeo...)",
+      "THUMBNAIL": "Thumbnail",
+      "URL": "Video URL",
       "ORDER": "Display Order"
     },
     "PLACEHOLDERS": {
@@ -272,9 +386,9 @@
     }
   },
   "CONFIG_ADMIN": {
-    "TITLE": "Website Configuration",
-    "SUBTITLE": "Manage general information and system settings",
-    "TAB_CONTENT_TITLE": "Configuration Content",
+    "TITLE": "Website Config",
+    "SUBTITLE": "Manage general information and system configuration",
+    "TAB_CONTENT_TITLE": "Config Content",
     "TAB_CONTENT_DESC": "Manage information in group",
     "SAVE_ALL": "Save All",
     "SAVING": "Saving...",
@@ -295,31 +409,31 @@
       "CONTACT_EMAIL": "Contact Email",
       "CONTACT_ADDRESS": "Address",
       "CONTACT_MAP_IFRAME": "Map Iframe",
-      "SOCIAL_FACEBOOK": "Facebook link",
-      "SOCIAL_ZALO": "Zalo link",
-      "SOCIAL_YOUTUBE": "Youtube link",
+      "SOCIAL_FACEBOOK": "Facebook Link",
+      "SOCIAL_ZALO": "Zalo Link",
+      "SOCIAL_YOUTUBE": "Youtube Link",
       "MENU_HOME": "Home Menu",
       "MENU_ABOUT": "About Menu",
-      "MENU_EVENTS": "Event Organization Menu",
-      "MENU_SOUND_LIGHT": "Sound & Light Menu",
-      "MENU_RENTAL": "Rental Menu",
+      "MENU_EVENTS": "Events Menu",
+      "MENU_SOUND_LIGHT": "Sound & Lighting Menu",
+      "MENU_RENTAL": "Equipment Rental Menu",
       "MENU_CONTACT": "Contact Menu",
       "STATS_FIELDS": "Number of Fields",
       "STATS_EVENTS": "Number of Events",
       "STATS_BRANDS": "Number of Brands"
     },
     "HINT": {
-      "MAP_TITLE": "How to get Google Maps Iframe:",
-      "MAP_STEP1": "Go to Google Maps and find your address.",
-      "MAP_STEP2": "Click Share -> Embed a map.",
-      "MAP_STEP3": "Copy the URL inside the src=\"...\" attribute and paste it here."
+      "MAP_TITLE": "Google Maps Instructions:",
+      "MAP_STEP1": "Open Google Maps and find your address.",
+      "MAP_STEP2": "Click 'Share' -> Select 'Embed a map' tab (DO NOT use 'Send a link').",
+      "MAP_STEP3": "Click 'COPY HTML' and PASTE DIRECTLY here. The system will filter the map link automatically."
     }
   },
   "PARTNERS_ADMIN": {
-    "TITLE": "Partner Management",
-    "SUBTITLE": "List of client brands and accompanying partners",
-    "ADD_NEW": "Add new partner",
-    "EDIT": "Edit partner",
+    "TITLE": "Partners Management",
+    "SUBTITLE": "List of brand clients and partners",
+    "ADD_NEW": "Add New Partner",
+    "EDIT": "Edit Partner",
     "FIELDS": {
       "NAME": "Partner Name",
       "LOGO": "Partner Logo (Image/Iframe)",
@@ -338,15 +452,15 @@
   "DASHBOARD": {
     "OVERVIEW": {
       "PRODUCTS": "Products",
-      "POSTS": "Articles",
+      "POSTS": "Posts",
       "VIDEOS": "Highlight Videos",
       "SUBSCRIBERS": "Subscribers"
     },
     "CHARTS": {
-      "PRODUCTS_POSTS_TITLE": "Products & Articles (Yearly)",
-      "SUBSCRIBERS_TITLE": "Subscribers (Yearly)",
-      "POST_STATUS_TITLE": "Article Status",
-      "PRODUCT_STATUS_TITLE": "Product Activity",
+      "PRODUCTS_POSTS_TITLE": "Products & Posts (This Year)",
+      "SUBSCRIBERS_TITLE": "Subscribers (This Year)",
+      "POST_STATUS_TITLE": "Posts Status",
+      "PRODUCT_STATUS_TITLE": "Products Activity",
       "POST_STATUS": {
         "PUBLISHED": "Published",
         "DRAFT": "Draft",
@@ -359,13 +473,13 @@
     },
     "RECENT": {
       "PRODUCTS_TITLE": "Recently Added Products (Top 5)",
-      "SUBSCRIBERS_TITLE": "Recent Subscriptions (Top 5)",
+      "SUBSCRIBERS_TITLE": "Recent Email Subscriptions (Top 5)",
       "TABLE": {
         "PRODUCT_NAME": "Product Name",
         "PRICE": "Price",
         "STATUS": "Status",
         "EMAIL": "Email",
-        "DATE": "Join Date"
+        "DATE": "Subscription Date"
       },
       "STATUS": {
         "ACTIVE": "Active",

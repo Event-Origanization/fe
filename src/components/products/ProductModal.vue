@@ -58,6 +58,18 @@
             </span>
           </label>
         </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            {{ $t('PRODUCT_ADMIN.FIELDS.TYPE') }} *
+          </label>
+          <select
+            v-model="form.productType"
+            class="block w-full px-4 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all"
+          >
+            <option :value="PAGE_KEYS.SOUND_LIGHT">Âm thanh ánh sáng</option>
+            <option :value="PAGE_KEYS.RENTAL">Cho thuê thiết bị</option>
+          </select>
+        </div>
       </div>
 
       <!-- Main Image Upload -->
@@ -160,6 +172,7 @@ import { hasFieldChanged } from '@/utils/diff'
 import { useProductStore } from '@/store/product.store'
 import type { IProduct, ProductCreationAttributes } from '@/types/product'
 import { useToast } from '@/composables/useToast'
+import { PAGE_KEYS } from '@/constants'
 
 const props = defineProps({
   show: Boolean,
@@ -184,6 +197,7 @@ const initialForm: ProductCreationAttributes = {
   content_vi: '',
   price: 0,
   isActive: true,
+  productType: 'RENTAL',
   images: [],
   variants: []
 }

@@ -49,7 +49,87 @@
             <option value="SCHEDULED">{{ $t('POSTS_ADMIN.STATUS.SCHEDULED') }}</option>
           </select>
         </div>
+        <div v-if="form.status === 'SCHEDULED'">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            {{ $t('POSTS_ADMIN.FIELDS.PUBLISH_AT') || 'Thời gian đăng bài' }} *
+          </label>
+          <input
+            v-model="form.publishAt"
+            type="datetime-local"
+            class="block w-full px-4 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all"
+          />
+        </div>
+        <div class="flex items-end">
+          <button
+            type="button"
+            @click="handleScoreSeo"
+            :disabled="aiLoading"
+            class="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg font-medium transition-all shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50"
+          >
+            <i v-if="aiLoading" class="pi pi-spin pi-spinner mr-2"></i>
+            <i v-else class="pi pi-bolt mr-2 text-yellow-300"></i>
+            {{ $t('POSTS_ADMIN.ACTIONS.SCORE_SEO') || 'Chấm điểm SEO (AI)' }}
+          </button>
+        </div>
       </div>
+
+      <!-- SEO Score Result Card -->
+      <Transition name="fade">
+        <div v-if="seoResult || form.seoScore" class="bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 rounded-2xl p-6 shadow-sm overflow-hidden">
+          <div class="flex flex-col md:flex-row gap-8">
+            <!-- Left: Score Section -->
+            <div class="flex flex-col items-center justify-center space-y-3 bg-white dark:bg-gray-900/40 p-4 rounded-xl shadow-inner min-w-[140px]">
+              <span class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">SEO Score</span>
+              <div 
+                class="w-24 h-24 rounded-full border-[6px] flex items-center justify-center text-3xl font-black shadow-lg"
+                :class="[
+                  (seoResult?.score || form.seoScore || 0) >= 80 ? 'border-green-500 text-green-600 bg-green-50/50' :
+                  (seoResult?.score || form.seoScore || 0) >= 50 ? 'border-yellow-500 text-yellow-600 bg-yellow-50/50' :
+                  'border-red-500 text-red-600 bg-red-50/50'
+                ]"
+              >
+                {{ seoResult?.score || form.seoScore || 0 }}
+              </div>
+              <span 
+                class="text-xs font-semibold px-2 py-1 rounded-full uppercase"
+                :class="[
+                  (seoResult?.score || form.seoScore || 0) >= 80 ? 'bg-green-100 text-green-700' :
+                  (seoResult?.score || form.seoScore || 0) >= 50 ? 'bg-yellow-100 text-yellow-700' :
+                  'bg-red-100 text-red-700'
+                ]"
+              >
+                {{ (seoResult?.score || form.seoScore || 0) >= 80 ? 'Excellent' : (seoResult?.score || form.seoScore || 0) >= 50 ? 'Good' : 'Needs Improve' }}
+              </span>
+            </div>
+
+            <!-- Right: Feedback Section -->
+            <div class="flex-1 space-y-4">
+              <!-- Analysis -->
+              <div v-if="seoResult?.analysis || form.seoAnalysis" class="space-y-2">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                  <i class="pi pi-search"></i>
+                  {{ $t('POSTS_ADMIN.LABEL.SEO_ANALYSIS') || 'Phân tích tổng quan' }}
+                </h3>
+                <div class="text-sm text-gray-700 dark:text-gray-200 leading-relaxed italic">
+                  {{ seoResult?.analysis || form.seoAnalysis }}
+                </div>
+              </div>
+
+              <!-- Suggestions -->
+              <div v-if="seoResult?.suggestions || form.seoSuggestions" class="space-y-2 pt-2 border-t dark:border-gray-700">
+                <h3 class="text-xs font-bold text-purple-500 uppercase tracking-widest flex items-center gap-2">
+                  <i class="pi pi-sparkles"></i>
+                  {{ $t('POSTS_ADMIN.LABEL.SEO_SUGGESTIONS') || 'Gợi ý hành động' }}
+                </h3>
+                <div 
+                  class="text-sm text-gray-600 dark:text-gray-300 prose dark:prose-invert prose-sm max-w-none overflow-y-auto max-h-[250px] custom-scrollbar pr-2"
+                  v-html="seoResult?.suggestions || form.seoSuggestions"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
 
       <!-- Main Media Upload -->
       <div>
@@ -153,7 +233,7 @@ import { slugify } from '@/utils/string'
 import { fileToDataURL, checkFileSize } from '@/utils/file'
 import { hasFieldChanged } from '@/utils/diff'
 import { usePostStore } from '@/store/post.store'
-import type { IPost, PostCreationAttributes } from '@/types/post'
+import type { IPost, PostCreationAttributes, SeoScoreResult } from '@/types/post'
 import { useToast } from '@/composables/useToast'
 
 const props = defineProps({
@@ -172,7 +252,10 @@ const emit = defineEmits<{
 const { t } = useI18n()
 const isEdit = ref(false)
 const postStore = usePostStore()
-const { toastSuccess, toastError, toastWarn } = useToast()
+const { toastSuccess, toastError, toastWarn, toastInfo } = useToast()
+
+const aiLoading = ref(false)
+const seoResult = ref<SeoScoreResult | null>(null)
 
 const initialForm: PostCreationAttributes = {
   title_vi: '',
@@ -180,6 +263,10 @@ const initialForm: PostCreationAttributes = {
   content_vi: '',
   status: 'DRAFT',
   media: '',
+  publishAt: null,
+  seoScore: null,
+  seoAnalysis: null,
+  seoSuggestions: null,
 }
 
 const form = reactive({ ...initialForm })
@@ -228,6 +315,34 @@ const removeMainImage = () => {
 const handleTitleInput = () => {
   if (!isEdit.value) {
     form.slug = slugify(form.title_vi)
+  }
+}
+
+const handleScoreSeo = async () => {
+  if (!form.title_vi || !form.content_vi) {
+    toastWarn(t('POSTS_ADMIN.ERRORS.REQUIRED_FOR_SEO'))
+    return
+  }
+
+  aiLoading.value = true
+  toastInfo(t('POSTS_ADMIN.STATUS.AI_ANALYZING'))
+  
+  try {
+    const result = await postStore.scoreSeo({
+      title: form.title_vi,
+      slug: form.slug,
+      content: form.content_vi
+    })
+    seoResult.value = result
+    form.seoScore = result.score
+    form.seoAnalysis = result.analysis
+    form.seoSuggestions = result.suggestions
+    toastSuccess(t('POSTS_ADMIN.STATUS.AI_SUCCESS'))
+  } catch (error) {
+    console.error('AI SEO Error:', error)
+    toastError(t('COMMON.ERROR'))
+  } finally {
+    aiLoading.value = false
   }
 }
 

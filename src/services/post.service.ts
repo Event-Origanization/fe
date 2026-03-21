@@ -3,7 +3,8 @@ import type {
     IPost, 
     PostCreationAttributes, 
     PostQuery, 
-    PostListResponse 
+    PostListResponse,
+    SeoScoreResult
 } from '@/types/post'
 import type { ResponseError } from '@/utils/error'
 import { API_ROUTES } from '@/constants'
@@ -15,6 +16,7 @@ export interface IPostService {
   create: (body: PostCreationAttributes) => Promise<ApiResponse<IPost> | ResponseError>
   update: (id: number, body: Partial<PostCreationAttributes>) => Promise<ApiResponse<IPost> | ResponseError>
   delete: (id: number) => Promise<ApiResponse<null> | ResponseError>
+  scoreSeo: (data: { title: string; slug: string; content: string }) => Promise<ApiResponse<SeoScoreResult> | ResponseError>
 }
 
 class PostService implements IPostService {
@@ -53,6 +55,11 @@ class PostService implements IPostService {
     return apiService(API_ROUTES.POSTS.DELETE)
       .addPathParam(':id', id)
       .delete<null>()
+  }
+
+  scoreSeo(data: { title: string; slug: string; content: string }): Promise<ApiResponse<SeoScoreResult> | ResponseError> {
+    return apiService('/posts/score-seo') 
+      .post<SeoScoreResult>(data)
   }
 }
 

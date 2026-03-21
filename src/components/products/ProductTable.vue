@@ -26,6 +26,15 @@
           <option value="active">{{ $t('COMMON.ACTIVE') }}</option>
           <option value="inactive">{{ $t('COMMON.INACTIVE') }}</option>
         </select>
+
+        <select
+          v-model="filterType"
+          class="block w-full md:w-48 px-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
+        >
+          <option value="all">{{ $t('PRODUCT_ADMIN.FILTERS.ALL_TYPES') }}</option>
+          <option :value="PAGE_KEYS.SOUND_LIGHT">Âm thanh ánh sáng</option>
+          <option :value="PAGE_KEYS.RENTAL">Cho thuê thiết bị</option>
+        </select>
         
         <button
           @click="$emit('add')"
@@ -74,12 +83,18 @@
           :class="[
             'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
             isActive 
-              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
-              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+              ? 'bg-green-100 text-green-800 dark:bg-green-100 dark:text-green-800' 
+              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-100 dark:text-yellow-800'
           ]"
         >
-          <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="isActive ? 'bg-green-600' : 'bg-yellow-600'"></span>
           {{ isActive ? $t('COMMON.ACTIVE') : $t('COMMON.INACTIVE') }}
+        </span>
+      </template>
+
+      <!-- Custom Cell: Type -->
+      <template #cell(productType)="{ value }">
+        <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded text-xs">
+          {{ value === PAGE_KEYS.SOUND_LIGHT ? 'Âm thanh ánh sáng' : 'Cho thuê thiết bị' }}
         </span>
       </template>
 
@@ -118,11 +133,13 @@ import type { IProduct } from '@/types/product'
 import { useToast } from '@/composables/useToast'
 import { formatCurrency } from '@/utils/common'
 import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
+import { PAGE_KEYS } from '@/constants'
 
 const { t } = useI18n()
 
 const columns: ITableColumn[] = [
   { key: 'name_vi', label: t('PRODUCT_ADMIN.TABLE.NAME') },
+  { key: 'productType', label: t('PRODUCT_ADMIN.TABLE.TYPE') },
   { key: 'price', label: t('PRODUCT_ADMIN.TABLE.PRICE') },
   { key: 'isActive', label: t('PRODUCT_ADMIN.TABLE.STATUS') },
   { key: 'actions', label: t('PRODUCT_ADMIN.TABLE.ACTIONS'), align: 'right' }
@@ -138,6 +155,7 @@ const { toastSuccess, toastError } = useToast()
 
 const searchQuery = ref('')
 const filterStatus = ref('all')
+const filterType = ref('all')
 
 onMounted(() => {
   fetchProducts()
@@ -145,14 +163,16 @@ onMounted(() => {
 
 const fetchProducts = () => {
   const isActive = filterStatus.value === 'all' ? undefined : filterStatus.value === 'active'
+  const productType = filterType.value === 'all' ? undefined : filterType.value as 'SOUND_LIGHT' | 'RENTAL'
   productStore.fetchProducts({
     search: searchQuery.value,
-    isActive: isActive
+    isActive: isActive,
+    productType: productType
   })
 }
 
 // Watch for search and filter changes
-watch([searchQuery, filterStatus], () => {
+watch([searchQuery, filterStatus, filterType], () => {
   fetchProducts()
 })
 

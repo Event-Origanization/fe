@@ -60,7 +60,7 @@
 
       <!-- Search & Languages -->
       <div class="hidden md:flex items-center gap-6">
-        <div class="relative">
+        <!-- <div class="relative">
           <input
             type="text"
             placeholder="Tìm kiếm..."
@@ -79,7 +79,7 @@
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             ></path>
           </svg>
-        </div>
+        </div> -->
 
         <!-- Language Selector -->
         <LanguageSelector dark />

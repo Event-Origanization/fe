@@ -9,12 +9,12 @@
       </div>
       <div class="relative z-10 w-full max-w-7xl mx-auto px-4">
         <h1 class="text-4xl md:text-6xl font-black uppercase text-white mb-4 tracking-widest drop-shadow-[0_0_15px_rgba(220,38,38,0.8)]" data-aos="fade-down">
-          LIÊN HỆ
+          {{ $t('CONTACT.BREADCRUMB') }}
         </h1>
         <div class="flex items-center justify-center gap-2 text-sm md:text-base font-medium text-gray-300 uppercase tracking-widest" data-aos="fade-up" data-aos-delay="100">
-          <router-link to="/" class="hover:text-red-500 transition-colors">TRANG CHỦ</router-link>
+          <router-link to="/" class="hover:text-red-500 transition-colors">{{ $t('COMMON.BREADCRUMB_HOME') }}</router-link>
           <span class="text-gray-600">-</span>
-          <span class="text-red-500 font-bold drop-shadow-[0_0_5px_rgba(220,38,38,0.6)]">LIÊN HỆ</span>
+          <span class="text-red-500 font-bold drop-shadow-[0_0_5px_rgba(220,38,38,0.6)]">{{ $t('CONTACT.BREADCRUMB') }}</span>
         </div>
       </div>
       <div class="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-600 to-transparent opacity-50 shadow-[0_0_10px_rgba(220,38,38,1)]"></div>
@@ -52,10 +52,10 @@
           <div>
             <p class="text-red-500 text-xs font-bold uppercase tracking-widest mb-2">5P Event</p>
             <h2 class="text-3xl md:text-4xl font-black uppercase leading-tight text-white mb-4">
-              HÃY KẾT NỐI <br /><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">CÙNG CHÚNG TÔI</span>
+              {{ $t('CONTACT.TITLE_CONNECT') }} <br /><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">{{ $t('CONTACT.TITLE_WITH_US') }}</span>
             </h2>
             <p class="text-gray-400 leading-relaxed text-sm">
-              Chúng tôi luôn sẵn sàng lắng nghe và đồng hành cùng bạn trong từng dự án sự kiện. Hãy để lại thông tin và chúng tôi sẽ phản hồi trong thời gian sớm nhất.
+              {{ $t('CONTACT.DESC') }}
             </p>
           </div>
 
@@ -74,7 +74,7 @@
 
           <!-- Socials -->
           <div class="flex items-center gap-3 mt-2">
-            <span class="text-xs text-gray-500 uppercase tracking-widest font-bold">THEO DÕI:</span>
+            <span class="text-xs text-gray-500 uppercase tracking-widest font-bold">{{ $t('CONTACT.FOLLOW_US') }}</span>
             <a v-for="(s, k) in socials" :key="k" :href="s.link"
               class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:border-red-500 hover:text-white hover:scale-110 hover:shadow-[0_0_12px_rgba(220,38,38,0.5)] transition-all duration-300">
               <i :class="['pi text-sm', s.icon]"></i>
@@ -87,24 +87,24 @@
           <form @submit.prevent="handleSubmit" class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8 md:p-10 flex flex-col gap-6 backdrop-blur-sm">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div class="flex flex-col gap-2">
-                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Họ và tên <span class="text-red-500">*</span></label>
+                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">{{ $t('CONTACT.FORM.FULLNAME') }} <span class="text-red-500">*</span></label>
                 <input v-model="form.name" type="text" placeholder="Nguyễn Văn A"
                   class="contact-input" required />
               </div>
               <div class="flex flex-col gap-2">
-                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Email <span class="text-red-500">*</span></label>
+                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">{{ $t('CONTACT.FORM.EMAIL') }} <span class="text-red-500">*</span></label>
                 <input v-model="form.email" type="email" placeholder="email@domain.com"
                   class="contact-input" required />
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Số điện thoại</label>
+              <label class="text-xs font-bold uppercase tracking-widest text-gray-400">{{ $t('CONTACT.FORM.PHONE') }}</label>
               <input v-model="form.phone" type="tel" placeholder="0369 150 431"
                 class="contact-input" />
             </div>
             <div class="flex flex-col gap-2">
-              <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Nội dung <span class="text-red-500">*</span></label>
-              <textarea v-model="form.message" rows="5" placeholder="Vui lòng nhập yêu cầu của bạn..."
+              <label class="text-xs font-bold uppercase tracking-widest text-gray-400">{{ $t('CONTACT.FORM.MESSAGE') }} <span class="text-red-500">*</span></label>
+              <textarea v-model="form.message" rows="5" :placeholder="$t('CONTACT.FORM.MESSAGE_PLACEHOLDER')"
                 class="contact-input resize-none" required></textarea>
             </div>
 
@@ -112,15 +112,15 @@
               :disabled="isSending"
               class="group w-full py-4 bg-gradient-to-r from-red-700 to-red-600 hover:from-red-600 hover:to-red-500 text-white font-black uppercase tracking-widest rounded-xl shadow-[0_0_20px_rgba(220,38,38,0.4)] hover:shadow-[0_0_30px_rgba(220,38,38,0.7)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70">
               <i class="pi pi-send group-hover:translate-x-1 transition-transform"></i>
-              <span v-if="!isSending">GỬI TIN NHẮN</span>
-              <span v-else>ĐANG GỬI...</span>
+              <span v-if="!isSending">{{ $t('CONTACT.FORM.SEND') }}</span>
+              <span v-else>{{ $t('CONTACT.FORM.SENDING') }}</span>
             </button>
 
             <!-- Success message -->
             <transition name="slide-fade">
               <div v-if="submitSuccess" class="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-bold">
                 <i class="pi pi-check-circle text-lg"></i>
-                Cảm ơn bạn! Chúng tôi sẽ liên hệ lại sớm nhất có thể.
+                {{ $t('CONTACT.FORM.SUCCESS_MSG') }}
               </div>
             </transition>
           </form>
@@ -132,7 +132,7 @@
         <div class="flex items-center gap-4 mb-8">
           <div class="h-[2px] flex-1 bg-gradient-to-r from-transparent to-red-600/40"></div>
           <h2 class="text-xl font-black uppercase tracking-widest text-white whitespace-nowrap">
-            <i class="pi pi-map-marker text-red-500 mr-2"></i>TÌM CHÚNG TÔI TRÊN BẢN ĐỒ
+            <i class="pi pi-map-marker text-red-500 mr-2"></i>{{ $t('COMMON.SEARCH') }}
           </h2>
           <div class="h-[2px] flex-1 bg-gradient-to-l from-transparent to-red-600/40"></div>
         </div>
@@ -159,12 +159,14 @@
 </template>
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
 import { useConfigStore } from '@/store/config'
 import { useContactMessageStore } from '@/store/contactMessage.store'
 import { useToast } from '@/composables/useToast'
 import { validateEmail, validatePhone, validateStringField } from '@/utils/validation'
 
+const { t } = useI18n()
 const configStore = useConfigStore()
 const contactMessageStore = useContactMessageStore()
 const { toastSuccess, toastError } = useToast()
@@ -186,29 +188,29 @@ const form = reactive({
 
 const handleSubmit = async () => {
   // Validate fields
-  const nameRes = validateStringField(form.name, 'Họ và tên')
+  const nameRes = validateStringField(form.name, t('CONTACT.FORM.FULLNAME'))
   if (!nameRes.isValid) {
-    toastError(nameRes.error || 'Tên là bắt buộc')
+    toastError(nameRes.error || t('CONTACT.FORM.VAL_NAME'))
     return
   }
 
   const emailRes = validateEmail(form.email)
   if (!emailRes.isValid) {
-    toastError(emailRes.error || 'Email không hợp lệ')
+    toastError(emailRes.error || t('CONTACT.FORM.VAL_EMAIL'))
     return
   }
 
   if (form.phone) {
     const phoneRes = validatePhone(form.phone)
     if (!phoneRes.isValid) {
-      toastError(phoneRes.error || 'Số điện thoại không hợp lệ')
+      toastError(phoneRes.error || t('CONTACT.FORM.VAL_PHONE'))
       return
     }
   }
 
-  const msgRes = validateStringField(form.message, 'Nội dung')
+  const msgRes = validateStringField(form.message, t('CONTACT.FORM.MESSAGE'))
   if (!msgRes.isValid) {
-    toastError(msgRes.error || 'Nội dung là bắt buộc')
+    toastError(msgRes.error || t('CONTACT.FORM.VAL_MESSAGE'))
     return
   }
 
@@ -225,11 +227,11 @@ const handleSubmit = async () => {
     
     submitSuccess.value = true
     Object.assign(form, { name: '', email: '', phone: '', message: '' })
-    toastSuccess('Tin nhắn của bạn đã được gửi thành công!')
+    toastSuccess(t('CONTACT.FORM.TOAST_SUCCESS'))
     
     setTimeout(() => { submitSuccess.value = false }, 5000)
   } catch {
-    toastError(contactMessageStore.error || 'Có lỗi xảy ra khi gửi tin nhắn, vui lòng thử lại sau.')
+    toastError(contactMessageStore.error || t('CONTACT.FORM.TOAST_ERROR'))
   } finally {
     isSending.value = false
   }
@@ -255,16 +257,16 @@ const contactHotline = computed(() => configStore.getConfigValue('CONTACT', 'CON
 const contactEmail = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_EMAIL', 'info.marketingevent5p@gmail.com'))
 
 const contactCards = computed(() => [
-  { icon: 'pi-map-marker', title: 'ĐỊA CHỈ', value: contactAddress.value, link: `https://maps.google.com/?q=${encodeURIComponent(contactAddress.value)}`, linkLabel: 'Bản đồ', external: true },
-  { icon: 'pi-phone', title: 'LIÊN HỆ CHÚNG TÔI', value: contactHotline.value, link: `tel:${contactHotline.value.replace(/\s+/g, '')}`, linkLabel: 'Gọi ngay', external: false },
-  { icon: 'pi-envelope', title: 'GỬI MAIL', value: contactEmail.value, link: `mailto:${contactEmail.value}`, linkLabel: 'Gửi email', external: false }
+  { icon: 'pi-map-marker', title: t('CONTACT.CARDS.ADDRESS_TITLE'), value: contactAddress.value, link: `https://maps.google.com/?q=${encodeURIComponent(contactAddress.value)}`, linkLabel: t('CONTACT.CARDS.MAP_LABEL'), external: true },
+  { icon: 'pi-phone', title: t('CONTACT.CARDS.CONTACT_TITLE'), value: contactHotline.value, link: `tel:${contactHotline.value.replace(/\s+/g, '')}`, linkLabel: t('CONTACT.CARDS.CALL_NOW'), external: false },
+  { icon: 'pi-envelope', title: t('CONTACT.CARDS.EMAIL_TITLE'), value: contactEmail.value, link: `mailto:${contactEmail.value}`, linkLabel: t('CONTACT.CARDS.SEND_EMAIL'), external: false }
 ])
 
 const infoItems = computed(() => [
-  { icon: 'pi-map-marker', label: 'Địa chỉ', value: contactAddress.value },
-  { icon: 'pi-phone', label: 'Điện thoại', value: contactHotline.value },
-  { icon: 'pi-envelope', label: 'Email', value: contactEmail.value },
-  { icon: 'pi-clock', label: 'Giờ làm việc', value: 'Thứ 2 – Thứ 7: 8:00 – 18:00' }
+  { icon: 'pi-map-marker', label: t('CONTACT.CARDS.ADDRESS_TITLE'), value: contactAddress.value },
+  { icon: 'pi-phone', label: t('CONTACT.CARDS.PHONE_LABEL'), value: contactHotline.value },
+  { icon: 'pi-envelope', label: t('CONTACT.CARDS.EMAIL_TITLE'), value: contactEmail.value },
+  { icon: 'pi-clock', label: t('CONTACT.CARDS.WORKING_HOURS'), value: t('CONTACT.CARDS.WORKING_TIME') }
 ])
 
 const socials = computed(() => [

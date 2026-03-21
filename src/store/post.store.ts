@@ -15,6 +15,7 @@ interface PostState {
   loading: boolean
   error: string | null
   currentPost: IPost | null
+  recentNews: IPost[]
 }
 
 export const usePostStore = defineStore('post', {
@@ -26,6 +27,7 @@ export const usePostStore = defineStore('post', {
     loading: false,
     error: null,
     currentPost: null,
+    recentNews: [],
   }),
 
   actions: {
@@ -41,6 +43,32 @@ export const usePostStore = defineStore('post', {
         this.total = result.data.total
         this.totalPages = result.data.totalPages
         this.currentPage = result.data.currentPage
+      } catch (err) {
+        this.error = err instanceof Error ? err.message : 'An unexpected error occurred'
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async fetchRecentNews(limit: number = 50) {
+      try {
+        const result = await postService.getAll({ limit })
+        if (!(result instanceof ResponseError)) {
+          this.recentNews = result.data.posts
+        }
+      } catch (err) {
+        console.error('Failed to fetch recent news:', err)
+      }
+    },
+
+    async fetchPostBySlug(slug: string) {
+      this.loading = true
+      this.error = null
+      try {
+        const result = await postService.getBySlug(slug)
+        if (result instanceof ResponseError) throw result
+        this.currentPost = result.data
+        return result.data
       } catch (err) {
         this.error = err instanceof Error ? err.message : 'An unexpected error occurred'
       } finally {
@@ -121,6 +149,21 @@ export const usePostStore = defineStore('post', {
 
     setCurrentPost(post: IPost | null) {
       this.currentPost = post
+    },
+
+    async scoreSeo(data: { title: string; slug: string; content: string }) {
+      this.loading = true
+      this.error = null
+      try {
+        const result = await postService.scoreSeo(data)
+        if (result instanceof ResponseError) throw result
+        return result.data
+      } catch (err) {
+        this.error = err instanceof Error ? err.message : 'An unexpected error occurred'
+        throw err
+      } finally {
+        this.loading = false
+      }
     }
   }
 })
