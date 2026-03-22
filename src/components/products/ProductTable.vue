@@ -83,10 +83,11 @@
           :class="[
             'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
             isActive 
-              ? 'bg-green-100 text-green-800 dark:bg-green-100 dark:text-green-800' 
-              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-100 dark:text-yellow-800'
+              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
+              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
           ]"
         >
+          <span class="w-1.5 h-1.5 rounded-full mr-1.5" :class="isActive ? 'bg-green-600' : 'bg-yellow-600'"></span>
           {{ isActive ? $t('COMMON.ACTIVE') : $t('COMMON.INACTIVE') }}
         </span>
       </template>

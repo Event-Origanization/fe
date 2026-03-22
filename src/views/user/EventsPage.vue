@@ -43,6 +43,10 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <!-- Left: Big Images -->
           <div class="lg:col-span-7 flex flex-col gap-4" data-aos="fade-up">
+            <!-- Loading -->
+            <div v-if="postStore.loading" class="col-span-3 flex justify-center items-center w-full h-[50vh]">
+              <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
+            </div>
             <!-- Top large image -->
             <div v-if="postStore.recentNews[0]" @click="goToPost(postStore.recentNews[0].slug)" class="w-full aspect-video rounded overflow-hidden relative group cursor-pointer border border-white/5 hover:border-red-500/30 transition-all">
               <img :src="postStore.recentNews[0].media" :alt="getTitle(postStore.recentNews[0])" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -196,8 +200,8 @@ const changePage = (p: number) => {
 
 onMounted(async () => {
   AOS.refresh()
-  postStore.fetchRecentNews(50)
-  postStore.fetchPosts({ limit: 6, page: 1 })
+  await postStore.fetchRecentNews(50)
+  await postStore.fetchPosts({ limit: 6, page: 1 })
 })
 </script>
 

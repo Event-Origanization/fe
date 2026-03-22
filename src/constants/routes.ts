@@ -113,6 +113,10 @@ export const ADMIN_PATHS = {
   SEO: 'seo',
   PARTNERS: 'partners',
   CONTACT_MESSAGES: 'contact-messages',
+  POSTS_CREATE: 'posts/create',
+  POSTS_EDIT: 'posts/edit/:id',
+  PRODUCTS_CREATE: 'products/create',
+  PRODUCTS_EDIT: 'products/edit/:id',
 }
 
 export const ADMIN_ROUTES = {
@@ -127,5 +131,7 @@ export const ADMIN_ROUTES = {
   SEO: `${ADMIN_BASE}/${ADMIN_PATHS.SEO}`,
   PARTNERS: `${ADMIN_BASE}/${ADMIN_PATHS.PARTNERS}`,
   CONTACT_MESSAGES: `${ADMIN_BASE}/${ADMIN_PATHS.CONTACT_MESSAGES}`,
+  POSTS_CREATE: `${ADMIN_BASE}/${ADMIN_PATHS.POSTS_CREATE}`,
+  POSTS_EDIT: `${ADMIN_BASE}/${ADMIN_PATHS.POSTS_EDIT}`,
 }
 

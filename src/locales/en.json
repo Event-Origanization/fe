@@ -239,7 +239,9 @@
     "TITLE": "Product Management",
     "SUBTITLE": "List of 5P Event products and services",
     "ADD_NEW": "Add New Product",
+    "ADD_SUBTITLE": "Add a new product to the service catalog",
     "EDIT": "Edit Product",
+    "EDIT_SUBTITLE": "Edit product content and optimize display",
     "FIELDS": {
       "NAME": "Product Name",
       "SLUG": "Slug",
@@ -325,7 +327,9 @@
     "TITLE": "Posts Management",
     "SUBTITLE": "List of 5P Event posts",
     "ADD_NEW": "Add New Post",
+    "ADD_SUBTITLE": "Create a new post with quality content",
     "EDIT": "Edit Post",
+    "EDIT_SUBTITLE": "Edit post content and optimize SEO",
     "FIELDS": {
       "TITLE": "Post Title",
       "SLUG": "Slug",
@@ -338,6 +342,8 @@
       "SCORE_SEO": "Score SEO (AI)"
     },
     "LABEL": {
+      "PUBLISHING": "Publishing Settings",
+      "SEO_DETAIL": "SEO Score Details",
       "SEO_FEEDBACK": "AI Optimization Suggestions",
       "SEO_ANALYSIS": "Overall Analysis",
       "SEO_SUGGESTIONS": "Actionable Suggestions"
