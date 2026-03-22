@@ -1,6 +1,6 @@
 <!-- src/views/admin/Products/ProductManagement.vue -->
 <template>
-  <div class="space-y-6">
+  <div class="space-y-6 pb-20">
     <page-breadcrumb :pageTitle="currentPageTitle" />
     
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -10,45 +10,32 @@
     </div>
 
     <component-card :title="$t('PRODUCT_ADMIN.SUBTITLE')">
-      <product-table @add="openCreateModal" @edit="handleEdit" />
+      <product-table @add="openCreate" @edit="handleEdit" />
     </component-card>
-
-    <ProductModal
-      :show="showModal"
-      :product="selectedProduct"
-      @close="showModal = false"
-      @submit="handleProductSubmit"
-    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
 import ProductTable from '@/components/products/ProductTable.vue'
-import ProductModal from '@/components/products/ProductModal.vue'
 import type { IProduct } from '@/types/product'
 
 const { t } = useI18n()
+const router = useRouter()
 const currentPageTitle = computed(() => t('PRODUCT_ADMIN.TITLE'))
-const showModal = ref(false)
-const selectedProduct = ref<IProduct | null>(null)
 
-const openCreateModal = () => {
-  selectedProduct.value = null
-  showModal.value = true
+const openCreate = () => {
+  router.push({ name: 'ProductCreate' })
 }
 
 const handleEdit = (product: IProduct) => {
-  selectedProduct.value = { ...product }
-  showModal.value = true
-}
-
-const handleProductSubmit = (data: IProduct) => {
-  console.log('Product submitted successfully:', data)
-  // In a real app, this would call an API
-  // For now we just log it as requested
+  router.push({ 
+    name: 'ProductEdit', 
+    params: { id: product.id } 
+  })
 }
 </script>

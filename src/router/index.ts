@@ -76,6 +76,36 @@ const router = createRouter({
           },
         },
         {
+          path: ADMIN_PATHS.POSTS_CREATE,
+          name: 'PostCreate',
+          component: () => import('@/views/admin/Posts/PostEditorPage.vue'),
+          meta: {
+            title: 'Tạo bài viết mới',
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
+        {
+          path: ADMIN_PATHS.POSTS_EDIT,
+          name: 'PostEdit',
+          component: () => import('@/views/admin/Posts/PostEditorPage.vue'),
+          meta: {
+            title: 'Chỉnh sửa bài viết',
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
+        {
+          path: 'products/create',
+          name: 'ProductCreate',
+          component: () => import('@/views/admin/Products/ProductEditorPage.vue'),
+          meta: { requiresAuth: true, title: 'Thêm sản phẩm mới' }
+        },
+        {
+          path: 'products/edit/:id',
+          name: 'ProductEdit',
+          component: () => import('@/views/admin/Products/ProductEditorPage.vue'),
+          meta: { requiresAuth: true, title: 'Chỉnh sửa sản phẩm' }
+        },
+        {
           path: ADMIN_PATHS.SEO,
           name: 'SeoManagement',
           component: () => import('@/views/admin/Seo/SeoManagement.vue'),

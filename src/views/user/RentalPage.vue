@@ -36,6 +36,7 @@
           </div>
 
           <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Loading -->
             <div v-if="productStore.loading" class="col-span-3 flex justify-center items-center w-full h-[50vh]">
               <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
             </div>

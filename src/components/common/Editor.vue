@@ -145,14 +145,18 @@ const editorConfig = computed(() => {
     branding: false,
     promotion: false,
     statusbar: false,
+    
+    // Sticky toolbar settings
+    sticky_toolbar: true,
+    sticky_toolbar_offset: 0, // Adjust this if there's a top navbar
 
     content_style: `
       body { 
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
         font-size: 14px;
-        line-height: 1.3;
+        line-height: 1.5;
         margin: 0;
-        padding: 10px;
+        padding: 20px;
         outline: none !important;
       }
       body:focus {
@@ -160,26 +164,33 @@ const editorConfig = computed(() => {
         border: none !important;
       }
       p {
-        margin: 0 0 6px 0;
-        line-height: 1.3;
+        margin: 0 0 12px 0;
+        line-height: 1.5;
       }
-      br {
-        line-height: 1.3;
-      }
-      div {
+      h1, h2, h3, h4, h5, h6 {
+        margin-top: 24px;
+        margin-bottom: 12px;
+        font-weight: 700;
         line-height: 1.3;
       }
       table {
         border-collapse: collapse;
         width: 100%;
+        margin-bottom: 20px;
       }
       table td, table th {
-        border: 1px solid #ddd;
-        padding: 8px;
+        border: 1px solid #e2e8f0;
+        padding: 10px;
       }
       table th {
-        background-color: #f2f2f2;
+        background-color: #f8fafc;
         font-weight: bold;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 10px 0;
       }
     `,
 
@@ -189,8 +200,8 @@ const editorConfig = computed(() => {
 
   // Add conditional configuration
   if (props.autoResize) {
-    config.autoresize_bottom_margin = 16
-    config.autoresize_overflow_padding = 10
+    config.autoresize_bottom_margin = 20
+    config.autoresize_overflow_padding = 20
     config.autoresize_on_init = true
     config.resize = false
   } else {
@@ -320,20 +331,20 @@ const editorConfig = computed(() => {
           dialog,
           '.tox-dialog__title',
           'Insert/Edit Image',
-          t('lang.EDITOR.INSERT_EDIT_IMAGE'),
+          t('EDITOR.INSERT_EDIT_IMAGE'),
         )
         updateLabels(
           dialog,
           '.tox-dialog__title',
           'Insert/Edit Link',
-          t('lang.EDITOR.INSERT_EDIT_LINK'),
+          t('EDITOR.INSERT_EDIT_LINK'),
         )
 
-        updateLabels(dialog, '.tox-label', 'Source', t('lang.EDITOR.SOURCE'))
-        updateLabels(dialog, '.tox-label', 'Height', t('lang.EDITOR.HEIGHT'))
-        updateLabels(dialog, '.tox-label', 'Width', t('lang.EDITOR.WIDTH'))
-        updateLabels(dialog, '.tox-label', 'URL', t('lang.EDITOR.URL'))
-        updateLabels(dialog, '.tox-label', 'Text to display', t('lang.EDITOR.TEXT_TO_DISPLAY'))
+        updateLabels(dialog, '.tox-label', 'Source', t('EDITOR.SOURCE'))
+        updateLabels(dialog, '.tox-label', 'Height', t('EDITOR.HEIGHT'))
+        updateLabels(dialog, '.tox-label', 'Width', t('EDITOR.WIDTH'))
+        updateLabels(dialog, '.tox-label', 'URL', t('EDITOR.URL'))
+        updateLabels(dialog, '.tox-label', 'Text to display', t('EDITOR.TEXT_TO_DISPLAY'))
 
         // Hide lock icon (constrain proportions)
         dialog
@@ -666,16 +677,37 @@ defineExpose({
 }
 
 ::deep(.tox-tinymce) {
-  border-radius: 4px;
+  border-radius: 0;
   border: none;
   min-height: var(--min-height) !important;
   height: var(--editor-height) !important;
+  display: flex;
+  flex-direction: column;
 }
 
 ::deep(.tox-tinymce.tox-edit-focus) {
   min-height: var(--min-height) !important;
   height: var(--editor-height) !important;
   border: none !important;
+}
+
+/* Ensure the edit area grows to fill the fixed height and handles scrolling */
+::deep(.tox-editor-container) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+::deep(.tox-edit-area) {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+}
+
+::deep(.tox-edit-area iframe) {
+  flex: 1 !important;
+  height: 100% !important;
 }
 
 /* Let TinyMCE autoresize manage inner heights */
@@ -686,10 +718,17 @@ defineExpose({
 }
 
 ::deep(.tox-editor-header) {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: white;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  background-color: white !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.dark ::deep(.tox-editor-header) {
+  background-color: #1e293b !important;
+  border-bottom-color: #334155 !important;
 }
 
 ::deep(.tox-promotion),

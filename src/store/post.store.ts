@@ -13,7 +13,9 @@ interface PostState {
   totalPages: number
   currentPage: number
   loading: boolean
+  loadingRecentNews: boolean
   error: string | null
+  errorRecentNews: string | null
   currentPost: IPost | null
   recentNews: IPost[]
 }
@@ -25,7 +27,9 @@ export const usePostStore = defineStore('post', {
     totalPages: 0,
     currentPage: 1,
     loading: false,
+    loadingRecentNews: false,
     error: null,
+    errorRecentNews: null,
     currentPost: null,
     recentNews: [],
   }),
@@ -51,13 +55,18 @@ export const usePostStore = defineStore('post', {
     },
 
     async fetchRecentNews(limit: number = 50) {
+      this.loadingRecentNews = true
+      this.errorRecentNews = null
       try {
         const result = await postService.getAll({ limit })
-        if (!(result instanceof ResponseError)) {
-          this.recentNews = result.data.posts
-        }
+
+        if (result instanceof ResponseError) throw result
+
+        this.recentNews = result.data.posts
       } catch (err) {
-        console.error('Failed to fetch recent news:', err)
+        this.errorRecentNews = err instanceof Error ? err.message : 'An unexpected error occurred'
+      } finally {
+        this.loadingRecentNews = false
       }
     },
 

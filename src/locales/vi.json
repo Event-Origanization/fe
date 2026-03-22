@@ -239,7 +239,9 @@
     "TITLE": "Quản Lý Sản Phẩm",
     "SUBTITLE": "Danh sách sản phẩm dịch vụ 5P Event",
     "ADD_NEW": "Thêm sản phẩm mới",
+    "ADD_SUBTITLE": "Thêm sản phẩm mới vào danh mục dịch vụ",
     "EDIT": "Chỉnh sửa sản phẩm",
+    "EDIT_SUBTITLE": "Chỉnh sửa nội dung sản phẩm và tối ưu hiển thị",
     "FIELDS": {
       "NAME": "Tên sản phẩm",
       "SLUG": "Đường dẫn (Slug)",
@@ -325,7 +327,9 @@
     "TITLE": "Quản Lý Bài Viết",
     "SUBTITLE": "Danh sách bài viết của 5P Event",
     "ADD_NEW": "Thêm bài viết mới",
+    "ADD_SUBTITLE": "Tạo bài viết mới với nội dung chất lượng",
     "EDIT": "Chỉnh sửa bài viết",
+    "EDIT_SUBTITLE": "Chỉnh sửa nội dung bài viết và tối ưu SEO",
     "FIELDS": {
       "TITLE": "Tiêu đề bài viết",
       "SLUG": "Đường dẫn (Slug)",
@@ -338,6 +342,8 @@
       "SCORE_SEO": "Chấm điểm SEO (AI)"
     },
     "LABEL": {
+      "PUBLISHING": "Cài đặt đăng bài",
+      "SEO_DETAIL": "Chi tiết đánh giá SEO",
       "SEO_FEEDBACK": "Gợi ý tối ưu từ AI",
       "SEO_ANALYSIS": "Phân tích tổng quan",
       "SEO_SUGGESTIONS": "Gợi ý hành động"

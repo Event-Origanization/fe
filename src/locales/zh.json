@@ -239,7 +239,9 @@
     "TITLE": "产品管理",
     "SUBTITLE": "5P Event 产品和服务列表",
     "ADD_NEW": "添加新产品",
+    "ADD_SUBTITLE": "将新产品添加到服务目录",
     "EDIT": "编辑产品",
+    "EDIT_SUBTITLE": "编辑产品内容并优化展示",
     "FIELDS": {
       "NAME": "产品名称",
       "SLUG": "Slug",
@@ -325,7 +327,9 @@
     "TITLE": "文章管理",
     "SUBTITLE": "5P Event 文章列表",
     "ADD_NEW": "添加新文章",
+    "ADD_SUBTITLE": "创建具有高质量内容的全新文章",
     "EDIT": "编辑文章",
+    "EDIT_SUBTITLE": "编辑文章内容并优化 SEO",
     "FIELDS": {
       "TITLE": "文章标题",
       "SLUG": "Slug",
@@ -338,6 +342,8 @@
       "SCORE_SEO": "SEO 评分 (AI)"
     },
     "LABEL": {
+      "PUBLISHING": "发布设置",
+      "SEO_DETAIL": "SEO 评分详情",
       "SEO_FEEDBACK": "AI 优化建议",
       "SEO_ANALYSIS": "整体分析",
       "SEO_SUGGESTIONS": "具体建议"
