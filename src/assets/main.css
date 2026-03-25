@@ -178,6 +178,9 @@ layer(base);
 */
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   *,
   ::after,
   ::before,

@@ -138,6 +138,7 @@ const emit = defineEmits<{
 const isEdit = ref(false)
 const homeVideoStore = useHomeVideoStore()
 const { toastSuccess, toastError, toastWarn } = useToast()
+const selectedFile = ref<File | null>(null)
 
 const initialForm: HomeVideoCreationAttributes = {
   title_vi: '',
@@ -156,6 +157,7 @@ watch(() => props.video, (newVal) => {
     isEdit.value = false
     Object.assign(form, initialForm)
   }
+  selectedFile.value = null
 }, { immediate: true })
 
 const fileInput = ref<HTMLInputElement | null>(null)
@@ -168,24 +170,20 @@ const handleFileUpload = async (event: Event) => {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file) {
-    import('@/utils/file').then(async ({ checkFileSize, fileToDataURL }) => {
+    import('@/utils/file').then(async ({ checkFileSize }) => {
       if (!checkFileSize(file, 2)) {
         toastWarn('Dung lượng ảnh không được vượt quá 2MB')
         return
       }
-      try {
-        const base64 = await fileToDataURL(file)
-        form.thumbnail = base64
-      } catch (error) {
-        console.error('Lỗi khi đọc file:', error)
-        toastError('Có lỗi xảy ra khi tải ảnh lên')
-      }
+      selectedFile.value = file
+      form.thumbnail = URL.createObjectURL(file)
     })
   }
 }
 
 const removeThumbnail = () => {
   form.thumbnail = ''
+  selectedFile.value = null
   if (fileInput.value) {
     fileInput.value.value = ''
   }
@@ -198,9 +196,14 @@ const handleSubmit = async () => {
   }
 
   try {
+    const dataToSend = { ...form }
+    if (selectedFile.value) {
+      (dataToSend as any).image = selectedFile.value
+    }
+
     let result
     if (isEdit.value && props.video?.id) {
-      const payload: Partial<HomeVideoCreationAttributes> = { ...form }
+      const payload: any = { ...dataToSend }
       
       // Kiểm tra xem có thay đổi tiêu đề không để yêu cầu dịch lại
       payload.translateTitle = hasFieldChanged(props.video, form, 'title_vi')
@@ -208,9 +211,9 @@ const handleSubmit = async () => {
       result = await homeVideoStore.updateVideo(props.video.id, payload)
     } else {
       result = await homeVideoStore.createVideo({ 
-        ...form, 
+        ...dataToSend, 
         translateTitle: true 
-      })
+      } as any)
     }
 
     toastSuccess(isEdit.value ? 'Cập nhật video thành công' : 'Thêm video thành công')

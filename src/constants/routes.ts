@@ -98,6 +98,9 @@ export const API_ROUTES = {
     MARK_AS_READ: '/contact-messages/:id/read',
     DELETE: '/contact-messages/:id',
   },
+  UPLOAD: {
+    IMAGE: '/upload/image',
+  },
 }
 
 const ADMIN_BASE = '/wpadmin'

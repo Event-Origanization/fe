@@ -265,6 +265,7 @@ onMounted(async () => {
 })
 
 const fileInput = ref<HTMLInputElement | null>(null)
+const selectedFile = ref<File | null>(null)
 
 const triggerFileUpload = () => {
   fileInput.value?.click()
@@ -278,18 +279,15 @@ const handleFileUpload = async (event: Event) => {
       toastWarn('Dung lượng ảnh không được vượt quá 2MB')
       return
     }
-    try {
-      const base64 = await fileToDataURL(file)
-      form.images = [base64]
-    } catch (error) {
-      console.error('Lỗi khi đọc file:', error)
-      toastError('Có lỗi xảy ra khi tải ảnh lên')
-    }
+    selectedFile.value = file
+    // Create a local blob URL for preview
+    form.images = [URL.createObjectURL(file)]
   }
 }
 
 const removeMainImage = () => {
   form.images = []
+  selectedFile.value = null
   if (fileInput.value) {
     fileInput.value.value = ''
   }
@@ -312,8 +310,14 @@ const handleSubmit = async () => {
   }
 
   try {
+    const dataToSend = { ...form }
+    // If we have a selected file, pass it as 'image' field for FormData conversion
+    if (selectedFile.value) {
+      (dataToSend as any).image = selectedFile.value
+    }
+
     if (isEdit.value && productId.value) {
-      const payload: Partial<ProductCreationAttributes> = { ...form }
+      const payload: any = { ...dataToSend }
       
       if (originalProduct.value) {
         payload.translateName = hasFieldChanged(originalProduct.value, form, 'name_vi')
@@ -324,10 +328,10 @@ const handleSubmit = async () => {
       toastSuccess('Cập nhật sản phẩm thành công')
     } else {
       await productStore.createProduct({ 
-        ...form, 
+        ...dataToSend, 
         translateName: true, 
         translateContent: true 
-      })
+      } as any)
       toastSuccess('Thêm sản phẩm thành công')
     }
 

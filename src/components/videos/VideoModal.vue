@@ -152,6 +152,7 @@ const { t } = useI18n()
 const isEdit = ref(false)
 const videoStore = useVideoStore()
 const { toastSuccess, toastError, toastWarn } = useToast()
+const selectedFile = ref<File | null>(null)
 
 const initialForm: HighlightVideoCreationAttributes = {
   title_vi: '',
@@ -171,6 +172,7 @@ watch(() => props.video, (newVal) => {
     isEdit.value = false
     Object.assign(form, initialForm)
   }
+  selectedFile.value = null
 }, { immediate: true })
 
 const fileInput = ref<HTMLInputElement | null>(null)
@@ -183,24 +185,20 @@ const handleFileUpload = async (event: Event) => {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file) {
-    import('@/utils/file').then(async ({ checkFileSize, fileToDataURL }) => {
+    import('@/utils/file').then(async ({ checkFileSize }) => {
       if (!checkFileSize(file, 2)) {
         toastWarn(t('COMMON.SIZE_HINT'))
         return
       }
-      try {
-        const base64 = await fileToDataURL(file)
-        form.thumbnail = base64
-      } catch (error) {
-        console.error('Lỗi khi đọc file:', error)
-        toastError(t('COMMON.ERROR'))
-      }
+      selectedFile.value = file
+      form.thumbnail = URL.createObjectURL(file)
     })
   }
 }
 
 const removeThumbnail = () => {
   form.thumbnail = ''
+  selectedFile.value = null
   if (fileInput.value) {
     fileInput.value.value = ''
   }
@@ -213,9 +211,14 @@ const handleSubmit = async () => {
   }
 
   try {
+    const dataToSend = { ...form }
+    if (selectedFile.value) {
+      (dataToSend as any).image = selectedFile.value
+    }
+
     let result
     if (isEdit.value && props.video?.id) {
-      const payload: Partial<HighlightVideoCreationAttributes> = { ...form }
+      const payload: any = { ...dataToSend }
       
       // Kiểm tra xem có thay đổi tiêu đề không để yêu cầu dịch lại
       payload.translateTitle = hasFieldChanged(props.video, form, 'title_vi')
@@ -223,9 +226,9 @@ const handleSubmit = async () => {
       result = await videoStore.updateVideo(props.video.id, payload)
     } else {
       result = await videoStore.createVideo({ 
-        ...form, 
+        ...dataToSend, 
         translateTitle: true 
-      })
+      } as any)
     }
 
     toastSuccess(t('COMMON.SUCCESS'))

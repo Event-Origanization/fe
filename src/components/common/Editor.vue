@@ -14,6 +14,7 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import tinymce from 'tinymce/tinymce'
 import { useI18n } from 'vue-i18n'
+import { uploadService } from '@/services/upload.service'
 
 import 'tinymce/skins/ui/oxide/skin.min.css'
 
@@ -213,51 +214,22 @@ const editorConfig = computed(() => {
   config.image_description = false
   config.image_title = false
 
-  // Enable file picker for images
-  config.file_picker_types = 'image'
-
-  config.file_picker_callback = (
-     
-    callback: (url: string, meta: Record<string, unknown>) => void,
-    _value: unknown,
-    _meta: Record<string, unknown>,
-  ) => {
-    void _value
-    void _meta
-    // Create a hidden input element
-    const input = document.createElement('input')
-    input.setAttribute('type', 'file')
-    input.setAttribute('accept', 'image/*')
-
-    input.onchange = (e: Event) => {
-      const target = e.target as HTMLInputElement
-      const file = target.files?.[0]
-
-      if (!file) return
-
-      // Check if file is an image
-      if (!file.type.match('image.*')) {
-        alert('Please select an image file')
-        return
-      }
-
-      // Read the file as base64
-      const reader = new FileReader()
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        // Call the callback with the base64 data
-        if (e.target?.result) {
-          callback(e.target.result as string, {
-            alt: file.name,
-            title: file.name,
-          })
+  config.automatic_uploads = true
+  config.images_upload_handler = (blobInfo: any, progress: (percent: number) => void) => new Promise((resolve, reject) => {
+    uploadService.uploadImage(blobInfo.blob())
+      .then((res) => {
+        if ('data' in res && res.data?.location) {
+          resolve(res.data.location)
+        } else if ('message' in res) {
+          reject(res.message)
+        } else {
+          reject('Image upload failed')
         }
-      }
-      reader.readAsDataURL(file)
-    }
-
-    // Trigger the file picker
-    input.click()
-  }
+      })
+      .catch((err) => {
+        reject(err.message || 'Unknown error occurred during upload')
+      })
+  })
 
   config.convert_urls = false
   config.relative_urls = false

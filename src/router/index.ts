@@ -27,11 +27,15 @@ export const ROUTE_NAMES = {
   SOUND_LIGHT: 'Sound_Light',
   RENTAL: 'Rental',
   CONTACT: 'Contact',
+  NEWS: 'News',
   POST_DETAIL: 'PostDetail',
   PRODUCT_DETAIL: 'ProductDetail',
   SIGNIN: 'Signin',
   SIGNUP: 'Signup',
   NOT_FOUND: 'NotFound',
+  PRODUCT_MANAGEMENT: 'ProductManagement',
+  PRODUCT_EDIT: 'ProductEdit',
+  PRODUCT_CREATE: 'ProductCreate'
 } as const
 
 const PUBLIC_ROUTE_NAMES: string[] = Object.values(ROUTE_NAMES)
@@ -218,6 +222,12 @@ const router = createRouter({
           name: ROUTE_NAMES.CONTACT,
           component: () => import('@/views/user/ContactPage.vue'),
           meta: { title: 'Contact Us' },
+        },
+        {
+          path: getSeoPath('NEWS', 'news').replace(/^\//, ''),
+          name: ROUTE_NAMES.NEWS,
+          component: () => import('@/views/user/NewsPage.vue'),
+          meta: { title: 'News' },
         },
         {
           path: getSeoPath('POST_DETAIL', 'post/:slug').replace(/^\//, ''),

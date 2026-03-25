@@ -1,4 +1,5 @@
 import { apiService, type ApiResponse } from '@/lib/http'
+import { objectToFormData } from '@/utils/formData'
 import type { 
     IProduct, 
     ProductCreationAttributes, 
@@ -39,14 +40,16 @@ class ProductService implements IProductService {
   }
 
   create(body: ProductCreationAttributes): Promise<ApiResponse<IProduct> | ResponseError> {
+    const formData = objectToFormData(body)
     return apiService(API_ROUTES.PRODUCTS.CREATE)
-      .post<IProduct>(body)
+      .post<IProduct>(formData)
   }
 
   update(id: number, body: Partial<ProductCreationAttributes>): Promise<ApiResponse<IProduct> | ResponseError> {
+    const formData = objectToFormData(body)
     return apiService(API_ROUTES.PRODUCTS.UPDATE)
       .addPathParam(':id', id)
-      .put<IProduct>(body)
+      .put<IProduct>(formData)
   }
 
   delete(id: number): Promise<ApiResponse<null> | ResponseError> {
