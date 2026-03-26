@@ -1,208 +1,167 @@
 <template>
-  <footer
-    class="mt-12 bg-[#050510]/95 pt-16 border-t border-gray-900 border-opacity-50 relative overflow-hidden"
-  >
-    <!-- Decoration lines -->
-    <div
-      class="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-600 via-pink-600 to-red-600 shadow-[0_0_20px_rgba(219,39,119,0.8)]"
-    ></div>
-    <div class="container mx-auto px-4 pb-12">
-      <!-- Subcribe Form inside glowing border -->
-      <div
-        class="max-w-3xl mx-auto bg-gradient-to-r from-gray-900 to-gray-800 p-[1px] rounded-full mb-16 drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] text-white"
-      >
-        <div class="bg-black rounded-full flex items-center p-2 pr-2 overflow-hidden shadow-inner">
-          <div class="pl-6 flex-shrink-0 flex items-center gap-2">
-            <svg
-              class="w-5 h-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              ></path>
-            </svg>
-            <span class="text-white font-medium uppercase text-sm tracking-widest"
-              >{{ $t('FOOTER.SUBSCRIBE') }}</span
-            >
-          </div>
-          <div class="w-px h-6 bg-gray-700 mx-4"></div>
-          <input
-            v-model="email"
-            type="email"
-            :placeholder="$t('FOOTER.EMAIL_PLACEHOLDER')"
-            class="bg-transparent flex-1 text-white text-sm focus:outline-none placeholder-gray-600 py-2"
-            @keyup.enter="handleSubscribe"
-          />
-          <button
-            @click="handleSubscribe"
-            :disabled="loading"
-            class="bg-[#111] border border-gray-700 hover:bg-gray-800 text-white p-2 rounded-full transition-colors flex items-center justify-center disabled:opacity-50"
-          >
-            <svg
-              class="w-5 h-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div>
+  <footer class="relative mt-20 pt-16 font-outfit">
+    <!-- Gray Background Container -->
+    <div class="bg-[#e9ecf2] rounded-tl-[100px] md:rounded-tl-[180px] relative pt-16 pb-4 md:mt-10">
+      
+      <!-- Top Right Yellow Shape extending higher -->
+      <div class="absolute -top-[40px] md:-top-[60px] right-0 w-[40%] md:w-[25%] h-[80px] md:h-[120px] bg-yellow-400 rounded-bl-[80px] md:rounded-bl-[150px] z-0"></div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
-        <!-- Brand -->
-        <div class="md:col-span-1 space-y-4 text-center md:text-left">
-          <div
-            class="w-16 h-16 bg-red-600 rounded flex items-center justify-center text-white font-bold text-3xl mx-auto md:mx-0 shadow-[0_0_15px_rgba(220,38,38,0.5)]"
-          >
-            5P
-          </div>
-          <h3 class="font-bold text-brand-500 uppercase tracking-wider text-base mt-4">
-            {{ configStore.getConfigValue('GENERAL', 'WEBSITE_NAME', '5P EVENT') }}
-          </h3>
-        </div>
+      <!-- Main Container -->
+      <div class="mx-auto px-10 lg:px-20 relative z-10 w-full">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 justify-between">
+          
+          <!-- Left Section (Logo, Text, Socials) -->
+          <div class="lg:w-[35%] flex flex-col pt-2">
+            <!-- Actual Logo Image -->
+            <div class="mb-8">
+              <router-link to="/" class="inline-block relative">
+                <img src="@/assets/images/LOGO-5P.png" alt="5P EVENT Logo" class="h-20 md:h-36 object-contain" />
+              </router-link>
+            </div>
 
-        <!-- Info List -->
-        <div
-          class="md:col-span-2 space-y-3 text-gray-400 leading-relaxed text-center md:text-left border-l border-gray-800 pl-4 md:pl-8"
-        >
-          <p>
-            <strong class="text-white uppercase">
-              {{
-                configStore.getConfigValue(
-                  'GENERAL',
-                  'WEBSITE_FULLNAME',
-                  'CÔNG TY TNHH TRUYỀN THÔNG VÀ TỔ CHỨC SỰ KIỆN 5P EVENT',
-                )
-              }}
-            </strong>
-          </p>
-          <p class="flex items-start gap-2 justify-center md:justify-start">
-            <svg
-              class="w-4 h-4 text-gray-500 mt-1 flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              ></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              ></path>
-            </svg>
-            <span>
-              {{
-                configStore.getConfigValue(
-                  'CONTACT',
-                  'CONTACT_ADDRESS',
-                  'Landmark 81, Vinhomes Central Park, 720A Điện Biên Phủ, Phường 22, Quận Bình Thạnh, TP.HCM',
-                )
-              }}
-            </span>
-          </p>
-          <p class="flex items-center gap-2 justify-center md:justify-start">
-            <svg
-              class="w-4 h-4 text-gray-500 flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              ></path>
-            </svg>
-            <span
-              >Hotline:
-              {{ configStore.getConfigValue('CONTACT', 'CONTACT_HOTLINE', '090 123 4567') }}</span
-            >
-          </p>
-          <p class="flex items-center gap-2 justify-center md:justify-start">
-            <svg
-              class="w-4 h-4 text-gray-500 flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              ></path>
-            </svg>
-            <span
-              >Email:
-              {{ configStore.getConfigValue('CONTACT', 'CONTACT_EMAIL', 'admin@5pevent.vn') }}</span
-            >
-          </p>
+            <!-- Description -->
+            <p class="text-gray-900 text-base font-medium leading-relaxed max-w-[360px] mb-8">
+              The Munich Interactive Intelligence Initiative promotes interactions between researchers, and between researchers and social actors.
+            </p>
+
+            <!-- Socials -->
+            <div class="flex items-center gap-3 mb-6">
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_LINKEDIN', '#')" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
+                <i class="pi pi-linkedin font-bold text-base"></i>
+              </a>
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_INSTAGRAM', '#')" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
+                <i class="pi pi-instagram font-bold text-base"></i>
+              </a>
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#')" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
+                <i class="pi pi-youtube font-bold text-base"></i>
+              </a>
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_ZALO', '#')" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
+                <i class="pi pi-link font-bold text-base"></i>
+              </a>
+            </div>
+            
+            <!-- Slogan in Red -->
+            <p class="text-red-600 text-lg font-bold leading-snug max-w-[450px]">
+              5P EVENT mang đến sự kiện SÁNG TẠO trong ý tưởng - CHỈN CHU trong khâu tổ chức - TỐI GIẢM về chi phí
+            </p>
+          </div>
+
+          <!-- Right Section (Columns & Logos) -->
+          <div class="lg:w-[65%] flex flex-col justify-between pt-4">
+            <!-- 5 Columns -->
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 text-base mb-16">
+              
+              <!-- Col 1 -->
+              <div class="flex flex-col gap-4">
+                <div>
+                  <div class="text-red-500 font-bold text-base uppercase">Giới thiệu chung</div>
+                </div>
+                <ul class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide pr-4">
+                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">Explore our Science</router-link></li>
+                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">Interactive Experiences and Sensing</router-link></li>
+                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">Interactive Decisions</router-link></li>
+                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">Interactive Discovery</router-link></li>
+                </ul>
+              </div>
+
+              <!-- Col 2 -->
+              <div class="flex flex-col gap-4">
+                <div>
+                  <div class="text-red-500 font-bold text-base uppercase">Dự án thực hiện</div>
+                </div>
+                <ul class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide">
+                  <li><router-link to="/events" class="hover:text-red-500 transition-colors block leading-snug">CVBE Lab</router-link></li>
+                  <li><router-link to="/events" class="hover:text-red-500 transition-colors block leading-snug">Crowd Cognition Lab</router-link></li>
+                </ul>
+              </div>
+
+              <!-- Col 3 -->
+              <div class="flex flex-col gap-4">
+                <div>
+                  <div class="text-red-500 font-bold text-base uppercase">Tin tức</div>
+                </div>
+                <ul class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide">
+                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">Multimedia</router-link></li>
+                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">Blog</router-link></li>
+                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">Events</router-link></li>
+                </ul>
+              </div>
+
+              <!-- Col 4 -->
+              <div class="flex flex-col gap-4">
+                <div>
+                  <div class="text-red-500 font-bold text-base uppercase">Thiết bị sự kiện</div>
+                </div>
+              </div>
+
+              <!-- Col 5 -->
+              <div class="flex flex-col gap-4">
+                <div> <!-- align title down to match other columns that have red text above them -->
+                  <h4 class="text-red-500 font-bold text-base uppercase"><router-link to="/contact" class="hover:text-red-500 transition-colors">CONTACT US</router-link></h4>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Partner Logos Row -->
+            <div class="flex flex-wrap items-center justify-start lg:justify-between gap-6 pb-2">
+               <!-- LMU -->
+               <div class="h-10 px-3 bg-[#428042] text-white font-bold flex items-center justify-center gap-2 rounded-sm select-none">
+                 <span class="text-xl tracking-tighter leading-none mt-0.5">LMU</span>
+                 <div class="flex flex-col text-[4px] leading-tight text-left mt-0.5 border-l border-white/50 pl-1.5 opacity-90">
+                   <span>LUDWIG-</span>
+                   <span>MAXIMILIANS-</span>
+                   <span>UNIVERSITÄT</span>
+                   <span>MÜNCHEN</span>
+                 </div>
+               </div>
+               
+               <!-- EU & ERC -->
+               <div class="flex items-center gap-4 select-none">
+                 <div class="h-10 w-16 bg-[#003399] flex items-center justify-center relative rounded-sm">
+                   <div class="text-yellow-400 flex items-center justify-center">
+                     <div class="w-8 h-8 rounded-full border-[1.5px] border-yellow-400 border-dotted"></div>
+                   </div>
+                 </div>
+                 <div class="h-10 flex items-center justify-center font-serif italic pr-1">
+                   <div class="text-[#f15a24] font-black text-xl tracking-tighter flex items-center gap-1 opacity-70">
+                     <i class="pi pi-sun text-lg"></i>
+                     erc
+                   </div>
+                 </div>
+               </div>
+               
+               <!-- DFG -->
+               <div class="h-10 text-[#003c7e] font-black text-3xl flex items-center gap-3 select-none">
+                 DFG 
+                 <span class="text-[7px] leading-[1.2] font-semibold text-[#006699] flex flex-col font-sans uppercase">
+                   <span>Deutsche</span>
+                   <span>Forschungsgemeinschaft</span>
+                 </span>
+               </div>
+               
+               <!-- VolkswagenStiftung -->
+               <div class="h-10 flex items-center gap-2 font-bold tracking-tight text-[#0a1e3f] select-none text-[15px]">
+                 <div class="grid grid-cols-3 gap-[2px] w-4">
+                   <div class="w-1 h-1 bg-[#0a1e3f] rounded-full" v-for="i in 9" :key="i"></div>
+                 </div>
+                 VolkswagenStiftung
+               </div>
+               
+               <!-- bidt -->
+               <div class="h-10 flex items-center font-bold text-3xl tracking-tighter text-[#1b2554] select-none">
+                 bidt
+               </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Socials and Links -->
-        <div class="md:col-span-1 space-y-4 text-center md:text-right text-white">
-          <h4 class="text-white font-medium font-outfit uppercase tracking-widest text-xs mb-6">
-            {{ $t('FOOTER.CONNECT_WITH_US') }}
-          </h4>
-          <div class="flex items-center justify-center md:justify-end gap-3 cursor-pointer">
-            <!-- Facebook -->
-            <a
-              :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_FACEBOOK', '#')"
-              target="_blank"
-              class="w-10 h-10 rounded-full border border-gray-700 bg-gray-900/50 flex items-center justify-center hover:bg-brand-500 hover:border-brand-500 transition-colors"
-            >
-              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M18.77,7.46H14.5v-1.9c0-.9.6-1.1,1-1.1h3V.5h-4.33C10.24.5,9.5,3.44,9.5,5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4Z"
-                />
-              </svg>
-            </a>
-            <!-- Youtube -->
-            <a
-              :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#')"
-              target="_blank"
-              class="w-10 h-10 rounded-full border border-gray-700 bg-gray-900/50 flex items-center justify-center hover:bg-brand-500 hover:border-brand-500 transition-colors"
-            >
-              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M21.58,7.19A2.71,2.71,0,0,0,19.67,5.3c-1.68-.45-8.44-.45-8.44-.45s-6.76,0-8.45.45A2.67,2.67,0,0,0,.87,7.19C.42,8.87.42,12.5.42,12.5s0,3.63.45,5.31A2.71,2.71,0,0,0,2.78,19.7c1.69.45,8.45.45,8.45.45s6.76,0,8.44-.45a2.71,2.71,0,0,0,1.91-1.89c.45-1.68.45-5.31.45-5.31s0-3.63-.45-5.31Zm-13,8.41V9.4l5.95,3.1-5.95,3.1Z"
-                />
-              </svg>
-            </a>
-            <!-- Zalo -->
-            <a
-              :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_ZALO', '#')"
-              target="_blank"
-              class="w-10 h-10 rounded-full border text-xs font-bold border-gray-700 bg-gray-900/50 flex items-center justify-center hover:bg-brand-500 hover:border-brand-500 transition-colors text-white"
-            >
-              Zalo
-            </a>
-          </div>
-          <div class="pt-8 text-gray-600 text-[11px] uppercase tracking-wider">
-            © 2026
-            {{
-              configStore.getConfigValue('GENERAL', 'WEBSITE_FULLNAME', '5P EVENT TRADING CO.,LTD')
-            }}
-          </div>
+        <!-- Yellow Bottom Line -->
+        <div class="w-full h-[3px] bg-yellow-400 mt-8 lg:mt-12"></div>
+        
+        <!-- Copyright Text -->
+        <div class="text-center py-6 opacity-0 h-10">
+           <!-- Space below line -->
         </div>
       </div>
     </div>
@@ -216,38 +175,4 @@ defineOptions({
 })
 
 const configStore = useConfigStore()
-
-import { ref } from 'vue'
-import { useNewsletterStore } from '@/store/newsletter'
-import { useToast } from '@/composables/useToast'
-
-const newsletterStore = useNewsletterStore()
-const { toastSuccess, toastError, toastWarn } = useToast()
-
-const email = ref('')
-const loading = ref(false)
-
-const handleSubscribe = async () => {
-  if (!email.value) {
-    toastWarn('Vui lòng nhập email')
-    return
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(email.value)) {
-    toastWarn('Email không hợp lệ')
-    return
-  }
-
-  loading.value = true
-  try {
-    await newsletterStore.subscribe(email.value)
-    toastSuccess('Đăng ký nhận tin thành công!')
-    email.value = ''
-  } catch {
-    toastError(newsletterStore.error || 'Có lỗi xảy ra khi đăng ký')
-  } finally {
-    loading.value = false
-  }
-}
 </script>

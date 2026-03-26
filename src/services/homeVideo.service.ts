@@ -1,4 +1,5 @@
 import { apiService, type ApiResponse } from '@/lib/http'
+import { objectToFormData } from '@/utils/formData'
 import type { 
     IHomeVideo, 
     HomeVideoCreationAttributes, 
@@ -32,14 +33,16 @@ class HomeVideoService implements IHomeVideoService {
   }
 
   create(body: HomeVideoCreationAttributes): Promise<ApiResponse<IHomeVideo> | ResponseError> {
+    const formData = objectToFormData(body)
     return apiService(API_ROUTES.HOME_VIDEOS.CREATE)
-      .post<IHomeVideo>(body)
+      .post<IHomeVideo>(formData)
   }
 
   update(id: number, body: Partial<HomeVideoCreationAttributes>): Promise<ApiResponse<IHomeVideo> | ResponseError> {
+    const formData = objectToFormData(body)
     return apiService(API_ROUTES.HOME_VIDEOS.UPDATE)
       .addPathParam(':id', id)
-      .put<IHomeVideo>(body)
+      .put<IHomeVideo>(formData)
   }
 
   delete(id: number): Promise<ApiResponse<null> | ResponseError> {

@@ -1,4 +1,5 @@
 import { apiService, type ApiResponse } from '@/lib/http'
+import { objectToFormData } from '@/utils/formData'
 import type { 
     IHighlightVideo, 
     HighlightVideoCreationAttributes, 
@@ -32,14 +33,16 @@ class HighlightVideoService implements IHighlightVideoService {
   }
 
   create(body: HighlightVideoCreationAttributes): Promise<ApiResponse<IHighlightVideo> | ResponseError> {
+    const formData = objectToFormData(body)
     return apiService(API_ROUTES.HIGHLIGHT_VIDEOS.CREATE)
-      .post<IHighlightVideo>(body)
+      .post<IHighlightVideo>(formData)
   }
 
   update(id: number, body: Partial<HighlightVideoCreationAttributes>): Promise<ApiResponse<IHighlightVideo> | ResponseError> {
+    const formData = objectToFormData(body)
     return apiService(API_ROUTES.HIGHLIGHT_VIDEOS.UPDATE)
       .addPathParam(':id', id)
-      .put<IHighlightVideo>(body)
+      .put<IHighlightVideo>(formData)
   }
 
   delete(id: number): Promise<ApiResponse<null> | ResponseError> {

@@ -1,162 +1,170 @@
 <template>
-  <div class="w-full bg-[#050510] min-h-screen text-white">
+  <div class="w-full bg-white min-h-screen text-gray-900 font-outfit overflow-hidden pb-20">
+    <!-- HERO SECTION WITH DECORATIVE SHAPES -->
+    <section class="relative pt-32 pb-20 px-6 lg:px-20 max-w-[1440px] mx-auto min-h-[700px] flex flex-col lg:flex-row items-center justify-between gap-16">
+      
+      <!-- Abstract Background Decor -->
+      <div class="absolute top-[10%] right-0 w-[400px] h-[400px] border-[40px] border-yellow-400/20 rounded-full -mr-40 pointer-events-none"></div>
+      <div class="absolute bottom-[20%] left-[-5%] w-[300px] h-[300px] bg-red-600/5 rounded-full blur-3xl pointer-events-none"></div>
 
-    <!-- PAGE BANNER -->
-    <section class="relative pt-32 pb-20 flex flex-col items-center justify-center text-center border-b border-red-900/30 overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-gradient-to-b from-red-900/40 via-[#050510]/80 to-[#050510]"></div>
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-red-600/20 blur-[100px] rounded-full pointer-events-none"></div>
-      </div>
-      <div class="relative z-10 w-full max-w-7xl mx-auto px-4">
-        <h1 class="text-4xl md:text-6xl font-black uppercase text-white mb-4 tracking-widest drop-shadow-[0_0_15px_rgba(220,38,38,0.8)]" data-aos="fade-down">
-          {{ $t('CONTACT.BREADCRUMB') }}
+      <!-- LEFT SIDE: TITLE & ILLUSTRATIVE ELEMENT -->
+      <div class="lg:w-1/2 relative z-10" data-aos="fade-right">
+        <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tight leading-[0.9] text-gray-900 mb-12">
+          GET<br />IN TOUCH
         </h1>
-        <div class="flex items-center justify-center gap-2 text-sm md:text-base font-medium text-gray-300 uppercase tracking-widest" data-aos="fade-up" data-aos-delay="100">
-          <router-link to="/" class="hover:text-red-500 transition-colors">{{ $t('COMMON.BREADCRUMB_HOME') }}</router-link>
-          <span class="text-gray-600">-</span>
-          <span class="text-red-500 font-bold drop-shadow-[0_0_5px_rgba(220,38,38,0.6)]">{{ $t('CONTACT.BREADCRUMB') }}</span>
-        </div>
-      </div>
-      <div class="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-600 to-transparent opacity-50 shadow-[0_0_10px_rgba(220,38,38,1)]"></div>
-    </section>
-
-    <!-- CONTACT CARDS -->
-    <section class="container mx-auto px-4 py-20">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-        <div v-for="(card, i) in contactCards" :key="i"
-          class="group relative flex flex-col items-center text-center p-8 rounded-2xl bg-white/[0.03] border border-white/[0.07] hover:border-red-500/40 hover:bg-white/[0.06] hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(220,38,38,0.15)] transition-all duration-400 overflow-hidden cursor-pointer"
-          :data-aos="i === 0 ? 'flip-left' : i === 1 ? 'zoom-in-up' : 'flip-right'"
-          :data-aos-delay="i * 120" data-aos-duration="700">
-          <!-- bg glow on hover -->
-          <div class="absolute inset-0 bg-gradient-to-b from-red-600/0 via-red-600/0 to-red-600/0 group-hover:from-red-700/10 transition-all duration-500 rounded-2xl"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center mb-5 shadow-[0_0_20px_rgba(220,38,38,0.5)] group-hover:scale-110 transition-transform duration-300">
-              <i :class="['pi text-2xl text-white', card.icon]"></i>
-            </div>
-            <h3 class="font-black uppercase tracking-widest text-sm text-white mb-2">{{ card.title }}</h3>
-            <p class="text-gray-300 text-sm leading-relaxed mb-5">{{ card.value }}</p>
-            <a :href="card.link" :target="card.external ? '_blank' : '_self'"
-              class="inline-flex items-center gap-2 px-5 py-2 border border-red-600 rounded-full text-xs font-bold uppercase tracking-widest text-red-500 hover:bg-red-600 hover:text-white hover:shadow-[0_0_12px_rgba(220,38,38,0.5)] transition-all duration-300">
-              {{ card.linkLabel }}
-              <i class="pi pi-arrow-right text-[10px]"></i>
-            </a>
-          </div>
+        
+        <!-- Abstract Illustration Area (Mimicking the image's hand/shape) -->
+        <div class="relative w-full max-w-sm mt-10">
+           <!-- Decorative dotted pattern -->
+           <div class="absolute -bottom-10 -left-10 grid grid-cols-6 gap-2 opacity-50">
+             <div v-for="i in 36" :key="i" class="w-1.5 h-1.5 bg-red-600 rounded-full"></div>
+           </div>
+           
+           <!-- Creative Shape / Image -->
+           <div class="relative z-10">
+              <div class="w-64 h-64 bg-yellow-400 rounded-2xl rotate-12 absolute -top-4 -left-4 opacity-10"></div>
+              <div class="relative overflow-hidden rounded-3xl shadow-2xl transform -rotate-2 border-8 border-white">
+                <img src="https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?q=80&w=2020&auto=format&fit=crop" alt="Handshake" class="w-full aspect-square object-cover" />
+              </div>
+           </div>
         </div>
       </div>
 
-      <!-- FORM + INFO BLOCK -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-20">
-
-        <!-- INFO LEFT -->
-        <div class="lg:col-span-5 flex flex-col gap-8" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
-          <div>
-            <p class="text-red-500 text-xs font-bold uppercase tracking-widest mb-2">5P Event</p>
-            <h2 class="text-3xl md:text-4xl font-black uppercase leading-tight text-white mb-4">
-              {{ $t('CONTACT.TITLE_CONNECT') }} <br /><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">{{ $t('CONTACT.TITLE_WITH_US') }}</span>
-            </h2>
-            <p class="text-gray-400 leading-relaxed text-sm">
-              {{ $t('CONTACT.DESC') }}
-            </p>
-          </div>
-
-          <!-- Info items -->
-          <div class="flex flex-col gap-5">
-            <div v-for="(info, j) in infoItems" :key="j" class="flex items-start gap-4 group">
-              <div class="w-10 h-10 shrink-0 rounded-lg bg-red-600/20 border border-red-600/30 flex items-center justify-center group-hover:bg-red-600 group-hover:border-red-500 transition-all duration-300">
-                <i :class="['pi text-red-500 group-hover:text-white transition-colors text-sm', info.icon]"></i>
+      <!-- RIGHT SIDE: CONTACT FORM ON PURPLE-LIKE (now RED) SHAPE -->
+      <div class="lg:w-1/2 relative z-10" data-aos="fade-left">
+        <!-- The big rounded shape behind the form -->
+        <div class="relative bg-brand-600 rounded-[100px_40px_100px_100px] p-8 md:p-12 shadow-2xl">
+           <!-- Form -->
+           <form @submit.prevent="handleSubmit" class="flex flex-col gap-6">
+              <div class="flex flex-col md:flex-row gap-6">
+                 <div class="flex-1">
+                   <input v-model="form.name" type="text" :placeholder="$t('CONTACT.FORM.FULLNAME')" 
+                     class="w-full bg-white rounded-full px-8 py-4 text-gray-900 font-semibold placeholder-gray-400 shadow-lg border-none focus:ring-2 focus:ring-yellow-400 outline-none transition-all" />
+                 </div>
+                 <div class="flex-1">
+                   <input v-model="form.email" type="email" :placeholder="$t('CONTACT.FORM.EMAIL')" 
+                     class="w-full bg-white rounded-full px-8 py-4 text-gray-900 font-semibold placeholder-gray-400 shadow-lg border-none focus:ring-2 focus:ring-yellow-400 outline-none transition-all" />
+                 </div>
               </div>
               <div>
-                <div class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">{{ info.label }}</div>
-                <div class="text-sm text-gray-200">{{ info.value }}</div>
+                <textarea v-model="form.message" rows="4" :placeholder="$t('CONTACT.FORM.MESSAGE_PLACEHOLDER')"
+                  class="w-full bg-white rounded-[32px] px-8 py-6 text-gray-900 font-semibold placeholder-gray-400 shadow-lg border-none focus:ring-2 focus:ring-yellow-400 outline-none transition-all resize-none"></textarea>
               </div>
-            </div>
-          </div>
-
-          <!-- Socials -->
-          <div class="flex items-center gap-3 mt-2">
-            <span class="text-xs text-gray-500 uppercase tracking-widest font-bold">{{ $t('CONTACT.FOLLOW_US') }}</span>
-            <a v-for="(s, k) in socials" :key="k" :href="s.link"
-              class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:border-red-500 hover:text-white hover:scale-110 hover:shadow-[0_0_12px_rgba(220,38,38,0.5)] transition-all duration-300">
-              <i :class="['pi text-sm', s.icon]"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- FORM RIGHT -->
-        <div class="lg:col-span-7" data-aos="fade-left" data-aos-delay="150">
-          <form @submit.prevent="handleSubmit" class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8 md:p-10 flex flex-col gap-6 backdrop-blur-sm">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div class="flex flex-col gap-2">
-                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">{{ $t('CONTACT.FORM.FULLNAME') }} <span class="text-red-500">*</span></label>
-                <input v-model="form.name" type="text" placeholder="Nguyễn Văn A"
-                  class="contact-input" required />
+              
+              <div class="flex justify-center mt-4">
+                <button type="submit" :disabled="isSending"
+                  class="bg-yellow-400 hover:bg-white text-gray-900 font-black px-12 py-4 rounded-full uppercase tracking-widest text-sm flex items-center gap-3 transition-all transform hover:scale-105 active:scale-95 shadow-xl disabled:opacity-50">
+                  {{ isSending ? $t('CONTACT.FORM.SENDING') : $t('CONTACT.FORM.SEND') }}
+                  <i class="pi pi-arrow-up-right text-xs"></i>
+                </button>
               </div>
-              <div class="flex flex-col gap-2">
-                <label class="text-xs font-bold uppercase tracking-widest text-gray-400">{{ $t('CONTACT.FORM.EMAIL') }} <span class="text-red-500">*</span></label>
-                <input v-model="form.email" type="email" placeholder="email@domain.com"
-                  class="contact-input" required />
-              </div>
-            </div>
-            <div class="flex flex-col gap-2">
-              <label class="text-xs font-bold uppercase tracking-widest text-gray-400">{{ $t('CONTACT.FORM.PHONE') }}</label>
-              <input v-model="form.phone" type="tel" placeholder="0369 150 431"
-                class="contact-input" />
-            </div>
-            <div class="flex flex-col gap-2">
-              <label class="text-xs font-bold uppercase tracking-widest text-gray-400">{{ $t('CONTACT.FORM.MESSAGE') }} <span class="text-red-500">*</span></label>
-              <textarea v-model="form.message" rows="5" :placeholder="$t('CONTACT.FORM.MESSAGE_PLACEHOLDER')"
-                class="contact-input resize-none" required></textarea>
-            </div>
+           </form>
 
-            <button type="submit"
-              :disabled="isSending"
-              class="group w-full py-4 bg-gradient-to-r from-red-700 to-red-600 hover:from-red-600 hover:to-red-500 text-white font-black uppercase tracking-widest rounded-xl shadow-[0_0_20px_rgba(220,38,38,0.4)] hover:shadow-[0_0_30px_rgba(220,38,38,0.7)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70">
-              <i class="pi pi-send group-hover:translate-x-1 transition-transform"></i>
-              <span v-if="!isSending">{{ $t('CONTACT.FORM.SEND') }}</span>
-              <span v-else>{{ $t('CONTACT.FORM.SENDING') }}</span>
-            </button>
-
-            <!-- Success message -->
-            <transition name="slide-fade">
-              <div v-if="submitSuccess" class="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-bold">
-                <i class="pi pi-check-circle text-lg"></i>
-                {{ $t('CONTACT.FORM.SUCCESS_MSG') }}
-              </div>
-            </transition>
-          </form>
+           <!-- Bottom decorative dots -->
+           <div class="absolute -bottom-6 -right-6 grid grid-cols-10 gap-2 opacity-50 hidden md:grid">
+             <div v-for="i in 50" :key="i" class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+           </div>
         </div>
       </div>
+    </section>
 
-      <!-- GOOGLE MAP SECTION -->
-      <div data-aos="fade-up" class="mb-4">
-        <div class="flex items-center gap-4 mb-8">
-          <div class="h-[2px] flex-1 bg-gradient-to-r from-transparent to-red-600/40"></div>
-          <h2 class="text-xl font-black uppercase tracking-widest text-white whitespace-nowrap">
-            <i class="pi pi-map-marker text-red-500 mr-2"></i>{{ $t('COMMON.SEARCH') }}
-          </h2>
-          <div class="h-[2px] flex-1 bg-gradient-to-l from-transparent to-red-600/40"></div>
+    <!-- ENQUIRIES & ADRESS SECTION -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-20 py-20 relative">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+        
+        <!-- ENQUIRIES BOXES -->
+        <div class="flex flex-col gap-6" data-aos="fade-up">
+           <div class="bg-gray-100 rounded-[30px] p-10 flex flex-col gap-6">
+              <div>
+                <h3 class="text-2xl font-black text-gray-900 mb-2">Press enquiries</h3>
+                <p class="text-gray-600 font-medium">5PeventBooking@gmail.com</p>
+              </div>
+              <div>
+                <h3 class="text-2xl font-black text-gray-900 mb-2">General enquiries</h3>
+                <div class="flex flex-col gap-1">
+                  <p class="text-gray-600 font-medium"><span class="font-bold text-gray-900 uppercase text-sm">Booking:</span> 5P.research@gmail.com</p>
+                  <p class="text-gray-600 font-medium"><span class="font-bold text-gray-900 uppercase text-sm">Media:</span> info@5Pmedia.net</p>
+                </div>
+              </div>
+           </div>
+
+           <!-- ADDRESS BOX (Light Yellow) -->
+           <div class="bg-yellow-50 rounded-[30px] p-10" data-aos="fade-up" data-aos-delay="100">
+              <h3 class="text-2xl font-black text-gray-900 mb-6">Address</h3>
+              <div class="flex flex-col gap-4 text-gray-800 font-medium leading-relaxed">
+                <p>{{ contactAddress }}</p>
+                <div class="pt-4 flex flex-col gap-2">
+                   <p class="text-lg font-bold">Hotline: {{ contactHotline }}</p>
+                   <p class="text-lg font-bold">Email: {{ contactEmail }}</p>
+                </div>
+              </div>
+           </div>
         </div>
-        <div class="rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(220,38,38,0.1)] relative">
-          <!-- Map overlay effect on top edge -->
-          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent z-10 opacity-60"></div>
+
+        <!-- JOB ENQUIRIES / CTA SECTION -->
+        <div class="relative flex items-center justify-center pt-20" data-aos="zoom-in">
+           <!-- Large Yellow Circle Decor -->
+           <div class="absolute w-[400px] h-[400px] bg-yellow-400 rounded-full opacity-70 z-0"></div>
+           
+           <!-- Hovering White Card -->
+           <div class="relative z-10 bg-white/95 backdrop-blur shadow-2xl rounded-[40px] p-12 md:p-16 text-center max-w-sm transform hover:-translate-y-4 transition-all duration-500">
+              <h3 class="text-3xl font-black text-gray-900 mb-8 leading-tight">For job enquiries, please see</h3>
+              <router-link to="/about" class="bg-brand-600 hover:bg-black text-white px-10 py-4 rounded-full font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all">
+                JOIN US
+                <i class="pi pi-arrow-up-right text-xs"></i>
+              </router-link>
+           </div>
+           
+           <!-- Decorative Arrow Shape -->
+           <div class="absolute right-0 bottom-0 text-brand-600 opacity-20 transform translate-x-1/2 translate-y-1/2 pointer-events-none">
+              <i class="pi pi-arrow-up-right text-[200px]"></i>
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL MEDIA BANNER -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-20 py-10" data-aos="fade-up">
+       <div class="bg-brand-600 rounded-[50px] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10">
+          <h2 class="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none">
+            FOLLOW US<br />ON SOCIAL MEDIA
+          </h2>
+          
+          <div class="flex flex-wrap items-center gap-4 justify-center">
+             <a v-for="(s, k) in socials" :key="k" :href="s.link" target="_blank"
+               class="w-14 h-14 rounded-full bg-yellow-400 text-gray-900 flex items-center justify-center hover:bg-white transition-all transform hover:scale-110 shadow-lg">
+               <i :class="['pi text-xl', s.icon]"></i>
+             </a>
+          </div>
+       </div>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section class="max-w-[1440px] mx-auto px-6 lg:px-20 py-20" data-aos="fade-up">
+       <div class="flex items-center gap-6 mb-10">
+         <h2 class="text-4xl font-black uppercase text-gray-900 whitespace-nowrap">Find Us</h2>
+         <div class="h-1 flex-1 bg-gray-100 rounded-full relative overflow-hidden">
+            <div class="absolute inset-0 bg-brand-600 w-24 animate-[slide_3s_infinite]"></div>
+         </div>
+       </div>
+       
+       <div class="rounded-[50px] overflow-hidden shadow-2xl border-8 border-white bg-gray-200 aspect-[16/7] md:aspect-[21/9] relative">
           <iframe
             :src="parsedMapSrc"
             width="100%"
-            height="450"
-            style="border:0; filter: invert(90%) hue-rotate(180deg) brightness(0.9) contrast(0.9) saturate(0.9);"
+            height="100%"
+            style="border:0;"
             :allowfullscreen="true"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            class="block w-full"
+            class="block w-full h-full"
           ></iframe>
-          <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent z-10 opacity-60"></div>
-        </div>
-        <p class="text-center text-gray-500 text-xs mt-3 uppercase tracking-widest font-medium">{{ contactAddress }}</p>
-      </div>
+       </div>
     </section>
 
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -164,7 +172,7 @@ import AOS from 'aos'
 import { useConfigStore } from '@/store/config'
 import { useContactMessageStore } from '@/store/contactMessage.store'
 import { useToast } from '@/composables/useToast'
-import { validateEmail, validatePhone, validateStringField } from '@/utils/validation'
+import { validateEmail, validateStringField } from '@/utils/validation'
 
 const { t } = useI18n()
 const configStore = useConfigStore()
@@ -173,11 +181,10 @@ const { toastSuccess, toastError } = useToast()
 
 onMounted(async () => {
   await configStore.fetchAllConfigs()
-  AOS.refresh()
+  AOS.init({ duration: 1000, once: true })
 })
 
 const isSending = ref(false)
-const submitSuccess = ref(false)
 
 const form = reactive({
   name: '',
@@ -187,133 +194,55 @@ const form = reactive({
 })
 
 const handleSubmit = async () => {
-  // Validate fields
   const nameRes = validateStringField(form.name, t('CONTACT.FORM.FULLNAME'))
-  if (!nameRes.isValid) {
-    toastError(nameRes.error || t('CONTACT.FORM.VAL_NAME'))
-    return
-  }
+  if (!nameRes.isValid) return toastError(nameRes.error || 'Name invalid')
 
   const emailRes = validateEmail(form.email)
-  if (!emailRes.isValid) {
-    toastError(emailRes.error || t('CONTACT.FORM.VAL_EMAIL'))
-    return
-  }
-
-  if (form.phone) {
-    const phoneRes = validatePhone(form.phone)
-    if (!phoneRes.isValid) {
-      toastError(phoneRes.error || t('CONTACT.FORM.VAL_PHONE'))
-      return
-    }
-  }
+  if (!emailRes.isValid) return toastError(emailRes.error || 'Email invalid')
 
   const msgRes = validateStringField(form.message, t('CONTACT.FORM.MESSAGE'))
-  if (!msgRes.isValid) {
-    toastError(msgRes.error || t('CONTACT.FORM.VAL_MESSAGE'))
-    return
-  }
+  if (!msgRes.isValid) return toastError(msgRes.error || 'Message invalid')
 
   isSending.value = true
-  submitSuccess.value = false
-
   try {
-    await contactMessageStore.createContactMessage({
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      message: form.message
-    })
-    
-    submitSuccess.value = true
-    Object.assign(form, { name: '', email: '', phone: '', message: '' })
+    await contactMessageStore.createContactMessage(form)
     toastSuccess(t('CONTACT.FORM.TOAST_SUCCESS'))
-    
-    setTimeout(() => { submitSuccess.value = false }, 5000)
+    Object.assign(form, { name: '', email: '', phone: '', message: '' })
   } catch {
-    toastError(contactMessageStore.error || t('CONTACT.FORM.TOAST_ERROR'))
+    toastError(t('CONTACT.FORM.TOAST_ERROR'))
   } finally {
     isSending.value = false
   }
 }
 
-// Config-based dynamic values
-const contactAddress = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_ADDRESS', '122/46 Thạnh Xuân 22, P. Thạnh Xuân 22, Q.12, TP.HCM'))
-const contactMapIframe = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_MAP_IFRAME', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.178855780718!2d106.68459131533487!3d10.72714419234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f6bce7e1a23%3A0x8b3c65d00e2b8048!2s122%2F46%20Th%E1%BA%A1nh%20Xu%C3%A2n%2022%2C%20Ph%C6%B0%E1%BB%9Dng%20Th%E1%BA%A1nh%20Xu%C3%A2n%2022%2C%20Qu%E1%BA%ADn%2012%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh!5e0!3m2!1svi!2svn!4v1700000000000!5m2!1svi!2svn'))
+// Dynamic values from Store
+const contactAddress = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_ADDRESS', '122/46 Thạnh Xuân 22, Q.12, TP.HCM'))
+const contactHotline = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_HOTLINE', '0369 150 431'))
+const contactEmail = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_EMAIL', 'info.marketingevent5p@gmail.com'))
+const contactMapIframe = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_MAP_IFRAME', ''))
 
 const parsedMapSrc = computed(() => {
   const value = contactMapIframe.value;
   if (!value) return '';
-  // Nếu copy nguyên thẻ iframe từ google map
   if (value.trim().toLowerCase().startsWith('<iframe')) {
     const match = value.match(/src="([^"]+)"/);
-    if (match && match[1]) {
-      return match[1];
-    }
+    if (match && match[1]) return match[1];
   }
-  return value; // Trường hợp admin chỉ lưu mỗi link
+  return value;
 });
-const contactHotline = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_HOTLINE', '0369 150 431'))
-const contactEmail = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_EMAIL', 'info.marketingevent5p@gmail.com'))
-
-const contactCards = computed(() => [
-  { icon: 'pi-map-marker', title: t('CONTACT.CARDS.ADDRESS_TITLE'), value: contactAddress.value, link: `https://maps.google.com/?q=${encodeURIComponent(contactAddress.value)}`, linkLabel: t('CONTACT.CARDS.MAP_LABEL'), external: true },
-  { icon: 'pi-phone', title: t('CONTACT.CARDS.CONTACT_TITLE'), value: contactHotline.value, link: `tel:${contactHotline.value.replace(/\s+/g, '')}`, linkLabel: t('CONTACT.CARDS.CALL_NOW'), external: false },
-  { icon: 'pi-envelope', title: t('CONTACT.CARDS.EMAIL_TITLE'), value: contactEmail.value, link: `mailto:${contactEmail.value}`, linkLabel: t('CONTACT.CARDS.SEND_EMAIL'), external: false }
-])
-
-const infoItems = computed(() => [
-  { icon: 'pi-map-marker', label: t('CONTACT.CARDS.ADDRESS_TITLE'), value: contactAddress.value },
-  { icon: 'pi-phone', label: t('CONTACT.CARDS.PHONE_LABEL'), value: contactHotline.value },
-  { icon: 'pi-envelope', label: t('CONTACT.CARDS.EMAIL_TITLE'), value: contactEmail.value },
-  { icon: 'pi-clock', label: t('CONTACT.CARDS.WORKING_HOURS'), value: t('CONTACT.CARDS.WORKING_TIME') }
-])
 
 const socials = computed(() => [
   { icon: 'pi-facebook', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_FACEBOOK', '#') },
-  { icon: 'pi-youtube', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#') },
-  { icon: 'pi-comments', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_ZALO', '#') }
+  { icon: 'pi-twitter', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_TWITTER', '#') },
+  { icon: 'pi-linkedin', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_LINKEDIN', '#') },
+  { icon: 'pi-instagram', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_INSTAGRAM', '#') },
+  { icon: 'pi-youtube', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#') }
 ])
 </script>
 
 <style scoped>
-.contact-input {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 12px 16px;
-  color: white;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
-}
-.contact-input::placeholder {
-  color: rgba(255, 255, 255, 0.25);
-}
-.contact-input:focus {
-  border-color: rgba(220, 38, 38, 0.6);
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-  background: rgba(255, 255, 255, 0.06);
-}
-.contact-input option {
-  background: #0f0f1a;
-  color: white;
-}
-
-/* Slide-fade transition for success message */
-.slide-fade-enter-active {
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.slide-fade-leave-active {
-  transition: all 0.3s ease;
-}
-.slide-fade-enter-from {
-  transform: translateY(-8px);
-  opacity: 0;
-}
-.slide-fade-leave-to {
-  transform: translateY(-8px);
-  opacity: 0;
+@keyframes slide {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(400%); }
 }
 </style>

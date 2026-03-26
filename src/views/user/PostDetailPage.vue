@@ -1,68 +1,141 @@
 <template>
-  <div class="pt-[90px] min-h-screen bg-[#0a0a14] text-white overflow-hidden">
-    <div v-if="postStore.loading" class="flex justify-center items-center h-[50vh]">
-      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
+  <div class="min-h-screen bg-white text-gray-900 overflow-hidden">
+    <!-- LOADING STATE -->
+    <div v-if="postStore.loading" class="flex justify-center items-center h-screen">
+      <div class="flex flex-col items-center gap-6">
+        <div
+          class="w-16 h-16 border-4 border-gray-100 border-t-brand-600 rounded-full animate-spin"
+        ></div>
+        <p class="text-gray-400 font-medium uppercase tracking-widest text-xs">Loading...</p>
+      </div>
     </div>
 
     <template v-else-if="postStore.currentPost">
-      <!-- Hero Banner -->
-      <section class="relative pt-32 pb-20 flex flex-col items-center justify-center text-center border-b border-red-900/30 overflow-hidden" data-aos="fade-down">
-        <div class="absolute inset-0 z-0">
-          <div class="absolute inset-0 bg-gradient-to-b from-red-900/40 via-[#0a0a14]/80 to-[#0a0a14]"></div>
-          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-red-600/20 blur-[100px] rounded-full pointer-events-none"></div>
+      <!-- HERO BANNER: Full-bleed image with overlay -->
+      <section class="relative w-full h-[60vh] md:h-[70vh] overflow-hidden">
+        <!-- Background: Featured image or gradient fallback -->
+        <div class="absolute inset-0 bg-gray-900">
+          <img
+            v-if="postStore.currentPost.media"
+            :src="postStore.currentPost.media"
+            :alt="getTitle(postStore.currentPost)"
+            class="w-full h-full object-cover opacity-50"
+          />
+          <div
+            v-else
+            class="w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+          ></div>
         </div>
 
-        <div class="relative z-10 w-full max-w-4xl mx-auto px-6">
-          <!-- Category badge -->
-          <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-red-600/10 border border-red-600/20 text-red-400 text-xs font-bold uppercase tracking-widest mb-6" data-aos="fade-up" data-aos-delay="50">
-            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+        <!-- Gradient overlay from bottom -->
+        <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/30"></div>
+
+        <!-- Red top accent line -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-brand-600"></div>
+
+        <!-- Content overlaid on image -->
+        <div class="absolute bottom-0 left-0 right-0 px-6 pb-12 max-w-4xl mx-auto">
+          <!-- Category pill -->
+          <div
+            class="inline-flex items-center gap-2 bg-brand-600 text-white text-[11px] font-black uppercase tracking-[0.3em] px-4 py-1.5 rounded-full mb-5"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          >
+            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
             {{ $t('POST.LABEL') }}
           </div>
-
-          <!-- Title -->
-          <h1 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase text-white mb-6 leading-tight tracking-tight drop-shadow-[0_0_15px_rgba(220,38,38,0.4)]" data-aos="fade-up" data-aos-delay="100">
+          <h1
+            class="text-3xl md:text-5xl lg:text-[3.5rem] font-black leading-tight tracking-tight text-white drop-shadow-2xl"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             {{ getTitle(postStore.currentPost) }}
           </h1>
-
-          <!-- Meta info -->
-          <div class="flex items-center justify-center gap-6 text-gray-400 text-sm font-medium uppercase tracking-widest" data-aos="fade-up" data-aos-delay="150">
-            <div class="flex items-center gap-2">
-              <i class="pi pi-calendar text-red-500 text-xs"></i>
-              <span>{{ formatDate(postStore.currentPost.createdAt, locale) }}</span>
-            </div>
+          <div
+            class="flex items-center gap-4 mt-5 text-white/70 text-sm font-semibold"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <span class="flex items-center gap-2">
+              <i class="pi pi-calendar text-brand-400 text-xs"></i>
+              {{ formatDate(postStore.currentPost.createdAt, locale) }}
+            </span>
           </div>
         </div>
-
-        <!-- Bottom Glow Line -->
-        <div class="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-600 to-transparent opacity-50"></div>
       </section>
 
-      <!-- Content Area -->
-      <main class="container mx-auto px-6 py-16 max-w-4xl">
-        <div class="prose prose-invert prose-lg max-w-none" v-html="getContent(postStore.currentPost)" data-aos="fade-up"></div>
+      <!-- READING PROGRESS BAR -->
+      <div
+        class="fixed top-0 left-0 h-1 bg-brand-600 z-[200] transition-all duration-100"
+        :style="{ width: readProgress + '%' }"
+      ></div>
 
-        <div class="mt-16 flex justify-center" data-aos="fade-up">
+      <!-- MAIN CONTENT AREA -->
+      <main class="max-w-4xl mx-auto px-6 py-16 lg:py-24">
+        <!-- Decorative side accent -->
+        <div class="relative">
+          <div
+            class="absolute -left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-600 via-brand-300 to-transparent rounded-full opacity-30 hidden lg:block"
+          ></div>
+
+          <div
+            class="prose prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-h2:text-3xl prose-h2:text-brand-600 prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:text-gray-800 prose-h3:mt-8 prose-h3:mb-3 prose-p:text-gray-600 prose-p:leading-[1.9] prose-p:mb-6 prose-img:rounded-3xl prose-img:shadow-2xl prose-img:my-12 prose-a:text-brand-600 prose-a:font-bold hover:prose-a:underline prose-strong:text-gray-900 prose-strong:font-black prose-blockquote:border-l-4 prose-blockquote:border-brand-600 prose-blockquote:pl-6 prose-blockquote:not-italic prose-blockquote:text-gray-500"
+            v-html="getContent(postStore.currentPost)"
+            data-aos="fade-up"
+          ></div>
+        </div>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-6 my-16">
+          <div class="flex-1 h-px bg-gray-100"></div>
+          <div class="w-2 h-2 bg-brand-600 rounded-full"></div>
+          <div class="flex-1 h-px bg-gray-100"></div>
+        </div>
+
+        <!-- BACK BUTTON -->
+        <div class="flex items-center justify-between" data-aos="fade-up">
           <button
             @click="$router.back()"
-            class="px-10 py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl transition-all uppercase tracking-widest text-sm shadow-lg shadow-red-600/20 group"
+            class="group flex items-center gap-3 px-8 py-4 bg-gray-900 hover:bg-brand-600 text-white font-black rounded-2xl transition-all duration-300 uppercase tracking-widest text-sm shadow-xl hover:shadow-brand-600/30 hover:-translate-y-1 active:translate-y-0"
           >
-            <span class="inline-block transition-transform group-hover:-translate-x-1 mr-2">←</span>
+            <i class="pi pi-arrow-left transition-transform group-hover:-translate-x-1"></i>
             {{ $t('COMMON.BACK') }}
           </button>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-gray-400 uppercase font-black tracking-widest">Share</span>
+            <a
+              href="#"
+              class="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-600 hover:text-white text-gray-900 flex items-center justify-center transition-all"
+              ><i class="pi pi-facebook text-sm"></i
+            ></a>
+            <a
+              href="#"
+              class="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-600 hover:text-white text-gray-900 flex items-center justify-center transition-all"
+              ><i class="pi pi-link text-sm"></i
+            ></a>
+          </div>
         </div>
       </main>
     </template>
 
-    <div v-else class="flex flex-col justify-center items-center h-[70vh] text-gray-400 gap-6">
-      <div class="text-6xl text-white/5 font-black">{{ $t('COMMON.404') }}</div>
-      <p>{{ $t('POST.NOT_FOUND') }}</p>
-      <button @click="$router.push('/')" class="px-6 py-2 bg-red-600 text-white rounded-lg uppercase text-sm font-bold">{{ $t('COMMON.GO_HOME') }}</button>
+    <!-- 404 STATE -->
+    <div v-else class="flex flex-col justify-center items-center h-screen gap-8">
+      <div class="text-[120px] font-black text-gray-50 leading-none select-none">404</div>
+      <p class="text-gray-400 font-bold uppercase tracking-widest text-sm">
+        {{ $t('POST.NOT_FOUND') }}
+      </p>
+      <button
+        @click="$router.push('/')"
+        class="px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full uppercase text-sm font-black tracking-widest transition-all"
+      >
+        {{ $t('COMMON.GO_HOME') }}
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePostStore } from '@/store/post.store'
 import { useI18n } from 'vue-i18n'
@@ -73,6 +146,15 @@ import { formatDate } from '@/utils/common'
 const route = useRoute()
 const postStore = usePostStore()
 const { locale } = useI18n()
+
+const readProgress = ref(0)
+
+const updateProgress = () => {
+  const el = document.documentElement
+  const scrollTop = el.scrollTop || document.body.scrollTop
+  const scrollHeight = el.scrollHeight - el.clientHeight
+  readProgress.value = scrollHeight > 0 ? Math.min(100, (scrollTop / scrollHeight) * 100) : 0
+}
 
 const getTitle = (post: IPost) => {
   if (!post) return ''
@@ -92,34 +174,48 @@ const loadPost = async (slug: string) => {
 }
 
 onMounted(() => {
-  AOS.refresh()
+  AOS.init({ duration: 900, once: true })
   const slug = route.params.slug as string
-  if (slug) {
-    loadPost(slug)
-  }
+  if (slug) loadPost(slug)
+  window.addEventListener('scroll', updateProgress, { passive: true })
 })
 
-watch(() => route.params.slug, (newSlug) => {
-  if (newSlug) {
-    loadPost(newSlug as string)
-  }
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateProgress)
 })
+
+watch(
+  () => route.params.slug,
+  (newSlug) => {
+    if (newSlug) loadPost(newSlug as string)
+  },
+)
 </script>
 
 <style>
 .prose img {
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   max-width: 100%;
   height: auto;
   margin: 3rem auto;
   display: block;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
 }
 
-.prose h2, .prose h3 {
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #ef4444;
-  margin-top: 3rem;
+.prose h2 {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.prose h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: #dc2626;
+  border-radius: 4px;
 }
 </style>

@@ -294,6 +294,7 @@ const isEdit = computed(() => !!route.params.id)
 const aiLoading = ref(false)
 const seoResult = ref<SeoScoreResult | null>(null)
 const fileInput = ref<HTMLInputElement | null>(null)
+const selectedFile = ref<File | null>(null)
 
 const initialForm: PostCreationAttributes = {
   title_vi: '',
@@ -343,18 +344,15 @@ const handleFileUpload = async (event: Event) => {
       toastWarn(t('COMMON.SIZE_HINT'))
       return
     }
-    try {
-      const base64 = await fileToDataURL(file)
-      form.media = base64
-    } catch (error) {
-      console.error('Lỗi khi đọc file:', error)
-      toastError(t('COMMON.ERROR'))
-    }
+    selectedFile.value = file
+    // Create a local blob URL for preview
+    form.media = URL.createObjectURL(file)
   }
 }
 
 const removeMainImage = () => {
   form.media = ''
+  selectedFile.value = null
   if (fileInput.value) {
     fileInput.value.value = ''
   }
@@ -396,10 +394,16 @@ const handleScoreSeo = async () => {
 
 const handleSubmit = async () => {
   try {
+    const dataToSend = { ...form }
+    // If we have a selected file, pass it as 'image' field for FormData conversion
+    if (selectedFile.value) {
+      (dataToSend as any).image = selectedFile.value
+    }
+
     if (isEdit.value && originalPost.value?.id) {
-      const payload: Partial<PostCreationAttributes> = { ...form }
+      const payload: any = { ...dataToSend }
       
-      // Check for changes to re-translate if needed (handled by backend or AI service usually)
+      // Check for changes to re-translate if needed
       payload.translateTitle = hasFieldChanged(originalPost.value, form, 'title_vi')
       payload.translateContent = hasFieldChanged(originalPost.value, form, 'content_vi')
       
@@ -407,10 +411,10 @@ const handleSubmit = async () => {
       toastSuccess(t('COMMON.SUCCESS'))
     } else {
       await postStore.createPost({ 
-        ...form, 
+        ...dataToSend, 
         translateTitle: true, 
         translateContent: true 
-      })
+      } as any)
       toastSuccess(t('COMMON.SUCCESS'))
     }
 

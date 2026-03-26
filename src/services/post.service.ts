@@ -1,4 +1,5 @@
 import { apiService, type ApiResponse } from '@/lib/http'
+import { objectToFormData } from '@/utils/formData'
 import type { 
     IPost, 
     PostCreationAttributes, 
@@ -41,14 +42,16 @@ class PostService implements IPostService {
   }
 
   create(body: PostCreationAttributes): Promise<ApiResponse<IPost> | ResponseError> {
+    const formData = objectToFormData(body)
     return apiService(API_ROUTES.POSTS.CREATE)
-      .post<IPost>(body)
+      .post<IPost>(formData)
   }
 
   update(id: number, body: Partial<PostCreationAttributes>): Promise<ApiResponse<IPost> | ResponseError> {
+    const formData = objectToFormData(body)
     return apiService(API_ROUTES.POSTS.UPDATE)
       .addPathParam(':id', id)
-      .put<IPost>(body)
+      .put<IPost>(formData)
   }
 
   delete(id: number): Promise<ApiResponse<null> | ResponseError> {

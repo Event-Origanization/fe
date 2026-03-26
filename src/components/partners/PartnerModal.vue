@@ -146,6 +146,7 @@ const form = reactive({ ...initialForm })
 
 const resetForm = () => {
   Object.assign(form, initialForm)
+  selectedFile.value = null
   if (fileInput.value) fileInput.value.value = ''
 }
 
@@ -168,6 +169,7 @@ watch(() => props.show, (newVal) => {
 
 
 const fileInput = ref<HTMLInputElement | null>(null)
+const selectedFile = ref<File | null>(null)
 
 const triggerFileUpload = () => {
   fileInput.value?.click()
@@ -177,23 +179,20 @@ const handleFileUpload = async (event: Event) => {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file) {
-    const { checkFileSize, fileToDataURL } = await import('@/utils/file')
+    const { checkFileSize } = await import('@/utils/file')
     if (!checkFileSize(file, 2)) {
       toastWarn(t('COMMON.SIZE_HINT'))
       return
     }
-    try {
-      const base64 = await fileToDataURL(file)
-      form.logo = base64
-    } catch (error) {
-      console.error('Lỗi khi đọc file:', error)
-      toastError(t('COMMON.ERROR'))
-    }
+    selectedFile.value = file
+    // Create a local blob URL for preview
+    form.logo = URL.createObjectURL(file)
   }
 }
 
 const removeLogo = () => {
   form.logo = ''
+  selectedFile.value = null
   if (fileInput.value) {
     fileInput.value.value = ''
   }
@@ -206,11 +205,16 @@ const handleSubmit = async () => {
   }
 
   try {
+    const dataToSend = { ...form }
+    if (selectedFile.value) {
+      (dataToSend as any).image = selectedFile.value
+    }
+
     let result
     if (isEdit.value && props.partner?.id) {
-      result = await partnerStore.updatePartner(props.partner.id, { ...form })
+      result = await partnerStore.updatePartner(props.partner.id, dataToSend)
     } else {
-      result = await partnerStore.createPartner({ ...form })
+      result = await partnerStore.createPartner(dataToSend)
     }
 
     toastSuccess(t('COMMON.SUCCESS'))

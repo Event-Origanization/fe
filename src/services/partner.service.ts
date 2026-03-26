@@ -1,4 +1,5 @@
 import { apiService, type ApiResponse } from '@/lib/http'
+import { objectToFormData } from '@/utils/formData'
 import type { IPartner, PartnerCreationAttributes, PartnerQuery, PartnerListResponse } from '@/types/partner'
 import type { ResponseError } from '@/utils/error'
 import { API_ROUTES } from '@/constants'
@@ -32,13 +33,15 @@ class PartnerService implements IPartnerService {
   }
 
   create(body: PartnerCreationAttributes): Promise<ApiResponse<IPartner> | ResponseError> {
-    return apiService(API_ROUTES.PARTNERS.CREATE).post<IPartner>(body)
+    const formData = objectToFormData(body)
+    return apiService(API_ROUTES.PARTNERS.CREATE).post<IPartner>(formData)
   }
 
   update(id: number, body: Partial<PartnerCreationAttributes>): Promise<ApiResponse<IPartner> | ResponseError> {
+    const formData = objectToFormData(body)
     return apiService(API_ROUTES.PARTNERS.UPDATE)
       .addPathParam(':id', id)
-      .put<IPartner>(body)
+      .put<IPartner>(formData)
   }
 
   delete(id: number): Promise<ApiResponse<null> | ResponseError> {
