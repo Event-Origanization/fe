@@ -8,11 +8,10 @@
       <div class="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-yellow-400/10 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div class="relative z-10" data-aos="zoom-out" data-aos-duration="1500">
-        <h1 class="text-7xl md:text-[9vw] font-black uppercase tracking-tighter leading-[0.85] text-gray-900 mb-8 select-none">
-          CRAFTING<br />MEMORIES<br /><span class="text-brand-600">IN 5P</span>
+        <h1 v-html="$t('ABOUT.HERO.TITLE')" class="text-7xl md:text-[9vw] font-black uppercase tracking-tighter leading-[0.85] text-gray-900 mb-8 select-none">
         </h1>
         <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed" data-aos="fade-up" data-aos-delay="300">
-          5P Event mang đến sự kiện SÁNG TẠO trong ý tưởng - CHỈN CHU trong khâu tổ chức - TỐI GIẢM về chi phí - UY TÍN trong cam kết.
+          {{ $t('ABOUT.HERO.DESC') }}
         </p>
       </div>
 
@@ -30,10 +29,10 @@
        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-stretch">
           <!-- VISION -->
           <div class="group bg-gray-50 rounded-[60px] p-12 lg:p-16 flex flex-col justify-between hover:bg-brand-600 transition-all duration-700 cursor-default" data-aos="fade-right">
-             <div>
-                <span class="text-brand-600 group-hover:text-white text-xs font-black uppercase tracking-[0.4em] mb-4 block">Our Target</span>
+              <div>
+                <span class="text-brand-600 group-hover:text-white text-xs font-black uppercase tracking-[0.4em] mb-4 block">{{ $t('ABOUT.TARGET') }}</span>
                 <h2 class="text-4xl md:text-5xl font-black text-gray-900 group-hover:text-white mb-6 uppercase tracking-tight">
-                  Vision
+                  {{ $t('ABOUT.VISION_TITLE') }}
                 </h2>
                 <p class="text-gray-600 group-hover:text-white/80 text-lg leading-relaxed font-medium">
                   {{ $t('ABOUT.VISION_DESC') }}
@@ -49,9 +48,9 @@
           <!-- MISSION -->
           <div class="group bg-yellow-400 rounded-[60px] p-12 lg:p-16 flex flex-col justify-between hover:bg-black transition-all duration-700 cursor-default" data-aos="fade-left">
              <div>
-                <span class="text-gray-900 group-hover:text-yellow-400 text-xs font-black uppercase tracking-[0.4em] mb-4 block">Our Path</span>
+                <span class="text-gray-900 group-hover:text-yellow-400 text-xs font-black uppercase tracking-[0.4em] mb-4 block">{{ $t('ABOUT.PATH') }}</span>
                 <h2 class="text-4xl md:text-5xl font-black text-gray-900 group-hover:text-white mb-6 uppercase tracking-tight">
-                  Mission
+                  {{ $t('ABOUT.MISSION_TITLE') }}
                 </h2>
                 <p class="text-gray-800 group-hover:text-white/80 text-lg leading-relaxed font-medium">
                   {{ $t('ABOUT.MISSION_DESC') }}
@@ -116,16 +115,16 @@
        </div>
     </section>
 
-    <!-- BIG STATS PARALLAX EFFECT -->
+     <!-- BIG STATS PARALLAX EFFECT -->
     <section class="py-40 bg-white relative overflow-hidden flex flex-col items-center justify-center">
-       <div class="absolute -left-20 top-0 text-[25vw] font-black text-gray-50 select-none leading-none tracking-tighter">SUCCESS</div>
+       <div class="absolute -left-20 top-0 text-[25vw] font-black text-gray-50 select-none leading-none tracking-tighter">{{ $t('ABOUT.SUCCESS') }}</div>
        
        <div class="relative z-10 text-center" data-aos="zoom-in">
-          <span class="text-gray-900 font-black text-xl md:text-2xl uppercase tracking-[0.5em] mb-4 block">Since 2026</span>
+          <span class="text-gray-900 font-black text-xl md:text-2xl uppercase tracking-[0.5em] mb-4 block">{{ $t('ABOUT.SINCE') }}</span>
           <h2 class="text-8xl md:text-[12vw] font-black text-brand-600 leading-none tracking-tighter mb-4">
              <span v-count-up="'1000'">1000</span>+
           </h2>
-          <p class="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-widest">PROJECTS DONE</p>
+          <p class="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-widest">{{ $t('ABOUT.PROJECTS_DONE') }}</p>
        </div>
     </section>
 
@@ -157,7 +156,7 @@
           <!-- TEXT RIGHT -->
           <div class="lg:w-1/2 space-y-8" data-aos="fade-left">
              <h3 class="text-5xl font-black text-gray-900 uppercase leading-none border-l-8 border-brand-600 pl-8 mb-12">
-               Letter from<br />Our <span class="text-brand-600">Leader</span>
+               {{ $t('ABOUT.LETTER_FROM') }}<br />{{ $t('ABOUT.OUR_LEADER') }}
              </h3>
              <div class="text-gray-600 text-lg leading-relaxed font-medium space-y-6">
                 <p>{{ $t('ABOUT.CEO_P1') }}</p>

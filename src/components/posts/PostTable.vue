@@ -111,6 +111,19 @@
           </button>
         </div>
       </template>
+
+      <!-- Pagination Footer -->
+      <template #footer>
+        <Pagination
+          v-if="postStore.totalPages > 1 || postStore.total > 10"
+          :current-page="postStore.currentPage"
+          :total-pages="postStore.totalPages"
+          :total-items="postStore.total"
+          :limit="limit"
+          @page-change="changePage"
+          @limit-change="changeLimit"
+        />
+      </template>
     </BaseTable>
   </div>
 </template>
@@ -122,6 +135,7 @@ import { usePostStore } from '@/store/post.store'
 import type { IPost } from '@/types/post'
 import { useToast } from '@/composables/useToast'
 import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
+import Pagination from '@/components/common/Pagination.vue'
 
 defineEmits<{
   (e: 'add'): void
@@ -141,22 +155,34 @@ const columns: ITableColumn[] = [
 
 const searchQuery = ref('')
 const filterStatus = ref('all')
+const limit = ref(10)
 
-onMounted(() => {
-  fetchPosts()
-})
-
-const fetchPosts = () => {
+const fetchPosts = (page = 1) => {
   const status = filterStatus.value === 'all' ? undefined : filterStatus.value
   postStore.fetchPosts({
+    page,
+    limit: limit.value,
     search: searchQuery.value,
     status: status
   })
 }
 
+const changePage = (page: number) => {
+  fetchPosts(page)
+}
+
+const changeLimit = (newLimit: number) => {
+  limit.value = newLimit
+  fetchPosts(1)
+}
+
+onMounted(() => {
+  fetchPosts()
+})
+
 // Watch for search and filter changes
 watch([searchQuery, filterStatus], () => {
-  fetchPosts()
+  fetchPosts(1)
 })
 
 const confirmDelete = async (post: IPost) => {

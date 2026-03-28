@@ -111,6 +111,19 @@
           </button>
         </div>
       </template>
+
+      <!-- Pagination Footer -->
+      <template #footer>
+        <Pagination
+          v-if="videoStore.totalPages > 1 || videoStore.total > 10"
+          :current-page="videoStore.currentPage"
+          :total-pages="videoStore.totalPages"
+          :total-items="videoStore.total"
+          :limit="limit"
+          @page-change="changePage"
+          @limit-change="changeLimit"
+        />
+      </template>
     </BaseTable>
   </div>
 </template>
@@ -122,6 +135,7 @@ import { useVideoStore } from '@/store/highlight-video.store'
 import type { IHighlightVideo } from '@/types/highlight-video'
 import { useToast } from '@/composables/useToast'
 import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
+import Pagination from '@/components/common/Pagination.vue'
 
 defineEmits<{
   (e: 'add'): void
@@ -141,22 +155,34 @@ const columns: ITableColumn[] = [
 
 const searchQuery = ref('')
 const filterStatus = ref('all')
+const limit = ref(10)
 
-onMounted(() => {
-  fetchVideos()
-})
-
-const fetchVideos = () => {
+const fetchVideos = (page = 1) => {
   const isActive = filterStatus.value === 'all' ? undefined : filterStatus.value === 'active'
   videoStore.fetchVideos({
+    page,
+    limit: limit.value,
     search: searchQuery.value,
     isActive: isActive
   })
 }
 
+const changePage = (page: number) => {
+  fetchVideos(page)
+}
+
+const changeLimit = (newLimit: number) => {
+  limit.value = newLimit
+  fetchVideos(1)
+}
+
+onMounted(() => {
+  fetchVideos()
+})
+
 // Watch for search and filter changes
 watch([searchQuery, filterStatus], () => {
-  fetchVideos()
+  fetchVideos(1)
 })
 
 const confirmDelete = async (video: IHighlightVideo) => {

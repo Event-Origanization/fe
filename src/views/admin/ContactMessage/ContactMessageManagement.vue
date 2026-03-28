@@ -23,7 +23,7 @@
               type="text"
               :placeholder="$t('COMMON.SEARCH')"
               class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
-              @keyup.enter="fetchContactMessages"
+              @keyup.enter="fetchContactMessages(1)"
             />
           </div>
           
@@ -100,51 +100,15 @@
 
           <!-- Pagination Footer -->
           <template #footer>
-            <div v-if="contactMessageStore.totalPages > 1" class="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/30 px-4 py-3 sm:px-6">
-              <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                <div>
-                  <p class="text-sm text-gray-700 dark:text-gray-300">
-                    Tổng cộng <span class="font-medium">{{ contactMessageStore.total }}</span> tin nhắn
-                  </p>
-                </div>
-                <div>
-                  <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                    <button
-                      @click="changePage(contactMessageStore.currentPage - 1)"
-                      :disabled="contactMessageStore.currentPage === 1"
-                      class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 focus:z-20 focus:outline-offset-0 disabled:opacity-50"
-                    >
-                      <span class="sr-only">Previous</span>
-                      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
-                      </svg>
-                    </button>
-                    <button
-                      v-for="page in contactMessageStore.totalPages"
-                      :key="page"
-                      @click="changePage(page)"
-                      :class="[
-                        page === contactMessageStore.currentPage
-                          ? 'relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
-                          : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 dark:text-gray-300 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 focus:z-20 focus:outline-offset-0'
-                      ]"
-                    >
-                      {{ page }}
-                    </button>
-                    <button
-                      @click="changePage(contactMessageStore.currentPage + 1)"
-                      :disabled="contactMessageStore.currentPage === contactMessageStore.totalPages"
-                      class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 focus:z-20 focus:outline-offset-0 disabled:opacity-50"
-                    >
-                      <span class="sr-only">Next</span>
-                      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                      </svg>
-                    </button>
-                  </nav>
-                </div>
-              </div>
-            </div>
+            <Pagination
+              v-if="contactMessageStore.totalPages > 1 || contactMessageStore.total > 10"
+              :current-page="contactMessageStore.currentPage"
+              :total-pages="contactMessageStore.totalPages"
+              :total-items="contactMessageStore.total"
+              :limit="limit"
+              @page-change="changePage"
+              @limit-change="changeLimit"
+            />
           </template>
         </BaseTable>
       </div>
@@ -161,6 +125,7 @@ import { useContactMessageStore } from '@/store/contactMessage.store'
 import { useToast } from '@/composables/useToast'
 import type { IContactMessage } from '@/types/contactMessage'
 import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
+import Pagination from '@/components/common/Pagination.vue'
 
 const { t } = useI18n()
 const currentPageTitle = computed(() => t('CONTACT_MESSAGE_ADMIN.TITLE'))
@@ -178,10 +143,13 @@ const columns: ITableColumn[] = [
 
 const searchQuery = ref('')
 const filterStatus = ref('all')
+const limit = ref(10)
 
-const fetchContactMessages = () => {
+const fetchContactMessages = (page = 1) => {
   const isRead = filterStatus.value === 'all' ? undefined : filterStatus.value === 'read'
   contactMessageStore.fetchContactMessages({
+    page,
+    limit: limit.value,
     search: searchQuery.value,
     isRead: isRead
   })
@@ -196,12 +164,12 @@ watch([filterStatus], () => {
 })
 
 const changePage = (page: number) => {
-  const isRead = filterStatus.value === 'all' ? undefined : filterStatus.value === 'read'
-  contactMessageStore.fetchContactMessages({
-    page,
-    search: searchQuery.value,
-    isRead: isRead
-  })
+  fetchContactMessages(page)
+}
+
+const changeLimit = (newLimit: number) => {
+  limit.value = newLimit
+  fetchContactMessages(1)
 }
 
 const toggleReadStatus = async (msg: IContactMessage) => {

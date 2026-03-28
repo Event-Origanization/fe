@@ -56,19 +56,18 @@
         </div>
         
         <!-- Pagination Hạng mục 1 -->
-        <div v-if="productStore.rentalTotalPages > 1" class="flex justify-center mt-12 gap-2" data-aos="fade-up">
-          <button 
-            v-for="p in productStore.rentalTotalPages" 
-            :key="p"
-            @click="changeRentalPage(p)"
-            class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 font-bold"
-            :class="productStore.rentalCurrentPage === p 
-              ? 'bg-brand-600 text-white shadow-md' 
-              : 'border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-brand-600'"
-          >
-            {{ p }}
-          </button>
-        </div>
+        <Pagination
+          v-if="productStore.rentalTotalPages > 1"
+          :current-page="productStore.rentalCurrentPage"
+          :total-pages="productStore.rentalTotalPages"
+          :total-items="0"
+          :limit="8"
+          hide-info
+          hide-limit
+          @page-change="changeRentalPage"
+          class="mt-12"
+          data-aos="fade-up"
+        />
       </section>
 
       <!-- DANH MỤC 2: 7SEVEN (ÂM THANH ÁNH SÁNG) -->
@@ -106,19 +105,18 @@
         </div>
         
         <!-- Pagination Hạng mục 2 -->
-        <div v-if="productStore.soundLightTotalPages > 1" class="flex justify-center mt-12 gap-2" data-aos="fade-up">
-          <button 
-            v-for="p in productStore.soundLightTotalPages" 
-            :key="p"
-            @click="changeSoundLightPage(p)"
-            class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 font-bold"
-            :class="productStore.soundLightCurrentPage === p 
-              ? 'bg-brand-600 text-white shadow-md' 
-              : 'border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-brand-600'"
-          >
-            {{ p }}
-          </button>
-        </div>
+        <Pagination
+          v-if="productStore.soundLightTotalPages > 1"
+          :current-page="productStore.soundLightCurrentPage"
+          :total-pages="productStore.soundLightTotalPages"
+          :total-items="0"
+          :limit="8"
+          hide-info
+          hide-limit
+          @page-change="changeSoundLightPage"
+          class="mt-12"
+          data-aos="fade-up"
+        />
       </section>
       
       <!-- QUY TRÌNH THUÊ THIẾT BỊ -->
@@ -157,6 +155,7 @@ import { onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
+import Pagination from '@/components/common/Pagination.vue'
 import { useProductStore } from '@/store/product.store'
 import { PAGE_KEYS } from '@/constants'
 import { ROUTE_NAMES } from '@/router'

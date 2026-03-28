@@ -6,12 +6,18 @@
     "SOUND_LIGHT": "Âm thanh ánh sáng",
     "RENTAL": "Cho thuê thiết bị sự kiện",
     "CONTACT": "Liên hệ",
-    "LANGUAGES": "Ngôn Ngữ"
+    "LANGUAGES": "Ngôn Ngữ",
+    "REACH_US": "Liên hệ",
+    "NEWS": "Tin tức"
   },
   "HOME": {
-    "HERO_TITLE": "CHI PHÍ",
-    "BADGE_LEFT": "HỢP LÝ",
-    "BADGE_RIGHT": "TỐI ƯU",
+    "HERO": {
+      "SUBTITLE": "CÔNG TY TỔ CHỨC SỰ KIỆN 5P EVENT",
+      "DEFAULT_TITLE": "CÙNG 5P EVENT\nKIẾN TẠO CẢM XÚC\nTHU TRỌN THƯƠNG HIỆU",
+      "LEARN_MORE": "TÌM HIỂU THÊM VỀ CHÚNG TÔI",
+      "SLOGAN_P1": "Giải quyết tính cá nhân hóa và tư duy lại cách chúng ta bên nhau",
+      "SLOGAN_P2": "SÁNG TẠO trong ý tưởng - CHỈNH CHU trong khâu tổ chức - TỐI GIẢM về chi phí"
+    },
     "STATS": {
       "FIELDS": "Lĩnh vực",
       "EVENTS": "Sự kiện",
@@ -41,16 +47,52 @@
       "DESC": "Điểm kết nối điểm chạm trải nghiệm thông qua các sự kiện đẳng cấp. Thấu hiểu và đồng hành truyền tải thông điệp trọn vẹn. Khác biệt để tạo nên sự độc bản.",
       "VIEW_MORE": "Xem thêm"
     },
+    "FEATURED_SWIPER": {
+      "TITLE": "NỔI BẬT",
+      "DESC": "Xem những tin tức và nghiên cứu mới nhất từ hai phòng thí nghiệm của chúng tôi",
+      "ACTION": "XEM BÀI VIẾT"
+    },
+    "QUICK_CONTACT": {
+      "TITLE": "LIÊN HỆ VỚI CHÚNG TÔI",
+      "DESC": "Đối với bất kỳ thắc mắc nào hoặc để tìm hiểu thêm về Mi3 và các chương trình chuyển đổi của nó, vui lòng liên hệ với chúng tôi.",
+      "HINT": "Liên hệ để được tư vấn và hỗ trợ nhanh chóng nhất!",
+      "PLACEHOLDER_NAME": "Nhập họ và tên của bạn",
+      "PLACEHOLDER_EMAIL": "Nhập địa chỉ e-mail của bạn",
+      "PLACEHOLDER_MESSAGE": "Nhập nội dung tin nhắn",
+      "SEND_BTN": "GỬI TIN NHẮN",
+      "SUCCESS": "Đã gửi liên hệ thành công!"
+    },
     "PARTNERS": {
       "TITLE": "Khách hàng của chúng tôi"
     },
     "ABOUT_SNIPPET": {
+      "LABEL": "DỊCH VỤ CỦA CHÚNG TÔI",
       "TITLE": "Về Chúng Tôi",
       "SLOGAN": "5P EVENT - KIẾN TẠO CẢM XÚC, THU TRỌN THƯƠNG HIỆU",
-      "DESC": "5P EVENT mang đến những TUYỆT TÁC SỰ KIỆN NGHỆ THUẬT VÀ DỊCH VỤ SỰ KIỆN CHUYÊN NGHIỆP, TOÀN DIỆN, THÔNG MINH, TINH TẾ. Từ đó, tạo ra giá trị khác biệt mang đậm tính cách thương hiệu doanh nghiệp, tạo vị thế trước hàng triệu đối thủ & đối tượng khách hàng tiềm năng."
+      "DESC": "5P EVENT mang đến những TUYỆT TÁC SỰ KIỆN NGHỆ THUẬT VÀ DỊCH VỤ SỰ KIỆN CHUYÊN NGHIỆP, TOÀN DIỆN, THÔNG MINH, TINH TẾ. Từ đó, tạo ra giá trị khác biệt mang đậm tính cách thương hiệu doanh nghiệp, tạo vị thế trước hàng triệu đối thủ & đối tượng khách hàng tiềm năng.",
+      "SECTORS": "Cung cấp các giải pháp tối ưu cho mọi loại hình sự kiện, từ quy mô nhỏ đến các đại nhạc hội tầm cỡ quốc tế.",
+      "EVENT_TITLE": "Tổ chức sự kiện trọn gói",
+      "EVENT_DESC": "Sáng tạo ý tưởng, lập kế hoạch chi tiết, quản lý vận hành từ A-Z cho mọi loại hình sự kiện.",
+      "VIEW_DETAILS": "XEM CHI TIẾT",
+      "RENTAL_TITLE": "Cho thuê thiết bị sự kiện",
+      "RENTAL_DESC": "Hệ thống âm thanh, ánh sáng, màn hình LED, sân khấu hiện đại bậc nhất.",
+      "SOUND_LIGHT_TITLE": "Âm thanh & Ánh sáng",
+      "SOUND_LIGHT_DESC": "Kỹ thuật chuyên nghiệp, hiệu ứng đỉnh cao cho sân khấu bùng nổ."
     }
   },
   "ABOUT": {
+    "HERO": {
+      "TITLE": "KIẾN TẠO<br />CẢM XÚC<br /><span class=\"text-brand-600\">TẠI 5P</span>",
+      "DESC": "5P Event mang đến sự kiện SÁNG TẠO trong ý tưởng - CHỈN CHU trong khâu tổ chức - TỐI GIẢM về chi phí - UY TÍN trong cam kết."
+    },
+    "TARGET": "Mục tiêu của chúng tôi",
+    "PATH": "Con đường của chúng tôi",
+    "CORE_VALUES_MAIN": "Giá trị <span class=\"text-brand-500\">Cốt lõi</span>",
+    "SUCCESS": "THÀNH CÔNG",
+    "SINCE": "Từ năm 2026",
+    "PROJECTS_DONE": "DỰ ÁN ĐÃ HOÀN THÀNH",
+    "LETTER_FROM": "Thư từ",
+    "OUR_LEADER": "Lãnh đạo của chúng tôi",
     "VISION_TITLE": "VISION",
     "VISION_DESC": "5P EVENT hướng tới trở thành đơn vị tổ chức sự kiện hàng đầu và uy tín nhất Việt Nam, cung cấp các giải pháp hiệu quả và tối ưu nhất trong mọi dịch vụ chúng tôi đang cung cấp.",
     "MISSION_TITLE": "MISSION",
@@ -121,7 +163,18 @@
   "FOOTER": {
     "SUBSCRIBE": "Đăng ký nhận tin",
     "EMAIL_PLACEHOLDER": "Email của bạn...",
-    "CONNECT_WITH_US": "Kết nối với chúng tôi"
+    "CONNECT_WITH_US": "Kết nối với chúng tôi",
+    "DESC": "CÔNG TY TỔ CHỨC SỰ KIỆN 5P EVENT - Đơn vị hàng đầu trong lĩnh vực tổ chức sự kiện chuyên nghiệp, mang đến những trải nghiệm đẳng cấp và khác biệt.",
+    "SLOGAN": "5P EVENT mang đến sự kiện SÁNG TẠO trong ý tưởng - CHỈN CHU trong khâu tổ chức - TỐI GIẢM về chi phí",
+    "EXPLORE_SCIENCE": "Khám phá dịch vụ",
+    "INTERACTIVE_EXP": "Trải nghiệm tương tác",
+    "INTERACTIVE_DEC": "Giải pháp sự kiện",
+    "INTERACTIVE_DIS": "Khám phá sáng tạo",
+    "CVBE_LAB": "Dự án tiêu biểu",
+    "CROWD_LAB": "Sự kiện cộng đồng",
+    "MULTIMEDIA": "Đa phương tiện",
+    "BLOG": "Blog tin tức",
+    "EVENTS": "Sự kiện sắp tới"
   },
   "COMMON": {
     "CANCEL": "Hủy",
@@ -165,6 +218,14 @@
   },
   "CONTACT": {
     "BREADCRUMB": "LIÊN HỆ",
+    "HERO_TITLE": "LIÊN HỆ<br />VỚI CHÚNG TÔI",
+    "PRESS_ENQUIRIES": "Yêu cầu báo chí",
+    "GENERAL_ENQUIRIES": "Yêu cầu chung",
+    "ADDRESS": "Địa chỉ",
+    "JOB_HINT": "Đối với các yêu cầu về công việc, vui lòng xem",
+    "JOIN_US": "GIA NHẬP CHÚNG TÔI",
+    "FOLLOW_SOCIAL": "THEO DÕI CHÚNG TÔI<br />TRÊN MẠNG XÃ HỘI",
+    "FIND_US": "Tìm chúng tôi",
     "TITLE_CONNECT": "HÃY KẾT NỐI",
     "TITLE_WITH_US": "CÙNG CHÚNG TÔI",
     "DESC": "Chúng tôi luôn sẵn sàng lắng nghe và đồng hành cùng bạn trong từng dự án sự kiện. Hãy để lại thông tin và chúng tôi sẽ phản hồi trong thời gian sớm nhất.",
@@ -205,6 +266,42 @@
     "TAB_IMAGES": "HÌNH ẢNH",
     "TAB_VIDEOS": "VIDEO",
     "FEATURED_EVENT": "SỰ KIỆN NỔI BẬT"
+  },
+  "EVENTS_PAGE": {
+    "TITLE": "VIDEO SỰ KIỆN",
+    "SUBTITLE": "Điểm lại những video, podcast và tin tức bao quát những nghiên cứu mới nhất từ các phòng thí nghiệm của M21.",
+    "TAG_ARTICLE": "Bài viết",
+    "TAG_INTERVIEW": "Phỏng vấn",
+    "DEFAULT_VIDEO_TITLE": "Video sự kiện",
+    "NO_MORE_VIDEOS": "Chưa có thêm video sự kiện nào.",
+    "CLIENTS_TITLE": "KHÁCH HÀNG CỦA CHÚNG TÔI",
+    "CLIENTS_SUB": "Khách hàng của chúng tôi bao gồm:",
+    "UPDATE_LATER": "Cập nhật sau",
+    "GALLERY_TITLE": "HÌNH ẢNH SỰ KIỆN",
+    "GALLERY_SUB": "Cập nhật những hình ảnh mới nhất từ các sự kiện nổi bật của 5P Event.",
+    "TAG_GALLERY": "Thư viện ảnh",
+    "VIEW_FULL": "Xem bài viết đầy đủ"
+  },
+  "NEWS_PAGE": {
+    "HERO_TITLE": "TIN TỨC 5P EVENT",
+    "BREADCRUMB_ACTIVE": "TIN TỨC SỰ KIỆN",
+    "SECTION_SUBTITLE": "TIN TỨC MỚI NHẤT",
+    "SECTION_TITLE": "NỔI BẬT TRONG TUẦN",
+    "TAG_HOT": "Tin Nóng",
+    "HOT_NEWS_DESC": "Cập nhật những thông tin nóng hổi nhất về thị trường sự kiện và các hoạt động nổi bật của 5P Event.",
+    "NEWSLETTER_TITLE": "ĐĂNG KÝ NHẬN BẢN TIN",
+    "NEWSLETTER_DESC": "Không bỏ lỡ những sự kiện và tin tức độc quyền từ chúng tôi.",
+    "NEWSLETTER_PLACEHOLDER": "Email của bạn",
+    "SEARCH_RESULTS": "KẾT QUẢ CHO:",
+    "OTHER_POSTS": "BÀI VIẾT KHÁC",
+    "CANCEL_SEARCH": "Hủy tìm kiếm",
+    "TOC_TITLE": "MỤC LỤC NỘI DUNG",
+    "UPDATING": "Đang cập nhật...",
+    "TAG_EVENT": "Tin Sự Kiện",
+    "POST_DESC_PLACEHOLDER": "Bài viết cung cấp những thông tin chuyên sâu và góc nhìn mới mẻ về ngành tổ chức sự kiện hiện nay.",
+    "READ_MORE": "ĐỌC TIẾP",
+    "NO_RESULTS_TITLE": "KHÔNG TÌM THẤY KẾT QUẢ",
+    "NO_RESULTS_DESC": "Thử tìm kiếm với từ khóa khác hoặc quay lại danh sách tin tức."
   },
   "PRODUCT": {
     "RELATED": "SẢN PHẨM LIÊN QUAN",
@@ -409,6 +506,7 @@
       "WEBSITE_NAME": "Tên website",
       "WEBSITE_FULLNAME": "Tên đầy đủ công ty",
       "WEBSITE_SLOGAN": "Slogan",
+      "SYSTEM_FONT": "Font chữ hệ thống",
       "WEBSITE_LOGO": "Đường dẫn Logo",
       "WEBSITE_FAVICON": "Đường dẫn Favicon",
       "CONTACT_HOTLINE": "Hotline",

@@ -4,7 +4,7 @@
     <div class="bg-[#e9ecf2] rounded-tl-[100px] md:rounded-tl-[180px] relative pt-16 pb-4 md:mt-10">
       
       <!-- Top Right Yellow Shape extending higher -->
-      <div class="absolute -top-[40px] md:-top-[60px] right-0 w-[40%] md:w-[25%] h-[80px] md:h-[120px] bg-yellow-400 rounded-bl-[80px] md:rounded-bl-[150px] z-0"></div>
+      <div class="absolute -top-[40px] md:-top-[60px] right-0 w-[40%] md:w-[25%] h-[80px] md:h-[120px] bg-brand-500 rounded-bl-[80px] md:rounded-bl-[150px] z-0"></div>
 
       <!-- Main Container -->
       <div class="mx-auto px-10 lg:px-20 relative z-10 w-full">
@@ -21,7 +21,7 @@
 
             <!-- Description -->
             <p class="text-gray-900 text-base font-medium leading-relaxed max-w-[360px] mb-8">
-              The Munich Interactive Intelligence Initiative promotes interactions between researchers, and between researchers and social actors.
+              {{ $t('FOOTER.DESC') }}
             </p>
 
             <!-- Socials -->
@@ -42,7 +42,7 @@
             
             <!-- Slogan in Red -->
             <p class="text-red-600 text-lg font-bold leading-snug max-w-[450px]">
-              5P EVENT mang đến sự kiện SÁNG TẠO trong ý tưởng - CHỈN CHU trong khâu tổ chức - TỐI GIẢM về chi phí
+              {{ $t('FOOTER.SLOGAN') }}
             </p>
           </div>
 
@@ -54,50 +54,50 @@
               <!-- Col 1 -->
               <div class="flex flex-col gap-4">
                 <div>
-                  <div class="text-red-500 font-bold text-base uppercase">Giới thiệu chung</div>
+                  <div class="text-red-500 font-bold text-base uppercase">{{ $t('NAV.ABOUT') }}</div>
                 </div>
                 <ul class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide pr-4">
-                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">Explore our Science</router-link></li>
-                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">Interactive Experiences and Sensing</router-link></li>
-                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">Interactive Decisions</router-link></li>
-                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">Interactive Discovery</router-link></li>
+                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.EXPLORE_SCIENCE') }}</router-link></li>
+                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.INTERACTIVE_EXP') }}</router-link></li>
+                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.INTERACTIVE_DEC') }}</router-link></li>
+                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.INTERACTIVE_DIS') }}</router-link></li>
                 </ul>
               </div>
 
               <!-- Col 2 -->
               <div class="flex flex-col gap-4">
                 <div>
-                  <div class="text-red-500 font-bold text-base uppercase">Dự án thực hiện</div>
+                  <div class="text-red-500 font-bold text-base uppercase">{{ $t('NAV.EVENTS') }}</div>
                 </div>
                 <ul class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide">
-                  <li><router-link to="/events" class="hover:text-red-500 transition-colors block leading-snug">CVBE Lab</router-link></li>
-                  <li><router-link to="/events" class="hover:text-red-500 transition-colors block leading-snug">Crowd Cognition Lab</router-link></li>
+                  <li><router-link to="/events" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.CVBE_LAB') }}</router-link></li>
+                  <li><router-link to="/events" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.CROWD_LAB') }}</router-link></li>
                 </ul>
               </div>
 
               <!-- Col 3 -->
               <div class="flex flex-col gap-4">
                 <div>
-                  <div class="text-red-500 font-bold text-base uppercase">Tin tức</div>
+                  <div class="text-red-500 font-bold text-base uppercase">{{ $t('NAV.NEWS') }}</div>
                 </div>
                 <ul class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide">
-                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">Multimedia</router-link></li>
-                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">Blog</router-link></li>
-                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">Events</router-link></li>
+                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.MULTIMEDIA') }}</router-link></li>
+                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.BLOG') }}</router-link></li>
+                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.EVENTS') }}</router-link></li>
                 </ul>
               </div>
 
               <!-- Col 4 -->
               <div class="flex flex-col gap-4">
                 <div>
-                  <div class="text-red-500 font-bold text-base uppercase">Thiết bị sự kiện</div>
+                  <div class="text-red-500 font-bold text-base uppercase">{{ $t('NAV.RENTAL') }}</div>
                 </div>
               </div>
 
               <!-- Col 5 -->
               <div class="flex flex-col gap-4">
                 <div> <!-- align title down to match other columns that have red text above them -->
-                  <h4 class="text-red-500 font-bold text-base uppercase"><router-link to="/contact" class="hover:text-red-500 transition-colors">CONTACT US</router-link></h4>
+                  <h4 class="text-red-500 font-bold text-base uppercase"><router-link to="/contact" class="hover:text-red-500 transition-colors">{{ $t('NAV.CONTACT') }}</router-link></h4>
                 </div>
               </div>
 
@@ -157,7 +157,7 @@
         </div>
 
         <!-- Yellow Bottom Line -->
-        <div class="w-full h-[3px] bg-yellow-400 mt-8 lg:mt-12"></div>
+        <div class="w-full h-[3px] bg-brand-400 mt-8 lg:mt-12"></div>
         
         <!-- Copyright Text -->
         <div class="text-center py-6 opacity-0 h-10">

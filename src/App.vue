@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, onMounted } from 'vue'
+import { watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import ThemeProvider from '@/components/layout/ThemeProvider.vue'
@@ -18,6 +18,28 @@ const route = useRoute()
 const { locale } = useI18n()
 const seoStore = useSeoStore()
 const configStore = useConfigStore()
+
+// Dynamic Font Loading
+const currentFont = computed(() => configStore.getConfigValue('GENERAL', 'SYSTEM_FONT', 'Outfit'))
+
+watch(currentFont, (newFont) => {
+  if (newFont) {
+    // 1. Update/Add Google Fonts link
+    const fontId = 'dynamic-google-font'
+    let link = document.getElementById(fontId) as HTMLLinkElement
+    if (!link) {
+      link = document.createElement('link')
+      link.id = fontId
+      link.rel = 'stylesheet'
+      document.head.appendChild(link)
+    }
+    const formattedName = newFont.replace(/\s+/g, '+')
+    link.href = `https://fonts.googleapis.com/css2?family=${formattedName}:wght@100..900&display=swap`
+
+    // 2. Update CSS variable
+    document.documentElement.style.setProperty('--font-main', `"${newFont}", sans-serif`)
+  }
+}, { immediate: true })
 
 // Watch for route or locale changes to update SEO tags
 watch(

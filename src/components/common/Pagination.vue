@@ -1,98 +1,71 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="flex flex-col gap-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 sm:px-6 sm:flex-row sm:items-center sm:justify-between">
-    <!-- Mobile pagination -->
-    <div class="flex flex-1 justify-between sm:hidden">
+  <div :class="['flex flex-col gap-6 px-4 py-8 sm:px-6', centered ? 'items-center' : '']">
+    <!-- Main Pagination Area -->
+    <div class="flex items-center gap-2">
+      <!-- Previous button -->
       <button
         @click="$emit('page-change', currentPage - 1)"
         :disabled="currentPage <= 1"
-        class="relative inline-flex items-center rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:border-brand-600 hover:text-brand-600 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed group"
+        title="Trang trước"
       >
-        Previous
+        <i class="pi pi-chevron-left text-xs group-hover:-translate-x-0.5 transition-transform"></i>
       </button>
+
+      <!-- Page numbers -->
+      <div class="flex items-center gap-1 sm:gap-2">
+        <template v-for="(page, index) in visiblePages" :key="index">
+          <button
+            v-if="page !== '...'"
+            @click="$emit('page-change', Number(page))"
+            :class="[
+              'w-10 h-10 flex items-center justify-center rounded-full text-sm font-bold transition-all duration-300',
+              page === currentPage
+                ? 'bg-brand-600 text-white shadow-[0_8px_20px_rgba(220,38,38,0.25)] scale-110 z-10'
+                : 'bg-white border border-gray-100 text-gray-500 hover:border-brand-300 hover:text-brand-600'
+            ]"
+          >
+            {{ page }}
+          </button>
+          <span
+            v-else
+            class="w-10 h-10 flex items-center justify-center text-gray-400 font-bold"
+          >
+            ...
+          </span>
+        </template>
+      </div>
+
+      <!-- Next button -->
       <button
         @click="$emit('page-change', currentPage + 1)"
         :disabled="currentPage >= totalPages"
-        class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:border-brand-600 hover:text-brand-600 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed group"
+        title="Trang sau"
       >
-        Next
+        <i class="pi pi-chevron-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
       </button>
     </div>
 
-    <!-- Desktop pagination -->
-    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-      <div>
-        <p class="text-sm text-gray-700 dark:text-gray-300">
-          Hiển thị
-          <span class="font-medium">{{ startItem }}</span>
-          đến
-          <span class="font-medium">{{ endItem }}</span>
-          của
-          <span class="font-medium">{{ totalItems }}</span>
-          kết quả
+    <!-- Extra Info & Limit (Optional) -->
+    <div v-if="!hideInfo || !hideLimit" class="flex flex-col sm:flex-row items-center gap-4 w-full justify-between border-t border-gray-100 pt-6">
+      <div v-if="!hideInfo">
+        <p class="text-sm text-gray-500 font-medium italic">
+          Hiển thị <span class="text-gray-900 font-bold">{{ startItem }}-{{ endItem }}</span> trong tổng số <span class="text-gray-900 font-bold">{{ totalItems }}</span> bài viết
         </p>
       </div>
-      <div>
-        <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-          <!-- Previous button -->
-          <button
-            @click="$emit('page-change', currentPage - 1)"
-            :disabled="currentPage <= 1"
-            class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 dark:text-gray-500 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <span class="sr-only">Previous</span>
-            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
-            </svg>
-          </button>
 
-          <!-- Page numbers -->
-          <template v-for="page in visiblePages" :key="page">
-            <button
-              v-if="page !== '...'"
-              @click="$emit('page-change', Number(page))"
-              :class="[
-                'relative inline-flex items-center px-4 py-2 text-sm font-semibold',
-                page === currentPage
-                  ? 'z-10 bg-blue-600 text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
-                  : 'text-gray-900 dark:text-gray-300 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0'
-              ]"
-            >
-              {{ page }}
-            </button>
-            <span
-              v-else
-              class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:outline-offset-0"
-            >
-              ...
-            </span>
-          </template>
-
-          <!-- Next button -->
-          <button
-            @click="$emit('page-change', currentPage + 1)"
-            :disabled="currentPage >= totalPages"
-            class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 dark:text-gray-500 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <span class="sr-only">Next</span>
-            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-            </svg>
-          </button>
-        </nav>
+      <div v-if="!hideLimit" class="flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-full border border-gray-100">
+        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider">Số lượng hiển thị:</label>
+        <select
+          v-model="selectedLimit"
+          @change="onLimitChange"
+          class="bg-transparent border-none outline-none text-sm font-bold text-brand-600 cursor-pointer"
+        >
+          <option v-for="limit in LIMIT_OPTIONS" :key="limit" :value="limit">{{ limit }}</option>
+        </select>
       </div>
-    </div>
-
-    <!-- Limit selector -->
-    <div class="flex items-center gap-2 mt-4 sm:mt-0">
-      <label class="text-sm text-gray-700 dark:text-gray-300">Hiển thị:</label>
-      <select
-        v-model="selectedLimit"
-        @change="onLimitChange"
-        class="rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-2 py-1 text-sm text-gray-900 dark:text-gray-300 focus:border-blue-500 focus:ring-blue-500"
-      >
-        <option v-for="limit in LIMIT_OPTIONS" :key="limit" :value="limit">{{ limit }}</option>
-      </select>
     </div>
   </div>
 </template>
@@ -106,13 +79,19 @@ interface Props {
   totalPages: number
   totalItems: number
   limit: number
+  hideInfo?: boolean
+  hideLimit?: boolean
+  centered?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   currentPage: 1,
   totalPages: 1,
   totalItems: 0,
-  limit: 10
+  limit: 10,
+  hideInfo: false,
+  hideLimit: false,
+  centered: true
 })
 
 const emit = defineEmits<{
@@ -137,32 +116,40 @@ const visiblePages = computed(() => {
   const total = props.totalPages
   const current = props.currentPage
 
-  if (total <= 7) {
-    // Show all pages if total pages <= 7
+  // Logic for small screens (mobile)
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+  const maxVisible = isMobile ? 3 : 5
+
+  if (total <= maxVisible + 2) {
     for (let i = 1; i <= total; i++) {
       pages.push(i)
     }
   } else {
-    // Show first page
+    // Elegant sliding window logic
     pages.push(1)
 
-    if (current > 4) {
+    if (current > (maxVisible === 3 ? 2 : 3)) {
       pages.push('...')
     }
 
-    // Show pages around current page
-    const start = Math.max(2, current - 1)
-    const end = Math.min(total - 1, current + 1)
+    let start = Math.max(2, current - (maxVisible === 3 ? 0 : 1))
+    let end = Math.min(total - 1, current + (maxVisible === 3 ? 0 : 1))
+
+    // Handle edge cases near start/end
+    if (current <= (maxVisible === 3 ? 2 : 3)) {
+      end = maxVisible
+    } else if (current >= total - (maxVisible === 3 ? 1 : 2)) {
+      start = total - (maxVisible - 1)
+    }
 
     for (let i = start; i <= end; i++) {
       pages.push(i)
     }
 
-    if (current < total - 3) {
+    if (current < total - (maxVisible === 3 ? 1 : 2)) {
       pages.push('...')
     }
 
-    // Show last page
     if (total > 1) {
       pages.push(total)
     }

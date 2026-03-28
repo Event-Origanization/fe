@@ -16,7 +16,7 @@ export const useDashboardStore = defineStore('dashboard', {
       products: 0,
       posts: 0,
       highlightVideos: 0,
-      subscribers: 0,
+      contactMessages: 0,
       productStats: {
         active: 0,
         inactive: 0,
@@ -27,7 +27,7 @@ export const useDashboardStore = defineStore('dashboard', {
         scheduled: 0,
       },
       recentProducts: [],
-      recentSubscribers: [],
+      recentContactMessages: [],
     },
     charts: null,
     loading: false,

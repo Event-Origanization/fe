@@ -7,10 +7,11 @@ export interface DashboardProduct {
   createdAt: string;
 }
 
-export interface DashboardSubscriber {
+export interface DashboardContactMessage {
   id: number;
+  name: string;
   email: string;
-  isActive: boolean;
+  isRead: boolean;
   createdAt: string;
 }
 
@@ -18,7 +19,7 @@ export interface DashboardOverview {
   products: number;
   posts: number;
   highlightVideos: number;
-  subscribers: number;
+  contactMessages: number;
   productStats: {
     active: number;
     inactive: number;
@@ -29,7 +30,7 @@ export interface DashboardOverview {
     scheduled: number;
   };
   recentProducts: DashboardProduct[];
-  recentSubscribers: DashboardSubscriber[];
+  recentContactMessages: DashboardContactMessage[];
 }
 
 export interface ChartSeriesData {
@@ -43,6 +44,6 @@ export interface DashboardYearlyCharts {
     posts: number[];
   };
   lineChart: {
-    subscribers: number[];
+    contactMessages: number[];
   };
 }

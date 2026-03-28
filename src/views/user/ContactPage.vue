@@ -9,8 +9,7 @@
 
       <!-- LEFT SIDE: TITLE & ILLUSTRATIVE ELEMENT -->
       <div class="lg:w-1/2 relative z-10" data-aos="fade-right">
-        <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tight leading-[0.9] text-gray-900 mb-12">
-          GET<br />IN TOUCH
+        <h1 v-html="$t('CONTACT.HERO_TITLE')" class="text-xl md:text-7xl font-black uppercase text-gray-900 mb-12">
         </h1>
         
         <!-- Abstract Illustration Area (Mimicking the image's hand/shape) -->
@@ -76,11 +75,11 @@
         <div class="flex flex-col gap-6" data-aos="fade-up">
            <div class="bg-gray-100 rounded-[30px] p-10 flex flex-col gap-6">
               <div>
-                <h3 class="text-2xl font-black text-gray-900 mb-2">Press enquiries</h3>
+                <h3 class="text-2xl font-black text-gray-900 mb-2">{{ $t('CONTACT.PRESS_ENQUIRIES') }}</h3>
                 <p class="text-gray-600 font-medium">5PeventBooking@gmail.com</p>
               </div>
               <div>
-                <h3 class="text-2xl font-black text-gray-900 mb-2">General enquiries</h3>
+                <h3 class="text-2xl font-black text-gray-900 mb-2">{{ $t('CONTACT.GENERAL_ENQUIRIES') }}</h3>
                 <div class="flex flex-col gap-1">
                   <p class="text-gray-600 font-medium"><span class="font-bold text-gray-900 uppercase text-sm">Booking:</span> 5P.research@gmail.com</p>
                   <p class="text-gray-600 font-medium"><span class="font-bold text-gray-900 uppercase text-sm">Media:</span> info@5Pmedia.net</p>
@@ -90,7 +89,7 @@
 
            <!-- ADDRESS BOX (Light Yellow) -->
            <div class="bg-yellow-50 rounded-[30px] p-10" data-aos="fade-up" data-aos-delay="100">
-              <h3 class="text-2xl font-black text-gray-900 mb-6">Address</h3>
+              <h3 class="text-2xl font-black text-gray-900 mb-6">{{ $t('CONTACT.ADDRESS') }}</h3>
               <div class="flex flex-col gap-4 text-gray-800 font-medium leading-relaxed">
                 <p>{{ contactAddress }}</p>
                 <div class="pt-4 flex flex-col gap-2">
@@ -109,7 +108,7 @@
            <!-- Hovering White Card -->
            <div class="relative z-10 bg-white/95 backdrop-blur shadow-2xl rounded-[40px] p-12 md:p-16 text-center max-w-sm transform hover:-translate-y-4 transition-all duration-500">
               <h3 class="text-3xl font-black text-gray-900 mb-8 leading-tight">For job enquiries, please see</h3>
-              <router-link to="/about" class="bg-brand-600 hover:bg-black text-white px-10 py-4 rounded-full font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all">
+              <router-link to="/" class="bg-brand-600 hover:bg-black text-white px-10 py-4 rounded-full font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all">
                 JOIN US
                 <i class="pi pi-arrow-up-right text-xs"></i>
               </router-link>
@@ -126,8 +125,7 @@
     <!-- SOCIAL MEDIA BANNER -->
     <section class="max-w-[1440px] mx-auto px-6 lg:px-20 py-10" data-aos="fade-up">
        <div class="bg-brand-600 rounded-[50px] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10">
-          <h2 class="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none">
-            FOLLOW US<br />ON SOCIAL MEDIA
+          <h2 v-html="$t('CONTACT.FOLLOW_SOCIAL')" class="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none">
           </h2>
           
           <div class="flex flex-wrap items-center gap-4 justify-center">
@@ -142,7 +140,7 @@
     <!-- MAP SECTION -->
     <section class="max-w-[1440px] mx-auto px-6 lg:px-20 py-20" data-aos="fade-up">
        <div class="flex items-center gap-6 mb-10">
-         <h2 class="text-4xl font-black uppercase text-gray-900 whitespace-nowrap">Find Us</h2>
+         <h2 class="text-4xl font-black uppercase text-gray-900 whitespace-nowrap">{{ $t('CONTACT.FIND_US') }}</h2>
          <div class="h-1 flex-1 bg-gray-100 rounded-full relative overflow-hidden">
             <div class="absolute inset-0 bg-brand-600 w-24 animate-[slide_3s_infinite]"></div>
          </div>
