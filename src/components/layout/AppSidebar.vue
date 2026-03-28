@@ -213,7 +213,7 @@ const menuGroups = computed<MenuGroup[]>(() => {
           icon: UserCircleIcon,
           name: t('SIDEBAR.CUSTOMER_ENGAGEMENT'),
           subItems: [
-            { name: t('SIDEBAR.NEWSLETTER'), path: ADMIN_ROUTES.NEWSLETTER, pro: false },
+            // { name: t('SIDEBAR.NEWSLETTER'), path: ADMIN_ROUTES.NEWSLETTER, pro: false },
             {
               name: t('SIDEBAR.CONTACT_MESSAGES'),
               path: ADMIN_ROUTES.CONTACT_MESSAGES,

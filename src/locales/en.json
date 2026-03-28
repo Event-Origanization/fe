@@ -6,12 +6,18 @@
     "SOUND_LIGHT": "Sound & Lighting",
     "RENTAL": "Equipment Rental",
     "CONTACT": "Contact",
-    "LANGUAGES": "Languages"
+    "LANGUAGES": "Languages",
+    "REACH_US": "Reach us",
+    "NEWS": "News"
   },
   "HOME": {
-    "HERO_TITLE": "COST",
-    "BADGE_LEFT": "REASONABLE",
-    "BADGE_RIGHT": "OPTIMIZED",
+    "HERO": {
+      "SUBTITLE": "5P EVENT ORGANIZATION COMPANY",
+      "DEFAULT_TITLE": "WITH 5P EVENT\nCREATING EMOTIONS\nCAPTURING BRAND",
+      "LEARN_MORE": "LEARN MORE ABOUT US",
+      "SLOGAN_P1": "Addressing Individualism and rethinking how to be together",
+      "SLOGAN_P2": "CREATIVE in ideas - PROFESSIONAL in organization - OPTIMIZED in costs"
+    },
     "STATS": {
       "FIELDS": "Fields",
       "EVENTS": "Events",
@@ -41,16 +47,52 @@
       "DESC": "The point of connecting the touch points of experience through high-class events. Understanding and accompanying to convey the message completely. Different to create uniqueness.",
       "VIEW_MORE": "View more"
     },
+    "FEATURED_SWIPER": {
+      "TITLE": "FEATURED",
+      "DESC": "See our latest news and research publications by our two labs",
+      "ACTION": "GO TO THE POST"
+    },
+    "QUICK_CONTACT": {
+      "TITLE": "CONTACT US",
+      "DESC": "For any inquiries or to learn more about Mi3 and its transformative programs, feel free to get in touch with us.",
+      "HINT": "Contact us for the fastest advice and support!",
+      "PLACEHOLDER_NAME": "Enter your full name",
+      "PLACEHOLDER_EMAIL": "Enter your e-mail address",
+      "PLACEHOLDER_MESSAGE": "Type your message",
+      "SEND_BTN": "SEND US",
+      "SUCCESS": "Contact sent successfully!"
+    },
     "PARTNERS": {
       "TITLE": "Our Clients"
     },
     "ABOUT_SNIPPET": {
+      "LABEL": "OUR SERVICES",
       "TITLE": "About Us",
       "SLOGAN": "5P EVENT - CREATING EMOTIONS, CAPTURING BRAND",
-      "DESC": "5P EVENT brings ARTISTIC EVENT MASTERPIECES AND PROFESSIONAL, COMPREHENSIVE, SMART, SOPHISTICATED EVENT SERVICES. From there, creating distinct values imbued with the corporate brand personality, creating a position before millions of competitors & potential customers."
+      "DESC": "5P EVENT brings ARTISTIC EVENT MASTERPIECES AND PROFESSIONAL, COMPREHENSIVE, SMART, SOPHISTICATED EVENT SERVICES. From there, creating distinct values imbued with the corporate brand personality, creating a position before millions of competitors & potential customers.",
+      "SECTORS": "Providing optimal solutions for all types of events, from small scale to international music festivals.",
+      "EVENT_TITLE": "Full Event Organization",
+      "EVENT_DESC": "Creating ideas, detailed planning, management and operation from A-Z for all types of events.",
+      "VIEW_DETAILS": "VIEW DETAILS",
+      "RENTAL_TITLE": "Event Equipment Rental",
+      "RENTAL_DESC": "Top modern sound, lighting, LED screen, and stage system.",
+      "SOUND_LIGHT_TITLE": "Sound & Lighting",
+      "SOUND_LIGHT_DESC": "Professional techniques, top effects for an explosive stage."
     }
   },
   "ABOUT": {
+    "HERO": {
+      "TITLE": "CRAFTING<br />MEMORIES<br /><span class=\"text-brand-600\">IN 5P</span>",
+      "DESC": "5P Event brings CREATIVE events in ideas - PROFESSIONAL in organization - MINIMAL in costs - PRESTIGIOUS in commitment."
+    },
+    "TARGET": "Our Target",
+    "PATH": "Our Path",
+    "CORE_VALUES_MAIN": "Our Core <span class=\"text-brand-500\">Values</span>",
+    "SUCCESS": "SUCCESS",
+    "SINCE": "Since 2026",
+    "PROJECTS_DONE": "PROJECTS DONE",
+    "LETTER_FROM": "Letter from",
+    "OUR_LEADER": "Our Leader",
     "VISION_TITLE": "VISION",
     "VISION_DESC": "5P EVENT aims to become the leading and most prestigious event organization unit in Vietnam, providing the most effective and optimal solutions in all services we are providing.",
     "MISSION_TITLE": "MISSION",
@@ -121,7 +163,18 @@
   "FOOTER": {
     "SUBSCRIBE": "Subscribe to our newsletter",
     "EMAIL_PLACEHOLDER": "Your email...",
-    "CONNECT_WITH_US": "Connect with us"
+    "CONNECT_WITH_US": "Connect with us",
+    "DESC": "5P EVENT ORGANIZATION COMPANY - Leading unit in the field of professional event organization, bringing premium and distinct experiences.",
+    "SLOGAN": "5P EVENT brings CREATIVE in ideas - PROFESSIONAL in organization - OPTIMIZED in costs",
+    "EXPLORE_SCIENCE": "Explore Services",
+    "INTERACTIVE_EXP": "Interactive Experience",
+    "INTERACTIVE_DEC": "Event Solutions",
+    "INTERACTIVE_DIS": "Creative Discovery",
+    "CVBE_LAB": "Featured Projects",
+    "CROWD_LAB": "Community Events",
+    "MULTIMEDIA": "Multimedia",
+    "BLOG": "News Blog",
+    "EVENTS": "Upcoming Events"
   },
   "COMMON": {
     "CANCEL": "Cancel",
@@ -165,6 +218,14 @@
   },
   "CONTACT": {
     "BREADCRUMB": "CONTACT",
+    "HERO_TITLE": "GET<br />IN TOUCH",
+    "PRESS_ENQUIRIES": "Press enquiries",
+    "GENERAL_ENQUIRIES": "General enquiries",
+    "ADDRESS": "Address",
+    "JOB_HINT": "For job enquiries, please see",
+    "JOIN_US": "JOIN US",
+    "FOLLOW_SOCIAL": "FOLLOW US<br />ON SOCIAL MEDIA",
+    "FIND_US": "Find Us",
     "TITLE_CONNECT": "LET'S CONNECT",
     "TITLE_WITH_US": "WITH US",
     "DESC": "We are always ready to listen and accompany you in every event project. Please leave your information and we will respond as soon as possible.",
@@ -205,6 +266,42 @@
     "TAB_IMAGES": "IMAGES",
     "TAB_VIDEOS": "VIDEOS",
     "FEATURED_EVENT": "FEATURED EVENTS"
+  },
+  "EVENTS_PAGE": {
+    "TITLE": "EVENT VIDEOS",
+    "SUBTITLE": "Highlights of videos, podcasts and news covering the latest research from M21's labs.",
+    "TAG_ARTICLE": "Article",
+    "TAG_INTERVIEW": "Interview",
+    "DEFAULT_VIDEO_TITLE": "Event video",
+    "NO_MORE_VIDEOS": "No more event videos.",
+    "CLIENTS_TITLE": "OUR CLIENTS",
+    "CLIENTS_SUB": "Our clients include:",
+    "UPDATE_LATER": "Update soon",
+    "GALLERY_TITLE": "EVENT IMAGES",
+    "GALLERY_SUB": "Update the latest images from the featured events of 5P Event.",
+    "TAG_GALLERY": "Gallery",
+    "VIEW_FULL": "View full post"
+  },
+  "NEWS_PAGE": {
+    "HERO_TITLE": "5P EVENT NEWS",
+    "BREADCRUMB_ACTIVE": "EVENT NEWS",
+    "SECTION_SUBTITLE": "LATEST NEWS",
+    "SECTION_TITLE": "WEEKLY HIGHLIGHTS",
+    "TAG_HOT": "Hot News",
+    "HOT_NEWS_DESC": "Update the hottest information about the event market and outstanding activities of 5P Event.",
+    "NEWSLETTER_TITLE": "SUBSCRIBE NEWSLETTER",
+    "NEWSLETTER_DESC": "Don't miss out on our exclusive events and news.",
+    "NEWSLETTER_PLACEHOLDER": "Your email",
+    "SEARCH_RESULTS": "RESULTS FOR:",
+    "OTHER_POSTS": "OTHER POSTS",
+    "CANCEL_SEARCH": "Clear search",
+    "TOC_TITLE": "TABLE OF CONTENTS",
+    "UPDATING": "Updating...",
+    "TAG_EVENT": "Event News",
+    "POST_DESC_PLACEHOLDER": "The article provides in-depth information and fresh perspectives on the current event industry.",
+    "READ_MORE": "READ MORE",
+    "NO_RESULTS_TITLE": "NO RESULTS FOUND",
+    "NO_RESULTS_DESC": "Try searching with a different keyword or return to the news list."
   },
   "PRODUCT": {
     "RELATED": "RELATED PRODUCTS",
@@ -409,6 +506,7 @@
       "WEBSITE_NAME": "Website Name",
       "WEBSITE_FULLNAME": "Company Full Name",
       "WEBSITE_SLOGAN": "Slogan",
+      "SYSTEM_FONT": "System Font",
       "WEBSITE_LOGO": "Logo URL",
       "WEBSITE_FAVICON": "Favicon URL",
       "CONTACT_HOTLINE": "Hotline",

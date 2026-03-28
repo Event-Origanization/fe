@@ -33,11 +33,13 @@
         <!-- Search -->
         <div class="relative group/search">
           <input
+            v-model="searchQuery"
             type="text"
-            placeholder="Tìm kiếm..."
+            :placeholder="$t('COMMON.SEARCH')"
             class="bg-gray-100 border border-gray-200 text-sm rounded-full px-5 py-2 w-48 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-gray-900 placeholder-gray-400 transition-all font-semibold"
+            @keyup.enter="handleSearch"
           />
-          <button class="absolute right-3 top-2.5 text-gray-400 hover:text-brand-600 transition-colors">
+          <button @click="handleSearch" class="absolute right-3 top-2.5 text-gray-400 hover:text-brand-600 transition-colors">
             <i class="pi pi-search text-sm"></i>
           </button>
         </div>
@@ -81,7 +83,7 @@
          
          <div class="mt-auto pb-10 border-t border-white/10 pt-10">
             <div class="flex items-center justify-between mb-8">
-              <span class="text-xs font-black uppercase tracking-widest text-gray-500">Reach us</span>
+              <span class="text-xs font-black uppercase tracking-widest text-gray-500">{{ $t('NAV.REACH_US') }}</span>
               <div class="flex gap-4">
                  <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-brand-600 hover:text-white transition-all"><i class="pi pi-facebook"></i></a>
                  <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-brand-600 hover:text-white transition-all"><i class="pi pi-instagram"></i></a>
@@ -101,7 +103,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useConfigStore } from '@/store/config'
 import LanguageSelector from '../common/LanguageSelector.vue'
@@ -111,8 +113,20 @@ defineOptions({
 })
 
 const route = useRoute()
+const router = useRouter()
 const { t } = useI18n()
 const configStore = useConfigStore()
+
+const searchQuery = ref('')
+const handleSearch = () => {
+  if (searchQuery.value.trim()) {
+    router.push({ 
+      path: '/news', 
+      query: { q: searchQuery.value.trim() } 
+    })
+    searchQuery.value = ''
+  }
+}
 
 const isScrolled = ref(false)
 const isVisible = ref(true)
@@ -173,11 +187,11 @@ defineEmits<{
 
 const menuItems = computed(() => [
   { label: configStore.getConfigValue('MENU', 'MENU_HOME', t('NAV.HOME')), to: { name: 'Home' }, name: 'Home', path: '/' },
-  { label: configStore.getConfigValue('MENU', 'MENU_ABOUT', t('NAV.ABOUT')), to: { name: 'About' }, name: 'About', path: '/about' },
-  { label: configStore.getConfigValue('MENU', 'MENU_EVENTS', 'Dự án thực hiện'), to: { name: 'Events' }, name: 'Events', path: '/events' },
-  { label: configStore.getConfigValue('MENU', 'MENU_RENTAL', 'Thiết bị sự kiện'), to: { name: 'Rental' }, name: 'Rental', path: '/rental' },
-  { label: configStore.getConfigValue('MENU', 'MENU_NEWS', 'Tin tức'), to: '/news', path: '/news' },
-  { label: configStore.getConfigValue('MENU', 'MENU_CONTACT', 'Liên hệ'), to: { name: 'Contact' }, name: 'Contact', path: '/contact' }
+  // { label: configStore.getConfigValue('MENU', 'MENU_ABOUT', t('NAV.ABOUT')), to: { name: 'About' }, name: 'About', path: '/about' },
+  { label: configStore.getConfigValue('MENU', 'MENU_EVENTS', t('NAV.EVENTS')), to: { name: 'Events' }, name: 'Events', path: '/events' },
+  { label: configStore.getConfigValue('MENU', 'MENU_RENTAL', t('NAV.RENTAL')), to: { name: 'Rental' }, name: 'Rental', path: '/rental' },
+  { label: configStore.getConfigValue('MENU', 'MENU_NEWS', t('NAV.NEWS')), to: '/news', path: '/news' },
+  { label: configStore.getConfigValue('MENU', 'MENU_CONTACT', t('NAV.CONTACT')), to: { name: 'Contact' }, name: 'Contact', path: '/contact' }
 ])
 </script>
 

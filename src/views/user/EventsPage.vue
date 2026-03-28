@@ -6,29 +6,29 @@
 
       <!-- Title block -->
       <div class="mb-10 text-center lg:text-left relative z-20" data-aos="fade-down">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 uppercase tracking-tighter mb-4">VIDEO SỰ KIỆN</h1>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 uppercase tracking-tighter mb-4">{{ $t('EVENTS_PAGE.TITLE') }}</h1>
         <p class="text-gray-500 text-base max-w-lg mx-auto lg:mx-0 leading-relaxed">
-          Highlights of videos, podcasts and news covering the latest research from M21's labs.
+          {{ $t('EVENTS_PAGE.SUBTITLE') }}
         </p>
       </div>
 
       <!-- ===== 5-VIDEO CREATIVE LAYOUT (DESKTOP) ===== -->
-      <div class="hidden lg:block relative w-full h-[1800px] mt-16" data-aos="fade-up" data-aos-duration="1000">
+      <div v-if="videoStore.currentPage === 1" class="hidden lg:block relative w-full h-[1800px] mt-16" data-aos="fade-up" data-aos-duration="1000">
         
         <!-- DECORATIVE ELEMENTS -->
-        <!-- 1. Yellow Circle with Arrow -->
-        <div class="absolute top-[8%] -left-[10%] w-[500px] h-[500px] bg-[#fdf047] rounded-full z-0 opacity-80 mix-blend-multiply flex items-center justify-center animate-pulse-slow">
-            <i class="pi pi-arrow-up-right text-[150px] text-[#7885b9] absolute top-[40%] left-[45%] font-light transform hover:translate-x-4 hover:-translate-y-4 transition-transform duration-500"></i>
+        <!-- 1. Red Circle with Arrow -->
+        <div class="absolute top-[8%] -left-[10%] w-[500px] h-[500px] bg-brand-500 rounded-full z-0 opacity-20 mix-blend-multiply flex items-center justify-center animate-pulse-slow">
+            <i class="pi pi-arrow-up-right text-[150px] text-white absolute top-[40%] left-[45%] font-light transform hover:translate-x-4 hover:-translate-y-4 transition-transform duration-500"></i>
         </div>
 
         <!-- 2. Purple Blob Top Right -->
         <div class="absolute top-[2%] right-[5%] w-[450px] h-[500px] bg-[#a8aecc] rounded-[60px] z-0 opacity-70 rotate-6 mix-blend-multiply"></div>
 
-        <!-- 3. Yellow Dots (Top Right) -->
-        <div class="absolute top-[32%] right-[5%] w-[180px] h-[180px] z-0 opacity-80" style="background-image: radial-gradient(#fdf047 3px, transparent 3px); background-size: 20px 20px;"></div>
+        <!-- 3. Red Dots (Top Right) -->
+        <div class="absolute top-[32%] right-[5%] w-[180px] h-[180px] z-0 opacity-40" style="background-image: radial-gradient(#dc2626 3px, transparent 3px); background-size: 20px 20px;"></div>
 
-        <!-- 4. Yellow Dots (Bottom Left) -->
-        <div class="absolute bottom-[28%] left-[8%] w-[200px] h-[200px] z-0 opacity-80" style="background-image: radial-gradient(#fdf047 3px, transparent 3px); background-size: 20px 20px;"></div>
+        <!-- 4. Red Dots (Bottom Left) -->
+        <div class="absolute bottom-[28%] left-[8%] w-[200px] h-[200px] z-0 opacity-40" style="background-image: radial-gradient(#dc2626 3px, transparent 3px); background-size: 20px 20px;"></div>
 
         <!-- 5. Gray Circular Lines (Center Right) -->
         <div class="absolute top-[52%] right-[10%] w-[450px] h-[450px] border-[3px] border-gray-100 rounded-full z-0 pointer-events-none opacity-80"></div>
@@ -37,7 +37,7 @@
         <!-- VIDEOS -->
         <!-- Video 1: Top Right (Verticalish) -->
         <div class="absolute top-0 right-[15%] w-[28%] aspect-[3/4] z-10 creative-video-card" data-aos="fade-left" data-aos-delay="200" @click="openVideo(featuredVideos[0])">
-          <img :src="featuredVideos[0]?.media || defImg(0)" class="w-full h-full object-cover rounded-[30px]" alt="Video 1" />
+          <img :src="featuredVideos[0]?.thumbnail || featuredVideos[0]?.url || defImg(0)" class="w-full h-full object-cover rounded-[30px]" alt="Video 1" />
           <div class="video-hover-overlay rounded-[30px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -45,7 +45,7 @@
 
         <!-- Video 2: Middle Left (Horizontal) -->
         <div class="absolute top-[20%] left-[2%] w-[45%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-right" data-aos-delay="300" @click="openVideo(featuredVideos[1])">
-          <img :src="featuredVideos[1]?.media || defImg(1)" class="w-full h-full object-cover rounded-[24px]" alt="Video 2" />
+          <img :src="featuredVideos[1]?.thumbnail || featuredVideos[1]?.url || defImg(1)" class="w-full h-full object-cover rounded-[24px]" alt="Video 2" />
           <div class="video-hover-overlay rounded-[24px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -53,7 +53,7 @@
 
         <!-- Video 3: Middle Right (Horizontal) -->
         <div class="absolute top-[42%] right-[2%] w-[42%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-left" data-aos-delay="400" @click="openVideo(featuredVideos[2])">
-          <img :src="featuredVideos[2]?.media || defImg(2)" class="w-full h-full object-cover rounded-[24px]" alt="Video 3" />
+          <img :src="featuredVideos[2]?.thumbnail || featuredVideos[2]?.url || defImg(2)" class="w-full h-full object-cover rounded-[24px]" alt="Video 3" />
           <div class="video-hover-overlay rounded-[24px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -61,7 +61,7 @@
 
         <!-- Video 4: Bottom Left (Horizontal) -->
         <div class="absolute top-[62%] left-[8%] w-[40%] aspect-[16/10] z-10 creative-video-card" data-aos="fade-up-right" data-aos-delay="500" @click="openVideo(featuredVideos[3])">
-          <img :src="featuredVideos[3]?.media || defImg(3)" class="w-full h-full object-cover rounded-[24px]" alt="Video 4" />
+          <img :src="featuredVideos[3]?.thumbnail || featuredVideos[3]?.url || defImg(3)" class="w-full h-full object-cover rounded-[24px]" alt="Video 4" />
           <div class="video-hover-overlay rounded-[24px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -69,7 +69,7 @@
 
         <!-- Video 5: Bottom Right (Horizontal) -->
         <div class="absolute top-[82%] right-[10%] w-[44%] aspect-[16/10] z-30 creative-video-card" data-aos="fade-up-left" data-aos-delay="600" @click="openVideo(featuredVideos[4])">
-          <img :src="featuredVideos[4]?.media || defImg(4)" class="w-full h-full object-cover rounded-[24px]" alt="Video 5" />
+          <img :src="featuredVideos[4]?.thumbnail || featuredVideos[4]?.url || defImg(4)" class="w-full h-full object-cover rounded-[24px]" alt="Video 5" />
           <div class="video-hover-overlay rounded-[24px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -77,7 +77,7 @@
       </div>
 
       <!-- ===== MOBILE VIDEO LAYOUT ===== -->
-      <div class="lg:hidden flex flex-col gap-8 mt-10">
+      <div v-if="videoStore.currentPage === 1" class="lg:hidden flex flex-col gap-8 mt-10">
          <div 
             v-for="(post, idx) in featuredVideos" 
             :key="'mob-'+idx"
@@ -85,7 +85,7 @@
             data-aos="fade-up"
             @click="openVideo(post)"
          >
-            <img :src="post?.media || defImg(idx)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Video" />
+            <img :src="post?.thumbnail || post?.url || defImg(idx)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Video" />
             <div class="video-hover-overlay">
               <div class="play-btn"><i class="pi pi-play"></i></div>
             </div>
@@ -94,7 +94,7 @@
     </section>
 
     <!-- ===== XEM THÊM VIDEO (Bottom Section Background Colored) ===== -->
-    <section class="py-24 relative bg-[#ecedf4] rounded-t-[50px] md:rounded-t-[80px]">
+    <section id="more-videos-section" class="py-24 relative bg-[#ecedf4] rounded-t-[50px] md:rounded-t-[80px]">
       <div class="container mx-auto px-4 relative z-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           <div
@@ -109,13 +109,13 @@
             <div class="p-4 pb-0 flex-shrink-0">
                <div class="aspect-[4/3] rounded-[16px] overflow-hidden relative shadow-inner">
                  <img
-                   :src="post.media || defImg(idx + 5)"
+                   :src="post.thumbnail || post.url || defImg(idx + 5)"
                    :alt="getTitle(post)"
                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                  />
                  <div class="absolute top-3 left-3 flex gap-2">
-                   <span class="bg-white/95 text-brand-700 text-[10px] font-black uppercase px-2 py-1 rounded-md shadow-sm opacity-90 group-hover:opacity-100 transition-opacity"><i class="pi pi-file-o mr-1"></i> Article</span>
-                   <span class="bg-white/95 text-brand-700 text-[10px] font-black uppercase px-2 py-1 rounded-md shadow-sm opacity-90 group-hover:opacity-100 transition-opacity"><i class="pi pi-comment mr-1"></i> Interview</span>
+                   <span class="bg-white/95 text-brand-700 text-[10px] font-black uppercase px-2 py-1 rounded-md shadow-sm opacity-90 group-hover:opacity-100 transition-opacity"><i class="pi pi-file-o mr-1"></i> {{ $t('EVENTS_PAGE.TAG_ARTICLE') }}</span>
+                   <span class="bg-white/95 text-brand-700 text-[10px] font-black uppercase px-2 py-1 rounded-md shadow-sm opacity-90 group-hover:opacity-100 transition-opacity"><i class="pi pi-comment mr-1"></i> {{ $t('EVENTS_PAGE.TAG_INTERVIEW') }}</span>
                  </div>
                  
                  <!-- Play Overlay on Card Image -->
@@ -130,7 +130,7 @@
             <!-- Content Info -->
             <div class="p-6 flex flex-col flex-grow">
               <h3 class="font-black text-lg md:text-xl text-gray-900 leading-tight line-clamp-2 group-hover:text-brand-600 transition-colors duration-300">
-                {{ getTitle(post) || 'Video sự kiện' }}
+                {{ getTitle(post) || $t('EVENTS_PAGE.DEFAULT_VIDEO_TITLE') }}
               </h3>
               <p class="text-[12px] text-gray-400 font-bold mt-auto pt-4 uppercase tracking-widest">
                 {{ formatDate(post.createdAt, locale) }}
@@ -140,8 +140,21 @@
         </div>
 
         <div v-if="moreVideos.length === 0" class="text-center py-10 text-gray-400 font-medium">
-          Chưa có thêm video sự kiện nào.
+          {{ $t('EVENTS_PAGE.NO_MORE_VIDEOS') }}
         </div>
+
+        <!-- Pagination for Videos -->
+        <Pagination
+          v-if="videoStore.totalPages > 1"
+          :current-page="videoStore.currentPage"
+          :total-pages="videoStore.totalPages"
+          :total-items="videoStore.total"
+          :limit="11"
+          hide-info
+          hide-limit
+          @page-change="changeVideoPage"
+          class="mt-16"
+        />
       </div>
     </section>
 
@@ -151,12 +164,12 @@
          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent shadow-[0_0_15px_rgba(220,38,38,0.8)]"></div>
          
          <div class="inline-block bg-white text-brand-600 font-black uppercase tracking-widest px-8 md:px-12 py-4 rounded-full shadow-lg mb-8 -mt-24 border border-gray-100 text-lg md:text-xl transform hover:-translate-y-1 transition-transform">
-           KHÁCH HÀNG CỦA CHÚNG TÔI
+           {{ $t('EVENTS_PAGE.CLIENTS_TITLE') }}
          </div>
          
-         <p class="text-yellow-300 font-bold mb-12 text-sm md:text-base tracking-wide flex items-center justify-center gap-4">
-           <span>Our clients include:</span>
-           <span class="text-white/80 italic font-normal">Update text sau</span>
+         <p class="text-brand-200 font-bold mb-12 text-sm md:text-base tracking-wide flex items-center justify-center gap-4">
+           <span>{{ $t('EVENTS_PAGE.CLIENTS_SUB') }}</span>
+           <span class="text-white/80 italic font-normal">{{ $t('EVENTS_PAGE.UPDATE_LATER') }}</span>
          </p>
          
          <!-- Logos Grid (4 rows, 6 cols) -->
@@ -172,10 +185,10 @@
     </section>
 
     <!-- HÌNH ẢNH SỰ KIỆN -->
-    <section class="py-16 bg-[#f8fafc] border-t border-gray-100">
+    <section id="gallery-section" class="py-16 bg-[#f8fafc] border-t border-gray-100">
       <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-widest mb-4" data-aos="fade-up">HÌNH ẢNH SỰ KIỆN</h2>
-        <p class="text-gray-500 md:text-lg max-w-2xl mx-auto mb-16 font-medium" data-aos="fade-up" data-aos-delay="100">Cập nhật những hình ảnh mới nhất từ các sự kiện nổi bật của 5P Event.</p>
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-widest mb-4" data-aos="fade-up">{{ $t('EVENTS_PAGE.GALLERY_TITLE') }}</h2>
+        <p class="text-gray-500 md:text-lg max-w-2xl mx-auto mb-16 font-medium" data-aos="fade-up" data-aos-delay="100">{{ $t('EVENTS_PAGE.GALLERY_SUB') }}</p>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
            <div 
@@ -188,7 +201,7 @@
            >
              <div class="w-full aspect-[4/3] rounded-[20px] overflow-hidden mb-6 relative">
                 <img :src="post.media || `https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=600`" :alt="getTitle(post)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div class="absolute top-4 left-4 bg-brand-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wider">Gallery</div>
+                <div class="absolute top-4 left-4 bg-brand-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wider">{{ $t('EVENTS_PAGE.TAG_GALLERY') }}</div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
              </div>
              
@@ -205,18 +218,18 @@
            </div>
         </div>
         
-        <!-- Pagination -->
-        <div v-if="postStore.totalPages > 1" class="flex justify-center mt-16 gap-2" data-aos="fade-up">
-          <button 
-            v-for="p in postStore.totalPages" 
-            :key="p"
-            @click="changePage(p)"
-            class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 text-sm font-bold"
-            :class="postStore.currentPage === p ? 'bg-brand-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-brand-600'"
-          >
-            {{ p }}
-          </button>
-        </div>
+        <!-- Pagination for Gallery -->
+        <Pagination
+          v-if="postStore.totalPages > 1"
+          :current-page="postStore.currentPage"
+          :total-pages="postStore.totalPages"
+          :total-items="postStore.total"
+          :limit="9"
+          hide-info
+          hide-limit
+          @page-change="changePage"
+          class="mt-16"
+        />
       </div>
     </section>
 
@@ -244,7 +257,7 @@
               ></iframe>
               <img
                 v-else
-                :src="activeVideo.media || defImg(0)"
+                :src="(activeVideo as any).thumbnail || (activeVideo as any).url || (activeVideo as any).media || defImg(0)"
                 class="w-full h-full object-contain"
                 alt="Video preview"
               />
@@ -256,10 +269,11 @@
               </h3>
               <p class="text-white/60 text-sm mt-1">{{ formatDate(activeVideo.createdAt, locale) }}</p>
               <button
+                v-if="(activeVideo as any).slug"
                 class="mt-4 px-6 py-2 bg-brand-600 text-white font-bold rounded-full text-sm hover:bg-brand-500 hover:scale-105 transition-all outline-none"
-                @click="goToPost(activeVideo.slug); closeVideo()"
+                @click="goToPost((activeVideo as any).slug); closeVideo()"
               >
-                Xem bài viết đầy đủ
+                {{ $t('EVENTS_PAGE.VIEW_FULL') }}
               </button>
             </div>
           </div>
@@ -276,21 +290,27 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
 import { usePostStore } from '@/store/post.store'
+import { useVideoStore } from '@/store/highlight-video.store'
+import Pagination from '@/components/common/Pagination.vue'
 import { formatDate } from '@/utils/common'
 import type { IPost } from '@/types/post'
 import { ROUTE_NAMES } from '@/router'
 
+import type { IHighlightVideo } from '@/types/highlight-video'
+
 defineOptions({ name: 'EventsPage' })
 
 const postStore = usePostStore()
+const videoStore = useVideoStore()
 const { locale } = useI18n()
 const router = useRouter()
 
 // ── Video modal ──────────────────────────────────────────────────
-const activeVideo = ref<IPost | null>(null)
+const activeVideo = ref<IPost | IHighlightVideo | null>(null)
 
 const activeVideoUrl = computed(() => {
-  const media = activeVideo.value?.media || ''
+  if (!activeVideo.value) return ''
+  const media = (activeVideo.value as any).url || (activeVideo.value as any).media || ''
   const ytMatch = media.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)
   if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`
   const vimeoMatch = media.match(/vimeo\.com\/(\d+)/)
@@ -299,7 +319,7 @@ const activeVideoUrl = computed(() => {
   return '' 
 })
 
-const openVideo = (post: IPost | undefined) => {
+const openVideo = (post: IPost | IHighlightVideo | undefined) => {
   if (!post) return
   activeVideo.value = post
   document.body.style.overflow = 'hidden'
@@ -311,8 +331,8 @@ const closeVideo = () => {
 }
 
 // ── Data helpers ─────────────────────────────────────────────────
-const featuredVideos = computed(() => postStore.recentNews.slice(0, 5))
-const moreVideos     = computed(() => postStore.recentNews.slice(5))
+const featuredVideos = computed(() => videoStore.videos.slice(0, 5))
+const moreVideos     = computed(() => videoStore.currentPage === 1 ? videoStore.videos.slice(5) : videoStore.videos)
 
 const placeholders = [
   'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200',
@@ -326,24 +346,38 @@ const placeholders = [
 ]
 const defImg = (i: number) => placeholders[i % placeholders.length]
 
-const getTitle = (post: IPost | undefined) => {
-  if (!post) return ''
-  const key = `title_${locale.value}` as keyof IPost
-  return (post[key] as string) || post.title_vi || ''
+const getTitle = (item: any) => {
+  if (!item) return ''
+  const key = `title_${locale.value}`
+  return item[key] || item.title_vi || item.title || ''
 }
 
 const goToPost = (slug: string) => {
   if (slug) router.push({ name: ROUTE_NAMES.POST_DETAIL, params: { slug } })
 }
 
-const changePage = (p: number) => {
-  postStore.fetchPosts({ page: p, limit: 9 })
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+const changePage = async (p: number) => {
+  await postStore.fetchPosts({ page: p, limit: 9 })
+  const gallerySection = document.getElementById('gallery-section')
+  if (gallerySection) {
+    gallerySection.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+
+const changeVideoPage = async (p: number) => {
+  await videoStore.fetchVideos({ page: p, limit: 11 })
+  const videoSection = document.getElementById('more-videos-section')
+  if (videoSection) {
+    videoSection.scrollIntoView({ behavior: 'smooth' })
+  }
 }
 
 onMounted(async () => {
-  await postStore.fetchRecentNews(20)
-  await postStore.fetchPosts({ limit: 9, page: 1 })
+  await Promise.all([
+    videoStore.fetchVideos({ limit: 11, page: 1 }),
+    postStore.fetchPosts({ limit: 9, page: 1 })
+  ])
+  AOS.init()
   AOS.refresh()
 })
 </script>

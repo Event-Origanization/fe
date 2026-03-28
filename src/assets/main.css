@@ -8,7 +8,8 @@ layer(base);
 
 @theme {
   --font-*: initial;
-  --font-outfit: Outfit, sans-serif;
+  --font-outfit: "Outfit", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-main: var(--font-outfit);
 
   --breakpoint-*: initial;
   --breakpoint-2xsm: 375px;
@@ -193,7 +194,9 @@ layer(base);
     cursor: pointer;
   }
   body {
-    @apply relative font-normal font-outfit z-1 bg-gray-50;
+    background-color: var(--color-gray-50);
+    font-family: var(--font-main);
+    @apply relative font-normal z-1;
   }
 }
 

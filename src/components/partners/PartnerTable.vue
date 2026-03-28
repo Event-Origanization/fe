@@ -103,6 +103,19 @@
           </button>
         </div>
       </template>
+
+      <!-- Pagination Footer -->
+      <template #footer>
+        <Pagination
+          v-if="partnerStore.totalPages > 1 || partnerStore.total > 10"
+          :current-page="partnerStore.currentPage"
+          :total-pages="partnerStore.totalPages"
+          :total-items="partnerStore.total"
+          :limit="limit"
+          @page-change="changePage"
+          @limit-change="changeLimit"
+        />
+      </template>
     </BaseTable>
   </div>
 </template>
@@ -114,6 +127,7 @@ import { usePartnerStore } from '@/store/partner.store'
 import type { IPartner } from '@/types/partner'
 import { useToast } from '@/composables/useToast'
 import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
+import Pagination from '@/components/common/Pagination.vue'
 
 defineEmits<{
   (e: 'add'): void
@@ -134,14 +148,13 @@ const columns: ITableColumn[] = [
 
 const searchQuery = ref('')
 const filterStatus = ref('all')
+const limit = ref(10)
 
-onMounted(() => {
-  fetchPartners()
-})
-
-const fetchPartners = () => {
+const fetchPartners = (page = 1) => {
   const isActive = filterStatus.value === 'all' ? undefined : filterStatus.value === 'active'
   partnerStore.fetchPartners({
+    page,
+    limit: limit.value,
     search: searchQuery.value,
     isActive: isActive,
     sortBy: 'orderIndex',
@@ -149,9 +162,22 @@ const fetchPartners = () => {
   })
 }
 
+const changePage = (page: number) => {
+  fetchPartners(page)
+}
+
+const changeLimit = (newLimit: number) => {
+  limit.value = newLimit
+  fetchPartners(1)
+}
+
+onMounted(() => {
+  fetchPartners()
+})
+
 // Watch for search and filter changes
 watch([searchQuery, filterStatus], () => {
-  fetchPartners()
+  fetchPartners(1)
 })
 
 const confirmDelete = async (partner: IPartner) => {

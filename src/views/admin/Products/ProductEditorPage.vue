@@ -39,67 +39,55 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Main Content -->
-      <div class="lg:col-span-2 space-y-6">
-        <!-- Title & Slug -->
-        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 space-y-4">
-          <div>
-            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
-              {{ $t('PRODUCT_ADMIN.FIELDS.NAME') }} *
-            </label>
-            <input
-              v-model="form.name_vi"
-              type="text"
-              @input="handleNameInput"
-              :placeholder="$t('PRODUCT_ADMIN.PLACEHOLDERS.NAME')"
-              class="block w-full px-4 py-3 text-lg font-semibold border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all outline-none shadow-sm"
-              required
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              {{ $t('PRODUCT_ADMIN.FIELDS.SLUG') }} *
-            </label>
-            <div class="flex items-center gap-2">
-              <span class="text-gray-400 text-sm hidden sm:inline">/product/</span>
-              <input
-                v-model="form.slug"
-                type="text"
-                class="block flex-1 px-4 py-2 text-sm border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all outline-none"
-                placeholder="slug-san-pham"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Editor Section -->
-        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
-          <div class="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center bg-gray-50/50 dark:bg-gray-800/20">
-            <h2 class="font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-              <i class="pi pi-pencil text-red-500"></i>
-              {{ $t('PRODUCT_ADMIN.FIELDS.CONTENT') }} *
-            </h2>
-            <div class="text-xs text-gray-500 italic font-medium">
-              {{ $t('COMMON.AUTO_TRANSLATE_HINT') }}
-            </div>
-          </div>
-          <div class="p-0">
-            <Editor v-model="form.content_vi" minHeight="700px" :autoResize="false" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar -->
-      <div class="space-y-6">
-        <!-- Classification -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Left Column: Information -->
+      <div class="lg:col-span-7 space-y-6">
+        <!-- Basic Info -->
         <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 space-y-6">
           <h3 class="font-bold text-gray-800 dark:text-gray-200 border-b dark:border-gray-800 pb-3 flex items-center gap-2">
-            <i class="pi pi-cog text-blue-500"></i>
-            Phân loại & Giá cả
+            <i class="pi pi-info-circle text-red-500"></i>
+            Thông tin cơ bản
           </h3>
           
           <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
+                {{ $t('PRODUCT_ADMIN.FIELDS.NAME') }} *
+              </label>
+              <input
+                v-model="form.name_vi"
+                type="text"
+                @input="handleNameInput"
+                :placeholder="$t('PRODUCT_ADMIN.PLACEHOLDERS.NAME')"
+                class="block w-full px-4 py-3 text-lg font-semibold border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all outline-none shadow-sm"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                {{ $t('PRODUCT_ADMIN.FIELDS.SLUG') }} *
+              </label>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-400 text-sm hidden sm:inline">/product/</span>
+                <input
+                  v-model="form.slug"
+                  type="text"
+                  class="block flex-1 px-4 py-2 text-sm border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all outline-none"
+                  placeholder="slug-san-pham"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & Category -->
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 space-y-6">
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 border-b dark:border-gray-800 pb-3 flex items-center gap-2">
+            <i class="pi pi-tag text-blue-500"></i>
+            Giá cả & Phân loại
+          </h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Price -->
             <div class="space-y-2">
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider">
@@ -130,72 +118,98 @@
                 <option :value="PAGE_KEYS.RENTAL">Cho thuê thiết bị</option>
               </select>
             </div>
+          </div>
 
-            <!-- Status -->
-            <div class="pt-2 border-t dark:border-gray-800 flex items-center justify-between">
-              <div>
-                <span class="block text-sm font-bold text-gray-700 dark:text-gray-300">{{ $t('COMMON.STATUS') }}</span>
-                <span class="text-xs text-gray-500 italic font-medium">{{ form.isActive ? 'Đang hiển thị' : 'Tạm ẩn' }}</span>
-              </div>
-              <label class="inline-flex items-center cursor-pointer">
-                <input type="checkbox" v-model="form.isActive" class="sr-only peer" />
-                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-900 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r peer-checked:from-red-500 peer-checked:to-orange-500 shadow-sm"></div>
-              </label>
+          <!-- Status -->
+          <div class="pt-4 border-t dark:border-gray-800 flex items-center justify-between">
+            <div>
+              <span class="block text-sm font-bold text-gray-700 dark:text-gray-300">{{ $t('COMMON.STATUS') }}</span>
+              <span class="text-xs text-gray-500 italic font-medium">{{ form.isActive ? 'Đang hiển thị' : 'Tạm ẩn' }}</span>
             </div>
+            <label class="inline-flex items-center cursor-pointer">
+              <input type="checkbox" v-model="form.isActive" class="sr-only peer" />
+              <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-900 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r peer-checked:from-red-500 peer-checked:to-orange-500 shadow-sm"></div>
+            </label>
           </div>
         </div>
+      </div>
 
-        <!-- Image Upload -->
-        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 space-y-4">
-          <h3 class="font-bold text-gray-800 dark:text-gray-200 border-b dark:border-gray-800 pb-3 flex items-center gap-2">
-            <i class="pi pi-image text-emerald-500"></i>
-            {{ $t('PRODUCT_ADMIN.FIELDS.IMAGE') }}
-          </h3>
+      <!-- Right Column: Images -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 h-full flex flex-col">
+          <div class="flex justify-between items-center border-b dark:border-gray-800 pb-3 mb-6">
+            <h3 class="font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              <i class="pi pi-image text-emerald-500"></i>
+              Thư viện ảnh sản phẩm
+            </h3>
+            <span class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md text-gray-500 font-bold">
+              {{ form.images?.length || 0 }} ảnh
+            </span>
+          </div>
           
-          <div class="space-y-4">
+          <div class="flex-1 space-y-6">
+            <!-- Upload Area -->
             <div 
               @click="triggerFileUpload"
-              class="w-full aspect-square border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden flex flex-col items-center justify-center cursor-pointer hover:border-red-500 dark:hover:border-red-500 transition-all relative group bg-gray-50 dark:bg-gray-800/50 shadow-inner"
+              class="w-full aspect-[16/6] border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-red-500 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all group"
             >
-              <template v-if="form.images && form.images.length > 0">
-                <img :src="form.images[0]" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <i class="pi pi-camera text-white text-3xl"></i>
-                </div>
-              </template>
-              <template v-else>
-                <div class="flex flex-col items-center text-gray-400 group-hover:text-red-500 transition-colors">
-                  <i class="pi pi-upload text-4xl mb-3"></i>
-                  <span class="text-xs font-bold uppercase tracking-widest">{{ $t('COMMON.UPLOAD') }}</span>
-                </div>
-              </template>
+              <div class="flex flex-col items-center text-gray-400 group-hover:text-red-500 transition-colors">
+                <i class="pi pi-cloud-upload text-4xl mb-2"></i>
+                <span class="text-xs font-bold uppercase tracking-widest">{{ $t('COMMON.UPLOAD') }}</span>
+              </div>
             </div>
             
-            <div v-if="form.images && form.images.length > 0" class="flex flex-col gap-2">
-              <button 
-                type="button"
-                @click.stop="removeMainImage"
-                class="w-full px-4 py-2.5 text-xs font-bold text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors flex items-center justify-center gap-2 border border-red-100 dark:border-red-900/40"
+            <!-- Image Grid -->
+            <div 
+              v-if="form.images && form.images.length > 0" 
+              class="grid grid-cols-2 sm:grid-cols-3 gap-4"
+            >
+              <div 
+                v-for="(img, idx) in form.images" 
+                :key="idx" 
+                class="relative group aspect-square rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800"
               >
-                <i class="pi pi-trash"></i>
-                {{ $t('COMMON.DELETE') }}
-              </button>
+                <img :src="img" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <button 
+                    type="button"
+                    @click.stop="removeImage(idx)"
+                    class="w-10 h-10 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all"
+                  >
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <div class="space-y-1 p-3 bg-gray-50 dark:bg-gray-800/30 rounded-xl">
-              <p class="text-[10px] text-gray-500 dark:text-gray-400 flex items-center gap-2">
-                <i class="pi pi-info-circle text-blue-400"></i>
-                {{ $t('COMMON.FORMAT_HINT') }}
-              </p>
-              <p class="text-[10px] text-gray-500 dark:text-gray-400 flex items-center gap-2 font-medium">
-                <i class="pi pi-info-circle text-blue-400"></i>
-                {{ $t('COMMON.SIZE_HINT') }}
-              </p>
+            <!-- Empty State -->
+            <div 
+              v-else 
+              class="h-64 flex flex-col items-center justify-center text-gray-400 p-8 text-center border border-gray-50 dark:border-gray-800 rounded-2xl bg-gray-50/30"
+            >
+              <i class="pi pi-images text-5xl mb-4 opacity-20"></i>
+              <p class="text-sm font-medium">Chưa có ảnh nào được chọn.<br>Nhấn để tải lên ảnh cho sản phẩm.</p>
+            </div>
+
+            <!-- Hints -->
+            <div class="pt-6 border-t dark:border-gray-800 mt-auto">
+              <div class="space-y-2">
+                <p class="text-[10px] text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                  <i class="pi pi-info-circle text-blue-400"></i>
+                  {{ $t('COMMON.FORMAT_HINT') }}
+                </p>
+                <p class="text-[10px] text-gray-500 dark:text-gray-400 flex items-center gap-2 font-medium">
+                  <i class="pi pi-info-circle text-blue-400"></i>
+                  {{ $t('COMMON.SIZE_HINT') }}
+                </p>
+              </div>
             </div>
           </div>
+
           <input 
             ref="fileInput"
             type="file" 
+            multiple
             class="hidden" 
             accept="image/*"
             @change="handleFileUpload"
@@ -235,12 +249,10 @@ const isEdit = computed(() => !!productId.value)
 const initialForm: ProductCreationAttributes = {
   name_vi: '',
   slug: '',
-  content_vi: '',
   price: 0,
   isActive: true,
   productType: 'RENTAL',
-  images: [],
-  variants: []
+  images: []
 }
 
 const form = reactive({ ...initialForm })
@@ -265,7 +277,7 @@ onMounted(async () => {
 })
 
 const fileInput = ref<HTMLInputElement | null>(null)
-const selectedFile = ref<File | null>(null)
+const selectedFiles = ref<File[]>([])
 
 const triggerFileUpload = () => {
   fileInput.value?.click()
@@ -273,23 +285,41 @@ const triggerFileUpload = () => {
 
 const handleFileUpload = async (event: Event) => {
   const target = event.target as HTMLInputElement
-  const file = target.files?.[0]
-  if (file) {
+  const files = target.files
+  if (!files || files.length === 0) return
+
+  const imageFiles = Array.from(files)
+  
+  for (const file of imageFiles) {
     if (!checkFileSize(file, 2)) {
-      toastWarn('Dung lượng ảnh không được vượt quá 2MB')
-      return
+      toastWarn(`Ảnh ${file.name} vượt quá 2MB`)
+      continue
     }
-    selectedFile.value = file
-    // Create a local blob URL for preview
-    form.images = [URL.createObjectURL(file)]
+    selectedFiles.value.push(file)
+    form.images?.push(URL.createObjectURL(file))
+  }
+  
+  if (fileInput.value) {
+    fileInput.value.value = ''
   }
 }
 
-const removeMainImage = () => {
-  form.images = []
-  selectedFile.value = null
-  if (fileInput.value) {
-    fileInput.value.value = ''
+const removeImage = (index: number) => {
+  if (form.images) {
+    // If it's an object URL (i.e. newly uploaded file), remove from selectedFiles
+    const url = form.images[index]
+    if (url.startsWith('blob:')) {
+      const idx = selectedFiles.value.findIndex(f => URL.createObjectURL(f) === url)
+      // Note: Comparing object URLs doesn't work directly since they change, 
+      // but assuming the order of selectedFiles matches the blob blobs at the end of form.images
+      const newImagesCount = form.images.filter(i => i.startsWith('blob:')).length
+      const startIdx = form.images.length - newImagesCount
+      if (index >= startIdx) {
+        selectedFiles.value.splice(index - startIdx, 1)
+      }
+    }
+    
+    form.images.splice(index, 1)
   }
 }
 
@@ -311,17 +341,23 @@ const handleSubmit = async () => {
 
   try {
     const dataToSend = { ...form }
-    // If we have a selected file, pass it as 'image' field for FormData conversion
-    if (selectedFile.value) {
-      (dataToSend as any).image = selectedFile.value
-    }
+    
+    // Assign array of existing images + newly selected files to images array in form data builder
+    // The backend uses images field
+    const imagesToKeep = dataToSend.images?.filter(url => !url.startsWith('blob:')) || []
+    
+    // In FormData builder, objectToFormData will receive `images` as array.
+    // If we put Files in there directly, `objectToFormData` maps them directly.
+    // But since `backend` now expects `images` for files and strings...
+    const finalImages: any[] = [...imagesToKeep, ...selectedFiles.value]
+    
+    ;(dataToSend as any).images = finalImages.length ? finalImages : []
 
     if (isEdit.value && productId.value) {
       const payload: any = { ...dataToSend }
       
       if (originalProduct.value) {
         payload.translateName = hasFieldChanged(originalProduct.value, form, 'name_vi')
-        payload.translateContent = hasFieldChanged(originalProduct.value, form, 'content_vi')
       }
       
       await productStore.updateProduct(productId.value, payload)
@@ -329,8 +365,7 @@ const handleSubmit = async () => {
     } else {
       await productStore.createProduct({ 
         ...dataToSend, 
-        translateName: true, 
-        translateContent: true 
+        translateName: true
       } as any)
       toastSuccess('Thêm sản phẩm thành công')
     }

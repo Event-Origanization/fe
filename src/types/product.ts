@@ -6,12 +6,8 @@ export interface IProduct {
   name_en: string;
   name_zh: string;
   slug: string;
-  content_vi: string;
-  content_en: string;
-  content_zh: string;
   price: number;
   images: string[];
-  variants: Record<string, unknown>[];
   isActive: boolean;
   productType: typeof PAGE_KEYS.SOUND_LIGHT | typeof PAGE_KEYS.RENTAL;
   createdAt: string;
@@ -23,16 +19,11 @@ export interface ProductCreationAttributes {
   name_en?: string;
   name_zh?: string;
   slug: string;
-  content_vi: string;
-  content_en?: string;
-  content_zh?: string;
   price: number;
   images?: string[];
-  variants?: Record<string, unknown>[];
   isActive?: boolean;
   productType: typeof PAGE_KEYS.SOUND_LIGHT | typeof PAGE_KEYS.RENTAL;
   translateName?: boolean;
-  translateContent?: boolean;
 }
 
 export interface ProductQuery {

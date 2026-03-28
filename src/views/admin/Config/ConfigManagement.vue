@@ -57,33 +57,89 @@
           </div>
           
           <div v-if="editData[config.key]" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- VI -->
-            <div class="space-y-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Tiếng Việt</span>
-              <input 
-                v-model="editData[config.key].value_vi"
-                type="text"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-              />
-            </div>
-            <!-- EN -->
-            <div class="space-y-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">English</span>
-              <input 
-                v-model="editData[config.key].value_en"
-                type="text"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-              />
-            </div>
-            <!-- ZH -->
-            <div class="space-y-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">繁體中文</span>
-              <input 
-                v-model="editData[config.key].value_zh"
-                type="text"
-                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-              />
-            </div>
+            <!-- Special handling for SYSTEM_FONT -->
+            <template v-if="config.key === 'SYSTEM_FONT'">
+              <div class="col-span-3 space-y-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Chọn Font Chữ Hệ Thống</span>
+                <div class="flex gap-4">
+                  <div class="relative flex-1" ref="fontDropdownRef">
+                    <div 
+                      @click="isFontDropdownOpen = !isFontDropdownOpen"
+                      class="flex items-center justify-between w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 cursor-pointer hover:bg-white focus:outline-none transition-all"
+                      :style="systemFontMode !== '_CUSTOM_' ? { fontFamily: `&quot;${systemFontMode}&quot;, sans-serif` } : {}"
+                    >
+                      <span>{{ systemFontMode === '_CUSTOM_' ? 'Font tùy chỉnh từ Google Fonts...' : systemFontMode }}</span>
+                      <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                    
+                    <div 
+                      v-if="isFontDropdownOpen"
+                      class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg max-h-64 overflow-y-auto py-1"
+                    >
+                      <div 
+                        v-for="font in availableFonts" 
+                        :key="font" 
+                        @click="selectFontMode(font, config.key)"
+                        class="px-4 py-2.5 cursor-pointer hover:bg-gray-50 text-gray-900 transition-colors"
+                        :class="{'bg-blue-50 text-blue-600': systemFontMode === font}"
+                        :style="{ fontFamily: `&quot;${font}&quot;, sans-serif` }"
+                      >
+                        {{ font }}
+                      </div>
+                      <div 
+                        @click="selectFontMode('_CUSTOM_', config.key)"
+                        class="px-4 py-2.5 cursor-pointer hover:bg-gray-50 text-gray-900 border-t border-gray-100 transition-colors"
+                        :class="{'bg-blue-50 text-blue-600': systemFontMode === '_CUSTOM_'}"
+                      >
+                        Font tùy chỉnh từ Google Fonts...
+                      </div>
+                    </div>
+                  </div>
+                  <input 
+                    v-if="systemFontMode === '_CUSTOM_'"
+                    v-model="editData[config.key].value_vi"
+                    @input="syncFontValues(config.key)"
+                    placeholder="VD: Dancing Script"
+                    type="text"
+                    class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  />
+                </div>
+                <p class="text-[11px] text-gray-500 italic mt-1">* Chọn font từ danh sách hoặc nhập tên chính xác từ Google Fonts. Áp dụng toàn trang.</p>
+              </div>
+            </template>
+
+            <!-- Default rendering -->
+            <template v-else>
+              <!-- VI -->
+              <div class="space-y-1.5">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Tiếng Việt</span>
+                <input 
+                  v-model="editData[config.key].value_vi"
+                  type="text"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                />
+              </div>
+              <!-- EN -->
+              <div class="space-y-1.5">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">English</span>
+                <input 
+                  v-model="editData[config.key].value_en"
+                  type="text"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                />
+              </div>
+              <!-- ZH -->
+              <div class="space-y-1.5">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">繁體中文</span>
+                <input 
+                  v-model="editData[config.key].value_zh"
+                  type="text"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                />
+              </div>
+            </template>
           </div>
         </div>
       </div>
@@ -92,7 +148,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue';
 import ComponentCard from '@/components/common/ComponentCard.vue';
@@ -127,6 +183,8 @@ const getConfigLabel = (key: string) => {
   return t(`CONFIG_ADMIN.LABELS.${key}`) || key;
 };
 
+const systemFontMode = ref('Outfit');
+
 const initEditData = () => {
   const data: Record<string, { value_vi: string, value_en: string, value_zh: string }> = {};
   configStore.allConfigs.forEach(c => {
@@ -137,6 +195,50 @@ const initEditData = () => {
     };
   });
   editData.value = data;
+  
+  if (data['SYSTEM_FONT']) {
+    if (availableFonts.includes(data['SYSTEM_FONT'].value_vi)) {
+      systemFontMode.value = data['SYSTEM_FONT'].value_vi;
+    } else {
+      systemFontMode.value = '_CUSTOM_';
+    }
+  }
+};
+
+const availableFonts = [
+  'Inter', 'Be Vietnam Pro', 'Montserrat', 'Roboto', 'Open Sans', 'Poppins', 'Nunito', 'Noto Sans', 'Lexend', 'Quicksand', 'Mulish',
+  'Playfair Display', 'Lora', 'Merriweather', 'EB Garamond', 'Tinos', 'Noto Serif',
+  'Outfit', 'Kanit', 'Oswald', 'Bitter', 'Space Grotesk'
+];
+
+const syncFontValues = (key: string) => {
+  if (key === 'SYSTEM_FONT') {
+    const val = editData.value[key].value_vi;
+    editData.value[key].value_en = val;
+    editData.value[key].value_zh = val;
+  }
+};
+
+const handleFontModeChange = (key: string) => {
+  if (systemFontMode.value !== '_CUSTOM_') {
+    editData.value[key].value_vi = systemFontMode.value;
+    syncFontValues(key);
+  }
+};
+
+const isFontDropdownOpen = ref(false);
+const fontDropdownRef = ref<HTMLElement | null>(null);
+
+const selectFontMode = (val: string, key: string) => {
+  systemFontMode.value = val;
+  isFontDropdownOpen.value = false;
+  handleFontModeChange(key);
+};
+
+const handleClickOutside = (e: MouseEvent) => {
+  if (fontDropdownRef.value && !fontDropdownRef.value.contains(e.target as Node)) {
+    isFontDropdownOpen.value = false;
+  }
 };
 
 onMounted(async () => {
@@ -144,6 +246,11 @@ onMounted(async () => {
   await configStore.fetchAllConfigs();
   initEditData();
   loading.value = false;
+  document.addEventListener('click', handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside);
 });
 
 const saveAll = async () => {

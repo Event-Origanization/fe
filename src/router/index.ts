@@ -22,7 +22,7 @@ const getSeoPath = (pageKey: string, defaultPath: string) => {
 // ====================== ROUTE NAME CONSTANTS ======================
 export const ROUTE_NAMES = {
   HOME: 'Home',
-  ABOUT: 'About',
+  // ABOUT: 'About',
   EVENTS: 'Events',
   SOUND_LIGHT: 'Sound_Light',
   RENTAL: 'Rental',
@@ -149,16 +149,16 @@ const router = createRouter({
             roles: [USER_ROLES.ROLE_ADMIN],
           },
         },
-        {
-          path: ADMIN_PATHS.NEWSLETTER,
-          name: 'NewsletterManagement',
-          component: () => import('@/views/admin/Newsletter/NewsletterManagement.vue'),
-          meta: {
-            title: 'Quản lý nhận tin',
-            // requiresAuth: true,
-            roles: [USER_ROLES.ROLE_ADMIN],
-          },
-        },
+        // {
+        //   path: ADMIN_PATHS.NEWSLETTER,
+        //   name: 'NewsletterManagement',
+        //   component: () => import('@/views/admin/Newsletter/NewsletterManagement.vue'),
+        //   meta: {
+        //     title: 'Quản lý nhận tin',
+        //     // requiresAuth: true,
+        //     roles: [USER_ROLES.ROLE_ADMIN],
+        //   },
+        // },
         {
           path: ADMIN_PATHS.PARTNERS,
           name: 'PartnerManagement',
@@ -193,12 +193,12 @@ const router = createRouter({
           component: () => import('@/views/user/HomePage.vue'),
           meta: { title: 'Home Page' },
         },
-        {
-          path: getSeoPath('ABOUT', 'about').replace(/^\//, ''),
-          name: ROUTE_NAMES.ABOUT,
-          component: () => import('@/views/user/AboutPage.vue'),
-          meta: { title: 'About Us' },
-        },
+        // {
+        //   path: getSeoPath('ABOUT', 'about').replace(/^\//, ''),
+        //   name: ROUTE_NAMES.ABOUT,
+        //   component: () => import('@/views/user/AboutPage.vue'),
+        //   meta: { title: 'About Us' },
+        // },
         {
           path: getSeoPath('EVENTS', 'events').replace(/^\//, ''),
           name: ROUTE_NAMES.EVENTS,

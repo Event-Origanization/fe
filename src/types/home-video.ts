@@ -3,7 +3,7 @@ export interface IHomeVideo {
     title_vi: string
     title_en: string
     title_zh: string
-    url: string
+    url: string | null
     thumbnail: string | null
     isActive: boolean
     createdAt: string
@@ -14,7 +14,7 @@ export interface HomeVideoCreationAttributes {
     title_vi: string
     title_en?: string
     title_zh?: string
-    url: string
+    url?: string | null
     thumbnail?: string | null
     isActive?: boolean
     translateTitle?: boolean

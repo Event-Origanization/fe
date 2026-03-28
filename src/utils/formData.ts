@@ -17,11 +17,10 @@ export const objectToFormData = (obj: Record<string, any>): FormData => {
     else if (key === 'image' && value instanceof File) {
       formData.append(key, value)
     }
-    // Handle arrays
     else if (Array.isArray(value)) {
       value.forEach((item, index) => {
         if (item instanceof File) {
-          formData.append(`${key}[${index}]`, item)
+          formData.append(key, item)
         } else if (typeof item === 'object') {
           formData.append(`${key}[${index}]`, JSON.stringify(item))
         } else {

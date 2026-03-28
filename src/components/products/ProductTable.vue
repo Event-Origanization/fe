@@ -122,6 +122,19 @@
           </button>
         </div>
       </template>
+
+      <!-- Pagination Footer -->
+      <template #footer>
+        <Pagination
+          v-if="productStore.totalPages > 1 || productStore.total > 10"
+          :current-page="productStore.currentPage"
+          :total-pages="productStore.totalPages"
+          :total-items="productStore.total"
+          :limit="limit"
+          @page-change="changePage"
+          @limit-change="changeLimit"
+        />
+      </template>
     </BaseTable>
   </div>
 </template>
@@ -134,6 +147,7 @@ import type { IProduct } from '@/types/product'
 import { useToast } from '@/composables/useToast'
 import { formatCurrency } from '@/utils/common'
 import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
+import Pagination from '@/components/common/Pagination.vue'
 import { PAGE_KEYS } from '@/constants'
 
 const { t } = useI18n()
@@ -157,24 +171,36 @@ const { toastSuccess, toastError } = useToast()
 const searchQuery = ref('')
 const filterStatus = ref('all')
 const filterType = ref('all')
+const limit = ref(10)
 
-onMounted(() => {
-  fetchProducts()
-})
-
-const fetchProducts = () => {
+const fetchProducts = (page = 1) => {
   const isActive = filterStatus.value === 'all' ? undefined : filterStatus.value === 'active'
   const productType = filterType.value === 'all' ? undefined : filterType.value as 'SOUND_LIGHT' | 'RENTAL'
   productStore.fetchProducts({
+    page,
+    limit: limit.value,
     search: searchQuery.value,
     isActive: isActive,
     productType: productType
   })
 }
 
+const changePage = (page: number) => {
+  fetchProducts(page)
+}
+
+const changeLimit = (newLimit: number) => {
+  limit.value = newLimit
+  fetchProducts(1)
+}
+
+onMounted(() => {
+  fetchProducts()
+})
+
 // Watch for search and filter changes
 watch([searchQuery, filterStatus, filterType], () => {
-  fetchProducts()
+  fetchProducts(1)
 })
 
 const confirmDelete = async (product: IProduct) => {
