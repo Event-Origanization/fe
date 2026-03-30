@@ -240,7 +240,7 @@ const changePage = async (page: number) => {
 }
 
 const clearSearch = () => {
-  router.push({ path: '/news' })
+  router.push({ name: ROUTE_NAMES.NEWS })
 }
 
 const fetchAllData = async () => {

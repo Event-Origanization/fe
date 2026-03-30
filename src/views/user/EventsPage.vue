@@ -310,7 +310,7 @@ const activeVideo = ref<IPost | IHighlightVideo | null>(null)
 
 const activeVideoUrl = computed(() => {
   if (!activeVideo.value) return ''
-  const media = (activeVideo.value as any).url || (activeVideo.value as any).media || ''
+  const media = (activeVideo.value as IHighlightVideo).url || (activeVideo.value as IHighlightVideo).thumbnail || ''
   const ytMatch = media.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)
   if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`
   const vimeoMatch = media.match(/vimeo\.com\/(\d+)/)
@@ -346,10 +346,10 @@ const placeholders = [
 ]
 const defImg = (i: number) => placeholders[i % placeholders.length]
 
-const getTitle = (item: any) => {
+const getTitle = (item: IPost | IHighlightVideo) => {
   if (!item) return ''
-  const key = `title_${locale.value}`
-  return item[key] || item.title_vi || item.title || ''
+  const key = `title_${locale.value}` as 'title_vi' | 'title_en' | 'title_zh'
+  return (item[key] as string) || item.title_vi || ''
 }
 
 const goToPost = (slug: string) => {

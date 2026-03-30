@@ -16,7 +16,6 @@
       :show="showModal"
       :video="selectedVideo"
       @close="showModal = false"
-      @submit="handleVideoSubmit"
     />
   </div>
 </template>
@@ -43,9 +42,5 @@ const openCreateModal = () => {
 const handleEdit = (video: IHomeVideo) => {
   selectedVideo.value = { ...video }
   showModal.value = true
-}
-
-const handleVideoSubmit = (data: IHomeVideo) => {
-  console.log('Home video submitted successfully:', data)
 }
 </script>

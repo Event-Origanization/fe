@@ -273,12 +273,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, computed, watch } from 'vue'
+import { ref, reactive, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Editor from '@/components/common/Editor.vue'
 import { slugify } from '@/utils/string'
-import { fileToDataURL, checkFileSize } from '@/utils/file'
+import { checkFileSize } from '@/utils/file'
 import { hasFieldChanged } from '@/utils/diff'
 import { usePostStore } from '@/store/post.store'
 import type { IPost, PostCreationAttributes, SeoScoreResult } from '@/types/post'
@@ -397,11 +397,11 @@ const handleSubmit = async () => {
     const dataToSend = { ...form }
     // If we have a selected file, pass it as 'image' field for FormData conversion
     if (selectedFile.value) {
-      (dataToSend as any).image = selectedFile.value
+      (dataToSend as Record<string, unknown>).image = selectedFile.value
     }
 
     if (isEdit.value && originalPost.value?.id) {
-      const payload: any = { ...dataToSend }
+      const payload: Record<string, unknown> = { ...dataToSend }
       
       // Check for changes to re-translate if needed
       payload.translateTitle = hasFieldChanged(originalPost.value, form, 'title_vi')
@@ -414,7 +414,7 @@ const handleSubmit = async () => {
         ...dataToSend, 
         translateTitle: true, 
         translateContent: true 
-      } as any)
+      })
       toastSuccess(t('COMMON.SUCCESS'))
     }
 

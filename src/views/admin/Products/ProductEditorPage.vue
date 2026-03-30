@@ -223,9 +223,8 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import Editor from '@/components/common/Editor.vue'
 import { slugify } from '@/utils/string'
-import { fileToDataURL, checkFileSize } from '@/utils/file'
+import { checkFileSize } from '@/utils/file'
 import { hasFieldChanged } from '@/utils/diff'
 import { useProductStore } from '@/store/product.store'
 import type { IProduct, ProductCreationAttributes } from '@/types/product'
@@ -309,7 +308,6 @@ const removeImage = (index: number) => {
     // If it's an object URL (i.e. newly uploaded file), remove from selectedFiles
     const url = form.images[index]
     if (url.startsWith('blob:')) {
-      const idx = selectedFiles.value.findIndex(f => URL.createObjectURL(f) === url)
       // Note: Comparing object URLs doesn't work directly since they change, 
       // but assuming the order of selectedFiles matches the blob blobs at the end of form.images
       const newImagesCount = form.images.filter(i => i.startsWith('blob:')).length
@@ -349,12 +347,12 @@ const handleSubmit = async () => {
     // In FormData builder, objectToFormData will receive `images` as array.
     // If we put Files in there directly, `objectToFormData` maps them directly.
     // But since `backend` now expects `images` for files and strings...
-    const finalImages: any[] = [...imagesToKeep, ...selectedFiles.value]
+    const finalImages: (string | File)[] = [...imagesToKeep, ...selectedFiles.value]
     
-    ;(dataToSend as any).images = finalImages.length ? finalImages : []
+    ;(dataToSend as Record<string, unknown>).images = finalImages.length ? finalImages : []
 
     if (isEdit.value && productId.value) {
-      const payload: any = { ...dataToSend }
+      const payload: Record<string, unknown> = { ...dataToSend }
       
       if (originalProduct.value) {
         payload.translateName = hasFieldChanged(originalProduct.value, form, 'name_vi')
@@ -366,7 +364,7 @@ const handleSubmit = async () => {
       await productStore.createProduct({ 
         ...dataToSend, 
         translateName: true
-      } as any)
+      })
       toastSuccess('Thêm sản phẩm thành công')
     }
 

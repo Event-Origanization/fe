@@ -204,6 +204,7 @@ const menuGroups = computed<MenuGroup[]>(() => {
           subItems: [
             { name: t('SIDEBAR.PRODUCTS'), path: ADMIN_ROUTES.PRODUCTS, pro: false },
             { name: t('SIDEBAR.POSTS'), path: ADMIN_ROUTES.POSTS, pro: false },
+            { name: t('SIDEBAR.HIGHLIGHTS'), path: ADMIN_ROUTES.HIGHLIGHTS, pro: false },
             { name: t('SIDEBAR.PARTNERS'), path: ADMIN_ROUTES.PARTNERS, pro: false },
             { name: t('SIDEBAR.VIDEOS'), path: ADMIN_ROUTES.VIDEOS, pro: false },
             { name: t('SIDEBAR.HOME_VIDEOS'), path: ADMIN_ROUTES.HOME_VIDEOS, pro: false },

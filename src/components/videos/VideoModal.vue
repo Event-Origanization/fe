@@ -145,7 +145,6 @@ const props = defineProps({
 
 const emit = defineEmits<{
   (e: 'close'): void
-  (e: 'submit', data: IHighlightVideo): void
 }>()
 
 const { t } = useI18n()
@@ -213,12 +212,12 @@ const handleSubmit = async () => {
   try {
     const dataToSend = { ...form }
     if (selectedFile.value) {
-      (dataToSend as any).image = selectedFile.value
+      (dataToSend as Record<string, unknown>).image = selectedFile.value
     }
 
     let result
     if (isEdit.value && props.video?.id) {
-      const payload: any = { ...dataToSend }
+      const payload: Record<string, unknown> = { ...dataToSend }
       
       // Kiểm tra xem có thay đổi tiêu đề không để yêu cầu dịch lại
       payload.translateTitle = hasFieldChanged(props.video, form, 'title_vi')
@@ -228,12 +227,11 @@ const handleSubmit = async () => {
       result = await videoStore.createVideo({ 
         ...dataToSend, 
         translateTitle: true 
-      } as any)
+      })
     }
 
     toastSuccess(t('COMMON.SUCCESS'))
 
-    emit('submit', result.data)
     emit('close')
   } catch (error) {
     console.error('Error submitting video:', error)

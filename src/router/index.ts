@@ -120,6 +120,15 @@ const router = createRouter({
           },
         },
         {
+          path: ADMIN_PATHS.HIGHLIGHTS,
+          name: 'HighlightManagement',
+          component: () => import('@/views/admin/Highlights/HighlightManagement.vue'),
+          meta: {
+            title: 'Quản lý Nổi bật',
+            roles: [USER_ROLES.ROLE_ADMIN],
+          },
+        },
+        {
           path: ADMIN_PATHS.VIDEOS,
           name: 'VideoManagement',
           component: () => import('@/views/admin/Videos/VideoManagement.vue'),

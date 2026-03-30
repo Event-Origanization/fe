@@ -125,7 +125,7 @@
         {{ $t('POST.NOT_FOUND') }}
       </p>
       <button
-        @click="$router.push('/')"
+        @click="$router.push({ name: ROUTE_NAMES.HOME })"
         class="px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full uppercase text-sm font-black tracking-widest transition-all"
       >
         {{ $t('COMMON.GO_HOME') }}
@@ -142,6 +142,7 @@ import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
 import type { IPost } from '@/types/post'
 import { formatDate } from '@/utils/common'
+import { ROUTE_NAMES } from '@/router'
 
 const route = useRoute()
 const postStore = usePostStore()

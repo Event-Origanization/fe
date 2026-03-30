@@ -236,7 +236,8 @@ const selectFontMode = (val: string, key: string) => {
 };
 
 const handleClickOutside = (e: MouseEvent) => {
-  if (fontDropdownRef.value && !fontDropdownRef.value.contains(e.target as Node)) {
+  const el = Array.isArray(fontDropdownRef.value) ? fontDropdownRef.value[0] : fontDropdownRef.value;
+  if (el && typeof el.contains === 'function' && !el.contains(e.target as Node)) {
     isFontDropdownOpen.value = false;
   }
 };

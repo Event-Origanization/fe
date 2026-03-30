@@ -127,7 +127,6 @@ const props = defineProps({
 
 const emit = defineEmits<{
   (e: 'close'): void
-  (e: 'submit', data: IPartner): void
 }>()
 
 const { t } = useI18n()
@@ -207,7 +206,7 @@ const handleSubmit = async () => {
   try {
     const dataToSend = { ...form }
     if (selectedFile.value) {
-      (dataToSend as any).image = selectedFile.value
+      (dataToSend as Record<string, unknown>).image = selectedFile.value
     }
 
     let result
@@ -218,7 +217,6 @@ const handleSubmit = async () => {
     }
 
     toastSuccess(t('COMMON.SUCCESS'))
-    emit('submit', result.data)
     emit('close')
   } catch (error) {
     console.error('Error submitting partner:', error)
