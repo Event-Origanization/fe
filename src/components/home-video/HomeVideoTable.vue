@@ -63,7 +63,7 @@
           </div>
           <div class="flex-grow min-w-0">
             <p class="font-bold text-gray-900 dark:text-white truncate" :title="video.title_vi">{{ video.title_vi }}</p>
-            <a :href="video.url" target="_blank" class="text-sm text-blue-500 hover:underline truncate block" :title="video.url">{{ video.url }}</a>
+            <a :href="video.url || ''" target="_blank" class="text-sm text-blue-500 hover:underline truncate block" :title="video.url || ''">{{ video.url || '' }}</a>
           </div>
         </div>
       </template>

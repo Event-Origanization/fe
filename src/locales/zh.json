@@ -234,6 +234,7 @@
       "FULLNAME": "姓名",
       "EMAIL": "邮箱",
       "PHONE": "电话号码",
+      "PHONE_PLACEHOLDER": "电话（可选）",
       "MESSAGE": "内容",
       "MESSAGE_PLACEHOLDER": "请输入您的要求...",
       "SEND": "发送消息",

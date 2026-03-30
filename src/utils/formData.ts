@@ -3,7 +3,7 @@
  * @param obj - Plain object
  * @returns FormData
  */
-export const objectToFormData = (obj: Record<string, any>): FormData => {
+export const objectToFormData = (obj: Record<string, unknown>): FormData => {
   const formData = new FormData()
 
   Object.entries(obj).forEach(([key, value]) => {
@@ -34,7 +34,7 @@ export const objectToFormData = (obj: Record<string, any>): FormData => {
     }
     // Handle primitive values
     else {
-      formData.append(key, value)
+      formData.append(key, value as string)
     }
   })
 

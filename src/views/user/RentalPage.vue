@@ -14,7 +14,7 @@
         <div class="flex items-center justify-center gap-2 text-sm md:text-base font-bold text-gray-400 uppercase tracking-widest" data-aos="fade-up" data-aos-delay="100">
           <router-link to="/" class="hover:text-brand-600 transition-colors">{{ $t('COMMON.BREADCRUMB_HOME') }}</router-link>
           <span class="text-gray-300">-</span>
-          <span class="text-brand-600">THIẾT BỊ SỰ KIỆN</span>
+          <span class="text-brand-600">{{ configStore.getConfigValue('MENU', 'MENU_RENTAL_EVENT', 'CHO THUÊ THIẾT BỊ SỰ KIỆN') }}</span>
         </div>
       </div>
     </section>
@@ -28,7 +28,7 @@
           <div>
             <h4 class="text-brand-600 font-bold uppercase tracking-widest text-sm mb-2">5P EVENT</h4>
             <h2 class="text-3xl font-black text-gray-900 uppercase tracking-widest">
-              CHO THUÊ THIẾT BỊ SỰ KIỆN
+              {{ configStore.getConfigValue('MENU', 'MENU_RENTAL_EVENT', 'CHO THUÊ THIẾT BỊ SỰ KIỆN') }}
             </h2>
           </div>
           <p class="text-gray-500 font-medium mt-4 md:mt-0 max-w-sm text-sm">Cung cấp giải pháp thiết bị toàn diện cho mọi quy mô sự kiện với chất lượng hàng đầu.</p>
@@ -70,54 +70,7 @@
         />
       </section>
 
-      <!-- DANH MỤC 2: 7SEVEN (ÂM THANH ÁNH SÁNG) -->
-      <section class="mb-20">
-        <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between border-b border-gray-200 pb-4" data-aos="fade-right">
-          <div>
-            <h4 class="text-gray-500 font-bold uppercase tracking-widest text-sm mb-2">ĐỐI TÁC CHIẾN LƯỢC</h4>
-            <h2 class="text-3xl font-black text-brand-600 uppercase tracking-widest">
-              7SEVEN
-            </h2>
-          </div>
-          <p class="text-gray-900 font-bold mt-4 md:mt-0 md:text-right text-sm">Cho thuê Âm thanh, Ánh sáng, Màn hình LED chuyên nghiệp</p>
-        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          <div v-if="productStore.loading" class="col-span-full flex justify-center items-center py-20">
-            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-600"></div>
-          </div>
-          <!-- Sản phẩm Hạng mục 2 -->
-          <div v-for="(item, idx) in productStore.soundLightProducts" :key="item.id" @click="goToProduct(item.slug)" class="group flex flex-col cursor-pointer bg-[#f8fafc] border border-gray-100 shadow-sm rounded-[24px] overflow-hidden hover:border-brand-200 hover:shadow-[0_16px_50px_rgba(220,38,38,0.12)] hover:-translate-y-3 transition-all duration-500" data-aos="fade-up" :data-aos-delay="idx % 4 * 100">
-            <div class="w-full aspect-[4/3] bg-white relative overflow-hidden flex items-center justify-center p-2">
-              <img :src="item.images && item.images[0] ? item.images[0] : 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=400'" :alt="getName(item)" class="w-full h-full object-cover rounded-[16px] group-hover:scale-105 transition-transform duration-700" />
-              <div class="absolute inset-0 bg-gray-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center rounded-[16px] m-2">
-                <div class="opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-500 bg-white/20 backdrop-blur-sm rounded-full p-4">
-                  <i class="pi pi-search text-white text-2xl"></i>
-                </div>
-              </div>
-            </div>
-            <div class="p-6 w-full text-center flex flex-col items-center justify-center min-h-[100px]">
-              <h3 class="font-black text-lg text-gray-900 group-hover:text-brand-600 transition-colors duration-300 line-clamp-2 uppercase">
-                {{ getName(item) }}
-              </h3>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Pagination Hạng mục 2 -->
-        <Pagination
-          v-if="productStore.soundLightTotalPages > 1"
-          :current-page="productStore.soundLightCurrentPage"
-          :total-pages="productStore.soundLightTotalPages"
-          :total-items="0"
-          :limit="8"
-          hide-info
-          hide-limit
-          @page-change="changeSoundLightPage"
-          class="mt-12"
-          data-aos="fade-up"
-        />
-      </section>
       
       <!-- QUY TRÌNH THUÊ THIẾT BỊ -->
       <section class="mt-32 pt-20 border-t border-gray-100" data-aos="fade-up">
@@ -157,6 +110,7 @@ import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
 import Pagination from '@/components/common/Pagination.vue'
 import { useProductStore } from '@/store/product.store'
+import { useConfigStore } from '@/store/config'
 import { PAGE_KEYS } from '@/constants'
 import { ROUTE_NAMES } from '@/router'
 import type { IProduct } from '@/types/product'
@@ -166,6 +120,7 @@ defineOptions({
 })
 
 const productStore = useProductStore()
+const configStore = useConfigStore()
 const { locale, t } = useI18n()
 const router = useRouter()
 
@@ -182,33 +137,18 @@ const goToProduct = (slug: string) => {
 const changeRentalPage = async (page: number) => {
   await productStore.fetchPublicProducts({ 
     productType: PAGE_KEYS.RENTAL, 
-    limit: 8, 
+    limit: 12, 
     page 
   })
-}
-
-const changeSoundLightPage = async (page: number) => {
-  await productStore.fetchPublicProducts({ 
-    productType: PAGE_KEYS.SOUND_LIGHT, 
-    limit: 8, 
-    page 
-  })
+  window.scrollTo({ top: 300, behavior: 'smooth' })
 }
 
 onMounted(async () => {
-  // Fetch both sets of products for the unified page
-  await Promise.all([
-    productStore.fetchPublicProducts({ 
-      productType: PAGE_KEYS.RENTAL, 
-      limit: 8, 
-      page: 1 
-    }),
-    productStore.fetchPublicProducts({ 
-      productType: PAGE_KEYS.SOUND_LIGHT, 
-      limit: 8, 
-      page: 1 
-    })
-  ])
+  await productStore.fetchPublicProducts({ 
+    productType: PAGE_KEYS.RENTAL, 
+    limit: 12, 
+    page: 1 
+  })
   AOS.init()
   AOS.refresh()
 })

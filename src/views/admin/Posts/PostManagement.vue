@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
@@ -34,9 +34,5 @@ const openCreateModal = () => {
 
 const handleEdit = (post: IPost) => {
   router.push({ name: 'PostEdit', params: { id: post.id } })
-}
-
-const handlePostSubmit = (data: IPost) => {
-  console.log('Post submitted successfully:', data)
 }
 </script>

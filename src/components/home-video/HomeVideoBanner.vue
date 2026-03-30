@@ -1,7 +1,5 @@
-<!-- src/components/home-video/HomeVideoBanner.vue -->
-<template>
+<!-- <template>
   <div v-if="activeVideo" class="w-full mx-auto relative group" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
-    <!-- Cyberpunk glowing frame -->
     <div
       class="absolute -inset-[3px] bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 rounded-sm blur-[2px] opacity-75 group-hover:opacity-100 group-hover:blur-[6px] transition-all duration-1000 [clip-path:polygon(5%_0%,95%_0%,100%_5%,100%_95%,95%_100%,5%_100%,0%_95%,0%_5%)]"
     ></div>
@@ -56,7 +54,6 @@
       ></div>
     </div>
 
-    <!-- Bottom cyber decor borders -->
     <div
       class="absolute -bottom-8 left-0 flex gap-4 w-1/3 h-6 [clip-path:polygon(0_0,100%_0,90%_100%,0_100%)] bg-pink-600/80"
     ></div>
@@ -65,7 +62,6 @@
     ></div>
   </div>
   
-  <!-- Default placeholder if no video -->
   <div v-else class="w-full max-w-6xl mx-auto relative group" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
       <div
         class="absolute -inset-[3px] bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 rounded-sm blur-[2px] opacity-75 transition-all duration-1000 [clip-path:polygon(5%_0%,95%_0%,100%_5%,100%_95%,95%_100%,5%_100%,0%_95%,0%_5%)]"
@@ -92,9 +88,9 @@
         </div>
       </div>
   </div>
-</template>
+</template> -->
 
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useHomeVideoStore } from '@/store/homeVideo'
 import { useI18n } from 'vue-i18n'
@@ -139,4 +135,4 @@ const embedUrl = computed(() => {
   }
   return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&playlist=${videoId}`
 })
-</script>
+</script> -->

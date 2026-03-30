@@ -17,7 +17,6 @@
       :show="showModal"
       :partner="selectedPartner"
       @close="showModal = false"
-      @submit="handlePartnerSubmit"
     />
   </div>
 </template>
@@ -44,9 +43,5 @@ const openCreateModal = () => {
 const handleEdit = (partner: IPartner) => {
   selectedPartner.value = { ...partner }
   showModal.value = true
-}
-
-const handlePartnerSubmit = (data: IPartner) => {
-  console.log('Partner submitted successfully:', data)
 }
 </script>

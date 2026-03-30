@@ -37,24 +37,35 @@
            <form @submit.prevent="handleSubmit" class="flex flex-col gap-6">
               <div class="flex flex-col md:flex-row gap-6">
                  <div class="flex-1">
-                   <input v-model="form.name" type="text" :placeholder="$t('CONTACT.FORM.FULLNAME')" 
+                   <input v-model="form.name" type="text" :placeholder="$t('CONTACT.FORM.FULLNAME') || 'Họ và tên'" 
                      class="w-full bg-white rounded-full px-8 py-4 text-gray-900 font-semibold placeholder-gray-400 shadow-lg border-none focus:ring-2 focus:ring-yellow-400 outline-none transition-all" />
                  </div>
                  <div class="flex-1">
-                   <input v-model="form.email" type="email" :placeholder="$t('CONTACT.FORM.EMAIL')" 
+                   <input v-model="form.email" type="email" :placeholder="$t('CONTACT.FORM.EMAIL') || 'Email'" 
                      class="w-full bg-white rounded-full px-8 py-4 text-gray-900 font-semibold placeholder-gray-400 shadow-lg border-none focus:ring-2 focus:ring-yellow-400 outline-none transition-all" />
                  </div>
               </div>
+
+              <div class="bg-white rounded-full flex items-center pr-4 shadow-sm focus-within:ring-2 focus-within:ring-yellow-400 transition-all">
+                <vue-tel-input
+                  v-model="form.phone"
+                  mode="international"
+                  :autoFormat="true"
+                  :validCharactersOnly="true"
+                  :inputOptions="{ placeholder: $t('CONTACT.FORM.PHONE_PLACEHOLDER') || 'SĐT (Tuỳ chọn)', styleClasses: 'w-full bg-transparent border-none outline-none font-semibold text-gray-900 placeholder-gray-400 h-[3.5rem] !px-4 !shadow-none focus:!ring-0' }"
+                  class="w-full !border-none !shadow-none !bg-transparent rounded-full !outline-none"
+                ></vue-tel-input>
+              </div>
               <div>
-                <textarea v-model="form.message" rows="4" :placeholder="$t('CONTACT.FORM.MESSAGE_PLACEHOLDER')"
+                <textarea v-model="form.message" rows="4" :placeholder="$t('CONTACT.FORM.MESSAGE_PLACEHOLDER') || 'Nội dung'"
                   class="w-full bg-white rounded-[32px] px-8 py-6 text-gray-900 font-semibold placeholder-gray-400 shadow-lg border-none focus:ring-2 focus:ring-yellow-400 outline-none transition-all resize-none"></textarea>
               </div>
               
               <div class="flex justify-center mt-4">
                 <button type="submit" :disabled="isSending"
                   class="bg-yellow-400 hover:bg-white text-gray-900 font-black px-12 py-4 rounded-full uppercase tracking-widest text-sm flex items-center gap-3 transition-all transform hover:scale-105 active:scale-95 shadow-xl disabled:opacity-50">
-                  {{ isSending ? $t('CONTACT.FORM.SENDING') : $t('CONTACT.FORM.SEND') }}
-                  <i class="pi pi-arrow-up-right text-xs"></i>
+                  {{ isSending ? $t('CONTACT.FORM.SENDING') || 'ĐANG GỬI...' : $t('CONTACT.FORM.SEND') || 'GỬI ĐI' }}
+                  <i class="pi pi-arrow-up-right text-xs" v-if="!isSending"></i>
                 </button>
               </div>
            </form>
@@ -203,11 +214,18 @@ const handleSubmit = async () => {
 
   isSending.value = true
   try {
-    await contactMessageStore.createContactMessage(form)
-    toastSuccess(t('CONTACT.FORM.TOAST_SUCCESS'))
+    const dataToSend = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone ? form.phone.trim() : undefined,
+      message: form.message.trim()
+    }
+    
+    await contactMessageStore.createContactMessage(dataToSend)
+    toastSuccess(t('CONTACT.FORM.TOAST_SUCCESS') || 'Gửi tin nhắn thành công.')
     Object.assign(form, { name: '', email: '', phone: '', message: '' })
   } catch {
-    toastError(t('CONTACT.FORM.TOAST_ERROR'))
+    toastError(t('CONTACT.FORM.TOAST_ERROR') || 'Gửi tin nhắn thất bại.')
   } finally {
     isSending.value = false
   }

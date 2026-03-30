@@ -29,6 +29,7 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePostStore } from '@/store/post.store'
 import { useI18n } from 'vue-i18n'
+import { ROUTE_NAMES } from '@/router'
 
 export interface NewsItem {
   title: string
@@ -42,7 +43,7 @@ const { locale } = useI18n()
 const router = useRouter()
 
 const goToPost = (slug: string) => {
-  if (slug) router.push({ name: 'PostDetail', params: { slug } })
+  if (slug) router.push({ name: ROUTE_NAMES.POST_DETAIL, params: { slug } })
 }
 
 const items = computed<NewsItem[]>(() => {

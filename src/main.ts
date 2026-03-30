@@ -19,7 +19,15 @@ const app = createApp(App)
 
 app.directive('count-up', vCountUp)
 
-app.use(primeVuePreset).use(PrimeVue).use(pinia).use(router).use(i18n).mount('#app')
+import VueTelInput from 'vue-tel-input'
+import 'vue-tel-input/vue-tel-input.css'
+
+app.use(primeVuePreset).use(PrimeVue).use(pinia).use(router).use(i18n)
+  .use(VueTelInput, {
+    defaultCountry: 'VN',
+    preferredCountries: ['VN', 'US', 'GB', 'CN', 'KR', 'JP'],
+  })
+  .mount('#app')
 
 AOS.init({
   duration: 800,

@@ -86,7 +86,7 @@
               <div class="service-panel__tag">01</div>
               <h3 class="service-panel__title service-panel__title--dark">{{ $t('HOME.ABOUT_SNIPPET.EVENT_TITLE') }}</h3>
               <p class="service-panel__desc service-panel__desc--dark">{{ $t('HOME.ABOUT_SNIPPET.EVENT_DESC') }}</p>
-              <button @click="$router.push('/events')" class="service-panel__btn service-panel__btn--red">
+              <button @click="$router.push({ name: ROUTE_NAMES.EVENTS })" class="service-panel__btn service-panel__btn--red">
                 {{ $t('HOME.ABOUT_SNIPPET.VIEW_DETAILS') }} <i class="pi pi-arrow-up-right"></i>
               </button>
             </div>
@@ -102,7 +102,7 @@
               <div class="service-panel__tag">02</div>
               <h3 class="service-panel__title service-panel__title--dark">{{ $t('HOME.ABOUT_SNIPPET.RENTAL_TITLE') }}</h3>
               <p class="service-panel__desc service-panel__desc--brand">{{ $t('HOME.ABOUT_SNIPPET.RENTAL_DESC') }}</p>
-              <button @click="$router.push('/rental')" class="service-panel__btn service-panel__btn--red">
+              <button @click="$router.push({ name: ROUTE_NAMES.RENTAL })" class="service-panel__btn service-panel__btn--red">
                 {{ $t('HOME.ABOUT_SNIPPET.VIEW_DETAILS') }} <i class="pi pi-arrow-up-right"></i>
               </button>
             </div>
@@ -118,7 +118,7 @@
               <div class="service-panel__tag service-panel__tag--light">03</div>
               <h3 class="service-panel__title service-panel__title--brand">{{ $t('HOME.ABOUT_SNIPPET.SOUND_LIGHT_TITLE') }}</h3>
               <p class="service-panel__desc service-panel__desc--light">{{ $t('HOME.ABOUT_SNIPPET.SOUND_LIGHT_DESC') }}</p>
-              <button @click="$router.push('/rental')" class="service-panel__btn service-panel__btn--outline">
+              <button @click="$router.push({ name: ROUTE_NAMES.SOUND_LIGHT })" class="service-panel__btn service-panel__btn--outline">
                 {{ $t('HOME.ABOUT_SNIPPET.VIEW_DETAILS') }} <i class="pi pi-arrow-up-right"></i>
               </button>
             </div>
@@ -183,12 +183,12 @@
           class="featured-swiper !overflow-visible pb-24"
         >
           <swiper-slide 
-            v-for="(item, index) in featuredItems" 
+            v-for="(item, index) in displayHighlights" 
             :key="index"
             class="!w-[320px] md:!w-[420px]"
           >
             <div 
-              class="w-full rounded-[40px] p-10 shadow-sm relative group hover:shadow-2xl hover:-translate-y-3 transition-all duration-700"
+              class="w-full rounded-[40px] p-10 shadow-sm relative group hover:shadow-2xl hover:-translate-y-5 hover:scale-[1.01] transition-all duration-500 ease-in-out h-full cursor-pointer"
               :class="[
                 index % 2 === 0 ? 'bg-[#e2e2ea]' : 'bg-brand-50 mt-32'
               ]"
@@ -198,29 +198,26 @@
               <!-- Icon Box -->
               <div class="flex gap-2 mb-10">
                 <div 
-                  v-for="(icon, iconIdx) in item.icons" 
-                  :key="iconIdx"
                   class="p-2.5 rounded-xl shadow-sm"
                   :class="index % 2 === 0 ? 'bg-brand-500' : 'bg-[#8b92b6]'"
                 >
-                  <i :class="[icon, index % 2 === 0 ? 'text-white' : 'text-white', 'font-extrabold']"></i>
+                  <i :class="[item.icon, 'text-white font-extrabold']"></i>
                 </div>
               </div>
               
-              <h4 class="text-3xl font-black text-gray-900 leading-tight mb-6 line-clamp-2 min-h-[4.5rem]">
-                {{ item.title }}
+              <h4 
+                class="text-3xl font-black text-gray-900 leading-tight mb-6 line-clamp-2 min-h-[4.5rem] cursor-help"
+                v-tooltip.top="item.displayTitle"
+              >
+                {{ item.displayTitle }}
               </h4>
               
-              <p class="text-gray-600 font-medium text-sm mb-10 leading-relaxed line-clamp-3">
-                {{ item.description }}
-              </p>
-              
-              <button 
-                class="font-black px-8 py-3 rounded-full text-sm inline-flex items-center gap-3 transition-all duration-500 shadow-lg active:scale-95 group/btn"
-                :class="index % 2 === 0 ? 'bg-brand-500 text-white hover:bg-gray-900 hover:text-white shadow-brand-500/30' : 'bg-[#8b92b6] text-white hover:bg-gray-900'"
+              <p 
+                class="text-gray-600 font-medium text-sm mb-6 leading-relaxed line-clamp-3 cursor-help"
+                v-tooltip.bottom="item.displayContent"
               >
-                {{ item.buttonText }} <i class="pi pi-arrow-up-right font-bold transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"></i>
-              </button>
+                {{ item.displayContent }}
+              </p>
             </div>
           </swiper-slide>
         </swiper>
@@ -261,13 +258,23 @@
             
             <form @submit.prevent="submitForm" class="space-y-4 relative z-10">
               <div class="flex flex-col sm:flex-row gap-4">
-                <input type="text" :placeholder="$t('HOME.QUICK_CONTACT.PLACEHOLDER_NAME')" class="flex-1 bg-white border-none rounded-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-brand-500 outline-none w-full" />
-                <input type="email" :placeholder="$t('HOME.QUICK_CONTACT.PLACEHOLDER_EMAIL')" class="flex-1 bg-white border-none rounded-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-brand-500 outline-none w-full" />
+                <input v-model="form.name" type="text" :placeholder="$t('HOME.QUICK_CONTACT.PLACEHOLDER_NAME') || 'Họ và tên'" class="flex-1 bg-white border-none rounded-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-brand-500 outline-none w-full" />
+                <input v-model="form.email" type="email" :placeholder="$t('HOME.QUICK_CONTACT.PLACEHOLDER_EMAIL') || 'Email'" class="flex-1 bg-white border-none rounded-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-brand-500 outline-none w-full" />
               </div>
-              <textarea :placeholder="$t('HOME.QUICK_CONTACT.PLACEHOLDER_MESSAGE')" rows="4" class="w-full bg-white border-none rounded-[20px] px-6 py-4 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-brand-500 outline-none resize-none"></textarea>
+              <div class="bg-white rounded-full flex items-center pr-4 shadow-sm focus-within:ring-2 focus-within:ring-brand-500 transition-all">
+                <vue-tel-input
+                  v-model="form.phone"
+                  mode="international"
+                  :autoFormat="true"
+                  :validCharactersOnly="true"
+                  :inputOptions="{ placeholder: $t('CONTACT.FORM.PHONE_PLACEHOLDER') || 'SĐT (Tuỳ chọn)', styleClasses: 'w-full bg-transparent border-none outline-none text-gray-900 placeholder-gray-400 h-[3.5rem] !px-4 !shadow-none focus:!ring-0' }"
+                  class="w-full !border-none !shadow-none !bg-transparent rounded-full !outline-none"
+                ></vue-tel-input>
+              </div>
+              <textarea v-model="form.message" :placeholder="$t('HOME.QUICK_CONTACT.PLACEHOLDER_MESSAGE') || 'Nội dung'" rows="4" class="w-full bg-white border-none rounded-[20px] px-6 py-4 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-brand-500 outline-none resize-none"></textarea>
               <div class="flex justify-end pt-2">
-                <button type="submit" class="group/btn bg-brand-500 hover:bg-brand-600 text-white font-black py-3.5 px-10 rounded-full shadow-xl shadow-brand-500/30 hover:shadow-brand-600/40 transition-all duration-300 hover:-translate-y-1 active:translate-y-0 flex items-center gap-2">
-                  {{ $t('HOME.QUICK_CONTACT.SEND_BTN') }} <i class="pi pi-arrow-up-right font-bold text-xs transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"></i>
+                <button type="submit" :disabled="isSending" class="group/btn bg-brand-500 hover:bg-brand-600 text-white font-black py-3.5 px-10 rounded-full shadow-xl shadow-brand-500/30 hover:shadow-brand-600/40 transition-all duration-300 hover:-translate-y-1 active:translate-y-0 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                  {{ isSending ? 'ĐANG GỬI...' : $t('HOME.QUICK_CONTACT.SEND_BTN') || 'GỬI ĐI' }} <i class="pi pi-arrow-up-right font-bold text-xs transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" v-if="!isSending"></i>
                 </button>
               </div>
             </form>
@@ -280,13 +287,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, computed, nextTick } from 'vue'
-import { useRouter } from 'vue-router'
+import { onMounted, onUnmounted, ref, computed, nextTick, reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
 import { useConfigStore } from '@/store/config'
 import { useHomeVideoStore } from '@/store/homeVideo'
+import { useHighlightStore } from '@/store/highlight'
 import { useToast } from '@/composables/useToast'
+import { ROUTE_NAMES } from '@/router'
+import { useContactMessageStore } from '@/store/contactMessage.store'
+import { validateEmail, validateStringField } from '@/utils/validation'
 
 // SWIPER IMPORTS
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -299,10 +309,25 @@ defineOptions({
   name: 'HomePage',
 })
 
-const router = useRouter()
 const configStore = useConfigStore()
+const highlightStore = useHighlightStore()
 const homeVideoStore = useHomeVideoStore()
-const { toastSuccess } = useToast()
+const contactMessageStore = useContactMessageStore()
+const { toastSuccess, toastError } = useToast()
+const { t, locale } = useI18n()
+
+// ICONS LIST FOR ROTATION
+const FEATURED_ICONS = [
+  'pi pi-star-fill',
+  'pi pi-bolt',
+  'pi pi-check-circle',
+  'pi pi-users',
+  'pi pi-calendar',
+  'pi pi-briefcase',
+  'pi pi-lightbulb',
+  'pi pi-shield',
+  'pi pi-verified'
+]
 
 const heroData = computed(() => {
   if (homeVideoStore.videos.length > 0) {
@@ -311,40 +336,24 @@ const heroData = computed(() => {
   return null
 })
 
+import type { IHighlight } from '@/types/highlight'
 
-const { t } = useI18n()
-const featuredItems = computed(() => [
-  {
-    title: t('HOME.PROJECTS.P1_TITLE'),
-    description: 'Paper by Bahador Bahrami and Mi3 alumni Dardo Ferreiro cited in article. Wirtschaftswoche, 2025. (In German).',
-    buttonText: t('HOME.FEATURED_SWIPER.ACTION'),
-    icons: ['pi pi-file-o', 'pi pi-users']
-  },
-  {
-    title: t('HOME.PROJECTS.P2_TITLE'),
-    description: 'Interview with Bahador Bahrami. Olafor Eliasson Channel. 2019.',
-    buttonText: t('HOME.FEATURED_SWIPER.ACTION'),
-    icons: ['pi pi-play', 'pi pi-image']
-  },
-  {
-    title: t('HOME.PROJECTS.P3_TITLE'),
-    description: 'Interview with Mi3 head Ophelia Deroy. The New York Times, 2021.',
-    buttonText: t('HOME.FEATURED_SWIPER.ACTION'),
-    icons: ['pi pi-file-o', 'pi pi-lightbulb']
-  },
-  {
-    title: t('HOME.PROJECTS.P4_TITLE'),
-    description: 'Ophelia Deroy, Guest speaker. 2020. BBC 4 Radio.',
-    buttonText: t('HOME.FEATURED_SWIPER.ACTION'),
-    icons: ['pi pi-microphone', 'pi pi-star']
-  },
-  {
-    title: t('HOME.PROJECTS.P5_TITLE'),
-    description: 'A study on human-computer interaction in professional workspace environments.',
-    buttonText: t('HOME.FEATURED_SWIPER.ACTION'),
-    icons: ['pi pi-eye', 'pi pi-compass']
-  }
-])
+// ... (các import khác giữ nguyên)
+
+const displayHighlights = computed(() => {
+  return highlightStore.highlights.map((item, idx) => {
+    const currentLocale = locale.value as 'vi' | 'en' | 'zh'
+    const titleKey = `title_${currentLocale}` as keyof IHighlight
+    const contentKey = `content_${currentLocale}` as keyof IHighlight
+    
+    return {
+      ...item,
+      displayTitle: (item[titleKey] as string) || item.title_vi,
+      displayContent: (item[contentKey] as string) || item.content_vi,
+      icon: FEATURED_ICONS[idx % FEATURED_ICONS.length]
+    }
+  })
+})
 
 // --- Services scrollbar refs ---
 const servicesTrackRef = ref<HTMLElement | null>(null)
@@ -355,7 +364,8 @@ let scrollListener: (() => void) | null = null
 onMounted(async () => {
   await Promise.all([
     configStore.fetchAllConfigs(),
-    homeVideoStore.fetchVideos({ isActive: true, limit: 1 })
+    homeVideoStore.fetchVideos({ isActive: true, limit: 1 }),
+    highlightStore.fetchPublicHighlights()
   ])
   AOS.refresh()
 
@@ -384,8 +394,41 @@ onUnmounted(() => {
   }
 })
 
-const submitForm = () => {
-  toastSuccess(t('HOME.QUICK_CONTACT.SUCCESS'))
+const isSending = ref(false)
+const form = reactive({
+  name: '',
+  email: '',
+  phone: '',
+  message: ''
+})
+
+const submitForm = async () => {
+  const nameRes = validateStringField(form.name, t('CONTACT.FORM.FULLNAME') || 'Họ và tên')
+  if (!nameRes.isValid) return toastError(nameRes.error || 'Vui lòng nhập họ và tên')
+
+  const emailRes = validateEmail(form.email)
+  if (!emailRes.isValid) return toastError(emailRes.error || 'Vui lòng nhập email hợp lệ')
+
+  const msgRes = validateStringField(form.message, t('CONTACT.FORM.MESSAGE_PLACEHOLDER') || 'Nội dung')
+  if (!msgRes.isValid) return toastError(msgRes.error || 'Vui lòng nhập nội dung nhắn gửi')
+
+  isSending.value = true
+  try {
+    const dataToSend = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone ? form.phone.trim() : undefined,
+      message: form.message.trim()
+    }
+    
+    await contactMessageStore.createContactMessage(dataToSend)
+    toastSuccess(t('HOME.QUICK_CONTACT.SUCCESS') || 'Gửi tin nhắn thành công, chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.')
+    Object.assign(form, { name: '', email: '', phone: '', message: '' })
+  } catch (error) {
+    toastError('Gửi tin nhắn thất bại. Vui lòng thử lại sau.')
+  } finally {
+    isSending.value = false
+  }
 }
 </script>
 
@@ -447,6 +490,22 @@ const submitForm = () => {
 @keyframes blobFloat {
   from { transform: scale(1) translate(0, 0); }
   to   { transform: scale(1.15) translate(20px, 20px); }
+}
+
+:deep(.vue-tel-input:focus-within) {
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+:deep(.vti__input) {
+  padding-left: 10px !important;
+}
+:deep(.vti__dropdown) {
+  padding: 0 10px;
+  border-radius: 9999px;
+  background-color: transparent;
+}
+:deep(.vti__dropdown:hover) {
+  background-color: #f1f5f9;
 }
 
 /* Track: horizontal scroll on mobile, 4-col on desktop */

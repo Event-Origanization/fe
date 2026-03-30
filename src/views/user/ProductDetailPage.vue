@@ -151,11 +151,6 @@
             </h2>
             <div class="h-px flex-1 bg-gray-200"></div>
           </div>
-
-          <div
-            class="bg-white rounded-[40px] p-10 lg:p-16 shadow-sm border border-gray-100 prose prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-h2:text-2xl prose-h2:text-brand-600 prose-h3:text-xl prose-h3:text-gray-800 prose-p:text-gray-600 prose-p:leading-relaxed prose-img:rounded-3xl prose-img:shadow-xl prose-img:my-10 prose-a:text-brand-600 prose-a:font-bold prose-strong:text-gray-900"
-            v-html="getContent(productStore.currentProduct)"
-          ></div>
         </div>
       </section>
 
@@ -187,7 +182,7 @@
         {{ $t('PRODUCT.NOT_FOUND') }}
       </p>
       <button
-        @click="$router.push('/')"
+        @click="$router.push({ name: ROUTE_NAMES.HOME })"
         class="px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-full uppercase text-sm font-black tracking-widest transition-all"
       >
         {{ $t('COMMON.GO_HOME') }}
@@ -205,6 +200,7 @@ import AOS from 'aos'
 import type { IProduct } from '@/types/product'
 import { obfuscateCurrency } from '@/utils/common'
 import { useConfigStore } from '@/store/config'
+import { ROUTE_NAMES } from '@/router'
 
 const route = useRoute()
 const productStore = useProductStore()
@@ -232,12 +228,6 @@ const getName = (product: IProduct) => {
   if (!product) return ''
   const key = `name_${locale.value}` as keyof IProduct
   return (product[key] as string) || product.name_vi || ''
-}
-
-const getContent = (product: IProduct) => {
-  if (!product) return ''
-  const key = `content_${locale.value}` as keyof IProduct
-  return (product[key] as string) || product.content_vi || ''
 }
 
 const loadProduct = async (slug: string) => {

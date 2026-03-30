@@ -57,6 +57,11 @@ const props = defineProps({
   },
 })
 
+interface BlobInfo {
+  blob: () => Blob;
+  filename: () => string;
+}
+
 const emit = defineEmits(['update:modelValue', 'blur', 'paste'])
 
 const { t } = useI18n()
@@ -215,7 +220,8 @@ const editorConfig = computed(() => {
   config.image_title = false
 
   config.automatic_uploads = true
-  config.images_upload_handler = (blobInfo: any, progress: (percent: number) => void) => new Promise((resolve, reject) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  config.images_upload_handler = (blobInfo: BlobInfo, _progress: (percent: number) => void) => new Promise((resolve, reject) => {
     uploadService.uploadImage(blobInfo.blob())
       .then((res) => {
         if ('data' in res && res.data?.location) {
