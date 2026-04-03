@@ -79,7 +79,7 @@
           <!-- Panel 1: Tổ chức sự kiện trọn gói -->
           <div class="service-panel service-panel--light" data-aos="fade-up" data-aos-delay="100">
             <div class="service-panel__img-wrap">
-              <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=500&auto=format&fit=crop" alt="Tổ chức sự kiện" class="service-panel__img" />
+              <img src="@/assets/images/images-home/TCSKTG.avif" alt="Tổ chức sự kiện" class="service-panel__img" />
               <div class="service-panel__img-overlay"></div>
             </div>
             <div class="service-panel__content">
@@ -95,7 +95,7 @@
           <!-- Panel 2: Cho thuê thiết bị sự kiện (short/raised) -->
           <div class="service-panel service-panel--light service-panel--sunk" data-aos="fade-up" data-aos-delay="200">
             <div class="service-panel__img-wrap">
-              <img src="https://images.unsplash.com/photo-1598368195835-915001ff7a91?q=80&w=500&auto=format&fit=crop" alt="Cho thuê thiết bị" class="service-panel__img" />
+              <img src="@/assets/images/images-home/CTTBSK.avif" alt="Cho thuê thiết bị" class="service-panel__img" />
               <div class="service-panel__img-overlay"></div>
             </div>
             <div class="service-panel__content">

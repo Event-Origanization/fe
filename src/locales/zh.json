@@ -149,7 +149,7 @@
     "POSTS": "文章管理",
     "VIDEOS": "精彩视频库",
     "CONFIG": "网站配置",
-    "HOME_VIDEOS": "首页视频",
+    "HOME_VIDEOS": "首页Banner",
     "NEWSLETTER": "订阅用户",
     "SEO": "SEO 元数据管理",
     "USERS": "用户管理",
@@ -214,7 +214,10 @@
     "NEWS": "新闻",
     "BREADCRUMB_HOME": "首页",
     "NOT_FOUND": "未找到",
-    "NOT_FOUND_DESC": "您找的内容不存在或已被删除。"
+    "NOT_FOUND_DESC": "您找的内容不存在或已被删除。",
+    "DETAIL_ARROW": "细节 →",
+    "COPY_SUCCESS": "已复制到剪贴板！",
+    "COPY_FAILED": "复制 URL 失败"
   },
   "CONTACT": {
     "BREADCRUMB": "联系我们",
@@ -276,8 +279,6 @@
     "DEFAULT_VIDEO_TITLE": "活动视频",
     "NO_MORE_VIDEOS": "暂无更多活动视频。",
     "CLIENTS_TITLE": "我们的客户",
-    "CLIENTS_SUB": "我们的客户包括：",
-    "UPDATE_LATER": "稍后更新",
     "GALLERY_TITLE": "活动图片",
     "GALLERY_SUB": "更新 5P Event 精选活动的最新图片。",
     "TAG_GALLERY": "画廊",
@@ -296,7 +297,7 @@
     "SEARCH_RESULTS": "搜索结果：",
     "OTHER_POSTS": "其他文章",
     "CANCEL_SEARCH": "清除搜索",
-    "TOC_TITLE": "目录",
+    "TOC_TITLE": "最新文章",
     "UPDATING": "更新中...",
     "TAG_EVENT": "活动新闻",
     "POST_DESC_PLACEHOLDER": "文章提供了对当前活动行业的深入信息和新鲜视角。",
@@ -319,7 +320,13 @@
       "STEP3_DESC": "按约定的时间表将设备运送并安装到位，进行准确测试。",
       "STEP4_TITLE": "现场支持",
       "STEP4_DESC": "技术人员全程跟进活动，立即处理突发情况，确保 100% 成功。"
-    }
+    },
+    "PROCESS_SUB": "流程与优势",
+    "PROCESS_TITLE": "为什么选择我们的服务？",
+    "PROCESS_DESC": "我们致力于为您提供最专业、透明、优化的活动设备租赁服务。",
+    "STEP": "步骤 {number}",
+    "HERO_TITLE": "设备专区",
+    "HERO_DESC": "为各种规模的活动提供全面、高品质的设备解决方案。"
   },
   "SOUND_LIGHT": {
     "BENEFITS": {
@@ -331,7 +338,22 @@
       "BENEFIT3_DESC": "在提供顶级服务质量的同时，提供最合理的成本。",
       "BENEFIT4_TITLE": "成功保证",
       "BENEFIT4_DESC": "我们确保活动技术环节的顺畅与完美。"
-    }
+    },
+    "STEPS": {
+      "STEP1_TITLE": "勘察与咨询",
+      "STEP1_DESC": "实地勘察空间规模，并提供最佳的技术解决方案建议。",
+      "STEP2_TITLE": "方案与报价",
+      "STEP2_DESC": "制定设备布置图，并提供各项目的详细报价。",
+      "STEP3_TITLE": "施工与运营",
+      "STEP3_DESC": "专业安装，技术团队在活动全程值守操作。",
+      "STEP4_TITLE": "完成与验收",
+      "STEP4_DESC": "设备拆卸整齐，并完成相关验收手续。"
+    },
+    "PROCESS_SUB": "专业流程",
+    "PROCESS_TITLE": "全面的技术解决方案",
+    "PROCESS_DESC": "我们以现代技术和敬业的技术团队为每个活动空间带来完美。",
+    "STEP": "步骤 {number}",
+    "HERO_DESC": "国际水准的专业音响、灯光、LED屏幕系统。"
   },
   "PRODUCT_ADMIN": {
     "TITLE": "产品管理",
@@ -404,19 +426,19 @@
     "EMPTY": "未找到消息"
   },
   "HOME_VIDEO_ADMIN": {
-    "TITLE": "首页视频管理",
-    "ADD_NEW": "添加新首页视频",
-    "EDIT": "编辑首页视频",
+    "TITLE": "首页横幅管理",
+    "ADD_NEW": "添加新首页横幅",
+    "EDIT": "编辑首页横幅",
     "FIELDS": {
-      "TITLE": "视频标题",
+      "TITLE": "横幅标题",
       "THUMBNAIL": "缩略图",
       "URL": "视频链接"
     },
     "PLACEHOLDERS": {
-      "TITLE": "输入视频标题..."
+      "TITLE": "输入横幅标题..."
     },
     "TABLE": {
-      "VIDEO": "视频",
+      "VIDEO": "横幅",
       "STATUS": "状态",
       "ACTIONS": "操作"
     }
@@ -501,6 +523,7 @@
       "CONTACT": "联系信息",
       "SOCIAL": "社交媒体",
       "MENU": "菜单配置",
+      "FOOTER": "页脚配置",
       "STATISTICS": "统计数据"
     },
     "LABELS": {
@@ -517,21 +540,39 @@
       "SOCIAL_FACEBOOK": "Facebook 链接",
       "SOCIAL_ZALO": "Zalo 链接",
       "SOCIAL_YOUTUBE": "Youtube 链接",
+      "SOCIAL_INSTAGRAM": "Instagram 链接",
       "MENU_HOME": "首页菜单",
       "MENU_ABOUT": "关于我们菜单",
       "MENU_EVENTS": "活动策划菜单",
       "MENU_SOUND_LIGHT": "音响灯光菜单",
       "MENU_RENTAL": "设备租赁菜单",
       "MENU_CONTACT": "联系我们菜单",
+      "MENU_NEWS": "新闻菜单",
+      "MENU_RENTAL_EVENT": "图片库菜单",
+      "FOOTER_COLUMNS": "页脚列结构",
       "STATS_FIELDS": "领域数量",
       "STATS_EVENTS": "活动数量",
-      "STATS_BRANDS": "品牌数量"
+      "STATS_BRANDS": "品牌数量",
+      "FOOTER_PARTNER_LOGOS": "页脚伙伴图标配置"
     },
     "HINT": {
       "MAP_TITLE": "Google 地图获取说明：",
       "MAP_STEP1": "打开 Google 地图并查找您的地址。",
       "MAP_STEP2": "点击 '分享' -> 选择 '嵌入地图' 标签（不要使用 '发送链接'）。",
       "MAP_STEP3": "点击 '复制 HTML' 并直接粘贴在这里。系统将自动过滤提取地图链接。"
+    },
+    "FOOTER_BUILDER": {
+      "ADD_COLUMN": "添加新列",
+      "ADD_ITEM": "添加子链接",
+      "COL_TITLE": "列标题",
+      "ITEM_TITLE": "链接标题",
+      "SELECT_LINK": "选择路径",
+      "CONFIRM_DELETE_COL": "您确定要删除此列吗？",
+      "CONFIRM_DELETE_ITEM": "删除此链接？",
+      "PARTNER_LOGOS": "合作伙伴 / 资助徽标",
+      "PARTNER_NAME": "伙伴名称",
+      "PARTNER_LINK": "链接",
+      "PARTNER_IMAGE": "图片"
     }
   },
   "PARTNERS_ADMIN": {

@@ -13,6 +13,7 @@
           v-model="searchQuery"
           type="text"
           :placeholder="$t('COMMON.SEARCH')"
+          @keyup.enter="fetchProducts(1)"
           class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         />
       </div>
@@ -199,7 +200,7 @@ onMounted(() => {
 })
 
 // Watch for search and filter changes
-watch([searchQuery, filterStatus, filterType], () => {
+watch([filterStatus, filterType], () => {
   fetchProducts(1)
 })
 

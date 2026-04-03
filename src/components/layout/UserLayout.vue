@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen text-white font-sans overflow-x-hidden relative selection:bg-brand-500 selection:text-white"
+    class="min-h-screen text-white font-sans overflow-x-clip relative selection:bg-brand-500 selection:text-white"
   >
     <!-- BACKGROUND GIAO THOA ÁNH SÁNG NEON -->
     <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">

@@ -139,38 +139,44 @@
         </div>
       </section>
 
-      <!-- DETAIL CONTENT SECTION -->
-      <section class="bg-gray-50 py-20" data-aos="fade-up">
-        <div class="max-w-4xl mx-auto px-6">
-          <!-- Section heading -->
-          <div class="flex items-center gap-6 mb-12">
-            <h2
-              class="text-3xl font-black uppercase tracking-tight text-gray-900 whitespace-nowrap"
-            >
-              {{ $t('PRODUCT_ADMIN.FIELDS.CONTENT') }}
-            </h2>
-            <div class="h-px flex-1 bg-gray-200"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- RELATED / COMING SOON PLACEHOLDER -->
-      <section class="max-w-[1440px] mx-auto px-6 lg:px-20 py-24" data-aos="fade-up">
+      <!-- RELATED -->
+      <section v-if="relatedProducts.length > 0" class="max-w-[1440px] mx-auto px-6 lg:px-20 py-24" data-aos="fade-up">
         <div class="flex items-center gap-6 mb-12">
           <h2 class="text-3xl font-black uppercase tracking-tight whitespace-nowrap">
             {{ $t('PRODUCT.RELATED') }}
           </h2>
           <div class="h-px flex-1 bg-gray-100"></div>
         </div>
-        <div
-          class="flex flex-col items-center justify-center py-20 rounded-[40px] border-2 border-dashed border-gray-200 bg-gray-50 gap-6"
-        >
-          <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center">
-            <i class="pi pi-clock text-2xl text-gray-300"></i>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div v-if="loadingRelated" class="col-span-full flex justify-center items-center py-20">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-600"></div>
           </div>
-          <p class="text-gray-400 font-bold uppercase tracking-widest text-sm">
-            {{ $t('PRODUCT.COMING_SOON') }}
-          </p>
+          <div
+            v-else
+            v-for="(item, idx) in relatedProducts"
+            :key="item.id"
+            @click="goToProduct(item.slug)"
+            class="group flex flex-col cursor-pointer bg-white border border-gray-100 shadow-sm rounded-[24px] overflow-hidden hover:border-brand-200 hover:shadow-[0_16px_50px_rgba(220,38,38,0.12)] hover:-translate-y-3 transition-all duration-500"
+            data-aos="fade-up"
+            :data-aos-delay="(idx % 4) * 100"
+          >
+            <div class="w-full aspect-[4/3] bg-gray-50 relative overflow-hidden flex items-center justify-center">
+              <img
+                :src="item.images && item.images[0] ? item.images[0] : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=400'"
+                :alt="getName(item)"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-brand-600/80 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
+                <span class="bg-white text-brand-600 text-xs font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 scale-90 group-hover:scale-100">{{ $t('COMMON.DETAIL_ARROW') }}</span>
+              </div>
+            </div>
+            <div class="p-6 w-full text-center flex flex-col items-center justify-center min-h-[100px]">
+              <h3 class="font-black text-lg text-gray-900 group-hover:text-brand-600 transition-colors duration-300 line-clamp-2 uppercase">
+                {{ getName(item) }}
+              </h3>
+            </div>
+          </div>
         </div>
       </section>
     </template>
@@ -193,8 +199,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useProductStore } from '@/store/product.store'
+import { productService } from '@/services/product.service'
 import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
 import type { IProduct } from '@/types/product'
@@ -203,9 +210,13 @@ import { useConfigStore } from '@/store/config'
 import { ROUTE_NAMES } from '@/router'
 
 const route = useRoute()
+const router = useRouter()
 const productStore = useProductStore()
 const configStore = useConfigStore()
 const { locale } = useI18n()
+
+const relatedProducts = ref<IProduct[]>([])
+const loadingRelated = ref(false)
 
 const activeImage = ref('')
 const readProgress = ref(0)
@@ -230,11 +241,32 @@ const getName = (product: IProduct) => {
   return (product[key] as string) || product.name_vi || ''
 }
 
+const goToProduct = (slug: string) => {
+  if (slug) router.push({ name: ROUTE_NAMES.PRODUCT_DETAIL, params: { slug } })
+}
+
 const loadProduct = async (slug: string) => {
   const result = await productStore.fetchProductBySlug(slug)
   if (result?.images && result.images.length > 0) {
     activeImage.value = result.images[0]
   }
+  
+  if (result?.productType) {
+    loadingRelated.value = true
+    try {
+      const relatedResult = await productService.getAll({ productType: result.productType, limit: 5 })
+      if (!(relatedResult instanceof Error) && relatedResult.data?.products) {
+        relatedProducts.value = relatedResult.data.products
+          .filter((p: IProduct) => p.id !== result.id)
+          .slice(0, 4)
+      }
+    } finally {
+      loadingRelated.value = false
+    }
+  } else {
+    relatedProducts.value = []
+  }
+
   window.scrollTo(0, 0)
 }
 
