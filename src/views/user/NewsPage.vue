@@ -100,40 +100,24 @@
            </button>
         </div>
 
-        <div class="flex flex-col lg:flex-row gap-8 lg:gap-10">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
           
           <!-- LEFT SIDE: Sidebar (Mục lục) -->
-          <div class="w-full lg:w-1/3 xl:w-1/4">
-             <div class="bg-[#dcf0fc] rounded-xl overflow-hidden shadow-sm transition-all duration-300 sticky top-28" data-aos="fade-right">
-                <!-- Header -->
-                <div 
-                  class="flex items-center justify-between p-4 md:px-5 cursor-pointer bg-[#dcf0fc] hover:bg-[#d0ebfa] transition-colors"
-                  @click="isTocOpen = !isTocOpen"
-                >
-                  <h3 class="font-extrabold text-[#2a3754] tracking-wide text-[15px] uppercase">{{ $t('NEWS_PAGE.TOC_TITLE') }}</h3>
-                  <i :class="['pi', isTocOpen ? 'pi-chevron-up' : 'pi-chevron-down', 'text-[#2a3754] font-black transition-transform duration-300']"></i>
-                </div>
-                
-                <!-- Content List -->
-                <Transition name="toc-slide">
-                  <div v-show="isTocOpen" class="border-t border-[#b8dcf5]">
-                    <ul class="p-4 md:px-5 py-3 flex flex-col gap-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
-                      <li v-for="post in postStore.recentNews" :key="post.id">
-                        <a 
-                          href="javascript:void(0)" 
-                          class="text-[#4581e6] font-bold text-[14px] leading-relaxed hover:text-[#18449c] transition-colors block py-1 uppercase"
-                          @click="goToPost(post.slug)"
-                        >
-                          {{ getTitle(post) }}
-                        </a>
-                      </li>
-                      <li v-if="postStore.recentNews.length === 0" class="text-gray-400 text-sm italic py-2">
-                        {{ $t('NEWS_PAGE.UPDATING') }}
-                      </li>
-                    </ul>
-                  </div>
-                </Transition>
-             </div>
+          <div class="w-full lg:w-1/3 xl:w-1/4 sticky top-28 flex-shrink-0" data-aos="fade-right">
+             <ExpandableSidebar :title="$t('NEWS_PAGE.TOC_TITLE')">
+                <li v-for="post in postStore.recentNews" :key="post.id">
+                  <a 
+                    href="javascript:void(0)" 
+                    class="text-[#4581e6] font-bold text-[14px] leading-relaxed hover:text-[#18449c] transition-colors block py-1 uppercase"
+                    @click="goToPost(post.slug)"
+                  >
+                    {{ getTitle(post) }}
+                  </a>
+                </li>
+                <li v-if="postStore.recentNews.length === 0" class="text-gray-400 text-sm italic py-2">
+                  {{ $t('NEWS_PAGE.UPDATING') }}
+                </li>
+             </ExpandableSidebar>
           </div>
 
           <!-- RIGHT SIDE: Grid -->
@@ -203,6 +187,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
 import Pagination from '@/components/common/Pagination.vue'
+import ExpandableSidebar from '@/components/common/ExpandableSidebar.vue'
 import { usePostStore } from '@/store/post.store'
 import { formatDate } from '@/utils/common'
 import type { IPost } from '@/types/post'
@@ -265,36 +250,5 @@ watch(() => route.query.q, async () => {
   AOS.refresh()
 })
 
-// TOC State
-const isTocOpen = ref(true)
+// TOC State removed since ExpandableSidebar handles it internally
 </script>
-
-<style scoped>
-.toc-slide-enter-active,
-.toc-slide-leave-active {
-  transition: all 0.4s ease-in-out;
-  max-height: 500px;
-  opacity: 1;
-}
-.toc-slide-enter-from,
-.toc-slide-leave-to {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-}
-
-/* Custom Scrollbar for TOC */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent; 
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #b8dcf5; 
-  border-radius: 10px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #4581e6; 
-}
-</style>

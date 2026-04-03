@@ -32,7 +32,7 @@
               {{ configStore.getConfigValue('MENU', 'MENU_SOUND_LIGHT', 'ÂM THANH ÁNH SÁNG') }}
             </h2>
           </div>
-          <p class="text-gray-500 font-medium mt-4 md:mt-0 max-w-sm text-sm">Hệ thống âm thanh, ánh sáng, màn hình LED chuyên nghiệp, đẳng cấp quốc tế.</p>
+          <p class="text-gray-500 font-medium mt-4 md:mt-0 max-w-sm text-sm">{{ $t('SOUND_LIGHT.HERO_DESC') }}</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -45,7 +45,7 @@
             <div class="w-full aspect-[4/3] bg-gray-50 relative overflow-hidden flex items-center justify-center">
               <img :src="item.images && item.images[0] ? item.images[0] : 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=400'" :alt="getName(item)" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
               <div class="absolute inset-0 bg-red-600/80 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
-                <span class="bg-white text-red-600 text-xs font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 scale-90 group-hover:scale-100">Chi tiết →</span>
+                <span class="bg-white text-red-600 text-xs font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 scale-90 group-hover:scale-100">{{ $t('COMMON.DETAIL_ARROW') }}</span>
               </div>
             </div>
             <div class="p-6 w-full text-center flex flex-col items-center justify-center min-h-[100px]">
@@ -74,11 +74,11 @@
       <!-- QUY TRÌNH DỊCH VỤ -->
       <section class="mt-32 pt-20 border-t border-gray-100" data-aos="fade-up">
         <div class="text-center mb-16">
-          <h4 class="text-red-600 font-bold uppercase tracking-widest text-sm mb-2">QUY TRÌNH CHUYÊN NGHIỆP</h4>
+          <h4 class="text-red-600 font-bold uppercase tracking-widest text-sm mb-2">{{ $t('SOUND_LIGHT.PROCESS_SUB') }}</h4>
           <h2 class="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-tighter mb-4">
-            GIẢI PHÁP KỸ THUẬT TOÀN DIỆN
+            {{ $t('SOUND_LIGHT.PROCESS_TITLE') }}
           </h2>
-          <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base font-medium">Chúng tôi mang đến sự hoàn hảo cho mọi không gian sự kiện bằng công nghệ hiện đại và đội ngũ kỹ thuật tận tâm.</p>
+          <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base font-medium">{{ $t('SOUND_LIGHT.PROCESS_DESC') }}</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
@@ -90,7 +90,7 @@
               <i :class="['pi text-red-600 text-xl transition-transform duration-300 group-hover:scale-110', step.icon]"></i>
             </div>
             <div class="bg-[#f8fafc] border border-gray-100 p-6 rounded-[24px] w-full flex-1 hover:border-red-200 hover:shadow-[0_12px_40px_rgba(220,38,38,0.08)] hover:-translate-y-2 transition-all duration-500 group-hover:bg-white">
-              <div class="text-red-600 font-black mb-3 text-sm tracking-widest uppercase opacity-70">Bước {{ i + 1 }}</div>
+              <div class="text-red-600 font-black mb-3 text-sm tracking-widest uppercase opacity-70">{{ $t('SOUND_LIGHT.STEP', { number: i + 1 }) }}</div>
               <h3 class="font-black text-gray-900 mb-3 uppercase tracking-wide group-hover:text-red-600 transition-colors duration-300">{{ step.title }}</h3>
               <p class="text-sm text-gray-500 font-medium leading-relaxed">{{ step.desc }}</p>
             </div>

@@ -66,7 +66,7 @@
       </div>
 
       <!-- URL -->
-      <div>
+      <!-- <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           {{ $t('HOME_VIDEO_ADMIN.FIELDS.URL') }} *
         </label>
@@ -81,7 +81,7 @@
             class="block w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all"
           />
         </div>
-      </div>
+      </div> -->
 
       <!-- Status -->
       <div class="flex items-end pb-2">
@@ -189,7 +189,7 @@ const removeThumbnail = () => {
 }
 
 const handleSubmit = async () => {
-  if (!form.title_vi || !form.url) {
+  if (!form.title_vi) {
       toastError('Vui lòng nhập đầy đủ thông tin bắt buộc')
       return
   }

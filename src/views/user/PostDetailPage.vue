@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white text-gray-900 overflow-hidden">
+  <div class="min-h-screen bg-white text-gray-900">
     <!-- LOADING STATE -->
     <div v-if="postStore.loading" class="flex justify-center items-center h-screen">
       <div class="flex flex-col items-center gap-6">
@@ -12,7 +12,7 @@
 
     <template v-else-if="postStore.currentPost">
       <!-- HERO BANNER: Full-bleed image with overlay -->
-      <section class="relative w-full h-[60vh] md:h-[70vh] overflow-hidden">
+      <section class="relative w-full h-[60vh] md:h-[70vh]">
         <!-- Background: Featured image or gradient fallback -->
         <div class="absolute inset-0 bg-gray-900">
           <img
@@ -71,48 +71,81 @@
       ></div>
 
       <!-- MAIN CONTENT AREA -->
-      <main class="max-w-4xl mx-auto px-6 py-16 lg:py-24">
-        <!-- Decorative side accent -->
-        <div class="relative">
-          <div
-            class="absolute -left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-600 via-brand-300 to-transparent rounded-full opacity-30 hidden lg:block"
-          ></div>
-
-          <div
-            class="prose prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-h2:text-3xl prose-h2:text-brand-600 prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:text-gray-800 prose-h3:mt-8 prose-h3:mb-3 prose-p:text-gray-600 prose-p:leading-[1.9] prose-p:mb-6 prose-img:rounded-3xl prose-img:shadow-2xl prose-img:my-12 prose-a:text-brand-600 prose-a:font-bold hover:prose-a:underline prose-strong:text-gray-900 prose-strong:font-black prose-blockquote:border-l-4 prose-blockquote:border-brand-600 prose-blockquote:pl-6 prose-blockquote:not-italic prose-blockquote:text-gray-500"
-            v-html="getContent(postStore.currentPost)"
-            data-aos="fade-up"
-          ></div>
-        </div>
-
-        <!-- Divider -->
-        <div class="flex items-center gap-6 my-16">
-          <div class="flex-1 h-px bg-gray-100"></div>
-          <div class="w-2 h-2 bg-brand-600 rounded-full"></div>
-          <div class="flex-1 h-px bg-gray-100"></div>
-        </div>
-
-        <!-- BACK BUTTON -->
-        <div class="flex items-center justify-between" data-aos="fade-up">
-          <button
-            @click="$router.back()"
-            class="group flex items-center gap-3 px-8 py-4 bg-gray-900 hover:bg-brand-600 text-white font-black rounded-2xl transition-all duration-300 uppercase tracking-widest text-sm shadow-xl hover:shadow-brand-600/30 hover:-translate-y-1 active:translate-y-0"
+      <main class="max-w-[1280px] mx-auto px-6 py-16 lg:py-24">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+          <!-- LEFT: TOC Sidebar -->
+          <aside
+            class="w-full lg:w-1/4 lg:sticky lg:top-28 flex-shrink-0"
+            v-if="tocHeadings.length > 0"
           >
-            <i class="pi pi-arrow-left transition-transform group-hover:-translate-x-1"></i>
-            {{ $t('COMMON.BACK') }}
-          </button>
-          <div class="flex items-center gap-2">
-            <span class="text-xs text-gray-400 uppercase font-black tracking-widest">Share</span>
-            <a
-              href="#"
-              class="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-600 hover:text-white text-gray-900 flex items-center justify-center transition-all"
-              ><i class="pi pi-facebook text-sm"></i
-            ></a>
-            <a
-              href="#"
-              class="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-600 hover:text-white text-gray-900 flex items-center justify-center transition-all"
-              ><i class="pi pi-link text-sm"></i
-            ></a>
+            <ExpandableSidebar :title="$t('NEWS_PAGE.TOC_TITLE')">
+              <li v-for="(heading, idx) in tocHeadings" :key="idx">
+                <a
+                  href="javascript:void(0)"
+                  :class="[
+                    'font-bold text-[14px] leading-relaxed hover:text-[#18449c] transition-colors block py-1',
+                    heading.level === 'h2'
+                      ? 'text-[#4581e6] uppercase'
+                      : 'text-[#6b7aab] pl-3 text-[13px] normal-case',
+                  ]"
+                  @click="scrollToHeading(heading.id)"
+                >
+                  {{ heading.text }}
+                </a>
+              </li>
+            </ExpandableSidebar>
+          </aside>
+
+          <!-- RIGHT: Article Content -->
+          <div class="w-full lg:flex-1 min-w-0">
+            <!-- Decorative side accent -->
+            <div class="relative">
+              <div
+                class="absolute -left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-600 via-brand-300 to-transparent rounded-full opacity-30 hidden lg:block"
+              ></div>
+
+              <div
+                ref="contentRef"
+                class="prose prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-h2:text-3xl prose-h2:text-brand-600 prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:text-gray-800 prose-h3:mt-8 prose-h3:mb-3 prose-p:text-gray-600 prose-p:leading-[1.9] prose-p:mb-6 prose-img:rounded-3xl prose-img:shadow-2xl prose-img:my-12 prose-a:text-brand-600 prose-a:font-bold hover:prose-a:underline prose-strong:text-gray-900 prose-strong:font-black prose-blockquote:border-l-4 prose-blockquote:border-brand-600 prose-blockquote:pl-6 prose-blockquote:not-italic prose-blockquote:text-gray-500"
+                v-html="getContent(postStore.currentPost)"
+                data-aos="fade-up"
+              ></div>
+            </div>
+
+            <!-- Divider -->
+            <div class="flex items-center gap-6 my-16">
+              <div class="flex-1 h-px bg-gray-100"></div>
+              <div class="w-2 h-2 bg-brand-600 rounded-full"></div>
+              <div class="flex-1 h-px bg-gray-100"></div>
+            </div>
+
+            <!-- BACK BUTTON -->
+            <div class="flex items-center justify-between" data-aos="fade-up">
+              <button
+                @click="$router.back()"
+                class="group flex items-center gap-3 px-8 py-4 bg-gray-900 hover:bg-brand-600 text-white font-black rounded-2xl transition-all duration-300 uppercase tracking-widest text-sm shadow-xl hover:shadow-brand-600/30 hover:-translate-y-1 active:translate-y-0"
+              >
+                <i class="pi pi-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                {{ $t('COMMON.BACK') }}
+              </button>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400 uppercase font-black tracking-widest"
+                  >Share</span
+                >
+                <a
+                  href="#"
+                  @click.prevent="shareToFacebook"
+                  class="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-600 hover:text-white text-gray-900 flex items-center justify-center transition-all"
+                  ><i class="pi pi-facebook text-sm"></i
+                ></a>
+                <a
+                  href="#"
+                  @click.prevent="copyUrl"
+                  class="w-9 h-9 rounded-full bg-gray-100 hover:bg-brand-600 hover:text-white text-gray-900 flex items-center justify-center transition-all"
+                  ><i class="pi pi-link text-sm"></i
+                ></a>
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -135,7 +168,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePostStore } from '@/store/post.store'
 import { useI18n } from 'vue-i18n'
@@ -143,12 +176,23 @@ import AOS from 'aos'
 import type { IPost } from '@/types/post'
 import { formatDate } from '@/utils/common'
 import { ROUTE_NAMES } from '@/router'
+import { useToast } from '@/composables/useToast'
+import ExpandableSidebar from '@/components/common/ExpandableSidebar.vue'
 
 const route = useRoute()
 const postStore = usePostStore()
-const { locale } = useI18n()
+const { locale, t } = useI18n()
+const { toastSuccess, toastError } = useToast()
 
 const readProgress = ref(0)
+const contentRef = ref<HTMLElement | null>(null)
+
+interface TocHeading {
+  id: string
+  text: string
+  level: 'h2' | 'h3'
+}
+const tocHeadings = ref<TocHeading[]>([])
 
 const updateProgress = () => {
   const el = document.documentElement
@@ -172,6 +216,48 @@ const getContent = (post: IPost) => {
 const loadPost = async (slug: string) => {
   await postStore.fetchPostBySlug(slug)
   window.scrollTo(0, 0)
+  await nextTick()
+  extractHeadings()
+}
+
+const extractHeadings = () => {
+  if (!contentRef.value) return
+  const elements = contentRef.value.querySelectorAll('h2, h3')
+  tocHeadings.value = Array.from(elements).map((el, idx) => {
+    const id = `heading-${idx}`
+    el.setAttribute('id', id)
+    return {
+      id,
+      text: el.textContent?.trim() || '',
+      level: el.tagName.toLowerCase() as 'h2' | 'h3',
+    }
+  })
+}
+
+const scrollToHeading = (id: string) => {
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
+
+const shareToFacebook = () => {
+  const url = window.location.href
+  console.log(url)
+  window.open(
+    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    '_blank',
+    'width=600,height=400',
+  )
+}
+
+const copyUrl = async () => {
+  try {
+    await navigator.clipboard.writeText(window.location.href)
+    toastSuccess(t('COMMON.COPY_SUCCESS') || 'Copied to clipboard!')
+  } catch {
+    toastError(t('COMMON.COPY_FAILED') || 'Failed to copy URL')
+  }
 }
 
 onMounted(() => {

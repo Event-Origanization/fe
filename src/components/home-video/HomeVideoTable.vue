@@ -13,6 +13,7 @@
           v-model="searchQuery"
           type="text"
           :placeholder="$t('COMMON.SEARCH')"
+          @keyup.enter="fetchVideos()"
           class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         />
       </div>
@@ -149,17 +150,17 @@ const fetchVideos = () => {
 }
 
 // Watch for search and filter changes
-watch([searchQuery, filterStatus], () => {
+watch([filterStatus], () => {
   fetchVideos()
 })
 
 const confirmDelete = async (video: IHomeVideo) => {
-  if (confirm(`Bạn có chắc muốn xóa video "${video.title_vi}"?`)) {
+  if (confirm(`Bạn có chắc muốn xóa banner "${video.title_vi}"?`)) {
     try {
       await homeVideoStore.deleteVideo(video.id)
-      toastSuccess('Đã xóa video thành công')
+      toastSuccess('Đã xóa banner thành công')
     } catch {
-      toastError(homeVideoStore.error || 'Lỗi khi xóa video')
+      toastError(homeVideoStore.error || 'Lỗi khi xóa banner')
     }
   }
 }

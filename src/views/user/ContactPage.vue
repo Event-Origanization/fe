@@ -87,13 +87,12 @@
            <div class="bg-gray-100 rounded-[30px] p-10 flex flex-col gap-6">
               <div>
                 <h3 class="text-2xl font-black text-gray-900 mb-2">{{ $t('CONTACT.PRESS_ENQUIRIES') }}</h3>
-                <p class="text-gray-600 font-medium">5PeventBooking@gmail.com</p>
+                <p class="text-gray-600 font-medium">{{ contactEmail }}</p>
               </div>
               <div>
                 <h3 class="text-2xl font-black text-gray-900 mb-2">{{ $t('CONTACT.GENERAL_ENQUIRIES') }}</h3>
                 <div class="flex flex-col gap-1">
-                  <p class="text-gray-600 font-medium"><span class="font-bold text-gray-900 uppercase text-sm">Booking:</span> 5P.research@gmail.com</p>
-                  <p class="text-gray-600 font-medium"><span class="font-bold text-gray-900 uppercase text-sm">Media:</span> info@5Pmedia.net</p>
+                  <p class="text-gray-600 font-medium"><span class="font-bold text-gray-900 uppercase text-sm">Booking:</span> {{ contactHotline }}</p>
                 </div>
               </div>
            </div>
@@ -119,10 +118,10 @@
            <!-- Hovering White Card -->
            <div class="relative z-10 bg-white/95 backdrop-blur shadow-2xl rounded-[40px] p-12 md:p-16 text-center max-w-sm transform hover:-translate-y-4 transition-all duration-500">
               <h3 class="text-3xl font-black text-gray-900 mb-8 leading-tight">For job enquiries, please see</h3>
-              <router-link to="/" class="bg-brand-600 hover:bg-black text-white px-10 py-4 rounded-full font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all">
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_FACEBOOK', '#')" target="_blank" class="bg-brand-600 hover:bg-black text-white px-10 py-4 rounded-full font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all">
                 JOIN US
                 <i class="pi pi-arrow-up-right text-xs"></i>
-              </router-link>
+           </a>
            </div>
            
            <!-- Decorative Arrow Shape -->
@@ -237,22 +236,23 @@ const contactHotline = computed(() => configStore.getConfigValue('CONTACT', 'CON
 const contactEmail = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_EMAIL', 'info.marketingevent5p@gmail.com'))
 const contactMapIframe = computed(() => configStore.getConfigValue('CONTACT', 'CONTACT_MAP_IFRAME', ''))
 
-const parsedMapSrc = computed(() => {
-  const value = contactMapIframe.value;
+const parsedMapSrc = computed(() => {  
+  const value = contactMapIframe.value?.trim();
   if (!value) return '';
-  if (value.trim().toLowerCase().startsWith('<iframe')) {
-    const match = value.match(/src="([^"]+)"/);
-    if (match && match[1]) return match[1];
+  
+  if (value.toLowerCase().startsWith('<iframe')) {
+    const match = value.match(/src=["']([^"']+)["']/i);
+    return match?.[1] || '';
   }
+  
   return value;
 });
 
 const socials = computed(() => [
   { icon: 'pi-facebook', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_FACEBOOK', '#') },
-  { icon: 'pi-twitter', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_TWITTER', '#') },
-  { icon: 'pi-linkedin', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_LINKEDIN', '#') },
   { icon: 'pi-instagram', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_INSTAGRAM', '#') },
-  { icon: 'pi-youtube', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#') }
+  { icon: 'pi-youtube', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#') },
+  { icon: 'pi-link', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_ZALO', '#') }
 ])
 </script>
 

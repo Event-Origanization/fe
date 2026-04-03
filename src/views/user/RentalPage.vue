@@ -9,7 +9,7 @@
       
       <div class="relative z-10 w-full max-w-7xl mx-auto px-4">
         <h1 class="text-4xl md:text-6xl font-black uppercase text-gray-900 mb-4 tracking-tighter" data-aos="fade-down">
-          KHU VỰC THIẾT BỊ
+          {{ $t('RENTAL.HERO_TITLE') }}
         </h1>
         <div class="flex items-center justify-center gap-2 text-sm md:text-base font-bold text-gray-400 uppercase tracking-widest" data-aos="fade-up" data-aos-delay="100">
           <router-link to="/" class="hover:text-brand-600 transition-colors">{{ $t('COMMON.BREADCRUMB_HOME') }}</router-link>
@@ -31,7 +31,7 @@
               {{ configStore.getConfigValue('MENU', 'MENU_RENTAL_EVENT', 'CHO THUÊ THIẾT BỊ SỰ KIỆN') }}
             </h2>
           </div>
-          <p class="text-gray-500 font-medium mt-4 md:mt-0 max-w-sm text-sm">Cung cấp giải pháp thiết bị toàn diện cho mọi quy mô sự kiện với chất lượng hàng đầu.</p>
+          <p class="text-gray-500 font-medium mt-4 md:mt-0 max-w-sm text-sm">{{ $t('RENTAL.HERO_DESC') }}</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -44,7 +44,7 @@
             <div class="w-full aspect-[4/3] bg-gray-50 relative overflow-hidden flex items-center justify-center">
               <img :src="item.images && item.images[0] ? item.images[0] : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=400'" :alt="getName(item)" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
               <div class="absolute inset-0 bg-brand-600/80 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
-                <span class="bg-white text-brand-600 text-xs font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 scale-90 group-hover:scale-100">Chi tiết →</span>
+                <span class="bg-white text-brand-600 text-xs font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 scale-90 group-hover:scale-100">{{ $t('COMMON.DETAIL_ARROW') }}</span>
               </div>
             </div>
             <div class="p-6 w-full text-center flex flex-col items-center justify-center min-h-[100px]">
@@ -75,11 +75,11 @@
       <!-- QUY TRÌNH THUÊ THIẾT BỊ -->
       <section class="mt-32 pt-20 border-t border-gray-100" data-aos="fade-up">
         <div class="text-center mb-16">
-          <h4 class="text-brand-600 font-bold uppercase tracking-widest text-sm mb-2">QUY TRÌNH & LỢI ÍCH</h4>
+          <h4 class="text-brand-600 font-bold uppercase tracking-widest text-sm mb-2">{{ $t('RENTAL.PROCESS_SUB') }}</h4>
           <h2 class="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-tighter mb-4">
-            VÌ SAO CHỌN DỊCH VỤ CỦA CHÚNG TÔI?
+            {{ $t('RENTAL.PROCESS_TITLE') }}
           </h2>
-          <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base font-medium">Chúng tôi cam kết mang đến dịch vụ cho thuê thiết bị sự kiện chuyên nghiệp, minh bạch và tối ưu nhất cho bạn.</p>
+          <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base font-medium">{{ $t('RENTAL.PROCESS_DESC') }}</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
@@ -91,7 +91,7 @@
               <i :class="['pi text-brand-600 text-xl transition-transform duration-300 group-hover:scale-110', step.icon]"></i>
             </div>
             <div class="bg-[#f8fafc] border border-gray-100 p-6 rounded-[24px] w-full flex-1 hover:border-brand-200 hover:shadow-[0_12px_40px_rgba(220,38,38,0.08)] hover:-translate-y-2 transition-all duration-500 group-hover:bg-white">
-              <div class="text-brand-600 font-black mb-3 text-sm tracking-widest uppercase opacity-70">Bước {{ i + 1 }}</div>
+              <div class="text-brand-600 font-black mb-3 text-sm tracking-widest uppercase opacity-70">{{ $t('RENTAL.STEP', { number: i + 1 }) }}</div>
               <h3 class="font-black text-gray-900 mb-3 uppercase tracking-wide group-hover:text-brand-600 transition-colors duration-300">{{ step.title }}</h3>
               <p class="text-sm text-gray-500 font-medium leading-relaxed">{{ step.desc }}</p>
             </div>

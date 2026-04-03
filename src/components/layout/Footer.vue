@@ -26,16 +26,16 @@
 
             <!-- Socials -->
             <div class="flex items-center gap-3 mb-6">
-              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_LINKEDIN', '#')" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
-                <i class="pi pi-linkedin font-bold text-base"></i>
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_FACEBOOK', '#')" target="_blank" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
+                <i class="pi pi-facebook font-bold text-base"></i>
               </a>
-              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_INSTAGRAM', '#')" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_INSTAGRAM', '#')" target="_blank" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
                 <i class="pi pi-instagram font-bold text-base"></i>
               </a>
-              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#')" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#')" target="_blank" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
                 <i class="pi pi-youtube font-bold text-base"></i>
               </a>
-              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_ZALO', '#')" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_ZALO', '#')" target="_blank" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
                 <i class="pi pi-link font-bold text-base"></i>
               </a>
             </div>
@@ -48,110 +48,44 @@
 
           <!-- Right Section (Columns & Logos) -->
           <div class="lg:w-[65%] flex flex-col justify-between pt-4">
-            <!-- 5 Columns -->
+            <!-- Dynamic Columns from Config -->
             <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 text-base mb-16">
-              
-              <!-- Col 1 -->
-              <div class="flex flex-col gap-4">
-                <div>
-                  <div class="text-red-500 font-bold text-base uppercase">{{ $t('NAV.ABOUT') }}</div>
+              <div v-for="(col, idx) in footerColumns" :key="idx" class="flex flex-col gap-4">
+                <div class="text-red-500 font-bold text-base uppercase">
+                   <router-link :to="getRoutePath(col.link)" class="hover:text-red-500 transition-colors">
+                     {{ col.title[currentLocale] || col.title.vi }}
+                   </router-link>
                 </div>
-                <ul class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide pr-4">
-                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.EXPLORE_SCIENCE') }}</router-link></li>
-                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.INTERACTIVE_EXP') }}</router-link></li>
-                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.INTERACTIVE_DEC') }}</router-link></li>
-                  <li><router-link to="/about" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.INTERACTIVE_DIS') }}</router-link></li>
+                <ul v-if="col.items && col.items.length" class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide pr-4">
+                  <li v-for="(item, itemIdx) in col.items" :key="itemIdx">
+                    <router-link :to="getRoutePath(item.link)" class="hover:text-red-500 transition-colors block leading-snug">
+                      {{ item.title[currentLocale] || item.title.vi }}
+                    </router-link>
+                  </li>
                 </ul>
               </div>
-
-              <!-- Col 2 -->
-              <div class="flex flex-col gap-4">
-                <div>
-                  <div class="text-red-500 font-bold text-base uppercase">{{ $t('NAV.EVENTS') }}</div>
-                </div>
-                <ul class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide">
-                  <li><router-link to="/events" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.CVBE_LAB') }}</router-link></li>
-                  <li><router-link to="/events" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.CROWD_LAB') }}</router-link></li>
-                </ul>
-              </div>
-
-              <!-- Col 3 -->
-              <div class="flex flex-col gap-4">
-                <div>
-                  <div class="text-red-500 font-bold text-base uppercase">{{ $t('NAV.NEWS') }}</div>
-                </div>
-                <ul class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide">
-                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.MULTIMEDIA') }}</router-link></li>
-                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.BLOG') }}</router-link></li>
-                  <li><router-link to="/news" class="hover:text-red-500 transition-colors block leading-snug">{{ $t('FOOTER.EVENTS') }}</router-link></li>
-                </ul>
-              </div>
-
-              <!-- Col 4 -->
-              <div class="flex flex-col gap-4">
-                <div>
-                  <div class="text-red-500 font-bold text-base uppercase">{{ $t('NAV.RENTAL') }}</div>
-                </div>
-              </div>
-
-              <!-- Col 5 -->
-              <div class="flex flex-col gap-4">
-                <div> <!-- align title down to match other columns that have red text above them -->
-                  <h4 class="text-red-500 font-bold text-base uppercase"><router-link to="/contact" class="hover:text-red-500 transition-colors">{{ $t('NAV.CONTACT') }}</router-link></h4>
-                </div>
-              </div>
-
             </div>
 
-            <!-- Partner Logos Row -->
-            <div class="flex flex-wrap items-center justify-start lg:justify-between gap-6 pb-2">
-               <!-- LMU -->
-               <div class="h-10 px-3 bg-[#428042] text-white font-bold flex items-center justify-center gap-2 rounded-sm select-none">
-                 <span class="text-xl tracking-tighter leading-none mt-0.5">LMU</span>
-                 <div class="flex flex-col text-[4px] leading-tight text-left mt-0.5 border-l border-white/50 pl-1.5 opacity-90">
-                   <span>LUDWIG-</span>
-                   <span>MAXIMILIANS-</span>
-                   <span>UNIVERSITÄT</span>
-                   <span>MÜNCHEN</span>
+            <!-- Partner Logos Row (Dynamic) -->
+            <div class="w-full pr-40">
+              <div class="w-full flex flex-wrap items-center justify-start lg:justify-between gap-8 pb-4 min-h-[50px]">
+               <template v-for="(logo, idx) in partnerLogos" :key="idx">
+                 <a v-if="logo.link" 
+                   :href="logo.link" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="hover:opacity-75 transition-all duration-300 transform hover:scale-105 text-left"
+                   :title="logo.name"
+                 >
+                   <img v-if="logo.image" :src="logo.image" :alt="logo.name" class="h-8 md:h-10 lg:h-16 object-contain filter transition-all" />
+                   <span v-else class="text-[13px] font-black text-blue-400 uppercase tracking-widest text-blue-500 transition-colors">{{ logo.name }}</span>
+                 </a>
+                 <div v-else class="select-none">
+                   <img v-if="logo.image" :src="logo.image" :alt="logo.name" class="h-8 md:h-10 lg:h-16 object-contain filter" />
+                   <span v-else class="text-[13px] font-black text-blue-400 uppercase tracking-widest">{{ logo.name }}</span>
                  </div>
-               </div>
-               
-               <!-- EU & ERC -->
-               <div class="flex items-center gap-4 select-none">
-                 <div class="h-10 w-16 bg-[#003399] flex items-center justify-center relative rounded-sm">
-                   <div class="text-yellow-400 flex items-center justify-center">
-                     <div class="w-8 h-8 rounded-full border-[1.5px] border-yellow-400 border-dotted"></div>
-                   </div>
-                 </div>
-                 <div class="h-10 flex items-center justify-center font-serif italic pr-1">
-                   <div class="text-[#f15a24] font-black text-xl tracking-tighter flex items-center gap-1 opacity-70">
-                     <i class="pi pi-sun text-lg"></i>
-                     erc
-                   </div>
-                 </div>
-               </div>
-               
-               <!-- DFG -->
-               <div class="h-10 text-[#003c7e] font-black text-3xl flex items-center gap-3 select-none">
-                 DFG 
-                 <span class="text-[7px] leading-[1.2] font-semibold text-[#006699] flex flex-col font-sans uppercase">
-                   <span>Deutsche</span>
-                   <span>Forschungsgemeinschaft</span>
-                 </span>
-               </div>
-               
-               <!-- VolkswagenStiftung -->
-               <div class="h-10 flex items-center gap-2 font-bold tracking-tight text-[#0a1e3f] select-none text-[15px]">
-                 <div class="grid grid-cols-3 gap-[2px] w-4">
-                   <div class="w-1 h-1 bg-[#0a1e3f] rounded-full" v-for="i in 9" :key="i"></div>
-                 </div>
-                 VolkswagenStiftung
-               </div>
-               
-               <!-- bidt -->
-               <div class="h-10 flex items-center font-bold text-3xl tracking-tighter text-[#1b2554] select-none">
-                 bidt
-               </div>
+               </template>
+            </div>
             </div>
           </div>
         </div>
@@ -169,10 +103,52 @@
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted } from 'vue'
 import { useConfigStore } from '@/store/config'
+import { useSeoStore } from '@/store/seo'
+import { useI18n } from 'vue-i18n'
+
 defineOptions({
   name: 'AppFooter',
 })
 
 const configStore = useConfigStore()
+const seoStore = useSeoStore()
+const { locale } = useI18n()
+
+const currentLocale = computed(() => locale.value || 'vi')
+
+const footerColumns = computed(() => {
+  const json = configStore.getConfigValue('FOOTER', 'FOOTER_COLUMNS', '')
+  if (!json) return []
+  try {
+    return JSON.parse(json)
+  } catch (e) {
+    console.error('Failed to parse footer columns JSON', e)
+    return []
+  }
+})
+
+const getRoutePath = (pageKey: string) => {
+  if (!pageKey) return '/'
+  if (pageKey === 'HOME') return '/'
+  const meta = seoStore.getSeoMetaByPage(pageKey)
+  return meta?.path || '/'
+}
+
+const partnerLogos = computed(() => {
+  const json = configStore.getConfigValue('FOOTER', 'FOOTER_PARTNER_LOGOS', '[]')
+  try {
+    return JSON.parse(json)
+  } catch (e) {
+    console.error('Failed to parse partner logos', e)
+    return []
+  }
+})
+
+onMounted(async () => {
+  if (seoStore.seoMetas.length === 0) {
+    await seoStore.fetchAllSeoMeta()
+  }
+})
 </script>

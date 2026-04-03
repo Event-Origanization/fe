@@ -150,7 +150,7 @@
     "HIGHLIGHTS": "Quản lý Slide Nổi bật",
     "VIDEOS": "Kho video highlight",
     "CONFIG": "Cấu hình website",
-    "HOME_VIDEOS": "Video trang chủ",
+    "HOME_VIDEOS": "Banner trang chủ",
     "NEWSLETTER": "Đăng ký nhận tin",
     "SEO": "Quản lý SEO Meta",
     "USERS": "Quản lý người dùng",
@@ -215,7 +215,10 @@
     "NEWS": "Tin tức",
     "BREADCRUMB_HOME": "TRANG CHỦ",
     "NOT_FOUND": "Không tìm thấy",
-    "NOT_FOUND_DESC": "Nội dung bạn tìm kiếm không tồn tại hoặc đã bị xóa."
+    "NOT_FOUND_DESC": "Nội dung bạn tìm kiếm không tồn tại hoặc đã bị xóa.",
+    "DETAIL_ARROW": "Chi tiết →",
+    "COPY_SUCCESS": "Đã lưu vào bộ nhớ tạm!",
+    "COPY_FAILED": "Sao chép thất bại"
   },
   "CONTACT": {
     "BREADCRUMB": "LIÊN HỆ",
@@ -277,8 +280,6 @@
     "DEFAULT_VIDEO_TITLE": "Video sự kiện",
     "NO_MORE_VIDEOS": "Chưa có thêm video sự kiện nào.",
     "CLIENTS_TITLE": "KHÁCH HÀNG CỦA CHÚNG TÔI",
-    "CLIENTS_SUB": "Khách hàng của chúng tôi bao gồm:",
-    "UPDATE_LATER": "Cập nhật sau",
     "GALLERY_TITLE": "HÌNH ẢNH SỰ KIỆN",
     "GALLERY_SUB": "Cập nhật những hình ảnh mới nhất từ các sự kiện nổi bật của 5P Event.",
     "TAG_GALLERY": "Thư viện ảnh",
@@ -297,7 +298,7 @@
     "SEARCH_RESULTS": "KẾT QUẢ CHO:",
     "OTHER_POSTS": "BÀI VIẾT KHÁC",
     "CANCEL_SEARCH": "Hủy tìm kiếm",
-    "TOC_TITLE": "MỤC LỤC NỘI DUNG",
+    "TOC_TITLE": "CÁC BÀI VIẾT MỚI NHẤT",
     "UPDATING": "Đang cập nhật...",
     "TAG_EVENT": "Tin Sự Kiện",
     "POST_DESC_PLACEHOLDER": "Bài viết cung cấp những thông tin chuyên sâu và góc nhìn mới mẻ về ngành tổ chức sự kiện hiện nay.",
@@ -320,7 +321,13 @@
       "STEP3_DESC": "Vận chuyển và setup thiết bị tận nơi đúng timeline cam kết, test chuẩn xác.",
       "STEP4_TITLE": "HỖ TRỢ TRỰC TIẾP",
       "STEP4_DESC": "Kỹ thuật viên trực suốt sự kiện, xử lý sự cố lập tức đảm bảo thành công 100%."
-    }
+    },
+    "PROCESS_SUB": "QUY TRÌNH & LỢI ÍCH",
+    "PROCESS_TITLE": "VÌ SAO CHỌN DỊCH VỤ CỦA CHÚNG TÔI?",
+    "PROCESS_DESC": "Chúng tôi cam kết mang đến dịch vụ cho thuê thiết bị sự kiện chuyên nghiệp, minh bạch và tối ưu nhất cho bạn.",
+    "STEP": "Bước {number}",
+    "HERO_TITLE": "KHU VỰC THIẾT BỊ",
+    "HERO_DESC": "Cung cấp giải pháp thiết bị toàn diện cho mọi quy mô sự kiện với chất lượng hàng đầu."
   },
   "SOUND_LIGHT": {
     "BENEFITS": {
@@ -332,7 +339,22 @@
       "BENEFIT3_DESC": "Mang đến mức chi phí hợp lý nhất đi kèm với chất lượng dịch vụ đỉnh cao.",
       "BENEFIT4_TITLE": "CAM KẾT THÀNH CÔNG",
       "BENEFIT4_DESC": "Chúng tôi đảm bảo sự trơn tru, hoàn hảo cho khâu kỹ thuật của sự kiện."
-    }
+    },
+    "STEPS": {
+      "STEP1_TITLE": "KHẢO SÁT & TƯ VẤN",
+      "STEP1_DESC": "Khảo sát thực tế không gian và tư vấn giải pháp kỹ thuật tối ưu nhất",
+      "STEP2_TITLE": "PHƯƠNG ÁN & BÁO GIÁ",
+      "STEP2_DESC": "Lên sơ đồ bố trí thiết bị và gửi báo giá chi tiết từng hạng mục",
+      "STEP3_TITLE": "THI CÔNG & VẬN HÀNH",
+      "STEP3_DESC": "Lắp đặt chuyên nghiệp và đội ngũ kỹ thuật trực vận hành suốt sự kiện",
+      "STEP4_TITLE": "HOÀN TẤT & NGHIỆM THU",
+      "STEP4_DESC": "Tháo dỡ thiết bị gọn gàng và hoàn thành các thủ tục nghiệm thu"
+    },
+    "PROCESS_SUB": "QUY TRÌNH CHUYÊN NGHIỆP",
+    "PROCESS_TITLE": "GIẢI PHÁP KỸ THUẬT TOÀN DIỆN",
+    "PROCESS_DESC": "Chúng tôi mang đến sự hoàn hảo cho mọi không gian sự kiện bằng công nghệ hiện đại và đội ngũ kỹ thuật tận tâm.",
+    "STEP": "Bước {number}",
+    "HERO_DESC": "Hệ thống âm thanh, ánh sáng, màn hình LED chuyên nghiệp, đẳng cấp quốc tế."
   },
   "PRODUCT_ADMIN": {
     "TITLE": "Quản Lý Sản Phẩm",
@@ -405,19 +427,19 @@
     "EMPTY": "Không có tin nhắn nào"
   },
   "HOME_VIDEO_ADMIN": {
-    "TITLE": "Quản Lý Video Trang Chủ",
-    "ADD_NEW": "Thêm video trang chủ mới",
-    "EDIT": "Chỉnh sửa video trang chủ",
+    "TITLE": "Quản Lý Ảnh Banner Trang Chủ",
+    "ADD_NEW": "Thêm ảnh banner trang chủ mới",
+    "EDIT": "Chỉnh sửa ảnh banner trang chủ",
     "FIELDS": {
-      "TITLE": "Tiêu đề video",
+      "TITLE": "Tiêu đề banner",
       "THUMBNAIL": "Ảnh xem trước (Thumbnail)",
       "URL": "Link Video (Youtube/Vimeo/Direct...)"
     },
     "PLACEHOLDERS": {
-      "TITLE": "Nhập tiêu đề video..."
+      "TITLE": "Nhập tiêu đề banner..."
     },
     "TABLE": {
-      "VIDEO": "Video",
+      "VIDEO": "Banner",
       "STATUS": "Trạng thái",
       "ACTIONS": "Thao tác"
     }
@@ -502,6 +524,7 @@
       "CONTACT": "Thông tin liên hệ",
       "SOCIAL": "Mạng xã hội",
       "MENU": "Cấu hình Menu",
+      "FOOTER": "Cấu hình Footer",
       "STATISTICS": "Số liệu thống kê"
     },
     "LABELS": {
@@ -518,21 +541,39 @@
       "SOCIAL_FACEBOOK": "Link Facebook",
       "SOCIAL_ZALO": "Link Zalo",
       "SOCIAL_YOUTUBE": "Link Youtube",
+      "SOCIAL_INSTAGRAM": "Link Instagram",
       "MENU_HOME": "Menu Trang chủ",
       "MENU_ABOUT": "Menu Giới thiệu",
       "MENU_EVENTS": "Menu Tổ chức sự kiện",
       "MENU_SOUND_LIGHT": "Menu Âm thanh ánh sáng",
       "MENU_RENTAL": "Menu Cho thuê thiết bị sự kiện",
       "MENU_CONTACT": "Menu Liên hệ",
+      "MENU_NEWS": "Menu Tin tức",
+      "MENU_RENTAL_EVENT": "Menu Thư viện hình ảnh",
+      "FOOTER_COLUMNS": "Cấu trúc cột Footer",
       "STATS_FIELDS": "Số lượng lĩnh vực",
       "STATS_EVENTS": "Số lượng sự kiện",
-      "STATS_BRANDS": "Số lượng thương hiệu"
+      "STATS_BRANDS": "Số lượng thương hiệu",
+      "FOOTER_PARTNER_LOGOS": "Cấu hình Logo Đối tác"
     },
     "HINT": {
       "MAP_TITLE": "Hướng dẫn lấy Bản đồ Google Maps:",
       "MAP_STEP1": "Mở Google Maps và tìm địa chỉ của bạn.",
       "MAP_STEP2": "Nhấp 'Chia sẻ' -> Chọn tab 'Nhúng bản đồ' (KHÔNG dùng tab 'Gửi liên kết').",
       "MAP_STEP3": "Nhấp 'SAO CHÉP HTML' rồi DÁN TRỰC TIẾP vào đây. Hệ thống sẽ tự động lọc lấy link bản đồ cho bạn."
+    },
+    "FOOTER_BUILDER": {
+      "ADD_COLUMN": "Thêm cột mới",
+      "ADD_ITEM": "Thêm liên kết con",
+      "COL_TITLE": "Tiêu đề cột",
+      "ITEM_TITLE": "Tiêu đề liên kết",
+      "SELECT_LINK": "Chọn đường dẫn",
+      "CONFIRM_DELETE_COL": "Bạn có chắc chắn muốn xóa cột này?",
+      "CONFIRM_DELETE_ITEM": "Xóa liên kết này?",
+      "PARTNER_LOGOS": "Logo Đối tác / Tài trợ",
+      "PARTNER_NAME": "Tên đối tác",
+      "PARTNER_LINK": "Liên kết",
+      "PARTNER_IMAGE": "Hình ảnh"
     }
   },
   "PARTNERS_ADMIN": {

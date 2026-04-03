@@ -167,17 +167,28 @@
            {{ $t('EVENTS_PAGE.CLIENTS_TITLE') }}
          </div>
          
-         <p class="text-brand-200 font-bold mb-12 text-sm md:text-base tracking-wide flex items-center justify-center gap-4">
-           <span>{{ $t('EVENTS_PAGE.CLIENTS_SUB') }}</span>
-           <span class="text-white/80 italic font-normal">{{ $t('EVENTS_PAGE.UPDATE_LATER') }}</span>
-         </p>
-         
          <!-- Logos Grid (4 rows, 6 cols) -->
-         <div class="grid grid-cols-3 md:grid-cols-6 gap-y-10 gap-x-4 items-center justify-items-center opacity-80">
-            <template v-for="row in 4" :key="'row'+row">
-              <div v-for="col in 6" :key="'logo'+row+col" class="w-full flex justify-center hover:opacity-100 hover:scale-110 hover:brightness-150 transition-all cursor-pointer">
-                <!-- Using generic placeholders since no specific logos provided -->
-                <span class="font-black text-white/60 tracking-wider text-sm md:text-lg uppercase">Brand {{row}}-{{col}}</span>
+         <!-- Logos Grid -->
+         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-y-12 gap-x-8 items-center justify-items-center opacity-90">
+            <template v-if="partnerStore.activePartners.length > 0">
+              <div v-for="partner in partnerStore.activePartners" 
+                   :key="partner.id" 
+                   class="w-full flex flex-col items-center justify-center hover:opacity-100 hover:scale-110 transition-all cursor-pointer group/logo"
+                   :title="partner.name">
+                <div class="w-full h-16 md:h-20 flex items-center justify-center mb-2">
+                  <img v-if="partner.logo" 
+                       :src="partner.logo" 
+                       :alt="partner.name" 
+                       class="max-w-full max-h-full object-contain filter invert opacity-60 group-hover/logo:opacity-100 transition-all duration-300" />
+                  <span v-else class="font-black text-white/50 tracking-wider text-sm md:text-base uppercase text-center line-clamp-1 px-2 border border-white/10 py-2 rounded-lg bg-white/5">
+                    {{ partner.name }}
+                  </span>
+                </div>
+              </div>
+            </template>
+            <template v-else>
+              <div v-for="i in 12" :key="'dummy-'+i" class="w-full flex justify-center hover:opacity-100 transition-all cursor-not-allowed">
+                <span class="font-black text-white/20 tracking-wider text-xs md:text-sm uppercase italic">Partner {{ i }}</span>
               </div>
             </template>
          </div>
@@ -291,6 +302,7 @@ import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
 import { usePostStore } from '@/store/post.store'
 import { useVideoStore } from '@/store/highlight-video.store'
+import { usePartnerStore } from '@/store/partner.store'
 import Pagination from '@/components/common/Pagination.vue'
 import { formatDate } from '@/utils/common'
 import type { IPost } from '@/types/post'
@@ -302,6 +314,7 @@ defineOptions({ name: 'EventsPage' })
 
 const postStore = usePostStore()
 const videoStore = useVideoStore()
+const partnerStore = usePartnerStore()
 const { locale } = useI18n()
 const router = useRouter()
 
@@ -375,7 +388,8 @@ const changeVideoPage = async (p: number) => {
 onMounted(async () => {
   await Promise.all([
     videoStore.fetchVideos({ limit: 11, page: 1 }),
-    postStore.fetchPosts({ limit: 9, page: 1 })
+    postStore.fetchPosts({ limit: 9, page: 1 }),
+    partnerStore.fetchActivePartners()
   ])
   AOS.init()
   AOS.refresh()

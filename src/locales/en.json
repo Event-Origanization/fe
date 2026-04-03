@@ -150,7 +150,7 @@
     "HIGHLIGHTS": "Highlights Management",
     "VIDEOS": "Videos Management",
     "CONFIG": "Website Config",
-    "HOME_VIDEOS": "Home Videos",
+    "HOME_VIDEOS": "Home Banner",
     "NEWSLETTER": "Newsletter Subscribers",
     "SEO": "SEO Meta Management",
     "USERS": "Users Management",
@@ -215,7 +215,10 @@
     "NEWS": "News",
     "BREADCRUMB_HOME": "HOME",
     "NOT_FOUND": "Not Found",
-    "NOT_FOUND_DESC": "The content you are looking for does not exist or has been deleted."
+    "NOT_FOUND_DESC": "The content you are looking for does not exist or has been deleted.",
+    "DETAIL_ARROW": "Details →",
+    "COPY_SUCCESS": "Copied to clipboard!",
+    "COPY_FAILED": "Failed to copy URL"
   },
   "CONTACT": {
     "BREADCRUMB": "CONTACT",
@@ -277,8 +280,6 @@
     "DEFAULT_VIDEO_TITLE": "Event video",
     "NO_MORE_VIDEOS": "No more event videos.",
     "CLIENTS_TITLE": "OUR CLIENTS",
-    "CLIENTS_SUB": "Our clients include:",
-    "UPDATE_LATER": "Update soon",
     "GALLERY_TITLE": "EVENT IMAGES",
     "GALLERY_SUB": "Update the latest images from the featured events of 5P Event.",
     "TAG_GALLERY": "Gallery",
@@ -297,7 +298,7 @@
     "SEARCH_RESULTS": "RESULTS FOR:",
     "OTHER_POSTS": "OTHER POSTS",
     "CANCEL_SEARCH": "Clear search",
-    "TOC_TITLE": "TABLE OF CONTENTS",
+    "TOC_TITLE": "LATEST POSTS",
     "UPDATING": "Updating...",
     "TAG_EVENT": "Event News",
     "POST_DESC_PLACEHOLDER": "The article provides in-depth information and fresh perspectives on the current event industry.",
@@ -320,7 +321,13 @@
       "STEP3_DESC": "Transport and set up equipment on-site according to committed timeline, accurate testing.",
       "STEP4_TITLE": "DIRECT SUPPORT",
       "STEP4_DESC": "Technicians stay throughout the event, address issues immediately to ensure 100% success."
-    }
+    },
+    "PROCESS_SUB": "PROCESS & BENEFITS",
+    "PROCESS_TITLE": "WHY CHOOSE OUR SERVICE?",
+    "PROCESS_DESC": "We are committed to providing you with the most professional, transparent and optimal event equipment rental service.",
+    "STEP": "Step {number}",
+    "HERO_TITLE": "EQUIPMENT ZONE",
+    "HERO_DESC": "Providing comprehensive equipment solutions for all event scales with top quality."
   },
   "SOUND_LIGHT": {
     "BENEFITS": {
@@ -332,7 +339,22 @@
       "BENEFIT3_DESC": "Bring the most reasonable cost accompanied by top service quality.",
       "BENEFIT4_TITLE": "COMMITMENT TO SUCCESS",
       "BENEFIT4_DESC": "We ensure the smoothness, perfection for the technical part of the event."
-    }
+    },
+    "STEPS": {
+      "STEP1_TITLE": "SURVEY & CONSULTATION",
+      "STEP1_DESC": "Survey the actual space and advise on the most optimal technical solutions.",
+      "STEP2_TITLE": "PROPOSAL & QUOTE",
+      "STEP2_DESC": "Create an equipment layout diagram and send a detailed quote for each item.",
+      "STEP3_TITLE": "INSTALLATION & OPERATION",
+      "STEP3_DESC": "Professional installation with a technical team on duty to operate throughout the event.",
+      "STEP4_TITLE": "COMPLETION & ACCEPTANCE",
+      "STEP4_DESC": "Neatly dismantle the equipment and complete the acceptance procedures."
+    },
+    "PROCESS_SUB": "PROFESSIONAL PROCESS",
+    "PROCESS_TITLE": "COMPREHENSIVE TECHNICAL SOLUTION",
+    "PROCESS_DESC": "We bring perfection to every event space with modern technology and a dedicated technical team.",
+    "STEP": "Step {number}",
+    "HERO_DESC": "Professional sound, lighting, and LED screen systems of international standards."
   },
   "PRODUCT_ADMIN": {
     "TITLE": "Product Management",
@@ -405,19 +427,19 @@
     "EMPTY": "No messages found"
   },
   "HOME_VIDEO_ADMIN": {
-    "TITLE": "Home Video Management",
-    "ADD_NEW": "Add New Home Video",
-    "EDIT": "Edit Home Video",
+    "TITLE": "Home Banner Management",
+    "ADD_NEW": "Add New Home Banner",
+    "EDIT": "Edit Home Banner",
     "FIELDS": {
-      "TITLE": "Video Title",
+      "TITLE": "Banner Title",
       "THUMBNAIL": "Thumbnail",
       "URL": "Video URL"
     },
     "PLACEHOLDERS": {
-      "TITLE": "Enter video title..."
+      "TITLE": "Enter banner title..."
     },
     "TABLE": {
-      "VIDEO": "Video",
+      "VIDEO": "Banner",
       "STATUS": "Status",
       "ACTIONS": "Actions"
     }
@@ -502,6 +524,7 @@
       "CONTACT": "Contact Info",
       "SOCIAL": "Social Media",
       "MENU": "Menu Config",
+      "FOOTER": "Footer Config",
       "STATISTICS": "Statistics"
     },
     "LABELS": {
@@ -518,21 +541,39 @@
       "SOCIAL_FACEBOOK": "Facebook Link",
       "SOCIAL_ZALO": "Zalo Link",
       "SOCIAL_YOUTUBE": "Youtube Link",
+      "SOCIAL_INSTAGRAM": "Instagram Link",
       "MENU_HOME": "Home Menu",
       "MENU_ABOUT": "About Menu",
       "MENU_EVENTS": "Events Menu",
       "MENU_SOUND_LIGHT": "Sound & Lighting Menu",
       "MENU_RENTAL": "Equipment Rental Menu",
       "MENU_CONTACT": "Contact Menu",
+      "MENU_NEWS": "News Menu",
+      "MENU_RENTAL_EVENT": "Image Gallery Menu",
+      "FOOTER_COLUMNS": "Footer Columns Structure",
       "STATS_FIELDS": "Number of Fields",
       "STATS_EVENTS": "Number of Events",
-      "STATS_BRANDS": "Number of Brands"
+      "STATS_BRANDS": "Number of Brands",
+      "FOOTER_PARTNER_LOGOS": "Partner Logos Setup"
     },
     "HINT": {
       "MAP_TITLE": "Google Maps Instructions:",
       "MAP_STEP1": "Open Google Maps and find your address.",
       "MAP_STEP2": "Click 'Share' -> Select 'Embed a map' tab (DO NOT use 'Send a link').",
       "MAP_STEP3": "Click 'COPY HTML' and PASTE DIRECTLY here. The system will filter the map link automatically."
+    },
+    "FOOTER_BUILDER": {
+      "ADD_COLUMN": "Add New Column",
+      "ADD_ITEM": "Add Sub-link",
+      "COL_TITLE": "Column Title",
+      "ITEM_TITLE": "Link Title",
+      "SELECT_LINK": "Select Path",
+      "CONFIRM_DELETE_COL": "Are you sure you want to delete this column?",
+      "CONFIRM_DELETE_ITEM": "Delete this link?",
+      "PARTNER_LOGOS": "Partner / Funding Logos",
+      "PARTNER_NAME": "Partner Name",
+      "PARTNER_LINK": "Link",
+      "PARTNER_IMAGE": "Image"
     }
   },
   "PARTNERS_ADMIN": {
