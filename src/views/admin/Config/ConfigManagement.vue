@@ -286,6 +286,7 @@
                   </div>
 
                   <!-- Image Upload -->
+                   <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
                   <div @click="($refs[`logoInput_${idx}`] as any)?.[0]?.click()" 
                     class="aspect-[16/6] bg-gray-50 border-4 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:bg-red-50 hover:border-red-400 transition-all group overflow-hidden relative shadow-inner"
                   >
@@ -383,12 +384,14 @@ const selectablePageKeys = computed(() => {
   return Object.keys(PAGE_KEYS).filter(k => k !== 'POST_DETAIL' && k !== 'PRODUCT_DETAIL');
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const footerData = ref<any[]>([]);
 const collapsedCols = ref<Record<number, boolean>>({});
 const toggleCol = (idx: number) => {
   collapsedCols.value[idx] = !collapsedCols.value[idx];
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const partnerLogos = ref<any[]>([]);
 const uploadingLogos = ref<Record<number, boolean>>({});
 

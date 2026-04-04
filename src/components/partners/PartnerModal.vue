@@ -209,11 +209,10 @@ const handleSubmit = async () => {
       (dataToSend as Record<string, unknown>).image = selectedFile.value
     }
 
-    let result
     if (isEdit.value && props.partner?.id) {
-      result = await partnerStore.updatePartner(props.partner.id, dataToSend)
+      await partnerStore.updatePartner(props.partner.id, dataToSend)
     } else {
-      result = await partnerStore.createPartner(dataToSend)
+      await partnerStore.createPartner(dataToSend)
     }
 
     toastSuccess(t('COMMON.SUCCESS'))
