@@ -33,7 +33,7 @@ class HomeVideoService implements IHomeVideoService {
   }
 
   create(body: HomeVideoCreationAttributes): Promise<ApiResponse<IHomeVideo> | ResponseError> {
-    const formData = objectToFormData(body)
+    const formData = objectToFormData(body as unknown as Record<string, unknown>)
     return apiService(API_ROUTES.HOME_VIDEOS.CREATE)
       .post<IHomeVideo>(formData)
   }

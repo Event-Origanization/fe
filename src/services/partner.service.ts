@@ -33,12 +33,12 @@ class PartnerService implements IPartnerService {
   }
 
   create(body: PartnerCreationAttributes): Promise<ApiResponse<IPartner> | ResponseError> {
-    const formData = objectToFormData(body)
+    const formData = objectToFormData(body as unknown as Record<string, unknown>)
     return apiService(API_ROUTES.PARTNERS.CREATE).post<IPartner>(formData)
   }
 
   update(id: number, body: Partial<PartnerCreationAttributes>): Promise<ApiResponse<IPartner> | ResponseError> {
-    const formData = objectToFormData(body)
+    const formData = objectToFormData(body as unknown as Record<string, unknown>)
     return apiService(API_ROUTES.PARTNERS.UPDATE)
       .addPathParam(':id', id)
       .put<IPartner>(formData)

@@ -40,7 +40,7 @@ class ProductService implements IProductService {
   }
 
   create(body: ProductCreationAttributes): Promise<ApiResponse<IProduct> | ResponseError> {
-    const formData = objectToFormData(body)
+    const formData = objectToFormData(body as unknown as Record<string, unknown>)
     return apiService(API_ROUTES.PRODUCTS.CREATE)
       .post<IProduct>(formData)
   }

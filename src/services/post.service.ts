@@ -42,7 +42,7 @@ class PostService implements IPostService {
   }
 
   create(body: PostCreationAttributes): Promise<ApiResponse<IPost> | ResponseError> {
-    const formData = objectToFormData(body)
+    const formData = objectToFormData(body as unknown as Record<string, unknown>)
     return apiService(API_ROUTES.POSTS.CREATE)
       .post<IPost>(formData)
   }
