@@ -287,7 +287,7 @@
 
                   <!-- Image Upload -->
                    <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
-                  <div @click="($refs[`logoInput_${idx}`] as any)?.[0]?.click()" 
+                  <div @click="(($refs as any)[`logoInput_${idx}`])?.[0]?.click()" 
                     class="aspect-[16/6] bg-gray-50 border-4 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:bg-red-50 hover:border-red-400 transition-all group overflow-hidden relative shadow-inner"
                   >
                     <img v-if="logo.image" :src="logo.image" class="absolute inset-0 w-full h-full object-contain p-6 hover:scale-110 transition-transform duration-500" :class="{'opacity-20': uploadingLogos[idx]}" />
@@ -368,7 +368,7 @@ import { useConfigStore } from '@/store/config';
 import { ConfigService } from '@/services/config.service';
 import { ResponseError } from '@/utils/error';
 import { useToast } from '@/composables/useToast';
-import { PAGE_KEYS, API_ROUTES } from '@/constants';
+import { PAGE_KEYS } from '@/constants';
 import { uploadService } from '@/services/upload.service';
 
 const { t } = useI18n();

@@ -33,7 +33,7 @@ class HighlightVideoService implements IHighlightVideoService {
   }
 
   create(body: HighlightVideoCreationAttributes): Promise<ApiResponse<IHighlightVideo> | ResponseError> {
-    const formData = objectToFormData(body)
+    const formData = objectToFormData(body as unknown as Record<string, unknown>)
     return apiService(API_ROUTES.HIGHLIGHT_VIDEOS.CREATE)
       .post<IHighlightVideo>(formData)
   }
