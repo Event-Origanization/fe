@@ -369,19 +369,27 @@ onMounted(() => {
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (editor && !isInternalUpdate) {
-      const currentContent = editor.getContent()
+    if (editor && editor.initialized && !isInternalUpdate) {
+      try {
+        const currentContent = editor.getContent()
 
-      if (currentContent !== (newValue || '')) {
-        const bookmark = editor.selection?.getBookmark(2, true)
+        if (currentContent !== (newValue || '')) {
+          const bookmark = editor.selection?.getBookmark(2, true)
 
-        editor.setContent(newValue || '')
+          editor.setContent(newValue || '')
 
-        try {
-          editor.selection.moveToBookmark(bookmark)
-        } catch (e) {
-          console.error(e)
+          try {
+            if (bookmark && editor.selection) {
+              editor.selection.moveToBookmark(bookmark)
+            }
+          } catch (e) {
+            console.error(e)
+          }
         }
+      } catch (e) {
+        console.warn('TinyMCE update error:', e)
+        // Fallback for not-fully-initialized state
+        editor.setContent(newValue || '')
       }
     }
   },

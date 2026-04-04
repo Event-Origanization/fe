@@ -134,6 +134,15 @@
                     class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                   />
                 </div>
+                <!-- Font Preview Box -->
+                <h6 class="text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 border-b border-gray-200 pb-2">Xem trước font chữ:</h6>
+                <div 
+                  class="mt-3 p-4 bg-white border border-gray-200 rounded-xl shadow-sm"
+                  :style="{ fontFamily: `&quot;${editData[config.key]?.value_vi || 'Outfit'}&quot;, sans-serif` }"
+                >
+                  <p class="text-xl font-medium text-gray-800 mb-2">Kiến tạo cảm xúc, thu trọn thương hiệu</p>
+                  <p class="text-md text-gray-500">The quick brown fox jumps over the lazy dog. 0123456789</p>
+                </div>
                 <p class="text-[11px] text-gray-500 italic mt-1">* Chọn font từ danh sách hoặc nhập tên chính xác từ Google Fonts. Áp dụng toàn trang.</p>
               </div>
             </template>
@@ -170,11 +179,6 @@
                       <span v-if="collapsedCols[colIdx]" class="text-xs font-bold text-red-500 bg-red-50 px-3 py-1.5 rounded-full border border-red-100">
                         {{ col.items.length }} liên kết con
                       </span>
-                      <button @click="removeFooterCol(colIdx)" 
-                        class="p-3 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shadow-sm active:scale-90 border border-red-100"
-                      >
-                        <i class="pi pi-trash text-lg"></i>
-                      </button>
                     </div>
                   </div>
                   
@@ -265,16 +269,6 @@
                     </div>
                   </div>
                 </div>
-
-                <!-- Add Column Button -->
-                <button @click="addFooterCol" 
-                  class="w-full py-10 border-4 border-dashed border-gray-300 rounded-3xl text-gray-400 hover:text-red-500 hover:border-red-500 hover:bg-red-50/20 transition-all font-black text-2xl flex flex-col items-center justify-center gap-4 bg-white/50 shadow-sm"
-                >
-                  <div class="w-20 h-20 bg-gray-100 text-gray-400 rounded-3xl flex items-center justify-center group-hover/builder:bg-red-100 group-hover/builder:text-red-500 transition-colors shadow-inner">
-                    <i class="pi pi-plus text-4xl"></i>
-                  </div>
-                  <span class="uppercase tracking-widest">{{ $t('CONFIG_ADMIN.FOOTER_BUILDER.ADD_COLUMN') }}</span>
-                </button>
               </div>
             </template>
 
@@ -426,20 +420,6 @@ const handlePartnerLogoUpload = async (event: Event, index: number) => {
   }
 };
 
-const addFooterCol = () => {
-  footerData.value.push({
-    title: { vi: 'TIÊU ĐỀ MỚI', en: 'NEW TITLE', zh: '新标题' },
-    link: 'HOME',
-    items: []
-  });
-};
-
-const removeFooterCol = (idx: number) => {
-  if (confirm(t('CONFIG_ADMIN.FOOTER_BUILDER.CONFIRM_DELETE_COL'))) {
-    footerData.value.splice(idx, 1);
-  }
-};
-
 const addFooterItem = (colIdx: number) => {
   footerData.value[colIdx].items.push({
     title: { vi: 'Liên kết mới', en: 'New link', zh: '新链接' },
@@ -457,7 +437,7 @@ const tabs = computed(() => [
   { id: 'SOCIAL', name: t('CONFIG_ADMIN.TABS.SOCIAL') },
   { id: 'MENU', name: t('CONFIG_ADMIN.TABS.MENU') },
   { id: 'FOOTER', name: t('CONFIG_ADMIN.TABS.FOOTER') },
-  { id: 'STATISTICS', name: t('CONFIG_ADMIN.TABS.STATISTICS') }
+  // { id: 'STATISTICS', name: t('CONFIG_ADMIN.TABS.STATISTICS') }
 ]);
 
 const editData = ref<Record<string, { value_vi: string, value_en: string, value_zh: string }>>({});

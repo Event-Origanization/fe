@@ -78,7 +78,7 @@
             class="w-full lg:w-1/4 lg:sticky lg:top-28 flex-shrink-0"
             v-if="tocHeadings.length > 0"
           >
-            <ExpandableSidebar :title="$t('NEWS_PAGE.TOC_TITLE')">
+            <ExpandableSidebar :title="$t('POST.TOC_TITLE')">
               <li v-for="(heading, idx) in tocHeadings" :key="idx">
                 <a
                   href="javascript:void(0)"
@@ -276,6 +276,15 @@ watch(
   (newSlug) => {
     if (newSlug) loadPost(newSlug as string)
   },
+)
+
+watch(
+  () => locale.value,
+  async () => {
+    // Wait for Vue to update the DOM via v-html
+    await nextTick()
+    extractHeadings()
+  }
 )
 </script>
 

@@ -269,7 +269,8 @@
     "LIBRARY": "图书馆",
     "TAB_IMAGES": "图片",
     "TAB_VIDEOS": "视频",
-    "FEATURED_EVENT": "精彩活动"
+    "FEATURED_EVENT": "精彩活动",
+    "TOC_TITLE": "文章目录"
   },
   "EVENTS_PAGE": {
     "TITLE": "活动视频",
