@@ -23,7 +23,7 @@ export interface CreateHighlightRequest {
   translateContent?: boolean;
 }
 
-export interface UpdateHighlightRequest extends Partial<CreateHighlightRequest> {}
+export type UpdateHighlightRequest = Partial<CreateHighlightRequest>;
 
 export interface HighlightQuery {
   page?: number;

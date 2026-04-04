@@ -424,7 +424,7 @@ const submitForm = async () => {
     await contactMessageStore.createContactMessage(dataToSend)
     toastSuccess(t('HOME.QUICK_CONTACT.SUCCESS') || 'Gửi tin nhắn thành công, chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.')
     Object.assign(form, { name: '', email: '', phone: '', message: '' })
-  } catch (error) {
+  } catch {
     toastError('Gửi tin nhắn thất bại. Vui lòng thử lại sau.')
   } finally {
     isSending.value = false

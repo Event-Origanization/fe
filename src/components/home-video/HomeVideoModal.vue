@@ -200,16 +200,15 @@ const handleSubmit = async () => {
       (dataToSend as Record<string, unknown>).image = selectedFile.value
     }
 
-    let result
     if (isEdit.value && props.video?.id) {
       const payload: Record<string, unknown> = { ...dataToSend }
       
       // Kiểm tra xem có thay đổi tiêu đề không để yêu cầu dịch lại
       payload.translateTitle = hasFieldChanged(props.video, form, 'title_vi')
       
-      result = await homeVideoStore.updateVideo(props.video.id, payload)
+      await homeVideoStore.updateVideo(props.video.id, payload)
     } else {
-      result = await homeVideoStore.createVideo({ 
+      await homeVideoStore.createVideo({ 
         ...dataToSend, 
         translateTitle: true 
       })

@@ -78,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useHighlightStore } from '@/store/highlight'
 import type { IHighlight } from '@/types/highlight'
 import { useToast } from '@/composables/useToast'
