@@ -103,7 +103,7 @@
         <div class="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
           
           <!-- LEFT SIDE: Sidebar (Mục lục) -->
-          <div class="w-full lg:w-1/3 xl:w-1/4 sticky top-28 flex-shrink-0" data-aos="fade-right">
+          <div class="w-full lg:w-1/3 xl:w-1/4 lg:sticky lg:top-28 flex-shrink-0" data-aos="fade-right">
              <ExpandableSidebar :title="$t('NEWS_PAGE.TOC_TITLE')">
                 <li v-for="post in postStore.recentNews" :key="post.id">
                   <a 

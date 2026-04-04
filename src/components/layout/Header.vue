@@ -115,13 +115,6 @@
          </nav>
          
          <div class="mt-auto pb-10 border-t border-white/10 pt-10">
-            <div class="flex items-center justify-between mb-8">
-              <span class="text-xs font-black uppercase tracking-widest text-gray-500">{{ $t('NAV.REACH_US') }}</span>
-              <div class="flex gap-4">
-                 <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-brand-600 hover:text-white transition-all"><i class="pi pi-facebook"></i></a>
-                 <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-brand-600 hover:text-white transition-all"><i class="pi pi-instagram"></i></a>
-              </div>
-            </div>
             <div class="bg-white/5 p-4 rounded-2xl flex justify-center">
               <LanguageSelector />
             </div>
@@ -147,7 +140,7 @@ defineOptions({
 })
 
 const router = useRouter()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const configStore = useConfigStore()
 
 const searchQuery = ref('')
@@ -210,13 +203,19 @@ watch(isScrolled, () => {
   setTimeout(updateHeaderHeight, 350)
 })
 
-defineProps<{
+const props = defineProps<{
   mobileMenuOpen?: boolean
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'toggle-menu'): void
 }>()
+
+watch(locale, () => {
+  if (props.mobileMenuOpen) {
+    emit('toggle-menu')
+  }
+})
 
 const menuItems = computed(() => [
   { 
