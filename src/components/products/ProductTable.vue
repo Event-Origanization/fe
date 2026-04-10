@@ -32,9 +32,19 @@
           v-model="filterType"
           class="block w-full md:w-48 px-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
         >
-          <option value="all">{{ $t('PRODUCT_ADMIN.FILTERS.ALL_TYPES') }}</option>
           <option :value="PAGE_KEYS.SOUND_LIGHT">Âm thanh ánh sáng</option>
           <option :value="PAGE_KEYS.RENTAL">Cho thuê thiết bị</option>
+        </select>
+
+        <select
+          v-if="filterType !== 'all'"
+          v-model="filterCategory"
+          class="block w-full md:w-48 px-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
+        >
+          <option value="all">Tất cả phân loại con</option>
+          <option v-for="cat in availableCategories" :key="cat" :value="cat">
+            {{ $t(`PRODUCT_CATEGORIES.${cat}`) }}
+          </option>
         </select>
         
         <button
@@ -95,9 +105,17 @@
 
       <!-- Custom Cell: Type -->
       <template #cell(productType)="{ value }">
-        <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded text-xs">
+        <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded text-xs whitespace-nowrap">
           {{ value === PAGE_KEYS.SOUND_LIGHT ? 'Âm thanh ánh sáng' : 'Cho thuê thiết bị' }}
         </span>
+      </template>
+
+      <!-- Custom Cell: Category -->
+      <template #cell(category)="{ value }">
+        <span v-if="value" class="px-2 py-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded text-xs whitespace-nowrap">
+          {{ $t(`PRODUCT_CATEGORIES.${value}`) }}
+        </span>
+        <span v-else class="text-gray-400 text-xs italic">-</span>
       </template>
 
       <!-- Custom Cell: Actions -->
@@ -141,7 +159,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useProductStore } from '@/store/product.store'
 import type { IProduct } from '@/types/product'
@@ -149,13 +167,14 @@ import { useToast } from '@/composables/useToast'
 import { formatCurrency } from '@/utils/common'
 import BaseTable, { type ITableColumn } from '@/components/common/BaseTable.vue'
 import Pagination from '@/components/common/Pagination.vue'
-import { PAGE_KEYS } from '@/constants'
+import { PAGE_KEYS, CATEGORIES_BY_TYPE } from '@/constants'
 
 const { t } = useI18n()
 
 const columns: ITableColumn[] = [
   { key: 'name_vi', label: t('PRODUCT_ADMIN.TABLE.NAME') },
   { key: 'productType', label: t('PRODUCT_ADMIN.TABLE.TYPE') },
+  { key: 'category', label: 'Phân loại con' },
   { key: 'price', label: t('PRODUCT_ADMIN.TABLE.PRICE') },
   { key: 'isActive', label: t('PRODUCT_ADMIN.TABLE.STATUS') },
   { key: 'actions', label: t('PRODUCT_ADMIN.TABLE.ACTIONS'), align: 'right' }
@@ -172,17 +191,26 @@ const { toastSuccess, toastError } = useToast()
 const searchQuery = ref('')
 const filterStatus = ref('all')
 const filterType = ref('all')
+const filterCategory = ref('all')
 const limit = ref(10)
+
+const availableCategories = computed(() => {
+  if (filterType.value === 'all') return []
+  return CATEGORIES_BY_TYPE[filterType.value] || []
+})
 
 const fetchProducts = (page = 1) => {
   const isActive = filterStatus.value === 'all' ? undefined : filterStatus.value === 'active'
   const productType = filterType.value === 'all' ? undefined : filterType.value as 'SOUND_LIGHT' | 'RENTAL'
+  const category = filterCategory.value === 'all' ? undefined : filterCategory.value
+  
   productStore.fetchProducts({
     page,
     limit: limit.value,
     search: searchQuery.value,
     isActive: isActive,
-    productType: productType
+    productType: productType,
+    category: category as any
   })
 }
 
@@ -200,7 +228,8 @@ onMounted(() => {
 })
 
 // Watch for search and filter changes
-watch([filterStatus, filterType], () => {
+watch([filterStatus, filterType, filterCategory], () => {
+  if (filterType.value === 'all') filterCategory.value = 'all'
   fetchProducts(1)
 })
 

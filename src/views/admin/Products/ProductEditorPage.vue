@@ -112,10 +112,27 @@
               </label>
               <select
                 v-model="form.productType"
+                @change="form.category = null"
                 class="block w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all outline-none shadow-sm cursor-pointer font-medium"
               >
                 <option :value="PAGE_KEYS.SOUND_LIGHT">Âm thanh ánh sáng</option>
                 <option :value="PAGE_KEYS.RENTAL">Cho thuê thiết bị</option>
+              </select>
+            </div>
+
+            <!-- Category -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider">
+                Phân loại con (Category)
+              </label>
+              <select
+                v-model="form.category"
+                class="block w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all outline-none shadow-sm cursor-pointer font-medium"
+              >
+                <option :value="null">Không phân loại</option>
+                <option v-for="cat in availableCategories" :key="cat" :value="cat">
+                  {{ $t(`PRODUCT_CATEGORIES.${cat}`) }}
+                </option>
               </select>
             </div>
           </div>
@@ -229,7 +246,7 @@ import { hasFieldChanged } from '@/utils/diff'
 import { useProductStore } from '@/store/product.store'
 import type { IProduct, ProductCreationAttributes } from '@/types/product'
 import { useToast } from '@/composables/useToast'
-import { PAGE_KEYS } from '@/constants'
+import { PAGE_KEYS, CATEGORIES_BY_TYPE } from '@/constants'
 
 const route = useRoute()
 const router = useRouter()
@@ -251,6 +268,7 @@ const initialForm: ProductCreationAttributes = {
   price: 0,
   isActive: true,
   productType: 'RENTAL',
+  category: null,
   images: []
 }
 
@@ -273,6 +291,11 @@ onMounted(async () => {
        toastError('Lỗi khi tải dữ liệu sản phẩm')
     }
   }
+})
+
+const availableCategories = computed(() => {
+  if (!form.productType) return []
+  return CATEGORIES_BY_TYPE[form.productType] || []
 })
 
 const fileInput = ref<HTMLInputElement | null>(null)

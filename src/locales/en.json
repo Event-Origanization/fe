@@ -13,9 +13,7 @@
   "HOME": {
     "HERO": {
       "SUBTITLE": "5P EVENT ORGANIZATION COMPANY",
-      "DEFAULT_TITLE": "WITH 5P EVENT\nCREATING EMOTIONS\nCAPTURING BRAND",
       "LEARN_MORE": "LEARN MORE ABOUT US",
-      "SLOGAN_P1": "Addressing Individualism and rethinking how to be together",
       "SLOGAN_P2": "CREATIVE in ideas - PROFESSIONAL in organization - OPTIMIZED in costs"
     },
     "STATS": {
@@ -310,7 +308,27 @@
   "PRODUCT": {
     "RELATED": "RELATED PRODUCTS",
     "NOT_FOUND": "Product not found",
-    "COMING_SOON": "Coming soon..."
+    "COMING_SOON": "Feature coming soon...",
+    "CATEGORIES": "CATEGORIES",
+    "SORT_BY": "Sort by",
+    "PRICE_ASC": "Price Low to High",
+    "PRICE_DESC": "Price High to Low",
+    "NEWEST": "Newest",
+    "FILTER_TITLE": "FILTER",
+    "PRICE_RANGE": "PRICE RANGE"
+  },
+  "PRODUCT_CATEGORIES": {
+    "SOUND_LIGHT_LIGHTING": "Event Lighting",
+    "SOUND_LIGHT_AUDIO": "Event Audio",
+    "SOUND_LIGHT_STAGE": "Event Stage",
+    "RENTAL_TABLE": "Event Table",
+    "RENTAL_CHAIR": "Event Chair",
+    "RENTAL_FAN": "Event Fan",
+    "RENTAL_TENT": "Space Tent",
+    "RENTAL_UMBRELLA": "Eccentric Umbrella",
+    "RENTAL_BACKDROP": "Backdrop Construction",
+    "RENTAL_STAGE": "Stage Construction",
+    "RENTAL_OTHER": "Other Equipment"
   },
   "RENTAL": {
     "STEPS": {
