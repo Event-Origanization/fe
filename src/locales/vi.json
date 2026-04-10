@@ -13,9 +13,7 @@
   "HOME": {
     "HERO": {
       "SUBTITLE": "CÔNG TY TỔ CHỨC SỰ KIỆN 5P EVENT",
-      "DEFAULT_TITLE": "CÙNG 5P EVENT\nKIẾN TẠO CẢM XÚC\nTHU TRỌN THƯƠNG HIỆU",
       "LEARN_MORE": "TÌM HIỂU THÊM VỀ CHÚNG TÔI",
-      "SLOGAN_P1": "Giải quyết tính cá nhân hóa và tư duy lại cách chúng ta bên nhau",
       "SLOGAN_P2": "SÁNG TẠO trong ý tưởng - CHỈNH CHU trong khâu tổ chức - TỐI GIẢM về chi phí"
     },
     "STATS": {
@@ -310,7 +308,27 @@
   "PRODUCT": {
     "RELATED": "SẢN PHẨM LIÊN QUAN",
     "NOT_FOUND": "Không tìm thấy sản phẩm này",
-    "COMING_SOON": "Tính năng đang được cập nhật..."
+    "COMING_SOON": "Tính năng đang được cập nhật...",
+    "CATEGORIES": "PHÂN LOẠI",
+    "SORT_BY": "Sắp xếp theo",
+    "PRICE_ASC": "Giá thấp → cao",
+    "PRICE_DESC": "Giá cao → thấp",
+    "NEWEST": "Mới nhất",
+    "FILTER_TITLE": "BỘ LỌC",
+    "PRICE_RANGE": "KHOẢNG GIÁ"
+  },
+  "PRODUCT_CATEGORIES": {
+    "SOUND_LIGHT_LIGHTING": "Ánh sáng sự kiện",
+    "SOUND_LIGHT_AUDIO": "Âm thanh sự kiện",
+    "SOUND_LIGHT_STAGE": "Sân khấu sự kiện",
+    "RENTAL_TABLE": "Bàn sự kiện",
+    "RENTAL_CHAIR": "Ghế sự kiện",
+    "RENTAL_FAN": "Quạt sự kiện",
+    "RENTAL_TENT": "Nhà bạt không gian",
+    "RENTAL_UMBRELLA": "Dù lệch tâm",
+    "RENTAL_BACKDROP": "Thi công backdrop",
+    "RENTAL_STAGE": "Thi công sân khấu",
+    "RENTAL_OTHER": "Thiết bị khác"
   },
   "RENTAL": {
     "STEPS": {

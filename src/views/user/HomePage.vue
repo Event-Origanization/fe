@@ -13,11 +13,8 @@
       <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
         <!-- Text content -->
         <div class="w-full lg:w-1/2 relative z-10 space-y-6" data-aos="fade-right">
-          <h4 class="text-brand-600 font-bold uppercase tracking-widest text-sm lg:text-base">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-600 tracking-tighter leading-[1.1] uppercase whitespace-pre-line">
             {{ $t('HOME.HERO.SUBTITLE') }}
-          </h4>
-          <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black text-gray-900 tracking-tighter leading-[1.1] uppercase whitespace-pre-line">
-            {{ heroData?.title_vi || $t('HOME.HERO.DEFAULT_TITLE') }}
           </h1>
           <div class="pt-2 pb-1">
             <a href="#about-snippet" class="group inline-flex items-center gap-3 bg-brand-600 hover:bg-gray-900 text-white font-black py-4 px-10 rounded-full shadow-xl shadow-brand-600/30 hover:shadow-gray-900/30 transition-all duration-500 hover:-translate-y-1 active:translate-y-0">
@@ -25,7 +22,6 @@
             </a>
           </div>
           <p class="text-gray-800 font-medium max-w-lg leading-relaxed text-base lg:text-lg">
-            {{ $t('HOME.HERO.SLOGAN_P1') }}<br/>
             <span class="text-brand-600 block mt-2 tracking-wide font-bold">{{ $t('HOME.HERO.SLOGAN_P2') }}</span>
           </p>
         </div>

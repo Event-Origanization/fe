@@ -1,4 +1,5 @@
 import { PAGE_KEYS } from "@/constants";
+import type { ProductCategory } from "@/constants";
 
 export interface IProduct {
   id: number;
@@ -10,6 +11,7 @@ export interface IProduct {
   images: string[];
   isActive: boolean;
   productType: typeof PAGE_KEYS.SOUND_LIGHT | typeof PAGE_KEYS.RENTAL;
+  category: ProductCategory | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -23,6 +25,7 @@ export interface ProductCreationAttributes {
   images?: string[];
   isActive?: boolean;
   productType: typeof PAGE_KEYS.SOUND_LIGHT | typeof PAGE_KEYS.RENTAL;
+  category?: ProductCategory | null;
   translateName?: boolean;
 }
 
@@ -34,6 +37,7 @@ export interface ProductQuery {
   maxPrice?: number;
   isActive?: boolean;
   productType?: typeof PAGE_KEYS.SOUND_LIGHT | typeof PAGE_KEYS.RENTAL;
+  category?: ProductCategory | ProductCategory[] | null;
   sortBy?: string;
   sortOrder?: 'ASC' | 'DESC';
 }
