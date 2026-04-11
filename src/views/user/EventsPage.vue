@@ -37,7 +37,12 @@
         <!-- VIDEOS -->
         <!-- Video 1: Top Right (Verticalish) -->
         <div class="absolute top-0 right-[15%] w-[28%] aspect-[3/4] z-10 creative-video-card" data-aos="fade-left" data-aos-delay="200" @click="openVideo(featuredVideos[0])">
-          <img :src="featuredVideos[0]?.thumbnail || featuredVideos[0]?.url || defImg(0)" class="w-full h-full object-cover rounded-[30px]" alt="Video 1" />
+          <img 
+            :src="featuredVideos[0]?.thumbnail || featuredVideos[0]?.url || defImg(0)" 
+            @error="(e) => handleImgError(e, 0)"
+            class="w-full h-full object-cover rounded-[30px]" 
+            alt="Video 1" 
+          />
           <div class="video-hover-overlay rounded-[30px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -45,7 +50,12 @@
 
         <!-- Video 2: Middle Left (Horizontal) -->
         <div class="absolute top-[20%] left-[2%] w-[45%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-right" data-aos-delay="300" @click="openVideo(featuredVideos[1])">
-          <img :src="featuredVideos[1]?.thumbnail || featuredVideos[1]?.url || defImg(1)" class="w-full h-full object-cover rounded-[24px]" alt="Video 2" />
+          <img 
+            :src="featuredVideos[1]?.thumbnail || featuredVideos[1]?.url || defImg(1)" 
+            @error="(e) => handleImgError(e, 1)"
+            class="w-full h-full object-cover rounded-[24px]" 
+            alt="Video 2" 
+          />
           <div class="video-hover-overlay rounded-[24px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -53,7 +63,12 @@
 
         <!-- Video 3: Middle Right (Horizontal) -->
         <div class="absolute top-[42%] right-[2%] w-[42%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-left" data-aos-delay="400" @click="openVideo(featuredVideos[2])">
-          <img :src="featuredVideos[2]?.thumbnail || featuredVideos[2]?.url || defImg(2)" class="w-full h-full object-cover rounded-[24px]" alt="Video 3" />
+          <img 
+            :src="featuredVideos[2]?.thumbnail || featuredVideos[2]?.url || defImg(2)" 
+            @error="(e) => handleImgError(e, 2)"
+            class="w-full h-full object-cover rounded-[24px]" 
+            alt="Video 3" 
+          />
           <div class="video-hover-overlay rounded-[24px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -61,7 +76,12 @@
 
         <!-- Video 4: Bottom Left (Horizontal) -->
         <div class="absolute top-[62%] left-[8%] w-[40%] aspect-[16/10] z-10 creative-video-card" data-aos="fade-up-right" data-aos-delay="500" @click="openVideo(featuredVideos[3])">
-          <img :src="featuredVideos[3]?.thumbnail || featuredVideos[3]?.url || defImg(3)" class="w-full h-full object-cover rounded-[24px]" alt="Video 4" />
+          <img 
+            :src="featuredVideos[3]?.thumbnail || featuredVideos[3]?.url || defImg(3)" 
+            @error="(e) => handleImgError(e, 3)"
+            class="w-full h-full object-cover rounded-[24px]" 
+            alt="Video 4" 
+          />
           <div class="video-hover-overlay rounded-[24px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -69,7 +89,12 @@
 
         <!-- Video 5: Bottom Right (Horizontal) -->
         <div class="absolute top-[82%] right-[10%] w-[44%] aspect-[16/10] z-30 creative-video-card" data-aos="fade-up-left" data-aos-delay="600" @click="openVideo(featuredVideos[4])">
-          <img :src="featuredVideos[4]?.thumbnail || featuredVideos[4]?.url || defImg(4)" class="w-full h-full object-cover rounded-[24px]" alt="Video 5" />
+          <img 
+            :src="featuredVideos[4]?.thumbnail || featuredVideos[4]?.url || defImg(4)" 
+            @error="(e) => handleImgError(e, 4)"
+            class="w-full h-full object-cover rounded-[24px]" 
+            alt="Video 5" 
+          />
           <div class="video-hover-overlay rounded-[24px]">
             <div class="play-btn"><i class="pi pi-play"></i></div>
           </div>
@@ -78,17 +103,22 @@
 
       <!-- ===== MOBILE VIDEO LAYOUT ===== -->
       <div v-if="videoStore.currentPage === 1" class="lg:hidden flex flex-col gap-8 mt-10">
-         <div 
-            v-for="(post, idx) in featuredVideos" 
-            :key="'mob-'+idx"
-            class="relative w-full aspect-video rounded-2xl overflow-hidden group shadow-xl"
-            data-aos="fade-up"
-            @click="openVideo(post)"
+         <div
+           v-for="(post, idx) in featuredVideos"
+           :key="'mob-' + idx"
+           class="relative w-full aspect-video rounded-2xl overflow-hidden group shadow-xl"
+           data-aos="fade-up"
+           @click="openVideo(post)"
          >
-            <img :src="post?.thumbnail || post?.url || defImg(idx)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Video" />
-            <div class="video-hover-overlay">
-              <div class="play-btn"><i class="pi pi-play"></i></div>
-            </div>
+           <img
+             :src="post?.thumbnail || post?.url || defImg(idx)"
+             @error="(e) => handleImgError(e, idx)"
+             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+             alt="Video"
+           />
+           <div class="video-hover-overlay">
+             <div class="play-btn"><i class="pi pi-play"></i></div>
+           </div>
          </div>
       </div>
     </section>
@@ -110,6 +140,7 @@
                <div class="aspect-[4/3] rounded-[16px] overflow-hidden relative shadow-inner">
                  <img
                    :src="post.thumbnail || post.url || defImg(idx + 5)"
+                   @error="(e) => handleImgError(e, idx + 5)"
                    :alt="getTitle(post)"
                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                  />
@@ -201,7 +232,10 @@
         <h2 class="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-widest mb-4" data-aos="fade-up">{{ $t('EVENTS_PAGE.GALLERY_TITLE') }}</h2>
         <p class="text-gray-500 md:text-lg max-w-2xl mx-auto mb-16 font-medium" data-aos="fade-up" data-aos-delay="100">{{ $t('EVENTS_PAGE.GALLERY_SUB') }}</p>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+        <div v-if="postStore.loading" class="flex justify-center items-center py-20">
+          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-600"></div>
+        </div>
+        <div v-else-if="postStore.posts.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
            <div 
              v-for="(post, idx) in postStore.posts" 
              :key="post.id" 
@@ -211,7 +245,12 @@
              :data-aos-delay="idx % 3 * 100"
            >
              <div class="w-full aspect-[4/3] rounded-[20px] overflow-hidden mb-6 relative">
-                <img :src="post.media || `https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=600`" :alt="getTitle(post)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img 
+                  :src="post.media || defImg(idx + 10)" 
+                  @error="(e) => handleImgError(e, idx + 10)"
+                  :alt="getTitle(post)" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                />
                 <div class="absolute top-4 left-4 bg-brand-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wider">{{ $t('EVENTS_PAGE.TAG_GALLERY') }}</div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
              </div>
@@ -227,6 +266,10 @@
                 </div>
              </div>
            </div>
+        </div>
+        <div v-else class="py-20 bg-gray-50 rounded-[40px] text-center" data-aos="fade-up">
+           <i class="pi pi-images text-5xl text-gray-300 mb-4"></i>
+           <p class="text-gray-500 italic">{{ $t('COMMON.EMPTY_DATA') }}</p>
         </div>
         
         <!-- Pagination for Gallery -->
@@ -359,6 +402,11 @@ const placeholders = [
 ]
 const defImg = (i: number) => placeholders[i % placeholders.length]
 
+const handleImgError = (e: Event, i: number) => {
+  const target = e.target as HTMLImageElement
+  target.src = defImg(i)
+}
+
 const getTitle = (item: IPost | IHighlightVideo) => {
   if (!item) return ''
   const key = `title_${locale.value}` as 'title_vi' | 'title_en' | 'title_zh'
@@ -370,7 +418,7 @@ const goToPost = (slug: string) => {
 }
 
 const changePage = async (p: number) => {
-  await postStore.fetchPosts({ page: p, limit: 9 })
+  await postStore.fetchPosts({ page: p, limit: 9, displayLocation: 'EVENT_IMAGE' })
   const gallerySection = document.getElementById('gallery-section')
   if (gallerySection) {
     gallerySection.scrollIntoView({ behavior: 'smooth' })
@@ -388,7 +436,7 @@ const changeVideoPage = async (p: number) => {
 onMounted(async () => {
   await Promise.all([
     videoStore.fetchVideos({ limit: 11, page: 1 }),
-    postStore.fetchPosts({ limit: 9, page: 1 }),
+    postStore.fetchPosts({ limit: 9, page: 1, displayLocation: 'EVENT_IMAGE' }),
     partnerStore.fetchActivePartners()
   ])
   AOS.init()

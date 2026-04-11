@@ -46,13 +46,12 @@
       "VIEW_MORE": "Xem thêm"
     },
     "FEATURED_SWIPER": {
-      "TITLE": "NỔI BẬT",
-      "DESC": "Xem những tin tức và nghiên cứu mới nhất từ hai phòng thí nghiệm của chúng tôi",
+      "TITLE": "GIỚI THIỆU CHUNG",
+      "DESC": "Cùng tìm hiểu tại đây",
       "ACTION": "XEM BÀI VIẾT"
     },
     "QUICK_CONTACT": {
       "TITLE": "LIÊN HỆ VỚI CHÚNG TÔI",
-      "DESC": "Đối với bất kỳ thắc mắc nào hoặc để tìm hiểu thêm về Mi3 và các chương trình chuyển đổi của nó, vui lòng liên hệ với chúng tôi.",
       "HINT": "Liên hệ để được tư vấn và hỗ trợ nhanh chóng nhất!",
       "PLACEHOLDER_NAME": "Nhập họ và tên của bạn",
       "PLACEHOLDER_EMAIL": "Nhập địa chỉ e-mail của bạn",
@@ -68,20 +67,20 @@
       "TITLE": "Về Chúng Tôi",
       "SLOGAN": "5P EVENT - KIẾN TẠO CẢM XÚC, THU TRỌN THƯƠNG HIỆU",
       "DESC": "5P EVENT mang đến những TUYỆT TÁC SỰ KIỆN NGHỆ THUẬT VÀ DỊCH VỤ SỰ KIỆN CHUYÊN NGHIỆP, TOÀN DIỆN, THÔNG MINH, TINH TẾ. Từ đó, tạo ra giá trị khác biệt mang đậm tính cách thương hiệu doanh nghiệp, tạo vị thế trước hàng triệu đối thủ & đối tượng khách hàng tiềm năng.",
-      "SECTORS": "Cung cấp các giải pháp tối ưu cho mọi loại hình sự kiện, từ quy mô nhỏ đến các đại nhạc hội tầm cỡ quốc tế.",
-      "EVENT_TITLE": "Tổ chức sự kiện trọn gói",
-      "EVENT_DESC": "Sáng tạo ý tưởng, lập kế hoạch chi tiết, quản lý vận hành từ A-Z cho mọi loại hình sự kiện.",
-      "VIEW_DETAILS": "XEM CHI TIẾT",
-      "RENTAL_TITLE": "Cho thuê thiết bị sự kiện",
-      "RENTAL_DESC": "Hệ thống âm thanh, ánh sáng, màn hình LED, sân khấu hiện đại bậc nhất.",
-      "SOUND_LIGHT_TITLE": "Âm thanh & Ánh sáng",
-      "SOUND_LIGHT_DESC": "Kỹ thuật chuyên nghiệp, hiệu ứng đỉnh cao cho sân khấu bùng nổ."
+      "SECTORS": "5P EVENT hoạt động chính trên 3 lĩnh vực",
+      "EVENT_TITLE": "5PEVENT",
+      "EVENT_DESC": "Tổ chức sự kiện trọn gói",
+      "VIEW_DETAILS": "TÌM HIỂU THÊM",
+      "RENTAL_TITLE": "CHO THUÊ THIẾT BỊ SỰ KIỆN 5P",
+      "RENTAL_DESC": "Cung cấp bàn ghế, backdrop, nhà bạt, atas sự kiện ...",
+      "SOUND_LIGHT_TITLE": "SEVEN LIGHTING & SOUND",
+      "SOUND_LIGHT_DESC": "Cho thuê âm thanh ánh sáng, màn hình LED chuyên nghiệp"
     }
   },
   "ABOUT": {
     "HERO": {
       "TITLE": "KIẾN TẠO<br />CẢM XÚC<br /><span class=\"text-brand-600\">TẠI 5P</span>",
-      "DESC": "5P Event mang đến sự kiện SÁNG TẠO trong ý tưởng - CHỈN CHU trong khâu tổ chức - TỐI GIẢM về chi phí - UY TÍN trong cam kết."
+      "DESC": "5P Event mang đến sự kiện SÁNG TẠO trong ý tưởng - CHỈNH CHU trong khâu tổ chức - TỐI GIẢM về chi phí - UY TÍN trong cam kết."
     },
     "TARGET": "Mục tiêu của chúng tôi",
     "PATH": "Con đường của chúng tôi",
@@ -163,8 +162,7 @@
     "SUBSCRIBE": "Đăng ký nhận tin",
     "EMAIL_PLACEHOLDER": "Email của bạn...",
     "CONNECT_WITH_US": "Kết nối với chúng tôi",
-    "DESC": "CÔNG TY TỔ CHỨC SỰ KIỆN 5P EVENT - Đơn vị hàng đầu trong lĩnh vực tổ chức sự kiện chuyên nghiệp, mang đến những trải nghiệm đẳng cấp và khác biệt.",
-    "SLOGAN": "5P EVENT mang đến sự kiện SÁNG TẠO trong ý tưởng - CHỈN CHU trong khâu tổ chức - TỐI GIẢM về chi phí",
+    "SLOGAN": "5P EVENT mang đến sự kiện SÁNG TẠO trong ý tưởng - CHỈNH CHU trong khâu tổ chức - TỐI GIẢM về chi phí",
     "EXPLORE_SCIENCE": "Khám phá dịch vụ",
     "INTERACTIVE_EXP": "Trải nghiệm tương tác",
     "INTERACTIVE_DEC": "Giải pháp sự kiện",
@@ -221,11 +219,12 @@
   "CONTACT": {
     "BREADCRUMB": "LIÊN HỆ",
     "HERO_TITLE": "LIÊN HỆ<br />VỚI CHÚNG TÔI",
-    "PRESS_ENQUIRIES": "Yêu cầu báo chí",
-    "GENERAL_ENQUIRIES": "Yêu cầu chung",
-    "ADDRESS": "Địa chỉ",
-    "JOB_HINT": "Đối với các yêu cầu về công việc, vui lòng xem",
-    "JOIN_US": "GIA NHẬP CHÚNG TÔI",
+    "PRESS_ENQUIRIES": "HOTLINE/ZALO TƯ VẤN",
+    "GENERAL_ENQUIRIES": "EMAIL LIÊN HỆ",
+    "ADDRESS": "ĐỊA CHỈ VĂN PHÒNG",
+    "FANPAGE": "FANPAGE CHÍNH THỨC",
+    "JOB_HINT": "Liên hệ để nhận tư vấn",
+    "JOIN_US": "TƯ VẤN",
     "FOLLOW_SOCIAL": "THEO DÕI CHÚNG TÔI<br />TRÊN MẠNG XÃ HỘI",
     "FIND_US": "Tìm chúng tôi",
     "TITLE_CONNECT": "HÃY KẾT NỐI",
@@ -273,7 +272,7 @@
   },
   "EVENTS_PAGE": {
     "TITLE": "VIDEO SỰ KIỆN",
-    "SUBTITLE": "Điểm lại những video, podcast và tin tức bao quát những nghiên cứu mới nhất từ các phòng thí nghiệm của M21.",
+    "SUBTITLE": "Xem ngay những khoảnh khắc “đắt giá” nhất của mỗi sự kiện.",
     "TAG_ARTICLE": "Bài viết",
     "TAG_INTERVIEW": "Phỏng vấn",
     "DEFAULT_VIDEO_TITLE": "Video sự kiện",
@@ -290,7 +289,6 @@
     "SECTION_SUBTITLE": "TIN TỨC MỚI NHẤT",
     "SECTION_TITLE": "NỔI BẬT TRONG TUẦN",
     "TAG_HOT": "Tin Nóng",
-    "HOT_NEWS_DESC": "Cập nhật những thông tin nóng hổi nhất về thị trường sự kiện và các hoạt động nổi bật của 5P Event.",
     "NEWSLETTER_TITLE": "ĐĂNG KÝ NHẬN BẢN TIN",
     "NEWSLETTER_DESC": "Không bỏ lỡ những sự kiện và tin tức độc quyền từ chúng tôi.",
     "NEWSLETTER_PLACEHOLDER": "Email của bạn",
@@ -315,7 +313,13 @@
     "PRICE_DESC": "Giá cao → thấp",
     "NEWEST": "Mới nhất",
     "FILTER_TITLE": "BỘ LỌC",
-    "PRICE_RANGE": "KHOẢNG GIÁ"
+    "PRICE_RANGE": "KHOẢNG GIÁ",
+    "FEATURES": {
+      "MODERN_EQUIPMENT": "Thiết bị hiện đại",
+      "CLEAR_CONTRACT": "Hợp đồng rõ ràng",
+      "PROFESSIONAL_TECH": "Kỹ thuật chuyên nghiệp",
+      "COMPETITIVE_COST": "Chi phí cạnh tranh"
+    }
   },
   "PRODUCT_CATEGORIES": {
     "SOUND_LIGHT_LIGHTING": "Ánh sáng sự kiện",
@@ -345,8 +349,8 @@
     "PROCESS_TITLE": "VÌ SAO CHỌN DỊCH VỤ CỦA CHÚNG TÔI?",
     "PROCESS_DESC": "Chúng tôi cam kết mang đến dịch vụ cho thuê thiết bị sự kiện chuyên nghiệp, minh bạch và tối ưu nhất cho bạn.",
     "STEP": "Bước {number}",
-    "HERO_TITLE": "KHU VỰC THIẾT BỊ",
-    "HERO_DESC": "Cung cấp giải pháp thiết bị toàn diện cho mọi quy mô sự kiện với chất lượng hàng đầu."
+    "HERO_TITLE": "THIẾT BỊ SỰ KIỆN",
+    "HERO_DESC": "Cung cấp đầy đủ các hạng mục sự kiện, tham khảo tại đây."
   },
   "SOUND_LIGHT": {
     "BENEFITS": {
@@ -373,7 +377,7 @@
     "PROCESS_TITLE": "GIẢI PHÁP KỸ THUẬT TOÀN DIỆN",
     "PROCESS_DESC": "Chúng tôi mang đến sự hoàn hảo cho mọi không gian sự kiện bằng công nghệ hiện đại và đội ngũ kỹ thuật tận tâm.",
     "STEP": "Bước {number}",
-    "HERO_DESC": "Hệ thống âm thanh, ánh sáng, màn hình LED chuyên nghiệp, đẳng cấp quốc tế."
+    "HERO_DESC": "Cung cấp hệ thống âm thanh, ánh sáng, sân khấu LED quy mô từ 50-5000 khách."
   },
   "PRODUCT_ADMIN": {
     "TITLE": "Quản Lý Sản Phẩm",

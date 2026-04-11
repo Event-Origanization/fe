@@ -1,7 +1,7 @@
 export const formatDate = (date: string, locale: string = 'vi', includeTime: boolean = false) => {
   if (!date) return ''
   const loc = locale === 'vi' ? 'vi-VN' : locale === 'zh' ? 'zh-CN' : 'en-US'
-  
+
   if (includeTime) {
     return new Date(date).toLocaleString(loc, {
       year: 'numeric',
@@ -11,7 +11,7 @@ export const formatDate = (date: string, locale: string = 'vi', includeTime: boo
       minute: '2-digit',
     })
   }
-  
+
   return new Date(date).toLocaleDateString(loc)
 }
 

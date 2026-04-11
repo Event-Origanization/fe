@@ -239,9 +239,6 @@
              <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover rounded-full grayscale mix-blend-multiply" alt="Brain book" />
           </div>
           <h2 class="text-4xl font-black text-gray-900 uppercase mb-4">{{ $t('HOME.QUICK_CONTACT.TITLE') }}</h2>
-          <p class="text-gray-600 mb-6 font-medium">
-            {{ $t('HOME.QUICK_CONTACT.DESC') }}
-          </p>
           <p class="text-brand-600 font-bold text-lg">
             {{ $t('HOME.QUICK_CONTACT.HINT') }}
           </p>

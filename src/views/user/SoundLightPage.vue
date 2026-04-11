@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-white min-h-screen text-gray-900 font-outfit pb-20">
+  <div class="w-full bg-white min-h-screen text-gray-900 font-outfit">
     <!-- PAGE BANNER -->
     <section class="relative pt-32 pb-20 flex flex-col items-center justify-center text-center border-b border-gray-100 overflow-hidden bg-[#0a0a0f]">
       <!-- Background Effects -->
@@ -10,7 +10,7 @@
       
       <div class="relative z-10 w-full max-w-7xl mx-auto px-4">
         <h1 class="text-4xl md:text-6xl font-black uppercase text-white mb-4 tracking-tighter" data-aos="fade-down">
-          7SEVEN
+          {{ $t('RENTAL.HERO_TITLE') }}
         </h1>
         <div class="flex items-center justify-center gap-2 text-sm md:text-base font-bold text-gray-400 uppercase tracking-widest" data-aos="fade-up" data-aos-delay="100">
           <router-link to="/" class="hover:text-red-600 transition-colors">{{ $t('COMMON.BREADCRUMB_HOME') }}</router-link>
@@ -27,9 +27,9 @@
       <section class="mb-24">
         <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between border-b border-gray-200 pb-4" data-aos="fade-right">
           <div>
-            <h4 class="text-red-600 font-bold uppercase tracking-widest text-sm mb-2">7SEVEN PARTNER</h4>
+            <h4 class="text-brand-600 font-bold uppercase tracking-widest text-sm mb-2">5P EVENT</h4>
             <h2 class="text-3xl font-black text-gray-900 uppercase tracking-widest">
-              {{ configStore.getConfigValue('MENU', 'MENU_SOUND_LIGHT', 'ÂM THANH ÁNH SÁNG') }}
+              SEVEN LIGHTING & SOUND
             </h2>
           </div>
           <p class="text-gray-500 font-medium mt-4 md:mt-0 max-w-sm text-sm">{{ $t('SOUND_LIGHT.HERO_DESC') }}</p>
@@ -67,7 +67,7 @@
               </div>
 
               <!-- Sort Order -->
-              <div>
+              <!-- <div>
                 <h4 class="font-black text-xs text-gray-400 uppercase tracking-widest mb-4 px-1">{{ $t('PRODUCT.SORT_BY') }}</h4>
                 <div class="relative">
                   <select 
@@ -81,7 +81,7 @@
                   </select>
                   <i class="pi pi-chevron-down absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
                 </div>
-              </div>
+              </div> -->
             </div>
           </aside>
 
@@ -135,41 +135,12 @@
         </div>
       </section>
 
-      <!-- QUY TRÌNH DỊCH VỤ -->
-
-      <!-- QUY TRÌNH DỊCH VỤ -->
-      <section class="mt-32 pt-20 border-t border-gray-100" data-aos="fade-up">
-        <div class="text-center mb-16">
-          <h4 class="text-red-600 font-bold uppercase tracking-widest text-sm mb-2">{{ $t('SOUND_LIGHT.PROCESS_SUB') }}</h4>
-          <h2 class="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-tighter mb-4">
-            {{ $t('SOUND_LIGHT.PROCESS_TITLE') }}
-          </h2>
-          <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base font-medium">{{ $t('SOUND_LIGHT.PROCESS_DESC') }}</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-          <!-- Desktop connecting line -->
-          <div class="hidden lg:block absolute top-[40px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-gray-200 to-transparent z-0"></div>
-          
-          <div v-for="(step, i) in translatedSteps" :key="i" class="relative z-10 flex flex-col items-center text-center group" data-aos="zoom-in" :data-aos-delay="i * 100">
-            <div class="w-20 h-20 rounded-full bg-white border-2 border-gray-100 flex items-center justify-center text-2xl mb-6 shadow-md group-hover:scale-110 group-hover:border-red-600 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.2)] transition-all duration-400">
-              <i :class="['pi text-red-600 text-xl transition-transform duration-300 group-hover:scale-110', step.icon]"></i>
-            </div>
-            <div class="bg-[#f8fafc] border border-gray-100 p-6 rounded-[24px] w-full flex-1 hover:border-red-200 hover:shadow-[0_12px_40px_rgba(220,38,38,0.08)] hover:-translate-y-2 transition-all duration-500 group-hover:bg-white">
-              <div class="text-red-600 font-black mb-3 text-sm tracking-widest uppercase opacity-70">{{ $t('SOUND_LIGHT.STEP', { number: i + 1 }) }}</div>
-              <h3 class="font-black text-gray-900 mb-3 uppercase tracking-wide group-hover:text-red-600 transition-colors duration-300">{{ step.title }}</h3>
-              <p class="text-sm text-gray-500 font-medium leading-relaxed">{{ step.desc }}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AOS from 'aos'
@@ -186,7 +157,7 @@ defineOptions({
 
 const productStore = useProductStore()
 const configStore = useConfigStore()
-const { locale, t } = useI18n()
+const { locale } = useI18n()
 const router = useRouter()
 
 const categories = CATEGORIES_BY_TYPE[PAGE_KEYS.SOUND_LIGHT]
@@ -210,6 +181,7 @@ const getFilterParams = (page: number = 1) => {
     page,
     category:
       selectedCategories.value.length > 0
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ? (selectedCategories.value as any)
         : undefined,
     sortBy: sortOption.value === 'newest' ? 'createdAt' : 'price',
@@ -235,11 +207,4 @@ onMounted(async () => {
   AOS.init()
   AOS.refresh()
 })
-
-const translatedSteps = computed(() => [
-  { icon: 'pi-search', title: t('SOUND_LIGHT.STEPS.STEP1_TITLE', 'KHẢO SÁT & TƯ VẤN'), desc: t('SOUND_LIGHT.STEPS.STEP1_DESC', 'Khảo sát thực tế không gian và tư vấn giải pháp kỹ thuật tối ưu nhất') },
-  { icon: 'pi-file-edit', title: t('SOUND_LIGHT.STEPS.STEP2_TITLE', 'PHƯƠNG ÁN & BÁO GIÁ'), desc: t('SOUND_LIGHT.STEPS.STEP2_DESC', 'Lên sơ đồ bố trí thiết bị và gửi báo giá chi tiết từng hạng mục') },
-  { icon: 'pi-cog', title: t('SOUND_LIGHT.STEPS.STEP3_TITLE', 'THI CÔNG & VẬN HÀNH'), desc: t('SOUND_LIGHT.STEPS.STEP3_DESC', 'Lắp đặt chuyên nghiệp và đội ngũ kỹ thuật trực vận hành suốt sự kiện') },
-  { icon: 'pi-check-circle', title: t('SOUND_LIGHT.STEPS.STEP4_TITLE', 'HOÀN TẤT & NGHIỆM THU'), desc: t('SOUND_LIGHT.STEPS.STEP4_DESC', 'Tháo dỡ thiết bị gọn gàng và hoàn thành các thủ tục nghiệm thu') }
-])
 </script>

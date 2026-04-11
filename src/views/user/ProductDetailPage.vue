@@ -96,11 +96,11 @@
             </div>
 
             <!-- Quote / short description -->
-            <div class="border-l-4 border-brand-600 pl-6">
+            <!-- <div class="border-l-4 border-brand-600 pl-6">
               <p class="text-gray-500 leading-relaxed font-medium italic text-lg">
                 {{ $t('HOME.SLOGAN.DESC') }}
               </p>
-            </div>
+            </div> -->
 
             <!-- Features (decorative) -->
             <div class="grid grid-cols-2 gap-4">
@@ -114,7 +114,7 @@
                 >
                   <i :class="['pi text-brand-600 text-sm', feat.icon]"></i>
                 </div>
-                <span class="text-sm font-bold text-gray-700">{{ feat.text }}</span>
+                <span class="text-sm font-bold text-gray-700">{{ $t(feat.text) }}</span>
               </div>
             </div>
 
@@ -229,10 +229,10 @@ const updateProgress = () => {
 }
 
 const features = [
-  { icon: 'pi-check-circle', text: 'Chất lượng đảm bảo' },
-  { icon: 'pi-shield', text: 'Cam kết bảo hành' },
-  { icon: 'pi-truck', text: 'Giao hàng tận nơi' },
-  { icon: 'pi-star', text: 'Dịch vụ chuyên nghiệp' },
+  { icon: 'pi-check-circle', text: 'PRODUCT.FEATURES.MODERN_EQUIPMENT' },
+  { icon: 'pi-shield', text: 'PRODUCT.FEATURES.CLEAR_CONTRACT' },
+  { icon: 'pi-truck', text: 'PRODUCT.FEATURES.PROFESSIONAL_TECH' },
+  { icon: 'pi-star', text: 'PRODUCT.FEATURES.COMPETITIVE_COST' },
 ]
 
 const getName = (product: IProduct) => {

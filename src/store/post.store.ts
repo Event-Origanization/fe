@@ -3,8 +3,9 @@ import { postService } from '@/services/post.service'
 import type { 
     IPost, 
     PostCreationAttributes, 
-    PostQuery 
+    PostQuery
 } from '@/types/post'
+import { POST_DISPLAY_LOCATION } from '@/types/post'
 import { ResponseError } from '@/utils/error'
 
 interface PostState {
@@ -13,11 +14,17 @@ interface PostState {
   totalPages: number
   currentPage: number
   loading: boolean
+  loadingHighlights: boolean
+  loadingLatestPosts: boolean
   loadingRecentNews: boolean
   error: string | null
+  errorHighlights: string | null
+  errorLatestPosts: string | null
   errorRecentNews: string | null
   currentPost: IPost | null
   recentNews: IPost[]
+  weeklyHighlights: IPost[]
+  latestPosts: IPost[]
 }
 
 export const usePostStore = defineStore('post', {
@@ -27,11 +34,17 @@ export const usePostStore = defineStore('post', {
     totalPages: 0,
     currentPage: 1,
     loading: false,
+    loadingHighlights: false,
+    loadingLatestPosts: false,
     loadingRecentNews: false,
     error: null,
+    errorHighlights: null,
+    errorLatestPosts: null,
     errorRecentNews: null,
     currentPost: null,
     recentNews: [],
+    weeklyHighlights: [],
+    latestPosts: [],
   }),
 
   actions: {
@@ -54,11 +67,11 @@ export const usePostStore = defineStore('post', {
       }
     },
 
-    async fetchRecentNews(limit: number = 50) {
+    async fetchRecentNews(limit: number = 50, displayLocation?: string) {
       this.loadingRecentNews = true
       this.errorRecentNews = null
       try {
-        const result = await postService.getAll({ limit })
+        const result = await postService.getAll({ limit, displayLocation })
 
         if (result instanceof ResponseError) throw result
 
@@ -67,6 +80,34 @@ export const usePostStore = defineStore('post', {
         this.errorRecentNews = err instanceof Error ? err.message : 'An unexpected error occurred'
       } finally {
         this.loadingRecentNews = false
+      }
+    },
+
+    async fetchWeeklyHighlights() {
+      this.loadingHighlights = true
+      this.errorHighlights = null
+      try {
+        const result = await postService.getAll({ limit: 4, displayLocation: POST_DISPLAY_LOCATION.WEEKLY_HIGHLIGHT })
+        if (result instanceof ResponseError) throw result
+        this.weeklyHighlights = result.data.posts
+      } catch (err) {
+        this.errorHighlights = err instanceof Error ? err.message : 'An unexpected error occurred'
+      } finally {
+        this.loadingHighlights = false
+      }
+    },
+
+    async fetchLatestPosts(limit: number = 10) {
+      this.loadingLatestPosts = true
+      this.errorLatestPosts = null
+      try {
+        const result = await postService.getAll({ limit, sortBy: 'createdAt', sortOrder: 'DESC' })
+        if (result instanceof ResponseError) throw result
+        this.latestPosts = result.data.posts
+      } catch (err) {
+        this.errorLatestPosts = err instanceof Error ? err.message : 'An unexpected error occurred'
+      } finally {
+        this.loadingLatestPosts = false
       }
     },
 

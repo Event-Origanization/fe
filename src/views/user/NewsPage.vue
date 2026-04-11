@@ -22,7 +22,7 @@
     <main class="container mx-auto px-4 py-20">
       
       <!-- LATEST NEWS (TIN NỔI BẬT) -->
-      <section class="mb-24" v-if="postStore.recentNews.length > 0">
+      <section class="mb-24">
         <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between border-b border-gray-200 pb-4" data-aos="fade-right">
           <div>
             <h4 class="text-brand-600 font-bold uppercase tracking-widest text-sm mb-2">{{ $t('NEWS_PAGE.SECTION_SUBTITLE') }}</h4>
@@ -32,27 +32,29 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div v-if="postStore.loadingHighlights" class="flex justify-center items-center py-20">
+          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-600"></div>
+        </div>
+        <div v-else-if="postStore.weeklyHighlights.length > 0" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <!-- Main Big Post -->
-          <div class="lg:col-span-7 group cursor-pointer" @click="goToPost(postStore.recentNews[0].slug)" data-aos="fade-up">
+          <div class="lg:col-span-7 group cursor-pointer" @click="goToPost(postStore.weeklyHighlights[0].slug)" data-aos="fade-up">
             <div class="w-full aspect-[4/3] rounded-[30px] overflow-hidden relative shadow-lg hover:shadow-[0_24px_60px_rgba(220,38,38,0.15)] mb-6 transition-shadow duration-500">
-              <img :src="postStore.recentNews[0].media || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1000'" :alt="getTitle(postStore.recentNews[0])" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <img :src="postStore.weeklyHighlights[0].media || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1000'" :alt="getTitle(postStore.weeklyHighlights[0])" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               <div class="absolute top-6 left-6 bg-brand-600 text-white text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest shadow-md">{{ $t('NEWS_PAGE.TAG_HOT') }}</div>
               <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
             <div class="flex items-center gap-3 text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">
               <i class="pi pi-calendar text-brand-600"></i>
-              {{ formatDate(postStore.recentNews[0].createdAt, locale) }}
+              {{ formatDate(postStore.weeklyHighlights[0].createdAt, locale) }}
             </div>
             <h3 class="text-3xl font-black text-gray-900 group-hover:text-brand-600 transition-colors duration-300 mb-4 leading-tight line-clamp-2 uppercase">
-              {{ getTitle(postStore.recentNews[0]) }}
+              {{ getTitle(postStore.weeklyHighlights[0]) }}
             </h3>
-            <p class="text-gray-600 text-base line-clamp-3">{{ $t('NEWS_PAGE.HOT_NEWS_DESC') }}</p>
           </div>
 
           <!-- 2 Smaller Featured Posts -->
           <div class="lg:col-span-5 flex flex-col gap-8">
-            <div v-for="(post, i) in postStore.recentNews.slice(1, 4)" :key="post.id" @click="goToPost(post.slug)" class="group cursor-pointer flex gap-4 md:gap-6 items-center bg-white border border-gray-100 p-4 rounded-[24px] shadow-sm hover:shadow-[0_12px_40px_rgba(220,38,38,0.1)] hover:border-brand-200 hover:-translate-y-1 transition-all duration-400" data-aos="fade-left" :data-aos-delay="i * 100 + 100">
+            <div v-for="(post, i) in postStore.weeklyHighlights.slice(1, 4)" :key="post.id" @click="goToPost(post.slug)" class="group cursor-pointer flex gap-4 md:gap-6 items-center bg-white border border-gray-100 p-4 rounded-[24px] shadow-sm hover:shadow-[0_12px_40px_rgba(220,38,38,0.1)] hover:border-brand-200 hover:-translate-y-1 transition-all duration-400" data-aos="fade-left" :data-aos-delay="i * 100 + 100">
                <div class="w-1/3 aspect-square rounded-[16px] overflow-hidden flex-shrink-0 relative">
                  <img :src="post.media || 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=400'" :alt="getTitle(post)" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                  <div class="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/15 transition-all duration-400"></div>
@@ -67,18 +69,6 @@
                  </h4>
                </div>
             </div>
-            
-            <!-- <div class="mt-auto bg-brand-50 rounded-[24px] p-6 border border-brand-100 text-center flex flex-col items-center justify-center">
-               <i class="pi pi-envelope text-4xl text-brand-500 mb-4 opacity-70"></i>
-               <h3 class="font-black text-lg text-gray-900 uppercase mb-2">{{ $t('NEWS_PAGE.NEWSLETTER_TITLE') }}</h3>
-               <p class="text-xs text-gray-600 mb-4">{{ $t('NEWS_PAGE.NEWSLETTER_DESC') }}</p>
-               <div class="flex w-full bg-white rounded-full p-1 border border-brand-200 shadow-sm">
-                 <input type="email" :placeholder="$t('NEWS_PAGE.NEWSLETTER_PLACEHOLDER')" class="flex-1 bg-transparent border-none outline-none text-sm px-4 text-gray-900" />
-                 <button class="bg-brand-600 hover:bg-brand-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
-                   <i class="pi pi-arrow-right text-sm"></i>
-                 </button>
-               </div>
-            </div> -->
           </div>
         </div>
       </section>
@@ -105,16 +95,23 @@
           <!-- LEFT SIDE: Sidebar (Mục lục) -->
           <div class="w-full lg:w-1/3 xl:w-1/4 lg:sticky lg:top-28 flex-shrink-0" data-aos="fade-right">
              <ExpandableSidebar :title="$t('NEWS_PAGE.TOC_TITLE')">
-                <li v-for="post in postStore.recentNews" :key="post.id">
-                  <a 
-                    href="javascript:void(0)" 
-                    class="text-[#4581e6] font-bold text-[14px] leading-relaxed hover:text-[#18449c] transition-colors block py-1 uppercase"
-                    @click="goToPost(post.slug)"
-                  >
-                    {{ getTitle(post) }}
-                  </a>
-                </li>
-                <li v-if="postStore.recentNews.length === 0" class="text-gray-400 text-sm italic py-2">
+                <template v-if="postStore.loadingLatestPosts">
+                  <div class="flex justify-center py-4">
+                    <i class="pi pi-spin pi-spinner text-brand-600"></i>
+                  </div>
+                </template>
+                <template v-else-if="postStore.latestPosts.length > 0">
+                  <li v-for="post in postStore.latestPosts" :key="post.id">
+                    <a 
+                      href="javascript:void(0)" 
+                      class="text-[#4581e6] font-bold text-[14px] leading-relaxed hover:text-[#18449c] transition-colors block py-1 uppercase"
+                      @click="goToPost(post.slug)"
+                    >
+                      {{ getTitle(post) }}
+                    </a>
+                  </li>
+                </template>
+                <li v-else class="text-gray-400 text-sm italic py-2">
                   {{ $t('NEWS_PAGE.UPDATING') }}
                 </li>
              </ExpandableSidebar>
@@ -220,7 +217,8 @@ const changePage = async (page: number) => {
   await postStore.fetchPosts({ 
     page, 
     limit: 9,
-    search: currentSearch.value 
+    search: currentSearch.value,
+    displayLocation: currentSearch.value ? undefined : 'OTHER_POST'
   })
 }
 
@@ -230,11 +228,13 @@ const clearSearch = () => {
 
 const fetchAllData = async () => {
   await Promise.all([
-    postStore.fetchRecentNews(10),
+    postStore.fetchWeeklyHighlights(),
+    postStore.fetchLatestPosts(10),
     postStore.fetchPosts({ 
       limit: 9, 
       page: 1,
-      search: currentSearch.value
+      search: currentSearch.value,
+      displayLocation: currentSearch.value ? undefined : 'OTHER_POST'
     })
   ])
 }

@@ -363,16 +363,13 @@ const handleSubmit = async () => {
   try {
     const dataToSend = { ...form }
     
-    // Assign array of existing images + newly selected files to images array in form data builder
-    // The backend uses images field
+    // Lọc ra các ảnh cũ (URL) muốn giữ lại
     const imagesToKeep = dataToSend.images?.filter(url => !url.startsWith('blob:')) || []
     
-    // In FormData builder, objectToFormData will receive `images` as array.
-    // If we put Files in there directly, `objectToFormData` maps them directly.
-    // But since `backend` now expects `images` for files and strings...
-    const finalImages: (string | File)[] = [...imagesToKeep, ...selectedFiles.value]
-    
-    ;(dataToSend as Record<string, unknown>).images = finalImages.length ? finalImages : []
+    // Gửi các file ảnh mới thêm vào trong trường 'images'
+    ;(dataToSend as Record<string, unknown>).images = selectedFiles.value.length ? selectedFiles.value : []
+    // Gửi danh sách ảnh cũ muốn giữ lại qua một trường riêng dưới dạng JSON string
+    ;(dataToSend as Record<string, unknown>).existingImages = JSON.stringify(imagesToKeep)
 
     if (isEdit.value && productId.value) {
       const payload: Record<string, unknown> = { ...dataToSend }
