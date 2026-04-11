@@ -20,8 +20,8 @@
             </div>
 
             <!-- Description -->
-            <p class="text-gray-900 text-base font-medium leading-relaxed max-w-[360px] mb-8">
-              {{ $t('FOOTER.DESC') }}
+            <p class="text-red-600 text-base font-bold leading-relaxed max-w-[400px] mb-8">
+              {{ $t('FOOTER.SLOGAN') }}
             </p>
 
             <!-- Socials -->
@@ -39,11 +39,6 @@
                 <i class="pi pi-link font-bold text-base"></i>
               </a>
             </div>
-            
-            <!-- Slogan in Red -->
-            <p class="text-red-600 text-lg font-bold leading-snug max-w-[450px]">
-              {{ $t('FOOTER.SLOGAN') }}
-            </p>
           </div>
 
           <!-- Right Section (Columns & Logos) -->

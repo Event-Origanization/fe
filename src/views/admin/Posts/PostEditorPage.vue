@@ -211,6 +211,55 @@
           </div>
         </div>
 
+        <!-- Display Locations -->
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 space-y-4">
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 border-b dark:border-gray-800 pb-3 flex items-center gap-2">
+            <i class="pi pi-desktop text-orange-500"></i>
+            {{ 'Vị trí hiển thị' }}
+          </h3>
+          
+          <div class="space-y-3">
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input 
+                type="checkbox"
+                :value="POST_DISPLAY_LOCATION.EVENT_IMAGE"
+                v-model="form.display_locations"
+                class="w-5 h-5 text-red-500 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-2 dark:bg-gray-800 dark:border-gray-700" 
+              />
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-red-600 transition-colors">
+                Hình ảnh sự kiện
+              </span>
+            </label>
+            
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input 
+                type="checkbox"
+                :value="POST_DISPLAY_LOCATION.WEEKLY_HIGHLIGHT"
+                v-model="form.display_locations"
+                class="w-5 h-5 text-red-500 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-2 dark:bg-gray-800 dark:border-gray-700" 
+              />
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-red-600 transition-colors">
+                  Nổi bật trong tuần
+                </span>
+                <span class="text-[10px] text-red-500 italic">Tối đa 4 bài viết</span>
+              </div>
+            </label>
+
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input 
+                type="checkbox"
+                value="OTHER_POST"
+                v-model="form.display_locations"
+                class="w-5 h-5 text-red-500 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-2 dark:bg-gray-800 dark:border-gray-700" 
+              />
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-red-600 transition-colors">
+                Bài viết khác
+              </span>
+            </label>
+          </div>
+        </div>
+
         <!-- Thumbnail Upload -->
         <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 space-y-4">
           <h3 class="font-bold text-gray-800 dark:text-gray-200 border-b dark:border-gray-800 pb-3 flex items-center gap-2">
@@ -269,6 +318,35 @@
         </div>
       </div>
     </div>
+
+    <!-- Error Dialog -->
+    <base-modal
+      :show="showErrorModal"
+      @close="showErrorModal = false"
+      title="Cảnh báo: Lỗi cấu hình Nổi bật"
+      maxWidth="md"
+    >
+      <div class="space-y-4">
+        <div class="flex items-start gap-4 p-4 bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500 rounded-lg">
+          <i class="pi pi-exclamation-triangle text-orange-500 text-2xl mt-1"></i>
+          <div>
+            <h4 class="font-bold text-orange-800 dark:text-orange-400 mb-1">Cảnh báo hệ thống</h4>
+            <p class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+              {{ errorMessage }}
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <template #footer>
+        <button
+          @click="showErrorModal = false"
+          class="px-6 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg transition-colors font-medium border border-transparent focus:outline-none focus:ring-2 focus:ring-gray-400"
+        >
+          Xác nhận
+        </button>
+      </template>
+    </base-modal>
   </div>
 </template>
 
@@ -277,11 +355,13 @@ import { ref, reactive, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Editor from '@/components/common/Editor.vue'
+import BaseModal from '@/components/common/BaseModal.vue'
 import { slugify } from '@/utils/string'
 import { checkFileSize } from '@/utils/file'
 import { hasFieldChanged } from '@/utils/diff'
 import { usePostStore } from '@/store/post.store'
 import type { IPost, PostCreationAttributes, SeoScoreResult } from '@/types/post'
+import { POST_DISPLAY_LOCATION } from '@/types/post'
 import { useToast } from '@/composables/useToast'
 
 const { t } = useI18n()
@@ -295,6 +375,8 @@ const aiLoading = ref(false)
 const seoResult = ref<SeoScoreResult | null>(null)
 const fileInput = ref<HTMLInputElement | null>(null)
 const selectedFile = ref<File | null>(null)
+const showErrorModal = ref(false)
+const errorMessage = ref('')
 
 const initialForm: PostCreationAttributes = {
   title_vi: '',
@@ -306,6 +388,7 @@ const initialForm: PostCreationAttributes = {
   seoScore: null,
   seoAnalysis: null,
   seoSuggestions: null,
+  display_locations: ['OTHER_POST'],
 }
 
 const form = reactive<PostCreationAttributes>({ ...initialForm })
@@ -319,6 +402,7 @@ onMounted(async () => {
       if (result) {
         originalPost.value = result
         Object.assign(form, result)
+        if (!form.display_locations) form.display_locations = ['OTHER_POST']
       }
     } catch (error) {
       console.error('Error fetching post:', error)
@@ -395,6 +479,11 @@ const handleScoreSeo = async () => {
 const handleSubmit = async () => {
   try {
     const dataToSend = { ...form }
+    
+    // Convert array to string so objectToFormData doesn't split it into multiple fields
+    // which may be parsed incorrectly by multer
+    ;(dataToSend as Record<string, unknown>).display_locations = JSON.stringify(form.display_locations || [])
+    
     // If we have a selected file, pass it as 'image' field for FormData conversion
     if (selectedFile.value) {
       (dataToSend as Record<string, unknown>).image = selectedFile.value
@@ -419,9 +508,15 @@ const handleSubmit = async () => {
     }
 
     goBack()
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     console.error('Error submitting post:', error)
-    toastError(postStore.error || t('COMMON.ERROR'))
+    if (error?.code === 'WEEKLY_HIGHLIGHT_LIMIT_EXCEEDED' || error?.error === 'WEEKLY_HIGHLIGHT_LIMIT_EXCEEDED') {
+      errorMessage.value = postStore.error || error.message || 'Đã đạt giới hạn bài viết nổi bật trong tuần!'
+      showErrorModal.value = true
+    } else {
+      toastError(postStore.error || t('COMMON.ERROR'))
+    }
   }
 }
 </script>

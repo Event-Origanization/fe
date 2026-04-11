@@ -30,8 +30,9 @@
 
         <select
           v-model="filterType"
-          class="block w-full md:w-48 px-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm"
+          class="block w-full md:w-48 px-3 py-2 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-red-500 transition-all shadow-sm outline-none cursor-pointer hover:border-red-300"
         >
+          <option value="all">Tất cả loại trang</option>
           <option :value="PAGE_KEYS.SOUND_LIGHT">Âm thanh ánh sáng</option>
           <option :value="PAGE_KEYS.RENTAL">Cho thuê thiết bị</option>
         </select>
@@ -210,6 +211,7 @@ const fetchProducts = (page = 1) => {
     search: searchQuery.value,
     isActive: isActive,
     productType: productType,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     category: category as any
   })
 }

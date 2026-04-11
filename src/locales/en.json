@@ -46,13 +46,12 @@
       "VIEW_MORE": "View more"
     },
     "FEATURED_SWIPER": {
-      "TITLE": "FEATURED",
-      "DESC": "See our latest news and research publications by our two labs",
+      "TITLE": "GENERAL INTRODUCTION",
+      "DESC": "Learn more here",
       "ACTION": "GO TO THE POST"
     },
     "QUICK_CONTACT": {
       "TITLE": "CONTACT US",
-      "DESC": "For any inquiries or to learn more about Mi3 and its transformative programs, feel free to get in touch with us.",
       "HINT": "Contact us for the fastest advice and support!",
       "PLACEHOLDER_NAME": "Enter your full name",
       "PLACEHOLDER_EMAIL": "Enter your e-mail address",
@@ -68,14 +67,14 @@
       "TITLE": "About Us",
       "SLOGAN": "5P EVENT - CREATING EMOTIONS, CAPTURING BRAND",
       "DESC": "5P EVENT brings ARTISTIC EVENT MASTERPIECES AND PROFESSIONAL, COMPREHENSIVE, SMART, SOPHISTICATED EVENT SERVICES. From there, creating distinct values imbued with the corporate brand personality, creating a position before millions of competitors & potential customers.",
-      "SECTORS": "Providing optimal solutions for all types of events, from small scale to international music festivals.",
-      "EVENT_TITLE": "Full Event Organization",
-      "EVENT_DESC": "Creating ideas, detailed planning, management and operation from A-Z for all types of events.",
-      "VIEW_DETAILS": "VIEW DETAILS",
-      "RENTAL_TITLE": "Event Equipment Rental",
-      "RENTAL_DESC": "Top modern sound, lighting, LED screen, and stage system.",
-      "SOUND_LIGHT_TITLE": "Sound & Lighting",
-      "SOUND_LIGHT_DESC": "Professional techniques, top effects for an explosive stage."
+      "SECTORS": "5P EVENT operates mainly in 3 areas",
+      "EVENT_TITLE": "5PEVENT",
+      "EVENT_DESC": "Full event organization",
+      "VIEW_DETAILS": "LEARN MORE",
+      "RENTAL_TITLE": "5P EVENT EQUIPMENT RENTAL",
+      "RENTAL_DESC": "Providing tables, chairs, backdrops, tents, event facilities...",
+      "SOUND_LIGHT_TITLE": "SEVEN LIGHTING & SOUND",
+      "SOUND_LIGHT_DESC": "Professional sound, lighting, and LED screen rental"
     }
   },
   "ABOUT": {
@@ -163,7 +162,6 @@
     "SUBSCRIBE": "Subscribe to our newsletter",
     "EMAIL_PLACEHOLDER": "Your email...",
     "CONNECT_WITH_US": "Connect with us",
-    "DESC": "5P EVENT ORGANIZATION COMPANY - Leading unit in the field of professional event organization, bringing premium and distinct experiences.",
     "SLOGAN": "5P EVENT brings CREATIVE in ideas - PROFESSIONAL in organization - OPTIMIZED in costs",
     "EXPLORE_SCIENCE": "Explore Services",
     "INTERACTIVE_EXP": "Interactive Experience",
@@ -221,11 +219,12 @@
   "CONTACT": {
     "BREADCRUMB": "CONTACT",
     "HERO_TITLE": "GET<br />IN TOUCH",
-    "PRESS_ENQUIRIES": "Press enquiries",
-    "GENERAL_ENQUIRIES": "General enquiries",
-    "ADDRESS": "Address",
-    "JOB_HINT": "For job enquiries, please see",
-    "JOIN_US": "JOIN US",
+    "PRESS_ENQUIRIES": "HOTLINE/ZALO ADVICE",
+    "GENERAL_ENQUIRIES": "CONTACT EMAIL",
+    "ADDRESS": "OFFICE ADDRESS",
+    "FANPAGE": "OFFICIAL FANPAGE",
+    "JOB_HINT": "Contact for consultation",
+    "JOIN_US": "CONSULTATION",
     "FOLLOW_SOCIAL": "FOLLOW US<br />ON SOCIAL MEDIA",
     "FIND_US": "Find Us",
     "TITLE_CONNECT": "LET'S CONNECT",
@@ -273,7 +272,7 @@
   },
   "EVENTS_PAGE": {
     "TITLE": "EVENT VIDEOS",
-    "SUBTITLE": "Highlights of videos, podcasts and news covering the latest research from M21's labs.",
+    "SUBTITLE": "Watch the most \"valuable\" moments of each event now.",
     "TAG_ARTICLE": "Article",
     "TAG_INTERVIEW": "Interview",
     "DEFAULT_VIDEO_TITLE": "Event video",
@@ -290,7 +289,6 @@
     "SECTION_SUBTITLE": "LATEST NEWS",
     "SECTION_TITLE": "WEEKLY HIGHLIGHTS",
     "TAG_HOT": "Hot News",
-    "HOT_NEWS_DESC": "Update the hottest information about the event market and outstanding activities of 5P Event.",
     "NEWSLETTER_TITLE": "SUBSCRIBE NEWSLETTER",
     "NEWSLETTER_DESC": "Don't miss out on our exclusive events and news.",
     "NEWSLETTER_PLACEHOLDER": "Your email",
@@ -315,7 +313,13 @@
     "PRICE_DESC": "Price High to Low",
     "NEWEST": "Newest",
     "FILTER_TITLE": "FILTER",
-    "PRICE_RANGE": "PRICE RANGE"
+    "PRICE_RANGE": "PRICE RANGE",
+    "FEATURES": {
+      "MODERN_EQUIPMENT": "Modern equipment",
+      "CLEAR_CONTRACT": "Clear contracts",
+      "PROFESSIONAL_TECH": "Professional technique",
+      "COMPETITIVE_COST": "Competitive costs"
+    }
   },
   "PRODUCT_CATEGORIES": {
     "SOUND_LIGHT_LIGHTING": "Event Lighting",
@@ -345,8 +349,8 @@
     "PROCESS_TITLE": "WHY CHOOSE OUR SERVICE?",
     "PROCESS_DESC": "We are committed to providing you with the most professional, transparent and optimal event equipment rental service.",
     "STEP": "Step {number}",
-    "HERO_TITLE": "EQUIPMENT ZONE",
-    "HERO_DESC": "Providing comprehensive equipment solutions for all event scales with top quality."
+    "HERO_TITLE": "EVENT EQUIPMENT",
+    "HERO_DESC": "Providing a full range of event items, learn more here."
   },
   "SOUND_LIGHT": {
     "BENEFITS": {
@@ -373,7 +377,7 @@
     "PROCESS_TITLE": "COMPREHENSIVE TECHNICAL SOLUTION",
     "PROCESS_DESC": "We bring perfection to every event space with modern technology and a dedicated technical team.",
     "STEP": "Step {number}",
-    "HERO_DESC": "Professional sound, lighting, and LED screen systems of international standards."
+    "HERO_DESC": "Providing sound, lighting, and LED stage systems for events with 50 to 5,000 guests."
   },
   "PRODUCT_ADMIN": {
     "TITLE": "Product Management",

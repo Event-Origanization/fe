@@ -46,13 +46,12 @@
       "VIEW_MORE": "查看更多"
     },
     "FEATURED_SWIPER": {
-      "TITLE": "精选",
-      "DESC": "查看我们两个实验室的最新新闻和研究出版物",
+      "TITLE": "简介",
+      "DESC": "在这里了解更多",
       "ACTION": "查看文章"
     },
     "QUICK_CONTACT": {
       "TITLE": "联系我们",
-      "DESC": "如有任何疑问或想了解更多关于 Mi3 及其转型计划的信息，请随时与我们联系。",
       "HINT": "联系我们以获得最快的建议和支持！",
       "PLACEHOLDER_NAME": "输入您的全名",
       "PLACEHOLDER_EMAIL": "输入您的电子邮件地址",
@@ -68,14 +67,14 @@
       "TITLE": "关于我们",
       "SLOGAN": "5P EVENT - 创造情感，捕捉品牌",
       "DESC": "5P EVENT 提供艺术活动杰作和专业、全面、智能、精致的活动服务。以此创造融入企业品牌个性的独特价值，在数百万竞争对手和潜在客户面前建立地位。",
-      "SECTORS": "为各类活动提供最佳解决方案，从小型活动到国际水准的音乐节。",
-      "EVENT_TITLE": "全方位活动策划",
-      "EVENT_DESC": "创意策划、详细计划、为各类活动提供 A-Z 的管理和运营。",
-      "VIEW_DETAILS": "查看详情",
-      "RENTAL_TITLE": "活动设备租赁",
-      "RENTAL_DESC": "顶级的音响、灯光、LED 屏幕和舞台系统。",
-      "SOUND_LIGHT_TITLE": "音响与灯光",
-      "SOUND_LIGHT_DESC": "专业技术，顶级效果，打造震撼舞台。"
+      "SECTORS": "5P EVENT 主要在3个领域开展业务",
+      "EVENT_TITLE": "5PEVENT",
+      "EVENT_DESC": "全包活动策划",
+      "VIEW_DETAILS": "了解更多",
+      "RENTAL_TITLE": "5P 活动设备租赁",
+      "RENTAL_DESC": "提供桌椅、背景板、帐篷、活动设施...",
+      "SOUND_LIGHT_TITLE": "SEVEN LIGHTING & SOUND",
+      "SOUND_LIGHT_DESC": "专业音响、灯光、LED 屏幕租赁"
     }
   },
   "ABOUT": {
@@ -162,7 +161,6 @@
     "SUBSCRIBE": "订阅我们的新闻邮件",
     "EMAIL_PLACEHOLDER": "您的邮箱...",
     "CONNECT_WITH_US": "关注我们",
-    "DESC": "5P 活动策划公司 - 专业活动策划领域的领先单位，带来高端且与众不同的体验。",
     "SLOGAN": "5P EVENT 带来创意领先 - 组织专业 - 成本优化",
     "EXPLORE_SCIENCE": "探索服务",
     "INTERACTIVE_EXP": "互动体验",
@@ -220,11 +218,12 @@
   "CONTACT": {
     "BREADCRUMB": "联系我们",
     "HERO_TITLE": "取得<br />联系",
-    "PRESS_ENQUIRIES": "媒体查询",
-    "GENERAL_ENQUIRIES": "一般查询",
-    "ADDRESS": "地址",
-    "JOB_HINT": "有关职位查询，请参阅",
-    "JOIN_US": "加入我们",
+    "PRESS_ENQUIRIES": "热线/ZALO 咨询",
+    "GENERAL_ENQUIRIES": "联系邮箱",
+    "ADDRESS": "办公地址",
+    "FANPAGE": "官方主页",
+    "JOB_HINT": "联系咨询",
+    "JOIN_US": "咨询",
     "FOLLOW_SOCIAL": "在社交媒体上<br />关注我们",
     "FIND_US": "找到我们",
     "TITLE_CONNECT": "建立联系",
@@ -272,7 +271,7 @@
   },
   "EVENTS_PAGE": {
     "TITLE": "活动视频",
-    "SUBTITLE": "回顾 M21 实验室最新研究的视频、播客 and 新闻亮点。",
+    "SUBTITLE": "立即观看每个活动中最“珍贵”的时刻。",
     "TAG_ARTICLE": "文章",
     "TAG_INTERVIEW": "采访",
     "DEFAULT_VIDEO_TITLE": "活动视频",
@@ -289,7 +288,6 @@
     "SECTION_SUBTITLE": "最新新闻",
     "SECTION_TITLE": "本周亮点",
     "TAG_HOT": "热点新闻",
-    "HOT_NEWS_DESC": "更新有关活动市场和 5P Event 杰出活动的最新信息。",
     "NEWSLETTER_TITLE": "订阅时事通讯",
     "NEWSLETTER_DESC": "不要错过我们的独家活动和新闻。",
     "NEWSLETTER_PLACEHOLDER": "您的电子邮件",
@@ -307,7 +305,13 @@
   "PRODUCT": {
     "RELATED": "相关产品",
     "NOT_FOUND": "未找到该产品",
-    "COMING_SOON": "功能更新中..."
+    "COMING_SOON": "功能更新中...",
+    "FEATURES": {
+      "MODERN_EQUIPMENT": "先进设备",
+      "CLEAR_CONTRACT": "清晰合同",
+      "PROFESSIONAL_TECH": "专业技术",
+      "COMPETITIVE_COST": "竞争性成本"
+    }
   },
   "RENTAL": {
     "STEPS": {
@@ -324,8 +328,8 @@
     "PROCESS_TITLE": "为什么选择我们的服务？",
     "PROCESS_DESC": "我们致力于为您提供最专业、透明、优化的活动设备租赁服务。",
     "STEP": "步骤 {number}",
-    "HERO_TITLE": "设备专区",
-    "HERO_DESC": "为各种规模的活动提供全面、高品质的设备解决方案。"
+    "HERO_TITLE": "活动设备",
+    "HERO_DESC": "提供齐全的活动项目，请点击此处参考。"
   },
   "SOUND_LIGHT": {
     "BENEFITS": {
@@ -352,7 +356,7 @@
     "PROCESS_TITLE": "全面的技术解决方案",
     "PROCESS_DESC": "我们以现代技术和敬业的技术团队为每个活动空间带来完美。",
     "STEP": "步骤 {number}",
-    "HERO_DESC": "国际水准的专业音响、灯光、LED屏幕系统。"
+    "HERO_DESC": "提供音响、灯光和 LED 舞台系统，服务规模涵盖 50 至 5000 名观众。"
   },
   "PRODUCT_ADMIN": {
     "TITLE": "产品管理",
