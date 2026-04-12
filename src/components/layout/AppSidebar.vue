@@ -178,7 +178,7 @@ import {
   HorizontalDots,
   ListIcon,
   PlugInIcon,
-} from '../../icons'
+} from '@/icons'
 import { useSidebar } from '@/composables/useSidebar'
 import { useI18n } from 'vue-i18n'
 import { ADMIN_ROUTES } from '@/constants/routes'

@@ -2,7 +2,9 @@
   "NAV": {
     "HOME": "Trang chủ",
     "ABOUT": "Giới thiệu",
-    "EVENTS": "Tổ chức sự kiện",
+    "EVENTS": "Dự án thực hiện",
+    "EVENT_VIDEO": "Video sự kiện",
+    "EVENT_IMAGE": "Hình ảnh sự kiện",
     "SOUND_LIGHT": "Âm thanh ánh sáng",
     "RENTAL": "Cho thuê thiết bị sự kiện",
     "CONTACT": "Liên hệ",
@@ -270,11 +272,18 @@
     "FEATURED_EVENT": "SỰ KIỆN NỔI BẬT",
     "TOC_TITLE": "Mục lục bài viết"
   },
+  "EVENT_VIDEOS_PAGE": {
+    "TITLE": "VIDEO SỰ KIỆN",
+    "SUBTITLE": "Xem ngay những khoảnh khắc “đắt giá” nhất của mỗi sự kiện."
+  },
+  "EVENT_IMAGES_PAGE": {
+    "TITLE": "HÌNH ẢNH SỰ KIỆN",
+    "SUBTITLE": "Cập nhật những hình ảnh mới nhất từ các sự kiện nổi bật của 5P Event."
+  },
   "EVENTS_PAGE": {
     "TITLE": "VIDEO SỰ KIỆN",
     "SUBTITLE": "Xem ngay những khoảnh khắc “đắt giá” nhất của mỗi sự kiện.",
-    "TAG_ARTICLE": "Bài viết",
-    "TAG_INTERVIEW": "Phỏng vấn",
+    "TAG_ARTICLE": "Video",
     "DEFAULT_VIDEO_TITLE": "Video sự kiện",
     "NO_MORE_VIDEOS": "Chưa có thêm video sự kiện nào.",
     "CLIENTS_TITLE": "KHÁCH HÀNG CỦA CHÚNG TÔI",
@@ -567,7 +576,9 @@
       "SOCIAL_INSTAGRAM": "Link Instagram",
       "MENU_HOME": "Menu Trang chủ",
       "MENU_ABOUT": "Menu Giới thiệu",
-      "MENU_EVENTS": "Menu Tổ chức sự kiện",
+      "MENU_EVENTS": "Menu Dự án thực hiện",
+      "MENU_EVENT_VIDEO": "Menu Video sự kiện",
+      "MENU_EVENT_IMAGE": "Menu Hình ảnh sự kiện",
       "MENU_SOUND_LIGHT": "Menu Âm thanh ánh sáng",
       "MENU_RENTAL": "Menu Cho thuê thiết bị sự kiện",
       "MENU_CONTACT": "Menu Liên hệ",

@@ -23,7 +23,8 @@ const getSeoPath = (pageKey: string, defaultPath: string) => {
 export const ROUTE_NAMES = {
   HOME: 'Home',
   // ABOUT: 'About',
-  EVENTS: 'Events',
+  EVENT_VIDEO: 'EventVideo',
+  EVENT_IMAGE: 'EventImage',
   SOUND_LIGHT: 'Sound_Light',
   RENTAL: 'Rental',
   CONTACT: 'Contact',
@@ -209,10 +210,16 @@ const router = createRouter({
         //   meta: { title: 'About Us' },
         // },
         {
-          path: getSeoPath('EVENTS', 'events').replace(/^\//, ''),
-          name: ROUTE_NAMES.EVENTS,
-          component: () => import('@/views/user/EventsPage.vue'),
-          meta: { title: 'Event Organization' },
+          path: getSeoPath('EVENT_VIDEO', 'video-su-kien').replace(/^\//, ''),
+          name: ROUTE_NAMES.EVENT_VIDEO,
+          component: () => import('@/views/user/EventVideosPage.vue'),
+          meta: { title: 'Event Videos' },
+        },
+        {
+          path: getSeoPath('EVENT_IMAGE', 'hinh-anh-su-kien').replace(/^\//, ''),
+          name: ROUTE_NAMES.EVENT_IMAGE,
+          component: () => import('@/views/user/EventImagesPage.vue'),
+          meta: { title: 'Event Images' },
         },
         {
           path: getSeoPath('SOUND_LIGHT', 'sound-lighting').replace(/^\//, ''),

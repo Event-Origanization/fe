@@ -50,7 +50,7 @@
       <template #cell(logo)="{ item: partner }">
         <div class="flex justify-center">
           <div class="h-12 w-28 rounded-lg border border-gray-200 dark:border-gray-700 flex-shrink-0 overflow-hidden flex items-center justify-center p-2 logo-checkerboard shadow-sm group-hover:shadow-md transition-shadow">
-            <img v-if="partner.logo" :src="partner.logo" class="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-300" />
+            <img v-if="partner.logo" :src="partner.logo" class="max-w-full max-h-full object-contain filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-300" />
             <span v-else class="text-[10px] text-gray-400 uppercase font-bold tracking-tighter opacity-50">Partner Logo</span>
           </div>
         </div>
@@ -209,11 +209,11 @@ const confirmDelete = async (partner: IPartner) => {
 }
 
 .logo-checkerboard {
-  background-image: conic-gradient(#f9fafb 90deg, #ffffff 0 180deg, #f9fafb 0 270deg, #ffffff 0);
-  background-size: 12px 12px;
+  background-image: conic-gradient(#cbd5e1 90deg, #f8fafc 0 180deg, #cbd5e1 0 270deg, #f8fafc 0);
+  background-size: 16px 16px;
 }
 
 .dark .logo-checkerboard {
-  background-image: conic-gradient(#1e293b 90deg, #0f172a 0 180deg, #1e293b 0 270deg, #0f172a 0);
+  background-image: conic-gradient(#334155 90deg, #0f172a 0 180deg, #334155 0 270deg, #0f172a 0);
 }
 </style>

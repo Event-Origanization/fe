@@ -15,7 +15,7 @@
         <div class="flex items-center justify-center gap-2 text-sm md:text-base font-bold text-gray-400 uppercase tracking-widest" data-aos="fade-up" data-aos-delay="100">
           <router-link to="/" class="hover:text-red-600 transition-colors">{{ $t('COMMON.BREADCRUMB_HOME') }}</router-link>
           <span class="text-gray-300">-</span>
-          <span class="text-red-600">{{ configStore.getConfigValue('MENU', 'MENU_SOUND_LIGHT', '7SEVEN') }}</span>
+          <span class="text-red-600">{{ configStore.getConfigValue('MENU', 'MENU_SOUND_LIGHT', 'SEVEN LIGHTING & SOUND') }}</span>
         </div>
       </div>
     </section>
@@ -23,7 +23,7 @@
     <!-- MAIN CONTENT -->
     <main class="container mx-auto px-4 py-20">
       
-      <!-- DANH MỤC: ÂM THANH ÁNH SÁNG 7SEVEN -->
+      <!-- DANH MỤC: ÂM THANH ÁNH SÁNG SEVEN LIGHTING & SOUND -->
       <section class="mb-24">
         <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between border-b border-gray-200 pb-4" data-aos="fade-right">
           <div>

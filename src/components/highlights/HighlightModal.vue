@@ -70,7 +70,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
-import BaseModal from '../common/BaseModal.vue'
+import BaseModal from '@/components/common/BaseModal.vue'
 import { useHighlightStore } from '@/store/highlight'
 import type { IHighlight, CreateHighlightRequest } from '@/types/highlight'
 import { useToast } from '@/composables/useToast'

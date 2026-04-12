@@ -25,6 +25,7 @@ export interface HighlightVideoCreationAttributes {
 export interface HighlightVideoQuery {
   page?: number;
   limit?: number;
+  skip?: number;
   search?: string;
   isActive?: boolean;
   sortBy?: string;

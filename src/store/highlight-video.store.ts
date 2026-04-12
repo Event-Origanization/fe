@@ -9,6 +9,7 @@ import { ResponseError } from '@/utils/error'
 
 interface VideoState {
   videos: IHighlightVideo[]
+  featuredVideos: IHighlightVideo[]
   total: number
   totalPages: number
   currentPage: number
@@ -20,6 +21,7 @@ interface VideoState {
 export const useVideoStore = defineStore('highlight-video', {
   state: (): VideoState => ({
     videos: [],
+    featuredVideos: [],
     total: 0,
     totalPages: 0,
     currentPage: 1,
@@ -45,6 +47,16 @@ export const useVideoStore = defineStore('highlight-video', {
         this.error = err instanceof Error ? err.message : 'An unexpected error occurred'
       } finally {
         this.loading = false
+      }
+    },
+
+    async fetchFeaturedVideos() {
+      try {
+        const result = await highlightVideoService.getAll({ limit: 5, page: 1, isActive: true })
+        if (result instanceof ResponseError) throw result
+        this.featuredVideos = result.data.videos
+      } catch (err) {
+        console.error('Error fetching featured videos:', err)
       }
     },
 

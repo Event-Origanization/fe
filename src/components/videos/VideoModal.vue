@@ -129,7 +129,7 @@
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import BaseModal from '../common/BaseModal.vue'
+import BaseModal from '@/components/common/BaseModal.vue'
 import { hasFieldChanged } from '@/utils/diff'
 import { useVideoStore } from '@/store/highlight-video.store'
 import type { IHighlightVideo, HighlightVideoCreationAttributes } from '@/types/highlight-video'

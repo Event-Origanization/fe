@@ -35,14 +35,14 @@
     <p
       class="absolute text-sm text-center text-gray-500 -translate-x-1/2 bottom-6 left-1/2 dark:text-gray-400"
     >
-      &copy; {{ currentYear }} - AiRemakePro
+      &copy; {{ currentYear }} - 5P Event
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import CommonGridShape from "../../components/common/CommonGridShape.vue";
+import CommonGridShape from "@/components/common/CommonGridShape.vue";
 
 const currentYear = ref(new Date().getFullYear());
 </script>
