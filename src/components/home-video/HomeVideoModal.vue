@@ -116,7 +116,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
-import BaseModal from '../common/BaseModal.vue'
+import BaseModal from '@/components/common/BaseModal.vue'
 import { hasFieldChanged } from '@/utils/diff'
 import { useHomeVideoStore } from '@/store/homeVideo'
 import type { IHomeVideo, HomeVideoCreationAttributes } from '@/types/home-video'

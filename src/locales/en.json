@@ -2,7 +2,9 @@
   "NAV": {
     "HOME": "Home",
     "ABOUT": "About",
-    "EVENTS": "Events",
+    "EVENTS": "Projects",
+    "EVENT_VIDEO": "Event Videos",
+    "EVENT_IMAGE": "Event Images",
     "SOUND_LIGHT": "Sound & Lighting",
     "RENTAL": "Equipment Rental",
     "CONTACT": "Contact",
@@ -270,11 +272,18 @@
     "FEATURED_EVENT": "FEATURED EVENTS",
     "TOC_TITLE": "Table of Contents"
   },
+  "EVENT_VIDEOS_PAGE": {
+    "TITLE": "EVENT VIDEOS",
+    "SUBTITLE": "Watch the most \"valuable\" moments of each event now."
+  },
+  "EVENT_IMAGES_PAGE": {
+    "TITLE": "EVENT IMAGES",
+    "SUBTITLE": "Update the latest images from the featured events of 5P Event."
+  },
   "EVENTS_PAGE": {
     "TITLE": "EVENT VIDEOS",
     "SUBTITLE": "Watch the most \"valuable\" moments of each event now.",
-    "TAG_ARTICLE": "Article",
-    "TAG_INTERVIEW": "Interview",
+    "TAG_ARTICLE": "Video",
     "DEFAULT_VIDEO_TITLE": "Event video",
     "NO_MORE_VIDEOS": "No more event videos.",
     "CLIENTS_TITLE": "OUR CLIENTS",
@@ -567,7 +576,9 @@
       "SOCIAL_INSTAGRAM": "Instagram Link",
       "MENU_HOME": "Home Menu",
       "MENU_ABOUT": "About Menu",
-      "MENU_EVENTS": "Events Menu",
+      "MENU_EVENTS": "Project Menu",
+      "MENU_EVENT_VIDEO": "Event Videos Menu",
+      "MENU_EVENT_IMAGE": "Event Images Menu",
       "MENU_SOUND_LIGHT": "Sound & Lighting Menu",
       "MENU_RENTAL": "Equipment Rental Menu",
       "MENU_CONTACT": "Contact Menu",

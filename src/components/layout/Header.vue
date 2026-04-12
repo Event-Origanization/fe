@@ -19,14 +19,22 @@
           v-for="item in menuItems" :key="item.path"
           class="relative group/nav py-2"
         >
-          <router-link
-            :to="item.to"
-            class="transition-all hover:text-brand-600 flex items-center gap-1"
-            :class="[$route.path === item.path || $route.name === item.name || (item.children && item.children.some(c => $route.path === c.path)) ? 'text-brand-600' : 'text-gray-900']"
+          <component
+            :is="item.to === '#' ? 'div' : 'router-link'"
+            :to="item.to !== '#' ? item.to : undefined"
+            class="transition-all hover:text-brand-600 flex items-center gap-1 cursor-pointer"
+            :class="[
+              ($route.path === item.path && item.path !== '/') || 
+              $route.name === item.name || 
+              (item.children && item.children.some(c => $route.path === c.path)) ||
+              ($route.path === '/' && item.path === '/')
+                ? 'text-brand-600' 
+                : 'text-gray-900'
+            ]"
           >
             {{ item.label }}
             <i v-if="item.children" class="pi pi-chevron-down text-[10px] transition-transform duration-300 group-hover/nav:rotate-180"></i>
-          </router-link>
+          </component>
 
           <!-- Dropdown Menu -->
           <div v-if="item.children" 
@@ -44,7 +52,14 @@
 
           <!-- Underline effect -->
           <span class="absolute bottom-0 left-0 w-0 h-[3px] bg-brand-600 transition-all duration-300 group-hover/nav:w-full"
-            :class="[$route.path === item.path || $route.name === item.name || (item.children && item.children.some(c => $route.path === c.path)) ? 'w-full' : 'w-0']"></span>
+            :class="[
+              ($route.path === item.path && item.path !== '/') || 
+              $route.name === item.name || 
+              (item.children && item.children.some(c => $route.path === c.path)) ||
+              ($route.path === '/' && item.path === '/')
+                ? 'w-full' 
+                : 'w-0'
+            ]"></span>
         </div>
       </nav>
 
@@ -94,12 +109,13 @@
       <div class="container mx-auto px-6 py-10 flex flex-col gap-8 h-full overflow-y-auto">
          <nav class="flex flex-col gap-4">
            <template v-for="item in menuItems" :key="item.path">
-             <router-link 
-                :to="item.to" @click="$emit('toggle-menu')" 
-                class="text-4xl font-black uppercase tracking-tighter transition-colors"
-                :class="[$route.path === item.path || $route.name === item.name ? '!text-brand-500' : 'text-white hover:text-brand-500']">
-                {{ item.label }}
-             </router-link>
+              <router-link 
+                 :to="item.to" 
+                 @click="item.to === '#' ? $event.preventDefault() : $emit('toggle-menu')" 
+                 class="text-4xl font-black uppercase tracking-tighter transition-colors"
+                 :class="[$route.path === item.path || $route.name === item.name ? '!text-brand-500' : 'text-white hover:text-brand-500']">
+                 {{ item.label }}
+              </router-link>
              <!-- Mobile Sub-menu -->
              <div v-if="item.children" class="flex flex-col gap-3 pl-4 border-l border-white/10 mb-4 mt-2">
                <router-link
@@ -133,7 +149,7 @@ import { useRouter } from 'vue-router'
 import { ROUTE_NAMES } from '@/router'
 import { useI18n } from 'vue-i18n'
 import { useConfigStore } from '@/store/config'
-import LanguageSelector from '../common/LanguageSelector.vue'
+import LanguageSelector from '@/components/common/LanguageSelector.vue'
 
 defineOptions({
   name: 'AppHeader',
@@ -226,13 +242,25 @@ const menuItems = computed(() => [
   },
   { 
     label: configStore.getConfigValue('MENU', 'MENU_EVENTS', t('NAV.EVENTS')), 
-    to: { name: ROUTE_NAMES.EVENTS }, 
-    name: ROUTE_NAMES.EVENTS, 
-    path: '/events' 
+    to: '#', 
+    name: '', 
+    path: '/du-an',
+    children: [
+      { 
+        label: configStore.getConfigValue('MENU', 'MENU_EVENT_VIDEO', 'Video sự kiện'), 
+        to: { name: ROUTE_NAMES.EVENT_VIDEO }, 
+        path: '/video-su-kien' 
+      },
+      { 
+        label: configStore.getConfigValue('MENU', 'MENU_EVENT_IMAGE', 'Hình ảnh sự kiện'), 
+        to: { name: ROUTE_NAMES.EVENT_IMAGE }, 
+        path: '/hinh-anh-su-kien' 
+      }
+    ]
   },
   { 
     label: configStore.getConfigValue('MENU', 'MENU_RENTAL', t('NAV.RENTAL')), 
-    to: { name: ROUTE_NAMES.RENTAL }, 
+    to: '#',  
     name: ROUTE_NAMES.RENTAL, 
     path: '/rental',
     children: [
@@ -242,7 +270,7 @@ const menuItems = computed(() => [
         path: '/rental' 
       },
       { 
-        label: configStore.getConfigValue('MENU', 'MENU_SOUND_LIGHT', '7seven'), 
+        label: configStore.getConfigValue('MENU', 'MENU_SOUND_LIGHT', 'SEVEN LIGHTING & SOUND'), 
         to: { name: ROUTE_NAMES.SOUND_LIGHT }, 
         path: '/sound-lighting' 
       }

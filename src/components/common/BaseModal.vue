@@ -1,83 +1,79 @@
 <!-- src/components/common/BaseModal.vue -->
 <template>
-  <transition name="fade">
-    <div
-      v-if="show"
-      class="absolute inset-0 z-[99998] overflow-y-auto bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm"
-      aria-labelledby="modal-title"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div class="flex items-center justify-center min-h-full p-4">
-        <!-- Overlay -->
-        <transition name="fade">
-          <div
-            v-if="show"
-            class="absolute inset-0"
-            aria-hidden="true"
-            style="pointer-events: none"
-            @click="$emit('close')"
-          ></div>
-        </transition>
+  <teleport to="body">
+    <transition name="fade">
+      <div
+        v-if="show"
+        class="fixed inset-0 z-[99998] overflow-y-auto bg-gray-900/75 transition-opacity backdrop-blur-sm"
+        aria-labelledby="modal-title"
+        role="dialog"
+        aria-modal="true"
+      >
+        <!-- This container is to center the modal content -->
+        <div class="flex items-center justify-center min-h-screen p-4 sm:p-6">
+          
+          <!-- Background Overlay (Click to close) -->
+          <div class="fixed inset-0 transition-opacity" aria-hidden="true" @click="$emit('close')"></div>
 
-        <!-- Modal content -->
-        <transition name="zoom">
-          <div
-            v-if="show"
-            :class="[
-              'relative bg-white dark:bg-gray-900 rounded-2xl text-left shadow-2xl transform transition-all w-full my-8 mx-auto flex flex-col overflow-hidden',
-              maxWidthClass || (isViewportWidth ? '' : 'max-w-md'),
-            ]"
-            :style="{
-              maxHeight: '75vh',
-              ...(isViewportWidth ? { maxWidth: props.maxWidth } : {})
-            }"
-          >
-            <!-- Close button -->
-            <button
-              @click="$emit('close')"
-              class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors z-10"
-            >
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-
-            <!-- Header -->
-            <div class="px-6 pt-6 pb-4 sm:px-8 sm:pt-8 shadow-md mb-4">
-              <slot name="header">
-                <h3
-                  v-if="title"
-                  class="text-xl font-bold text-gray-900 dark:text-white"
-                  id="modal-title"
-                >
-                  {{ title }}
-                </h3>
-              </slot>
-            </div>
-
-            <!-- Body -->
-            <div class="px-6 pb-6 sm:px-8 sm:pb-8 flex-1 overflow-y-auto min-h-0 custom-scrollbar">
-              <slot></slot>
-            </div>
-
-            <!-- Footer -->
+          <!-- Modal content -->
+          <transition name="zoom">
             <div
-              v-if="$slots.footer"
-              class="bg-gray-50 dark:bg-gray-800/50 px-6 py-4 sm:px-8 sm:flex sm:flex-row-reverse gap-3 border-t border-gray-200 dark:border-gray-700"
+              v-if="show"
+              :class="[
+                'relative bg-white dark:bg-gray-900 rounded-2xl text-left shadow-2xl transform transition-all w-full my-8 mx-auto flex flex-col overflow-hidden',
+                maxWidthClass || (isCustomWidth ? '' : 'max-w-md'),
+              ]"
+              :style="{
+                maxHeight: '75vh',
+                ...(isCustomWidth ? { maxWidth: props.maxWidth } : {})
+              }"
             >
-              <slot name="footer"></slot>
+              <!-- Close button -->
+              <button
+                @click="$emit('close')"
+                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors z-10 p-1"
+              >
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              <!-- Header -->
+              <div class="px-6 pt-6 pb-4 sm:px-8 sm:pt-8 border-b border-gray-100 dark:border-gray-800">
+                <slot name="header">
+                  <h3
+                    v-if="title"
+                    class="text-xl font-bold text-gray-900 dark:text-white pr-8"
+                    id="modal-title"
+                  >
+                    {{ title }}
+                  </h3>
+                </slot>
+              </div>
+
+              <!-- Body -->
+              <div class="px-6 py-6 sm:px-8 sm:py-8 flex-1 overflow-y-auto min-h-0 custom-scrollbar">
+                <slot></slot>
+              </div>
+
+              <!-- Footer -->
+              <div
+                v-if="$slots.footer"
+                class="bg-gray-50 dark:bg-gray-800/50 px-6 py-4 sm:px-8 sm:flex sm:flex-row-reverse gap-3 border-t border-gray-200 dark:border-gray-700"
+              >
+                <slot name="footer"></slot>
+              </div>
             </div>
-          </div>
-        </transition>
+          </transition>
+        </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </teleport>
 </template>
 
 <script setup lang="ts">
@@ -118,8 +114,11 @@ const maxWidthClass = computed(() => {
   )
 })
 
-const isViewportWidth = computed(() => {
-  return props.maxWidth?.includes('vw') || props.maxWidth?.includes('%')
+const isCustomWidth = computed(() => {
+  return props.maxWidth?.includes('vw') || 
+         props.maxWidth?.includes('%') || 
+         props.maxWidth?.includes('px') || 
+         props.maxWidth?.includes('rem')
 })
 </script>
 

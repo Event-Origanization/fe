@@ -2,7 +2,9 @@
   "NAV": {
     "HOME": "首页",
     "ABOUT": "关于我们",
-    "EVENTS": "活动策划",
+    "EVENTS": "项目",
+    "EVENT_VIDEO": "活动视频",
+    "EVENT_IMAGE": "活动图片",
     "SOUND_LIGHT": "音响灯光",
     "RENTAL": "设备租赁",
     "CONTACT": "联系我们",
@@ -269,11 +271,18 @@
     "FEATURED_EVENT": "精彩活动",
     "TOC_TITLE": "文章目录"
   },
+  "EVENT_VIDEOS_PAGE": {
+    "TITLE": "活动视频",
+    "SUBTITLE": "立即观看每个活动中最“珍贵”的时刻。"
+  },
+  "EVENT_IMAGES_PAGE": {
+    "TITLE": "活动图片",
+    "SUBTITLE": "更新 5P Event 精选活动的最新图片。"
+  },
   "EVENTS_PAGE": {
     "TITLE": "活动视频",
     "SUBTITLE": "立即观看每个活动中最“珍贵”的时刻。",
-    "TAG_ARTICLE": "文章",
-    "TAG_INTERVIEW": "采访",
+    "TAG_ARTICLE": "视频",
     "DEFAULT_VIDEO_TITLE": "活动视频",
     "NO_MORE_VIDEOS": "暂无更多活动视频。",
     "CLIENTS_TITLE": "我们的客户",
@@ -546,7 +555,9 @@
       "SOCIAL_INSTAGRAM": "Instagram 链接",
       "MENU_HOME": "首页菜单",
       "MENU_ABOUT": "关于我们菜单",
-      "MENU_EVENTS": "活动策划菜单",
+      "MENU_EVENTS": "项目菜单",
+      "MENU_EVENT_VIDEO": "活动视频菜单",
+      "MENU_EVENT_IMAGE": "活动图片菜单",
       "MENU_SOUND_LIGHT": "音响灯光菜单",
       "MENU_RENTAL": "设备租赁菜单",
       "MENU_CONTACT": "联系我们菜单",

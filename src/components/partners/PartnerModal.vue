@@ -112,7 +112,7 @@
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import BaseModal from '../common/BaseModal.vue'
+import BaseModal from '@/components/common/BaseModal.vue'
 import { usePartnerStore } from '@/store/partner.store'
 import type { IPartner, PartnerCreationAttributes } from '@/types/partner'
 import { useToast } from '@/composables/useToast'

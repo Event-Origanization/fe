@@ -86,12 +86,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useSidebar } from '@/composables/useSidebar'
-// import ThemeToggler from '../common/ThemeToggler.vue'
-// import SearchBar from './header/SearchBar.vue'
 import HeaderLogo from './header/HeaderLogo.vue'
-// import NotificationMenu from './header/NotificationMenu.vue'
 import UserMenu from './header/UserMenu.vue'
-import LanguageSelector from '../common/LanguageSelector.vue'
+import LanguageSelector from '@/components/common/LanguageSelector.vue'
 
 const { toggleSidebar, toggleMobileSidebar, isMobileOpen } = useSidebar()
 

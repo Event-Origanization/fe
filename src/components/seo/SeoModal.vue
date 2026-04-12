@@ -3,7 +3,7 @@
   <BaseModal
     :show="show"
     :title="$t('SEO_ADMIN.EDIT_TITLE', { page: meta?.pageKey || '' })"
-    maxWidth="60%"
+    maxWidth="50%"
     @close="$emit('close')"
   >
     <!-- Form -->
@@ -122,7 +122,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import BaseModal from '../common/BaseModal.vue'
+import BaseModal from '@/components/common/BaseModal.vue'
 import type { ISeoMeta, SeoMetaUpdatePayload } from '@/types/seo'
 
 const props = defineProps<{

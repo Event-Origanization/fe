@@ -12,6 +12,7 @@ interface PartnerState {
   loading: boolean
   error: string | null
   currentPartner: IPartner | null
+  currentQuery: PartnerQuery | null
 }
 
 export const usePartnerStore = defineStore('partner', {
@@ -24,12 +25,14 @@ export const usePartnerStore = defineStore('partner', {
     loading: false,
     error: null,
     currentPartner: null,
+    currentQuery: null,
   }),
 
   actions: {
     async fetchPartners(query?: PartnerQuery) {
       this.loading = true
       this.error = null
+      this.currentQuery = query || null
       try {
         const result = await partnerService.getAll(query)
         if (result instanceof ResponseError) throw result
@@ -64,7 +67,7 @@ export const usePartnerStore = defineStore('partner', {
       try {
         const result = await partnerService.create(data)
         if (result instanceof ResponseError) throw result
-        await this.fetchPartners({ page: this.currentPage })
+        await this.fetchPartners(this.currentQuery || { page: this.currentPage })
         return result
       } catch (err) {
         this.error = err instanceof Error ? err.message : 'Lỗi khi tạo đối tác'
@@ -80,7 +83,7 @@ export const usePartnerStore = defineStore('partner', {
       try {
         const result = await partnerService.update(id, data)
         if (result instanceof ResponseError) throw result
-        await this.fetchPartners({ page: this.currentPage })
+        await this.fetchPartners(this.currentQuery || { page: this.currentPage })
         return result
       } catch (err) {
         this.error = err instanceof Error ? err.message : 'Lỗi khi cập nhật đối tác'
@@ -96,7 +99,7 @@ export const usePartnerStore = defineStore('partner', {
       try {
         const result = await partnerService.delete(id)
         if (result instanceof ResponseError) throw result
-        await this.fetchPartners({ page: this.currentPage })
+        await this.fetchPartners(this.currentQuery || { page: this.currentPage })
         return result
       } catch (err) {
         this.error = err instanceof Error ? err.message : 'Lỗi khi xóa đối tác'
