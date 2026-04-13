@@ -25,7 +25,7 @@
         <!-- Video 1: Top Right (Verticalish) -->
         <div v-if="featuredVideos[0]" class="absolute top-0 right-[15%] w-[28%] aspect-[3/4] z-10 creative-video-card" data-aos="fade-left" data-aos-delay="200" @click="openVideo(featuredVideos[0])">
           <img 
-            :src="featuredVideos[0]?.thumbnail || featuredVideos[0]?.url || defImg(0)" 
+            :src="getDisplayThumbnail(featuredVideos[0], 0)" 
             @error="(e) => handleImgError(e, 0)"
             class="w-full h-full object-cover rounded-[30px]" 
             alt="Video 1" 
@@ -38,7 +38,7 @@
         <!-- Video 2: Middle Left (Horizontal) -->
         <div v-if="featuredVideos[1]" class="absolute top-[20%] left-[2%] w-[45%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-right" data-aos-delay="300" @click="openVideo(featuredVideos[1])">
           <img 
-            :src="featuredVideos[1]?.thumbnail || featuredVideos[1]?.url || defImg(1)" 
+            :src="getDisplayThumbnail(featuredVideos[1], 1)" 
             @error="(e) => handleImgError(e, 1)"
             class="w-full h-full object-cover rounded-[24px]" 
             alt="Video 2" 
@@ -51,7 +51,7 @@
         <!-- Video 3: Middle Right (Horizontal) -->
         <div v-if="featuredVideos[2]" class="absolute top-[42%] right-[2%] w-[42%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-left" data-aos-delay="400" @click="openVideo(featuredVideos[2])">
           <img 
-            :src="featuredVideos[2]?.thumbnail || featuredVideos[2]?.url || defImg(2)" 
+            :src="getDisplayThumbnail(featuredVideos[2], 2)" 
             @error="(e) => handleImgError(e, 2)"
             class="w-full h-full object-cover rounded-[24px]" 
             alt="Video 3" 
@@ -64,7 +64,7 @@
         <!-- Video 4: Bottom Left (Horizontal) -->
         <div v-if="featuredVideos[3]" class="absolute top-[62%] left-[8%] w-[40%] aspect-[16/10] z-10 creative-video-card" data-aos="fade-up-right" data-aos-delay="500" @click="openVideo(featuredVideos[3])">
           <img 
-            :src="featuredVideos[3]?.thumbnail || featuredVideos[3]?.url || defImg(3)" 
+            :src="getDisplayThumbnail(featuredVideos[3], 3)" 
             @error="(e) => handleImgError(e, 3)"
             class="w-full h-full object-cover rounded-[24px]" 
             alt="Video 4" 
@@ -77,7 +77,7 @@
         <!-- Video 5: Bottom Right (Horizontal) -->
         <div v-if="featuredVideos[4]" class="absolute top-[82%] right-[10%] w-[44%] aspect-[16/10] z-30 creative-video-card" data-aos="fade-up-left" data-aos-delay="600" @click="openVideo(featuredVideos[4])">
           <img 
-            :src="featuredVideos[4]?.thumbnail || featuredVideos[4]?.url || defImg(4)" 
+            :src="getDisplayThumbnail(featuredVideos[4], 4)" 
             @error="(e) => handleImgError(e, 4)"
             class="w-full h-full object-cover rounded-[24px]" 
             alt="Video 5" 
@@ -98,7 +98,7 @@
            @click="openVideo(post)"
          >
            <img
-             :src="post?.thumbnail || post?.url || defImg(idx)"
+             :src="getDisplayThumbnail(post, idx)"
              @error="(e) => handleImgError(e, idx)"
              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
              alt="Video"
@@ -126,7 +126,7 @@
             <div class="p-4 pb-0 flex-shrink-0">
                <div class="aspect-video rounded-[16px] overflow-hidden relative shadow-inner">
                  <img
-                   :src="post.thumbnail || post.url || defImg(idx + 5)"
+                   :src="getDisplayThumbnail(post, idx + 5)"
                    @error="(e) => handleImgError(e, idx + 5)"
                    :alt="getTitle(post)"
                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -292,8 +292,33 @@ const placeholders = [
 ]
 const defImg = (i: number) => placeholders[i % placeholders.length]
 
+const getDisplayThumbnail = (item: any, index: number) => {
+  if (!item) return defImg(index)
+  if (item.thumbnail) return item.thumbnail
+
+  const url = item.url || ''
+  // Support YouTube
+  const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/)
+  if (ytMatch) {
+    return `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`
+  }
+  
+  // Support Unsplash or direct image URLs
+  if (url.startsWith('http') && (url.includes('unsplash.com') || url.match(/\.(jpeg|jpg|gif|png|webp)$/i))) {
+    return url
+  }
+
+  return defImg(index)
+}
+
 const handleImgError = (e: Event, i: number) => {
   const target = e.target as HTMLImageElement
+  // Prevent infinite loops if placeholder also fails
+  if (target.dataset.triedPlaceholder) {
+    target.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' // Transparent 1x1
+    return
+  }
+  target.dataset.triedPlaceholder = 'true'
   target.src = defImg(i)
 }
 
