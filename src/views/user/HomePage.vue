@@ -82,7 +82,7 @@
               <div class="service-panel__tag">01</div>
               <h3 class="service-panel__title service-panel__title--dark">{{ $t('HOME.ABOUT_SNIPPET.EVENT_TITLE') }}</h3>
               <p class="service-panel__desc service-panel__desc--dark">{{ $t('HOME.ABOUT_SNIPPET.EVENT_DESC') }}</p>
-              <button @click="$router.push({ name: ROUTE_NAMES.EVENTS })" class="service-panel__btn service-panel__btn--red">
+              <button @click="$router.push({ name: ROUTE_NAMES.EVENT_VIDEO })" class="service-panel__btn service-panel__btn--red">
                 {{ $t('HOME.ABOUT_SNIPPET.VIEW_DETAILS') }} <i class="pi pi-arrow-up-right"></i>
               </button>
             </div>
