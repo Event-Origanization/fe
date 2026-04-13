@@ -205,7 +205,7 @@
               ></iframe>
               <img
                 v-else
-                :src="(activeVideo as any).thumbnail || (activeVideo as any).url || (activeVideo as any).media || defImg(0)"
+                :src="getDisplayThumbnail(activeVideo, 0)"
                 class="w-full h-full object-contain"
                 alt="Video preview"
               />
@@ -217,9 +217,9 @@
               </h3>
               <p class="text-white/60 text-sm mt-1">{{ formatDate(activeVideo.createdAt, locale) }}</p>
               <button
-                v-if="(activeVideo as any).slug"
+                v-if="'slug' in activeVideo && activeVideo.slug"
                 class="mt-4 px-6 py-2 bg-brand-600 text-white font-bold rounded-full text-sm hover:bg-brand-500 hover:scale-105 transition-all outline-none"
-                @click="goToPost((activeVideo as any).slug); closeVideo()"
+                @click="goToPost(activeVideo.slug); closeVideo()"
               >
                 {{ $t('EVENTS_PAGE.VIEW_FULL') }}
               </button>
@@ -256,11 +256,20 @@ const activeVideo = ref<IPost | IHighlightVideo | null>(null)
 
 const activeVideoUrl = computed(() => {
   if (!activeVideo.value) return ''
-  const media = (activeVideo.value as IHighlightVideo).url || (activeVideo.value as IHighlightVideo).thumbnail || ''
-  const ytMatch = media.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/)
+  
+  let media = ''
+  if ('url' in activeVideo.value) {
+    media = activeVideo.value.url || activeVideo.value.thumbnail || ''
+  } else if ('media' in activeVideo.value) {
+    media = activeVideo.value.media || ''
+  }
+
+  const ytMatch = media.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/)
   if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`
+  
   const vimeoMatch = media.match(/vimeo\.com\/(\d+)/)
   if (vimeoMatch) return `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1`
+  
   if (media.includes('youtube.com/embed') || media.includes('player.vimeo.com')) return media
   return '' 
 })
@@ -292,11 +301,21 @@ const placeholders = [
 ]
 const defImg = (i: number) => placeholders[i % placeholders.length]
 
-const getDisplayThumbnail = (item: any, index: number) => {
+const getDisplayThumbnail = (item: IPost | IHighlightVideo | null | undefined, index: number): string => {
   if (!item) return defImg(index)
-  if (item.thumbnail) return item.thumbnail
+  
+  let thumbnail = ''
+  let url = ''
 
-  const url = item.url || ''
+  if ('thumbnail' in item) {
+    thumbnail = item.thumbnail || ''
+    url = item.url || ''
+  }
+
+  if (thumbnail && !thumbnail.includes('youtube.com') && !thumbnail.includes('youtu.be')) {
+    return thumbnail
+  }
+
   // Support YouTube
   const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/)
   if (ytMatch) {
