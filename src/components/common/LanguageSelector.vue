@@ -23,7 +23,7 @@
         class="text-xs uppercase tracking-tighter"
         :class="[dark ? 'text-gray-300' : 'text-gray-700 dark:text-gray-300']"
       >
-        {{ currentLang?.code }}
+        {{ currentLang?.name }}
       </span>
       <svg 
         class="w-3.5 h-3.5 text-gray-400 transition-transform duration-300" 
