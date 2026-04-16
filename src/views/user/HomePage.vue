@@ -67,7 +67,7 @@
               </div>
               <h3 class="service-panel__title">{{ $t('HOME.ABOUT_SNIPPET.TITLE') }}</h3>
               <p class="service-panel__desc">{{ $t('HOME.ABOUT_SNIPPET.SECTORS') }}</p>
-              <div class="service-panel__badge">Nova Events</div>
+              <div class="service-panel__badge">{{ $t('HOME.ABOUT_SNIPPET.VIEW_DETAILS') }} <i class="pi pi-arrow-up-right"></i></div>
             </div>
             <div class="service-panel__decor"></div>
           </div>
@@ -252,7 +252,7 @@
             <form @submit.prevent="submitForm" class="space-y-4 relative z-10">
               <div class="flex flex-col sm:flex-row gap-4">
                 <input v-model="form.name" type="text" :placeholder="$t('HOME.QUICK_CONTACT.PLACEHOLDER_NAME') || 'Họ và tên'" class="flex-1 bg-white border-none rounded-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-brand-500 outline-none w-full" />
-                <input v-model="form.email" type="email" :placeholder="$t('HOME.QUICK_CONTACT.PLACEHOLDER_EMAIL') || 'Email'" class="flex-1 bg-white border-none rounded-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-brand-500 outline-none w-full" />
+                <input v-model="form.email" type="email" :placeholder="$t('CONTACT.FORM.EMAIL') || 'Email (Tuỳ chọn)'" class="flex-1 bg-white border-none rounded-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-brand-500 outline-none w-full" />
               </div>
               <div class="bg-white rounded-full flex items-center pr-4 shadow-sm focus-within:ring-2 focus-within:ring-brand-500 transition-all">
                 <vue-tel-input
@@ -289,7 +289,8 @@ import { useHighlightStore } from '@/store/highlight'
 import { useToast } from '@/composables/useToast'
 import { ROUTE_NAMES } from '@/router'
 import { useContactMessageStore } from '@/store/contactMessage.store'
-import { validateEmail, validateStringField } from '@/utils/validation'
+import { validateEmail, validateStringField, validatePhone } from '@/utils/validation'
+import type { ContactMessageCreationAttributes } from '@/types/contactMessage'
 
 // SWIPER IMPORTS
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -399,22 +400,25 @@ const submitForm = async () => {
   const nameRes = validateStringField(form.name, t('CONTACT.FORM.FULLNAME') || 'Họ và tên')
   if (!nameRes.isValid) return toastError(nameRes.error || 'Vui lòng nhập họ và tên')
 
-  const emailRes = validateEmail(form.email)
+  const emailRes = validateEmail(form.email, false)
   if (!emailRes.isValid) return toastError(emailRes.error || 'Vui lòng nhập email hợp lệ')
 
-  const msgRes = validateStringField(form.message, t('CONTACT.FORM.MESSAGE_PLACEHOLDER') || 'Nội dung')
+  const phoneRes = validatePhone(form.phone)
+  if (!phoneRes.isValid) return toastError(phoneRes.error || t('CONTACT.FORM.VAL_PHONE'))
+
+  const msgRes = validateStringField(form.message, t('HOME.QUICK_CONTACT.PLACEHOLDER_MESSAGE') || 'Nội dung')
   if (!msgRes.isValid) return toastError(msgRes.error || 'Vui lòng nhập nội dung nhắn gửi')
 
   isSending.value = true
   try {
     const dataToSend = {
       name: form.name.trim(),
-      email: form.email.trim(),
-      phone: form.phone ? form.phone.trim() : undefined,
+      email: form.email ? form.email.trim() : undefined,
+      phone: form.phone.trim(),
       message: form.message.trim()
     }
     
-    await contactMessageStore.createContactMessage(dataToSend)
+    await contactMessageStore.createContactMessage(dataToSend as ContactMessageCreationAttributes)
     toastSuccess(t('HOME.QUICK_CONTACT.SUCCESS') || 'Gửi tin nhắn thành công, chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.')
     Object.assign(form, { name: '', email: '', phone: '', message: '' })
   } catch {

@@ -6,10 +6,11 @@
 /**
  * Validate email format
  */
-export function validateEmail(email: string): { isValid: boolean; error?: string } {
+export function validateEmail(email: string | undefined, required: boolean = true): { isValid: boolean; error?: string } {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email || !email.trim()) {
-    return { isValid: false, error: 'Email là bắt buộc' };
+    if (required) return { isValid: false, error: 'Email là bắt buộc' };
+    return { isValid: true };
   }
   if (!emailRegex.test(email)) {
     return { isValid: false, error: 'Định dạng email không hợp lệ' };
@@ -110,12 +111,12 @@ export function validateSlug(slug: string): { isValid: boolean; error?: string }
  * Validate phone number
  */
 export function validatePhone(phone: string): { isValid: boolean; error?: string } {
-  const phoneRegex = /^[0-9+ ]{10,15}$/;
+  // const phoneRegex = /^[0-9+ ]{10,15}$/;
   if (!phone || !phone.trim()) {
     return { isValid: false, error: 'Số điện thoại là bắt buộc' };
   }
-  if (!phoneRegex.test(phone)) {
-    return { isValid: false, error: 'Số điện thoại không hợp lệ' };
-  }
+  // if (!phoneRegex.test(phone)) {
+  //   return { isValid: false, error: 'Số điện thoại không hợp lệ' };
+  // }
   return { isValid: true };
 }

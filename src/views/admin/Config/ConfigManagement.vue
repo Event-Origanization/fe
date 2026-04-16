@@ -274,51 +274,70 @@
 
             <!-- Special handling for FOOTER_PARTNER_LOGOS -->
             <template v-else-if="config.key === 'FOOTER_PARTNER_LOGOS'">
-              <div class="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div v-for="(logo, idx) in partnerLogos" :key="idx" 
-                  class="bg-white border-2 border-gray-100 rounded-3xl p-6 shadow-sm hover:border-red-200 transition-all flex flex-col gap-6"
-                >
-                  <div class="flex items-center gap-3 border-b border-gray-50 pb-4 mb-2">
-                    <div class="w-10 h-10 bg-red-100 text-red-600 rounded-xl flex items-center justify-center font-black text-lg shadow-sm">
-                      {{ idx + 1 }}
-                    </div>
-                    <span class="font-black text-gray-800 uppercase tracking-tight text-lg truncate">{{ logo.name }}</span>
-                  </div>
-
-                  <!-- Image Upload -->
-                   <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
-                  <div @click="(($refs as any)[`logoInput_${idx}`])?.[0]?.click()" 
-                    class="aspect-[16/6] bg-gray-50 border-4 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:bg-red-50 hover:border-red-400 transition-all group overflow-hidden relative shadow-inner"
+              <div class="col-span-3 space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div v-for="(logo, idx) in partnerLogos" :key="idx" 
+                    class="bg-white border-2 border-gray-100 rounded-3xl p-6 shadow-sm hover:border-red-200 transition-all flex flex-col gap-6 relative group/logo"
                   >
-                    <img v-if="logo.image" :src="logo.image" class="absolute inset-0 w-full h-full object-contain p-6 hover:scale-110 transition-transform duration-500" :class="{'opacity-20': uploadingLogos[idx]}" />
-                    <div v-if="uploadingLogos[idx]" class="absolute inset-0 flex flex-col items-center justify-center text-red-500">
-                      <i class="pi pi-spin pi-spinner text-4xl mb-2"></i>
-                      <span class="text-[10px] font-black uppercase tracking-widest animate-pulse">Đang tải lên...</span>
-                    </div>
-                    <div v-else-if="!logo.image" class="flex flex-col items-center text-gray-400 group-hover:text-red-500 transition-colors">
-                      <i class="pi pi-cloud-upload text-4xl mb-2"></i>
-                      <span class="text-xs font-black uppercase tracking-widest">{{ $t('CONFIG_ADMIN.FOOTER_BUILDER.PARTNER_IMAGE') }}</span>
-                    </div>
-                    <input :ref="`logoInput_${idx}`" type="file" @change="e => handlePartnerLogoUpload(e, idx)" class="hidden" accept="image/*" />
-                  </div>
+                    <!-- Delete Button -->
+                    <button 
+                      @click="removePartnerLogo(idx)"
+                      class="absolute -top-3 -right-3 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover/logo:opacity-100 transition-all hover:bg-red-600 active:scale-90 z-20"
+                    >
+                      <i class="pi pi-times text-xs"></i>
+                    </button>
 
-                  <!-- Name Edit -->
-                  <div class="space-y-2">
-                    <label class="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ $t('CONFIG_ADMIN.FOOTER_BUILDER.PARTNER_NAME') }}</label>
-                    <input v-model="logo.name" type="text" 
-                      class="w-full text-base font-bold border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-red-500 focus:ring-4 focus:ring-red-500/10 transition-all bg-white"
-                    />
-                  </div>
+                    <div class="flex items-center gap-3 border-b border-gray-50 pb-4 mb-2">
+                      <div class="w-10 h-10 bg-red-100 text-red-600 rounded-xl flex items-center justify-center font-black text-lg shadow-sm">
+                        {{ idx + 1 }}
+                      </div>
+                      <span class="font-black text-gray-800 uppercase tracking-tight text-lg truncate">{{ logo.name || 'Logo mới' }}</span>
+                    </div>
 
-                  <!-- Link Edit -->
-                  <div class="space-y-2">
-                    <label class="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ $t('CONFIG_ADMIN.FOOTER_BUILDER.PARTNER_LINK') }}</label>
-                    <input v-model="logo.link" type="text" 
-                      class="w-full text-base font-bold border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-red-500 focus:ring-4 focus:ring-red-500/10 transition-all bg-white"
-                      placeholder="https://..."
-                    />
+                    <!-- Image Upload -->
+                     <!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
+                    <div @click="(($refs as any)[`logoInput_${idx}`])?.[0]?.click()" 
+                      class="aspect-[16/6] bg-gray-50 border-4 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:bg-red-50 hover:border-red-400 transition-all group overflow-hidden relative shadow-inner"
+                    >
+                      <img v-if="logo.image" :src="logo.image" class="absolute inset-0 w-full h-full object-contain p-6 hover:scale-110 transition-transform duration-500" :class="{'opacity-20': uploadingLogos[idx]}" />
+                      <div v-if="uploadingLogos[idx]" class="absolute inset-0 flex flex-col items-center justify-center text-red-500">
+                        <i class="pi pi-spin pi-spinner text-4xl mb-2"></i>
+                        <span class="text-[10px] font-black uppercase tracking-widest animate-pulse">Đang tải lên...</span>
+                      </div>
+                      <div v-else-if="!logo.image" class="flex flex-col items-center text-gray-400 group-hover:text-red-500 transition-colors">
+                        <i class="pi pi-cloud-upload text-4xl mb-2"></i>
+                        <span class="text-xs font-black uppercase tracking-widest">{{ $t('CONFIG_ADMIN.FOOTER_BUILDER.PARTNER_IMAGE') }}</span>
+                      </div>
+                      <input :ref="`logoInput_${idx}`" type="file" @change="e => handlePartnerLogoUpload(e, idx)" class="hidden" accept="image/*" />
+                    </div>
+
+                    <!-- Name Edit -->
+                    <div class="space-y-2">
+                      <label class="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ $t('CONFIG_ADMIN.FOOTER_BUILDER.PARTNER_NAME') }}</label>
+                      <input v-model="logo.name" type="text" 
+                        class="w-full text-base font-bold border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-red-500 focus:ring-4 focus:ring-red-500/10 transition-all bg-white"
+                      />
+                    </div>
+
+                    <!-- Link Edit -->
+                    <div class="space-y-2">
+                      <label class="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">{{ $t('CONFIG_ADMIN.FOOTER_BUILDER.PARTNER_LINK') }}</label>
+                      <input v-model="logo.link" type="text" 
+                        class="w-full text-base font-bold border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-red-500 focus:ring-4 focus:ring-red-500/10 transition-all bg-white"
+                        placeholder="https://..."
+                      />
+                    </div>
                   </div>
                 </div>
+
+                <!-- Add Button -->
+                <button 
+                  @click="addPartnerLogo"
+                  class="w-full py-6 border-4 border-dashed border-orange-200 rounded-[32px] text-orange-500 font-black hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all flex flex-col items-center justify-center gap-2 group/addlogo shadow-sm"
+                >
+                  <i class="pi pi-plus-circle text-2xl group-hover/addlogo:scale-125 transition-transform"></i>
+                  <span class="text-lg uppercase">Thêm Logo Đối Tác / Tài Trợ</span>
+                </button>
               </div>
             </template>
 
@@ -421,6 +440,18 @@ const handlePartnerLogoUpload = async (event: Event, index: number) => {
     uploadingLogos.value[index] = false;
     target.value = '';
   }
+};
+
+const addPartnerLogo = () => {
+  partnerLogos.value.push({
+    name: 'Đối tác mới',
+    image: '',
+    link: ''
+  });
+};
+
+const removePartnerLogo = (index: number) => {
+  partnerLogos.value.splice(index, 1);
 };
 
 const addFooterItem = (colIdx: number) => {

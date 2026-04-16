@@ -259,7 +259,8 @@ import AOS from 'aos'
 import { useConfigStore } from '@/store/config'
 import { useContactMessageStore } from '@/store/contactMessage.store'
 import { useToast } from '@/composables/useToast'
-import { validateEmail, validateStringField } from '@/utils/validation'
+import { validateEmail, validateStringField, validatePhone } from '@/utils/validation'
+import type { ContactMessageCreationAttributes } from '@/types/contactMessage'
 
 const { t } = useI18n()
 const configStore = useConfigStore()
@@ -284,8 +285,11 @@ const handleSubmit = async () => {
   const nameRes = validateStringField(form.name, t('CONTACT.FORM.FULLNAME'))
   if (!nameRes.isValid) return toastError(nameRes.error || 'Name invalid')
 
-  const emailRes = validateEmail(form.email)
+  const emailRes = validateEmail(form.email, false)
   if (!emailRes.isValid) return toastError(emailRes.error || 'Email invalid')
+
+  const phoneRes = validatePhone(form.phone)
+  if (!phoneRes.isValid) return toastError(phoneRes.error || t('CONTACT.FORM.VAL_PHONE'))
 
   const msgRes = validateStringField(form.message, t('CONTACT.FORM.MESSAGE'))
   if (!msgRes.isValid) return toastError(msgRes.error || 'Message invalid')
@@ -294,12 +298,12 @@ const handleSubmit = async () => {
   try {
     const dataToSend = {
       name: form.name.trim(),
-      email: form.email.trim(),
-      phone: form.phone ? form.phone.trim() : undefined,
+      email: form.email ? form.email.trim() : undefined,
+      phone: form.phone.trim(),
       message: form.message.trim(),
     }
 
-    await contactMessageStore.createContactMessage(dataToSend)
+    await contactMessageStore.createContactMessage(dataToSend as ContactMessageCreationAttributes)
     toastSuccess(t('CONTACT.FORM.TOAST_SUCCESS') || 'Gửi tin nhắn thành công.')
     Object.assign(form, { name: '', email: '', phone: '', message: '' })
   } catch {
@@ -337,7 +341,7 @@ const parsedMapSrc = computed(() => {
 
 const socials = computed(() => [
   { icon: 'pi-facebook', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_FACEBOOK', '#') },
-  { icon: 'pi-instagram', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_INSTAGRAM', '#') },
+  { icon: 'pi-tiktok', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_TIKTOK', '#') },
   { icon: 'pi-youtube', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#') },
   { icon: 'pi-link', link: configStore.getConfigValue('SOCIAL', 'SOCIAL_ZALO', '#') },
 ])

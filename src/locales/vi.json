@@ -235,9 +235,9 @@
     "FOLLOW_US": "THEO DÕI:",
     "FORM": {
       "FULLNAME": "Họ và tên",
-      "EMAIL": "Email",
+      "EMAIL": "Email (Tuỳ chọn)",
       "PHONE": "Số điện thoại",
-      "PHONE_PLACEHOLDER": "SĐT (Tuỳ chọn)",
+      "PHONE_PLACEHOLDER": "Số điện thoại (Bắt buộc)",
       "MESSAGE": "Nội dung",
       "MESSAGE_PLACEHOLDER": "Vui lòng nhập yêu cầu của bạn...",
       "SEND": "GỬI TIN NHẮN",
@@ -247,7 +247,7 @@
       "TOAST_ERROR": "Có lỗi xảy ra khi gửi tin nhắn, vui lòng thử lại sau.",
       "VAL_NAME": "Tên là bắt buộc",
       "VAL_EMAIL": "Email không hợp lệ",
-      "VAL_PHONE": "Số điện thoại không hợp lệ",
+      "VAL_PHONE": "Số điện thoại là bắt buộc",
       "VAL_MESSAGE": "Nội dung là bắt buộc"
     },
     "CARDS": {
@@ -573,7 +573,7 @@
       "SOCIAL_FACEBOOK": "Link Facebook",
       "SOCIAL_ZALO": "Link Zalo",
       "SOCIAL_YOUTUBE": "Link Youtube",
-      "SOCIAL_INSTAGRAM": "Link Instagram",
+      "SOCIAL_TIKTOK": "Link TikTok",
       "MENU_HOME": "Menu Trang chủ",
       "MENU_ABOUT": "Menu Giới thiệu",
       "MENU_EVENTS": "Menu Dự án thực hiện",
