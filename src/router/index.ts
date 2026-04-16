@@ -43,7 +43,15 @@ const PUBLIC_ROUTE_NAMES: string[] = Object.values(ROUTE_NAMES)
 
 const router = createRouter({
   history: createWebHistory(),
-  scrollBehavior: () => ({ top: 0 }),
+  scrollBehavior: (to) => {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    }
+    return { top: 0 }
+  },
   routes: [
     // ====================== ADMIN ROUTES ======================
     {

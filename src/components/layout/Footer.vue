@@ -29,8 +29,8 @@
               <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_FACEBOOK', '#')" target="_blank" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
                 <i class="pi pi-facebook font-bold text-base"></i>
               </a>
-              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_INSTAGRAM', '#')" target="_blank" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
-                <i class="pi pi-instagram font-bold text-base"></i>
+              <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_TIKTOK', '#')" target="_blank" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
+                <i class="pi pi-tiktok font-bold text-base"></i>
               </a>
               <a :href="configStore.getConfigValue('SOCIAL', 'SOCIAL_YOUTUBE', '#')" target="_blank" class="w-10 h-10 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-900 hover:text-yellow-400 transition-colors shadow-sm">
                 <i class="pi pi-youtube font-bold text-base"></i>
@@ -126,7 +126,7 @@ const footerColumns = computed(() => {
 
 const getRoutePath = (pageKey: string) => {
   if (!pageKey) return '/'
-  if (pageKey === 'HOME') return '/'
+  if (pageKey === 'HOME') return '/#about-snippet'
   const meta = seoStore.getSeoMetaByPage(pageKey)
   return meta?.path || '/'
 }

@@ -235,9 +235,9 @@
     "FOLLOW_US": "FOLLOW US:",
     "FORM": {
       "FULLNAME": "Full Name",
-      "EMAIL": "Email",
+      "EMAIL": "Email (Optional)",
       "PHONE": "Phone Number",
-      "PHONE_PLACEHOLDER": "Phone (Optional)",
+      "PHONE_PLACEHOLDER": "Phone Number (Required)",
       "MESSAGE": "Message",
       "MESSAGE_PLACEHOLDER": "Please enter your request...",
       "SEND": "SEND MESSAGE",
@@ -247,7 +247,7 @@
       "TOAST_ERROR": "An error occurred while sending message, please try again later.",
       "VAL_NAME": "Name is required",
       "VAL_EMAIL": "Invalid email",
-      "VAL_PHONE": "Invalid phone number",
+      "VAL_PHONE": "Phone number is required",
       "VAL_MESSAGE": "Message is required"
     },
     "CARDS": {
@@ -573,7 +573,7 @@
       "SOCIAL_FACEBOOK": "Facebook Link",
       "SOCIAL_ZALO": "Zalo Link",
       "SOCIAL_YOUTUBE": "Youtube Link",
-      "SOCIAL_INSTAGRAM": "Instagram Link",
+      "SOCIAL_TIKTOK": "TikTok Link",
       "MENU_HOME": "Home Menu",
       "MENU_ABOUT": "About Menu",
       "MENU_EVENTS": "Project Menu",

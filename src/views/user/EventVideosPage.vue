@@ -1,29 +1,67 @@
 <template>
-  <div class="w-full bg-white text-gray-900 font-outfit pb-20 overflow-hidden">
+  <div class="w-full bg-white text-gray-900 font-outfit pb-20 overflow-hidden relative">
+    <!-- BACKGROUND DECORATIONS -->
+    <div class="video-bg-blob video-bg-blob--1"></div>
+    <div class="video-bg-blob video-bg-blob--2"></div>
+    <div class="video-bg-blob video-bg-blob--3"></div>
+    <div class="video-bg-blob video-bg-blob--4"></div>
+    
+    <!-- Abstract Shapes -->
+    <div class="absolute top-[15%] left-[-5%] w-[400px] h-[400px] bg-yellow-400 rounded-full opacity-20 blur-[100px] pointer-events-none z-0"></div>
+    <div class="absolute top-[5%] right-[-5%] w-[500px] h-[500px] bg-indigo-600 rounded-full opacity-10 blur-[120px] pointer-events-none z-0 animate-pulse-slow"></div>
+    <div class="absolute top-[40%] right-[-10%] w-[500px] h-[500px] bg-red-600 rounded-full opacity-10 blur-[120px] pointer-events-none z-0"></div>
+    <div class="absolute bottom-[20%] left-[10%] w-[350px] h-[350px] bg-blue-600 rounded-full opacity-10 blur-[90px] pointer-events-none z-0"></div>
+
+    <!-- Decor Dots Top Right -->
+    <div class="absolute top-10 right-10 opacity-20 z-0">
+      <div class="grid grid-cols-6 gap-2">
+        <div v-for="i in 24" :key="i" class="w-2 h-2 bg-indigo-500 rounded-full"></div>
+      </div>
+    </div>
 
     <!-- VIDEO SỰ KIỆN -->
     <section class="pt-24 pb-16 container mx-auto px-4 relative overflow-visible">
 
       <!-- Title block -->
-      <div class="mb-10 text-center lg:text-left relative z-20" data-aos="fade-down">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 uppercase tracking-tighter mb-4">{{ $t('EVENT_VIDEOS_PAGE.TITLE') }}</h1>
-        <p class="text-gray-500 text-base max-w-lg mx-auto lg:mx-0 leading-relaxed">
-          {{ $t('EVENT_VIDEOS_PAGE.SUBTITLE') }}
-        </p>
+      <div class="mb-10 text-center lg:text-left relative z-20 flex flex-col lg:flex-row lg:items-center justify-between gap-8" data-aos="fade-down">
+        <div class="max-w-xl">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 uppercase tracking-tighter mb-4">{{ $t('EVENT_VIDEOS_PAGE.TITLE') }}</h1>
+          <p class="text-gray-500 text-base leading-relaxed">
+            {{ $t('EVENT_VIDEOS_PAGE.SUBTITLE') }}
+          </p>
+        </div>
+        
+        <!-- Abstract Decoration near title -->
+        <div class="hidden lg:flex items-center gap-6 opacity-30 pr-20">
+          <div class="w-32 h-[2px] bg-indigo-500"></div>
+          <i class="pi pi-arrow-up-right text-4xl text-indigo-500"></i>
+          <div class="w-12 h-12 rounded-full border-2 border-indigo-500"></div>
+        </div>
       </div>
 
       <!-- ===== 5-VIDEO CREATIVE LAYOUT (DESKTOP) ===== -->
-      <div class="hidden lg:block relative w-full h-[1800px] mt-16" data-aos="fade-up" data-aos-duration="1000">
+      <div class="hidden lg:block relative w-full h-[1800px] z-10" data-aos="fade-up" data-aos-duration="1000">
         
         <!-- DECORATIVE ELEMENTS -->
-        <!-- 1. Red Circle with Arrow -->
-        <!-- 5. Gray Circular Lines (Center Right) -->
+        <!-- 1. Large Colored Shapes like in reference -->
+        <div class="absolute top-[10%] left-[-2%] w-[300px] h-[300px] bg-yellow-400 rounded-full z-0 opacity-80 pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute top-[35%] right-[5%] w-[450px] h-[450px] bg-indigo-500/40 rounded-[80px] rotate-[15deg] z-0 pointer-events-none animate-float-slow"></div>
+        <div class="absolute bottom-[15%] left-[5%] w-[380px] h-[380px] bg-red-500/30 rounded-full z-0 pointer-events-none animate-pulse-slow" style="animation-delay: -3s"></div>
+        
+        <!-- Dotted pattern -->
+        <div class="absolute bottom-[10%] right-[2%] opacity-30 z-0">
+          <div class="grid grid-cols-10 gap-3">
+            <div v-for="i in 100" :key="i" class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+          </div>
+        </div>
+        
+        <!-- Circles -->
         <div class="absolute top-[52%] right-[10%] w-[450px] h-[450px] border-[3px] border-gray-100 rounded-full z-0 pointer-events-none opacity-80"></div>
         <div class="absolute top-[48%] right-[5%] w-[600px] h-[600px] border-[2px] border-gray-50 rounded-full z-0 pointer-events-none opacity-80"></div>
 
         <!-- VIDEOS -->
-        <!-- Video 1: Top Right (Verticalish) -->
-        <div v-if="featuredVideos[0]" class="absolute top-0 right-[15%] w-[28%] aspect-[3/4] z-10 creative-video-card" data-aos="fade-left" data-aos-delay="200" @click="openVideo(featuredVideos[0])">
+        <!-- Video 1: Top Right (Landscape) -->
+        <div v-if="featuredVideos[0]" class="absolute top-[2%] right-[8%] w-[42%] aspect-[16/10] z-10 creative-video-card" data-aos="fade-left" data-aos-delay="200" @click="openVideo(featuredVideos[0])">
           <img 
             :src="getDisplayThumbnail(featuredVideos[0], 0)" 
             @error="(e) => handleImgError(e, 0)"
@@ -36,7 +74,7 @@
         </div>
 
         <!-- Video 2: Middle Left (Horizontal) -->
-        <div v-if="featuredVideos[1]" class="absolute top-[20%] left-[2%] w-[45%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-right" data-aos-delay="300" @click="openVideo(featuredVideos[1])">
+        <div v-if="featuredVideos[1]" class="absolute top-[22%] left-[4%] w-[46%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-right" data-aos-delay="300" @click="openVideo(featuredVideos[1])">
           <img 
             :src="getDisplayThumbnail(featuredVideos[1], 1)" 
             @error="(e) => handleImgError(e, 1)"
@@ -49,7 +87,7 @@
         </div>
 
         <!-- Video 3: Middle Right (Horizontal) -->
-        <div v-if="featuredVideos[2]" class="absolute top-[42%] right-[2%] w-[42%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-left" data-aos-delay="400" @click="openVideo(featuredVideos[2])">
+        <div v-if="featuredVideos[2]" class="absolute top-[42%] right-[4%] w-[44%] aspect-[16/10] z-20 creative-video-card" data-aos="fade-left" data-aos-delay="400" @click="openVideo(featuredVideos[2])">
           <img 
             :src="getDisplayThumbnail(featuredVideos[2], 2)" 
             @error="(e) => handleImgError(e, 2)"
@@ -62,7 +100,7 @@
         </div>
 
         <!-- Video 4: Bottom Left (Horizontal) -->
-        <div v-if="featuredVideos[3]" class="absolute top-[62%] left-[8%] w-[40%] aspect-[16/10] z-10 creative-video-card" data-aos="fade-up-right" data-aos-delay="500" @click="openVideo(featuredVideos[3])">
+        <div v-if="featuredVideos[3]" class="absolute top-[62%] left-[6%] w-[43%] aspect-[16/10] z-10 creative-video-card" data-aos="fade-up-right" data-aos-delay="500" @click="openVideo(featuredVideos[3])">
           <img 
             :src="getDisplayThumbnail(featuredVideos[3], 3)" 
             @error="(e) => handleImgError(e, 3)"
@@ -75,7 +113,7 @@
         </div>
 
         <!-- Video 5: Bottom Right (Horizontal) -->
-        <div v-if="featuredVideos[4]" class="absolute top-[82%] right-[10%] w-[44%] aspect-[16/10] z-30 creative-video-card" data-aos="fade-up-left" data-aos-delay="600" @click="openVideo(featuredVideos[4])">
+        <div v-if="featuredVideos[4]" class="absolute top-[82%] right-[8%] w-[46%] aspect-[16/10] z-30 creative-video-card" data-aos="fade-up-left" data-aos-delay="600" @click="openVideo(featuredVideos[4])">
           <img 
             :src="getDisplayThumbnail(featuredVideos[4], 4)" 
             @error="(e) => handleImgError(e, 4)"
@@ -111,7 +149,8 @@
     </section>
 
     <!-- ===== XEM THÊM VIDEO (Bottom Section Background Colored) ===== -->
-    <section id="more-videos-section" class="py-24 relative bg-[#ecedf4] rounded-t-[50px] md:rounded-t-[80px]">
+    <section id="more-videos-section" class="py-24 relative bg-white/40 backdrop-blur-xl rounded-t-[50px] md:rounded-t-[80px] border-t border-white/50 z-20">
+      <div class="video-bg-blob video-bg-blob--bottom"></div>
       <div class="max-w-7xl mx-auto px-4 relative z-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div
@@ -545,5 +584,83 @@ onMounted(async () => {
 .modal-fade-leave-to {
   opacity: 0;
   transform: scale(0.95);
+}
+
+/* --- NEW STYLES FOR BLOBS & SHAPES --- */
+.video-bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.15;
+}
+.video-bg-blob--1 {
+  top: -5%; left: -10%;
+  width: 600px; height: 600px;
+  background: #dc2626;
+  animation: blobFloat 20s infinite alternate;
+}
+.video-bg-blob--2 {
+  top: 25%; right: -5%;
+  width: 500px; height: 500px;
+  background: #facc15;
+  animation: blobFloat 25s infinite alternate-reverse;
+}
+.video-bg-blob--3 {
+  bottom: 20%; left: -5%;
+  width: 700px; height: 700px;
+  background: #6366f1;
+  animation: blobFloat 18s infinite alternate;
+}
+.video-bg-blob--4 {
+  top: 50%; left: 40%;
+  width: 400px; height: 400px;
+  background: #ec4899;
+  animation: blobFloat 22s infinite alternate-reverse;
+}
+.video-bg-blob--bottom {
+  bottom: 0; right: 0;
+  width: 800px; height: 800px;
+  background: #ecedf4;
+  opacity: 0.5;
+  filter: blur(150px);
+}
+
+@keyframes blobFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(100px, 50px) scale(1.1); }
+  66% { transform: translate(-50px, 150px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes float-slow {
+  0% { transform: rotate(15deg) translateY(0); }
+  50% { transform: rotate(18deg) translateY(-30px); }
+  100% { transform: rotate(15deg) translateY(0); }
+}
+.animate-float-slow {
+  animation: float-slow 10s infinite ease-in-out;
+}
+
+/* Glassmorphism for Mini Cards */
+.video-card-mini {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+}
+.video-card-mini:hover {
+  background: white !important;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12) !important;
+}
+
+/* Creative Layout Video Styles */
+.creative-video-card img {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  border: 4px solid white;
+}
+.creative-video-card:hover img {
+  border-color: #dc2626;
 }
 </style>

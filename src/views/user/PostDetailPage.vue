@@ -314,4 +314,39 @@ watch(
   background: #dc2626;
   border-radius: 4px;
 }
+
+/* Fix for ul, ol in post content */
+.prose ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.prose ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.prose li {
+  margin-bottom: 0.8rem;
+}
+
+.prose p {
+  margin-bottom: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+.prose h2, .prose h3 {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Đảm bảo ảnh không bị dính chữ */
+.prose img {
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
 </style>

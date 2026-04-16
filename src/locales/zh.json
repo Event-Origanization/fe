@@ -234,9 +234,9 @@
     "FOLLOW_US": "关注我们：",
     "FORM": {
       "FULLNAME": "姓名",
-      "EMAIL": "邮箱",
+      "EMAIL": "邮箱（可选）",
       "PHONE": "电话号码",
-      "PHONE_PLACEHOLDER": "电话（可选）",
+      "PHONE_PLACEHOLDER": "电话号码（必填）",
       "MESSAGE": "内容",
       "MESSAGE_PLACEHOLDER": "请输入您的要求...",
       "SEND": "发送消息",
@@ -246,7 +246,7 @@
       "TOAST_ERROR": "发送消息时出错，请稍后重试。",
       "VAL_NAME": "姓名为必填项",
       "VAL_EMAIL": "邮箱格式不正确",
-      "VAL_PHONE": "电话号码不正确",
+      "VAL_PHONE": "电话号码是必填项",
       "VAL_MESSAGE": "内容为必填项"
     },
     "CARDS": {
@@ -552,7 +552,7 @@
       "SOCIAL_FACEBOOK": "Facebook 链接",
       "SOCIAL_ZALO": "Zalo 链接",
       "SOCIAL_YOUTUBE": "Youtube 链接",
-      "SOCIAL_INSTAGRAM": "Instagram 链接",
+      "SOCIAL_TIKTOK": "TikTok 链接",
       "MENU_HOME": "首页菜单",
       "MENU_ABOUT": "关于我们菜单",
       "MENU_EVENTS": "项目菜单",
