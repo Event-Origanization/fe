@@ -181,12 +181,12 @@
           <swiper-slide 
             v-for="(item, index) in displayHighlights" 
             :key="index"
-            class="!w-[320px] md:!w-[420px]"
+            class="!w-[300px] md:!w-[420px]"
           >
             <div 
-              class="w-full rounded-[40px] p-10 shadow-sm relative group hover:shadow-2xl hover:-translate-y-5 hover:scale-[1.01] transition-all duration-500 ease-in-out h-full cursor-pointer"
+              class="w-full rounded-[32px] md:rounded-[40px] p-8 md:p-10 shadow-sm relative group md:hover:shadow-2xl md:hover:-translate-y-5 md:hover:scale-[1.01] transition-all duration-500 ease-in-out h-full cursor-pointer"
               :class="[
-                index % 2 === 0 ? 'bg-[#e2e2ea]' : 'bg-brand-50 mt-32'
+                index % 2 === 0 ? 'bg-[#e2e2ea]' : 'bg-brand-50 md:mt-32'
               ]"
               data-aos="fade-up"
               :data-aos-delay="index * 100"
