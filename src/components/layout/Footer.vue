@@ -47,13 +47,13 @@
             <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 text-base mb-16">
               <div v-for="(col, idx) in footerColumns" :key="idx" class="flex flex-col gap-4">
                 <div class="text-red-500 font-bold text-base uppercase">
-                   <router-link :to="getRoutePath(col.link)" class="hover:text-red-500 transition-colors">
+                   <router-link :to="getRoutePath(col.link, 0)" class="hover:text-red-500 transition-colors">
                      {{ col.title[currentLocale] || col.title.vi }}
                    </router-link>
                 </div>
                 <ul v-if="col.items && col.items.length" class="space-y-4 font-medium text-gray-700 text-[16px] tracking-wide pr-4">
                   <li v-for="(item, itemIdx) in col.items" :key="itemIdx">
-                    <router-link :to="getRoutePath(item.link)" class="hover:text-red-500 transition-colors block leading-snug">
+                    <router-link :to="getRoutePath(item.link, itemIdx)" class="hover:text-red-500 transition-colors block leading-snug">
                       {{ item.title[currentLocale] || item.title.vi }}
                     </router-link>
                   </li>
@@ -124,9 +124,15 @@ const footerColumns = computed(() => {
   }
 })
 
-const getRoutePath = (pageKey: string) => {
+const getRoutePath = (pageKey: string, index?: number | string) => {
   if (!pageKey) return '/'
-  if (pageKey === 'HOME') return '/#about-snippet'
+  if (pageKey === 'HOME') {
+    const idx = typeof index === 'undefined' ? -1 : Number(index)
+    if (idx === 0) return '/#about-snippet'
+    if (idx === 1) return '/#featured-highlights'
+    if (idx === 2) return '/#quick-contact'
+    return '/#about-snippet'
+  }
   const meta = seoStore.getSeoMetaByPage(pageKey)
   return meta?.path || '/'
 }

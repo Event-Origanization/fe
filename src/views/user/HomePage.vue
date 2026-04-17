@@ -132,7 +132,7 @@
     </section>
 
     <!-- FEATURED (GIỚI THIỆU CHUNG) -->
-    <section class="py-32 relative bg-white overflow-hidden">
+    <section id="featured-highlights" class="py-32 relative bg-white overflow-hidden">
       <!-- DECORATIVE BACKGROUND ELEMENTS -->
       <!-- Large Purple Circle -->
       <div class="absolute top-[10%] left-[40%] w-[600px] h-[600px] bg-[#eef1ff] rounded-full z-0 opacity-80 pointer-events-none"></div>
@@ -224,7 +224,7 @@
     </section>
 
     <!-- CONTACT FORM SECTION -->
-    <section class="py-24 relative container mx-auto px-4">
+    <section id="quick-contact" class="py-24 relative container mx-auto px-4">
       <div class="flex flex-col md:flex-row items-center justify-between bg-[#f8fafc] rounded-[40px] p-10 lg:p-16 relative shadow-sm border border-gray-100">
         <!-- Decor Dots -->
         <div class="absolute -top-6 -right-6 text-brand-500 opacity-20">

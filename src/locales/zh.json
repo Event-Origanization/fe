@@ -322,6 +322,21 @@
       "COMPETITIVE_COST": "竞争性成本"
     }
   },
+  "PRODUCT_CATEGORIES": {
+    "SOUND_LIGHT_LIGHTING": "活动灯光",
+    "SOUND_LIGHT_AUDIO": "活动音响",
+    "SOUND_LIGHT_STAGE": "活动舞台",
+    "RENTAL_TABLE": "活动桌子",
+    "RENTAL_CHAIR": "活动椅子",
+    "RENTAL_FAN": "活动风扇",
+    "RENTAL_TENT": "空间帐篷",
+    "RENTAL_UMBRELLA": "偏心伞",
+    "RENTAL_BACKDROP": "背景板搭建",
+    "RENTAL_STAGE": "舞台搭建",
+    "RENTAL_LED_SCREEN": "LED 屏幕",
+    "RENTAL_EFFECTS": "活动特效",
+    "RENTAL_OTHER": "其他设备"
+  },
   "RENTAL": {
     "STEPS": {
       "STEP1_TITLE": "接收需求",
