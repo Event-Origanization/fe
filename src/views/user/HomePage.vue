@@ -75,7 +75,7 @@
           <!-- Panel 1: Tổ chức sự kiện trọn gói -->
           <div class="service-panel service-panel--light" data-aos="fade-up" data-aos-delay="100">
             <div class="service-panel__img-wrap">
-              <img src="@/assets/images/images-home/TCSKTG.avif" alt="Tổ chức sự kiện" class="service-panel__img" />
+              <img src="@/assets/images/images-home/TCSKTG.jpg" alt="Tổ chức sự kiện" class="service-panel__img" />
               <div class="service-panel__img-overlay"></div>
             </div>
             <div class="service-panel__content">
@@ -91,7 +91,7 @@
           <!-- Panel 2: Cho thuê thiết bị sự kiện (short/raised) -->
           <div class="service-panel service-panel--light service-panel--sunk" data-aos="fade-up" data-aos-delay="200">
             <div class="service-panel__img-wrap">
-              <img src="@/assets/images/images-home/CTTBSK.avif" alt="Cho thuê thiết bị" class="service-panel__img" />
+              <img src="@/assets/images/images-home/CTTBSK.jpg" alt="Cho thuê thiết bị" class="service-panel__img" />
               <div class="service-panel__img-overlay"></div>
             </div>
             <div class="service-panel__content">
@@ -140,8 +140,8 @@
       <div class="absolute -top-[10%] -right-[15%] w-[700px] h-[700px] bg-brand-500 rounded-full z-0 opacity-50 pointer-events-none"></div>
       
       <!-- Tree/Book Artwork at bottom-center -->
-      <div class="absolute bottom-[20%] left-[55%] w-[450px] aspect-square z-10 pointer-events-none opacity-80 mix-blend-multiply transition-all duration-1000" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=600&auto=format" class="w-full h-full object-contain grayscale" alt="Tree book decor" />
+      <div class="absolute bottom-[20%] left-[55%] w-[450px] aspect-square z-10 pointer-events-none opacity-80 mix-blend-multiply transition-all duration-1000 rounded-[40px] overflow-hidden" data-aos="zoom-in" data-aos-delay="400">
+        <img src="@/assets/images/images-home/BG-SLIDE.jpg" class="w-full h-full object-contain grayscale rounded-[40px]" alt="Tree book decor" />
       </div>
 
       <div class="container mx-auto px-4 relative z-20 overflow-visible">
@@ -236,7 +236,7 @@
         <!-- Left Graphic / Text -->
         <div class="md:w-5/12 mb-10 md:mb-0 relative z-10" data-aos="fade-right">
           <div class="w-32 h-32 mb-8 mx-auto md:mx-0">
-             <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover rounded-full grayscale mix-blend-multiply" alt="Brain book" />
+             <img src="@/assets/images/images-home/LOGO-CONTACT.jpg" class="w-full h-full object-cover rounded-full grayscale mix-blend-multiply" alt="Brain book" />
           </div>
           <h2 class="text-4xl font-black text-gray-900 uppercase mb-4">{{ $t('HOME.QUICK_CONTACT.TITLE') }}</h2>
           <p class="text-brand-600 font-bold text-lg">
