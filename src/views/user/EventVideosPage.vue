@@ -190,7 +190,7 @@
               </h3>
               <div class="flex items-center justify-between mt-auto pt-3">
                 <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
-                  {{ formatDate(post.createdAt, locale) }}
+                  {{ formatDate(post.publishAt || post.createdAt, locale) }}
                 </span>
                 <i class="pi pi-arrow-right text-brand-600 text-xs transform group-hover:translate-x-1 transition-transform"></i>
               </div>
@@ -254,7 +254,7 @@
               <h3 class="text-white font-black text-xl uppercase leading-snug line-clamp-2">
                 {{ getTitle(activeVideo) || 'Video sự kiện' }}
               </h3>
-              <p class="text-white/60 text-sm mt-1">{{ formatDate(activeVideo.createdAt, locale) }}</p>
+              <p class="text-white/60 text-sm mt-1">{{ formatDate(activeVideo.publishAt || activeVideo.createdAt, locale) }}</p>
               <button
                 v-if="'slug' in activeVideo && activeVideo.slug"
                 class="mt-4 px-6 py-2 bg-brand-600 text-white font-bold rounded-full text-sm hover:bg-brand-500 hover:scale-105 transition-all outline-none"

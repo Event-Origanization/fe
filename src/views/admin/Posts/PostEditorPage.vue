@@ -394,14 +394,31 @@ const initialForm: PostCreationAttributes = {
 const form = reactive<PostCreationAttributes>({ ...initialForm })
 const originalPost = ref<IPost | null>(null)
 
+const formatToLocalDatetime = (dateStr: string | Date | null | undefined): string => {
+  if (!dateStr) return ''
+  const date = new Date(dateStr)
+  if (isNaN(date.getTime())) return ''
+  
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  
+  return `${year}-${month}-${day}T${hours}:${minutes}`
+}
+
 onMounted(async () => {
   if (isEdit.value) {
     const id = Number(route.params.id)
     try {
-      const result = await postStore.fetchPostById(id)
+      const result = await postStore.fetchPostById(id, { isAdminMode: true })
       if (result) {
         originalPost.value = result
         Object.assign(form, result)
+        if (form.publishAt) {
+          form.publishAt = formatToLocalDatetime(form.publishAt)
+        }
         if (!form.display_locations) form.display_locations = ['OTHER_POST']
       }
     } catch (error) {
@@ -479,6 +496,22 @@ const handleScoreSeo = async () => {
 const handleSubmit = async () => {
   try {
     const dataToSend = { ...form }
+
+    // Format publishAt timezone to GMT+7 ISO string if status is SCHEDULED
+    if (form.status === 'SCHEDULED' && form.publishAt) {
+      let datetimeStr = form.publishAt
+      if (datetimeStr.length === 16) {
+        datetimeStr += ':00'
+      }
+      if (datetimeStr.includes('T') && !datetimeStr.includes('Z') && !datetimeStr.includes('+')) {
+        const localDate = new Date(datetimeStr + '+07:00')
+        dataToSend.publishAt = localDate.toISOString()
+      } else {
+        dataToSend.publishAt = new Date(datetimeStr).toISOString()
+      }
+    } else {
+      dataToSend.publishAt = null
+    }
     
     // Convert array to string so objectToFormData doesn't split it into multiple fields
     // which may be parsed incorrectly by multer

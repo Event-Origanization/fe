@@ -34,7 +34,7 @@
              
              <div class="flex items-center justify-between border-t border-gray-100 pt-4 mt-auto">
                 <p class="text-[11px] text-gray-400 font-bold tracking-widest uppercase flex items-center gap-2">
-                  <i class="pi pi-calendar"></i> {{ formatDate(post.createdAt, locale) }}
+                  <i class="pi pi-calendar"></i> {{ formatDate(post.publishAt || post.createdAt, locale) }}
                 </p>
                 <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-600 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300">
                   <i class="pi pi-arrow-right text-xs"></i>

@@ -12,8 +12,8 @@ import { API_ROUTES } from '@/constants'
 
 export interface IPostService {
   getAll: (query?: PostQuery) => Promise<ApiResponse<PostListResponse> | ResponseError>
-  getById: (id: number) => Promise<ApiResponse<IPost> | ResponseError>
-  getBySlug: (slug: string) => Promise<ApiResponse<IPost> | ResponseError>
+  getById: (id: number, query?: { isAdminMode?: boolean }) => Promise<ApiResponse<IPost> | ResponseError>
+  getBySlug: (slug: string, query?: { isAdminMode?: boolean }) => Promise<ApiResponse<IPost> | ResponseError>
   create: (body: PostCreationAttributes) => Promise<ApiResponse<IPost> | ResponseError>
   update: (id: number, body: Partial<PostCreationAttributes>) => Promise<ApiResponse<IPost> | ResponseError>
   delete: (id: number) => Promise<ApiResponse<null> | ResponseError>
@@ -29,16 +29,22 @@ class PostService implements IPostService {
     return api.get<PostListResponse>()
   }
 
-  getById(id: number): Promise<ApiResponse<IPost> | ResponseError> {
-    return apiService(API_ROUTES.POSTS.GET_BY_ID)
+  getById(id: number, query?: { isAdminMode?: boolean }): Promise<ApiResponse<IPost> | ResponseError> {
+    const api = apiService(API_ROUTES.POSTS.GET_BY_ID)
       .addPathParam(':id', id)
-      .get<IPost>()
+    if (query) {
+      api.addQueryParam(query as unknown as Record<string, string | number | boolean | undefined | null>)
+    }
+    return api.get<IPost>()
   }
 
-  getBySlug(slug: string): Promise<ApiResponse<IPost> | ResponseError> {
-    return apiService(API_ROUTES.POSTS.GET_BY_SLUG)
+  getBySlug(slug: string, query?: { isAdminMode?: boolean }): Promise<ApiResponse<IPost> | ResponseError> {
+    const api = apiService(API_ROUTES.POSTS.GET_BY_SLUG)
       .addPathParam(':slug', slug)
-      .get<IPost>()
+    if (query) {
+      api.addQueryParam(query as unknown as Record<string, string | number | boolean | undefined | null>)
+    }
+    return api.get<IPost>()
   }
 
   create(body: PostCreationAttributes): Promise<ApiResponse<IPost> | ResponseError> {
