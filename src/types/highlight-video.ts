@@ -6,6 +6,7 @@ export interface IHighlightVideo {
   url: string;
   thumbnail?: string | null;
   orderIndex: number;
+  publishAt?: string;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;

@@ -45,7 +45,7 @@
             </div>
             <div class="flex items-center gap-3 text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">
               <i class="pi pi-calendar text-brand-600"></i>
-              {{ formatDate(postStore.weeklyHighlights[0].createdAt, locale) }}
+              {{ formatDate(postStore.weeklyHighlights[0].publishAt || postStore.weeklyHighlights[0].createdAt, locale) }}
             </div>
             <h3 class="text-3xl font-black text-gray-900 group-hover:text-brand-600 transition-colors duration-300 mb-4 leading-tight line-clamp-2 uppercase">
               {{ getTitle(postStore.weeklyHighlights[0]) }}
@@ -62,7 +62,7 @@
                <div class="flex flex-col py-2 flex-1">
                  <div class="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                    <i class="pi pi-clock text-brand-400"></i>
-                   {{ formatDate(post.createdAt, locale) }}
+                   {{ formatDate(post.publishAt || post.createdAt, locale) }}
                  </div>
                  <h4 class="text-sm sm:text-base md:text-lg font-black text-gray-900 group-hover:text-brand-600 transition-colors line-clamp-3 leading-tight uppercase">
                    {{ getTitle(post) }}
@@ -134,7 +134,7 @@
                     
                     <div class="flex items-center justify-between mb-3">
                        <p class="text-[11px] text-gray-500 font-bold tracking-widest uppercase flex items-center gap-2">
-                         <i class="pi pi-calendar text-brand-600"></i> {{ formatDate(post.createdAt, locale) }}
+                         <i class="pi pi-calendar text-brand-600"></i> {{ formatDate(post.publishAt || post.createdAt, locale) }}
                        </p>
                     </div>
                     

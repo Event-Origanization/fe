@@ -51,6 +51,7 @@ export interface PostQuery {
   sortBy?: string;
   sortOrder?: 'ASC' | 'DESC';
   displayLocation?: string;
+  isAdminMode?: boolean;
 }
 
 export interface PostListResponse {

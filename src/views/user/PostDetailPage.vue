@@ -58,7 +58,7 @@
           >
             <span class="flex items-center gap-2">
               <i class="pi pi-calendar text-brand-400 text-xs"></i>
-              {{ formatDate(postStore.currentPost.createdAt, locale) }}
+              {{ formatDate(postStore.currentPost.publishAt || postStore.currentPost.createdAt, locale) }}
             </span>
           </div>
         </div>

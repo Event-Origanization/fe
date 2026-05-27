@@ -267,6 +267,7 @@ const fetchPosts = (page = 1) => {
     search: searchQuery.value,
     status: status,
     displayLocation: displayLocation,
+    isAdminMode: true,
   })
 }
 

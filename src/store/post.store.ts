@@ -111,11 +111,11 @@ export const usePostStore = defineStore('post', {
       }
     },
 
-    async fetchPostBySlug(slug: string) {
+    async fetchPostBySlug(slug: string, query?: { isAdminMode?: boolean }) {
       this.loading = true
       this.error = null
       try {
-        const result = await postService.getBySlug(slug)
+        const result = await postService.getBySlug(slug, query)
         if (result instanceof ResponseError) throw result
         this.currentPost = result.data
         return result.data
@@ -126,11 +126,11 @@ export const usePostStore = defineStore('post', {
       }
     },
 
-    async fetchPostById(id: number) {
+    async fetchPostById(id: number, query?: { isAdminMode?: boolean }) {
       this.loading = true
       this.error = null
       try {
-        const result = await postService.getById(id)
+        const result = await postService.getById(id, query)
         
         if (result instanceof ResponseError) throw result
 
